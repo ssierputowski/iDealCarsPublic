@@ -3,9 +3,4 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 // Server logic for the app
-
-// Test comment for commiting to branch
-// Eric was up in here! And made changes.
-// Niraj Was here
-// Sagar is making a test comment!!
-// My comment wasn't good enough -stash
+//see if you an find this, Sagar
