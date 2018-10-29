@@ -7,13 +7,20 @@
 .wrapper { 
     border : 2px solid #000; 
     overflow:hidden;
-    height: auto;
+    height: 100vh;
 }
 
 #loginForm {
     overflow:hidden;
     margin:10px;
     min-height:170px;
+}
+
+#pic {
+    height: 70vh;
+    width: 70vh;
+    padding-left: 10vh;
+    padding-top: 18vh;
 }
 
 #logo {
@@ -23,14 +30,14 @@
 }
 
 #inputUser {
-    width: 50%;
+    width: 75%;
     height: 50%;
     padding-bottom: 1%;
     margin: auto;
 }
 
 #inputPass {
-    width: 50%;
+    width: 75%;
     height: 50%;
     padding-bottom: 1%;
     margin: auto;
