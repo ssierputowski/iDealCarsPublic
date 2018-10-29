@@ -1,0 +1,37 @@
+#login {
+    float: left;
+    width: 100%;
+    height: 90%;
+}
+
+.wrapper { 
+    border : 2px solid #000; 
+    overflow:hidden;
+    height: auto;
+}
+
+#loginForm {
+    overflow:hidden;
+    margin:10px;
+    min-height:170px;
+}
+
+#logo {
+    float:left; 
+    margin-right:20px;
+    margin: auto;
+}
+
+#inputUser {
+    width: 50%;
+    height: 50%;
+    padding-bottom: 1%;
+    margin: auto;
+}
+
+#inputPass {
+    width: 50%;
+    height: 50%;
+    padding-bottom: 1%;
+    margin: auto;
+}
