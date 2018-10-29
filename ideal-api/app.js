@@ -1,8 +1,8 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
-// Server logic for the app
+// This file is the server logic for the app
 
 // Test comment for commiting to branch
 // Eric was up in here!
