@@ -3,3 +3,20 @@
     overflow:hidden;
     height: 100vh;
 }
+
+.wrapper2 {
+    border: 2px dashed #000;
+    overflow:hidden;
+    float: left;
+    height: 30vh;
+    width: 30vh;
+}
+
+.wrapper3 {
+    border: 3px dotted darkgoldenrod;
+    float: left;
+    overflow: hidden;
+    height: 30vh;
+    width: 160.3vh;
+    background-color: white;
+}
