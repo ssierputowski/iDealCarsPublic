@@ -1,23 +1,21 @@
-<div class="wrapper">
-  <div id="logo">
-    <img src="../../assets/images/logo.png" id="pic" alt="logo" style="height: 200px; width: 200px;">
+<div class="d-flex flex-row justify-content-center align-items-center m-auto" style="max-width: 1200px; height: 100%;">
+  <div class="d-flex flex-column justify-content-center align-items-center w-50">
+    <img src="../../assets/images/logo_transparent.png">
   </div>
-
-  <form ng-submit="formSubmit()" class="form">
-    <div id="loginForm" class="container" style="padding-left:10vh">
-      <div id="inputUser" class="row-full"  style="padding-top:50vh;">
-        <input id="inputUser" type="text" class="form-control" ng-model="username" placeholder="username" required=""/>
+  <div class="d-flex flex-column justify-content-center align-items-center w-50">
+    <form>
+      <div class="d-flex flex-column justify-content-center align-items-center w-100">
+        <mat-form-field color="primary">
+          <mat-label>Username</mat-label>
+          <input matInput>
+        </mat-form-field>
+        <mat-form-field color="primary">
+          <mat-label>Password</mat-label>
+          <input matInput type="password">
+        </mat-form-field>
+        <button mat-raised-button type="submit" color="primary">LOGIN</button>
+        <a href="#">Forgot password?</a>
       </div>
-
-      <div id="inputPass">
-        <input id="inputPass" type="password" class="form-control" ng-model="password" placeholder="password" required=""/>
-      </div>
-
-      <div class="form-group" id="inputPass">
-        <button type="submit" class="btn btn-success" style="color:#53C8C9">Login</button>
-        <span class="text-danger" style="color:red">{{ error }}</span>
-      </div>
-
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
