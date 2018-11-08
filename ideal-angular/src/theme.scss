@@ -1,0 +1,78 @@
+// Custom Theme for Angular Material
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+// Defining custom palette (used http://mcg.mbitson.com)
+$ideal-teal: (
+  50: #eefefb,
+  100: #d5fdf5,
+  200: #b9fbee,
+  300: #9df9e7,
+  400: #88f8e2,
+  500: #73f7dd,
+  600: #6bf6d9,
+  700: #60f5d4,
+  800: #56f3cf,
+  900: #43f1c7,
+  A100: #ffffff,
+  A200: #ffffff,
+  A400: #ddfff6,
+  A700: #c3fff0,
+  contrast: (
+    50: black,
+    100: black,
+    200: black,
+    300: black,
+    400: black,
+    500: black,
+    600: black,
+    700: black,
+    800: black,
+    900: black,
+    A100: black,
+    A200: black,
+    A400: black,
+    A700: black,
+  )
+);
+
+$ideal-blue: (
+  50: #e3eef4,
+  100: #bad5e4,
+  200: #8cb9d2,
+  300: #5e9cbf,
+  400: #3c87b2,
+  500: #1972a4,
+  600: #166a9c,
+  700: #125f92,
+  800: #0e5589,
+  900: #084278,
+  A100: #a7d0ff,
+  A200: #74b5ff,
+  A400: #419aff,
+  A700: #288cff,
+  contrast: (
+    50: black,
+    100: black,
+    200: black,
+    300: black,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: black,
+    A400: black,
+    A700: white,
+  )
+);
+
+$ideal-palette-primary: mat-palette($ideal-teal);
+$ideal-palette-accent: mat-palette($ideal-blue);
+
+$ideal-theme: mat-light-theme($ideal-palette-primary, $ideal-palette-accent);
+
+@include angular-material-theme($ideal-theme);
