@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body {
-  height: 100%;
+  height: 100% !important;
+  font-size: 10px !important;
 }
 
 body {
-  background: #1972a4;
+  background: #1972a4 !important;
 }
