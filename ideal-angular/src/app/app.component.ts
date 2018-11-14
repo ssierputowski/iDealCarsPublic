@@ -6,12 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'ideal';
 
-  ngOnInit() {
-    console.log('Hello world!');
-
-    document.getElementById('title').style.color = '#73F7DD';
-  }
+  ngOnInit() {}
 }
 

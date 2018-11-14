@@ -1,44 +1,19 @@
-#login {
-    float: left;
-    width: 100%;
-    height: 90%;
+img {
+  width: 50rem;
+  height: 50rem;
 }
 
-.wrapper { 
-    border : 2px solid #000; 
-    overflow:hidden;
-    height: 100vh;
+form {
+  width: 100%;
+  font-size: 1.5rem;
 }
 
-#loginForm {
-    overflow:hidden;
-    margin:10px;
-    min-height:170px;
+input {
+  color: #73f7dd;
 }
 
-#pic {
-    height: 70vh;
-    width: 70vh;
-    padding-left: 10vh;
-    padding-top: 18vh;
-}
-
-#logo {
-    float:left; 
-    margin-right:20px;
-    margin: auto;
-}
-
-#inputUser {
-    width: 75%;
-    height: 50%;
-    padding-bottom: 1%;
-    margin: auto;
-}
-
-#inputPass {
-    width: 75%;
-    height: 50%;
-    padding-bottom: 1%;
-    margin: auto;
+a {
+  color: white;
+  font-size: 1rem;
+  margin-top: .5rem;
 }
