@@ -1,0 +1,13 @@
+body {
+  background: #FFFFFF !important;
+}
+
+form {
+  width: 100%;
+}
+
+.logoutButton {
+  position: fixed;
+  right: 25px;
+  top: 20px;
+}
