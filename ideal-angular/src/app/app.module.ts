@@ -11,18 +11,24 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+// import { TimeClockComponent} from './time-clock/time-clock.component';
+import { RecordsComponent } from './records/records.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
+  // { path: 'time-clock', component: TimeClockComponent },
+  { path: 'records', component: RecordsComponent}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+   // TimeClockComponent,
+    RecordsComponent
   ],
   imports: [
     BrowserModule,
