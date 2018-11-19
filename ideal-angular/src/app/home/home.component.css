@@ -1,81 +1,28 @@
-.wrapper { 
-    border : 2px solid #000; 
-    overflow:hidden;
-    height: 100vh;
-    margin: auto;
-    width: max-content;
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
+.profile {
+  font-family: 'Lato', 'sans-serif';
 }
-
-.wrapper2 {
-    border: 2px dashed #000;
-    overflow:hidden;
-    float: left;
-    height: 30vh;
-    width: 30vh;
+.profile {
+  margin-top: 2px;
+  padding:1px;
+  display: inline-block;
 }
-
-.wrapper3 {
-    border: 3px dotted darkgoldenrod;
-    float: left;
-    overflow: hidden;
-    height: 30vh;
-    width: 135vh;
-    background-color: white;
+.divider {
+  border-top:1px solid rgba(0,0,0,0.1);
 }
-
-.wrapper4 {
-    border: 3px dotted seagreen;
-    float: left;
-    overflow: hidden;
-    height: 30vh;
-    width: 24.46vh;
-    background-color: yellow;
+.emphasis {
+  border-top: 1px solid transparent;
 }
-
-.leftwrapper {
-    float: left;
-    overflow: hidden;
-    height: 67vh;
-    width: 30vh;
-    background-color: bisque;
+.emphasis h2{
+  margin-bottom:0;
 }
-
-#pic {
-    height: 30vh;
-    width: 30vh;
+span.tags {
+  background: #1abc9c;
+  border-radius: 2px;
+  color: #f5f5f5;
+  font-weight: bold;
+  padding: 2px 4px;
 }
-
-#profInfo {
-    width: 30vh;
-    height: 12vh;
-    background-color: azure;
-    overflow: hidden;
-    float: left;
-}
-
-#activity {
-    width: 125vh;
-    height: 67vh;
-    margin-left: 4vh;
-    background-color: sienna;
-    overflow: hidden;
-    float: left;
-}
-
-#cal {
-    width: 28vh;
-    height: 67vh;
-    margin-left: 4vh;
-    background-color: aquamarine;
-    overflow: hidden;
-    float: left;
-}
-
-#not {
-    width: 30vh;
-    height: 35vh;
-    margin-top: 2vh;
-    background-color: beige;
-    overflow: hidden;
-    float: left;
+.profile strong,span,div {
+  text-transform: initial;
 }
