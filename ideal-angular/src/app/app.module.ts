@@ -1,17 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import {
   MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
+  MatProgressSpinnerModule,
 } from '@angular/material';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { TimeClockComponent } from './time-clock/time-clock.component';
+import { HeaderComponent } from './header/header.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -26,13 +30,17 @@ const routes: Routes = [
     LoginComponent,
     HomeComponent,
     TimeClockComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     RouterModule.forRoot(routes),
   ],
   providers: [],
