@@ -13,9 +13,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
+import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { TimeClockComponent } from './time-clock/time-clock.component';
-import { HeaderComponent } from './header/header.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -28,9 +28,9 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
+    HeaderComponent,
     HomeComponent,
-    TimeClockComponent
-    HeaderComponent
+    TimeClockComponent,
   ],
   imports: [
     BrowserModule,
