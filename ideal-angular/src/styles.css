@@ -2,8 +2,9 @@
 
 html, body {
   height: 100% !important;
+  font-size: 10px !important;
 }
 
 body {
-  background: #1972a4 !important;
+  background: #ffffff !important;
 }
