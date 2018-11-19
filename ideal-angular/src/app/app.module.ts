@@ -14,12 +14,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
+import { TimeClockComponent } from './time-clock/time-clock.component';
 import { HeaderComponent } from './header/header.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'time-clock', component: TimeClockComponent }
 ];
 
 @NgModule({
@@ -27,6 +29,7 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     HomeComponent,
+    TimeClockComponent
     HeaderComponent
   ],
   imports: [
