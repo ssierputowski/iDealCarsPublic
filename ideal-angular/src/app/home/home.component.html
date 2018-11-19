@@ -1,29 +1,33 @@
-<app-header></app-header>
-<div class="wrapper">
-  <div class="wrapper2">
-      <img src="https://image.ibb.co/mBbskq/logo.png" id="pic">
-      <!--I tried to use the path ../images/logo.png and nothing would show up-->
+<div class="d-flex flex-row justify-content-between align-items-center p-2">
+  <img src="../../assets/images/logo_transparent.png" style="width: 15rem; height: 15rem;">
+  <div class="d-flex flex-column align-items-center">
+    <h2>Company Name</h2>
+    <span><a href="#">HOME</a>|<a href="#">INVENTORY</a>|<a href="#">TIME CLOCK</a></span>
   </div>
-  <div class="wrapper3">
-    Company Name Div
-  </div>
-  <div class="wrapper4">
-    Logout Div
-  </div>
-  <br>
-  <div class="leftwrapper">
-    <div id="profInfo">
-      prof stuff
+  <button mat-raised-button color="accent">LOGOUT</button>
+</div>
+
+
+<div class="container float-left">
+  <div class="row float-left">
+    <div class="col-lg-12 col-md-12 col-sm-11 col-xs-7">
+      <div class="row float-left">
+        <div class="col-lg-12 col-md-12 col-sm-11 col-xs-7" style="border-radius: 16px;">
+          <div class="well profile col-lg-12 col-md-12 col-sm-11 col-xs-7">
+            <div class="col-lg-10 col-md-12 col-sm-11 col-xs-7 text-center">
+              <figure>
+                <img src="http://kempenfeltplayers.com/wp-content/uploads/2015/07/profile-icon-empty.png" alt="Profile Pic" class="img-circle" style="width:3rem;" id="user-img">
+              </figure>
+              <!--All of this information is set to change. Just generic stuff for now.-->
+              <h5 style="text-align:center;"><strong id="user-name">Stanley Sierputowski</strong></h5>
+              <p style="text-align:center;font-size: smaller;" id="user-frid">FBT000000213 </p>
+              <p style="text-align:center;font-size: smaller;overflow-wrap: break-word;" id="user-email">sierputs@email.sc.edu </p>
+              <p style="text-align:center;font-size: smaller;" id="user-role">Mechanic</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <br>
-    <div id="not" >
-        Notification
-    </div>
-  </div>
-  <div id="activity">
-    Activity here
-  </div>
-  <div id="cal">
-    Calendar here
-  </div>
+  </div>  
+  <!--Still inside first container at top. Need to add activity maybe or create new container-->  
 </div>
