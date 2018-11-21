@@ -1,0 +1,23 @@
+<main>
+  <div class="d-flex flex-row justify-content-center align-items-center m-auto" style="max-width: 1200px; height: 100%;">
+    <div class="d-flex flex-column justify-content-center align-items-center w-50">
+      <img src="../../assets/images/logo_transparent.png">
+    </div>
+    <div class="d-flex flex-column justify-content-center align-items-center w-50">
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <form (submit)="onLogin(loginForm)" *ngIf="!isLoading" #loginForm="ngForm">
+        <div class="d-flex flex-column justify-content-center align-items-center w-100">
+          <mat-form-field color="primary" appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput type="text" name="username" ngModel #usernameInput="ngModel" required>
+          </mat-form-field>
+          <mat-form-field color="primary" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" name="password" ngModel #passwordInput="ngModel" required>
+          </mat-form-field>
+          <button mat-raised-button type="submit" color="primary">LOGIN</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
