@@ -6,6 +6,8 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatProgressSpinnerModule,
+  MatListModule,
+  MatIconModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -47,6 +49,8 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatListModule,
+    MatIconModule,
     RouterModule.forRoot(routes),
   ],
   providers: [],
