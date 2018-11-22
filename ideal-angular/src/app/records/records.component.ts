@@ -15,8 +15,6 @@ export class RecordsComponent implements OnInit {
   }
 
 }
-
-
 /**
 import {Component} from '@angular/core';
 
