@@ -1,5 +1,7 @@
 <app-header></app-header>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+<!--
 <mat-list>
   <h3 mat-subheader>Name</h3>
   <mat-list-item *ngFor="let name of name">
@@ -15,3 +17,36 @@
     <p mat-line> {{vehicle.updated | date}} </p>
   </mat-list-item>
 </mat-list>
+-->
+
+<mat-drawer-container class="example-container " autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <p>EXAMPLE</p>
+    <p *ngIf="showFiller">Click to search customer</p>
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+        <mat-icon>expand_more</mat-icon>
+      Toggle extra text
+    </button>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <button type="button" mat-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      Menu
+    </button>
+  </div>
+
+  <mat-card class="example-card" >
+    <mat-card-header>
+      <div mat-card-avatar class=""></div> <!-- Insert image in the quotes-->
+      <mat-card-title>Customer Name</mat-card-title>
+      <mat-card-subtitle>Vehicle</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://static.tcimg.net/vehicles/primary/29e2612bcf1a8a85/2019-Mercedes-Benz-C-Class-silver-full_color-driver_side_front_quarter.png">
+    <mat-card-content>
+      <p>
+      2019 Mercedes Benz C300
+      </p>
+    </mat-card-content>
+  </mat-card>
+</mat-drawer-container>

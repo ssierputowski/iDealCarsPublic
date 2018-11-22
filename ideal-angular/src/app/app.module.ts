@@ -7,12 +7,13 @@ import {
   MatInputModule,
   MatProgressSpinnerModule,
   MatListModule,
-  MatIconModule
+  MatIconModule,
+  MatCardModule,
+  MatSidenavModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -50,7 +51,9 @@ const routes: Routes = [
     MatInputModule,
     MatProgressSpinnerModule,
     MatListModule,
+    MatCardModule,
     MatIconModule,
+    MatSidenavModule,
     RouterModule.forRoot(routes),
   ],
   providers: [],
