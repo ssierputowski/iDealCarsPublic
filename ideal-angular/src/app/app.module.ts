@@ -7,24 +7,25 @@ import {
   MatInputModule,
   MatProgressSpinnerModule,
   MatListModule,
-  MatIconModule
+  MatIconModule,
+  MatCardModule,
+  MatSidenavModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { RecordsComponent } from './records/records.component';
 import { HeaderComponent } from './header/header.component';
 import { TimeClockComponent } from './time-clock/time-clock.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
-  // { path: 'time-clock', component: TimeClockComponent },
   { path: 'records', component: RecordsComponent},
   { path: 'time-clock', component: TimeClockComponent }
 ];
@@ -50,8 +51,11 @@ const routes: Routes = [
     MatInputModule,
     MatProgressSpinnerModule,
     MatListModule,
+    MatCardModule,
     MatIconModule,
+    MatSidenavModule,
     RouterModule.forRoot(routes),
+    AccordionModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

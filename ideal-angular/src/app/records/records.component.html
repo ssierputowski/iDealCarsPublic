@@ -1,5 +1,7 @@
 <app-header></app-header>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+<!--
 <mat-list>
   <h3 mat-subheader>Name</h3>
   <mat-list-item *ngFor="let name of name">
@@ -15,3 +17,119 @@
     <p mat-line> {{vehicle.updated | date}} </p>
   </mat-list-item>
 </mat-list>
+-->
+
+<mat-drawer-container class="example-container " autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <p>Filter</p>
+    <p *ngIf="showFiller">Click to search customer</p>
+    <div class="example-container">
+        <mat-form-field>
+          <input matInput placeholder="Input">
+        </mat-form-field>
+      </div>
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+        <mat-icon>expand_more</mat-icon>
+      Toggle extra text
+    </button>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <button type="button" mat-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      Menu
+    </button>
+  </div>
+<!--
+  <mat-card class="example-card" >
+    <mat-card-header>
+      <div mat-card-avatar class=""></div> Insert image in the quotes
+      <mat-card-title>Customer Name</mat-card-title>
+      <mat-card-subtitle>Vehicle</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://static.tcimg.net/vehicles/primary/29e2612bcf1a8a85/2019-Mercedes-Benz-C-Class-silver-full_color-driver_side_front_quarter.png">
+    <mat-card-content>
+      <p>
+      2019 Mercedes Benz C300
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <p>
+
+
+  </p>
+
+<mat-card class="example-card" >
+    <mat-card-header>
+      <div mat-card-avatar class=""></div> Insert image in the quotes
+      <mat-card-title>Customer Name 2</mat-card-title>
+      <mat-card-subtitle>Vehicle</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://static.tcimg.net/vehicles/primary/29e2612bcf1a8a85/2019-Mercedes-Benz-C-Class-silver-full_color-driver_side_front_quarter.png">
+    <mat-card-content>
+      <p>
+      2019 Mercedes Benz C300
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <p>
+
+  </p>
+
+-->
+
+<html ng-app="ui.bootstrap.demo">
+  <head>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.2.js"></script>
+    <script src="app.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+
+<div ng-controller="AccordionDemoCtrl">
+  <script type="text/ng-template" id="group-template.html">
+    <div class="panel {{panelClass || 'panel-default'}}">
+      <div class="panel-heading">
+        <h4 class="panel-title" style="color:#fa39c3">
+          <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" accordion-transclude="heading"><span
+            ng-class="{'text-muted': isDisabled}">{{heading}}</span></a>
+        </h4>
+      </div>
+      <div class="panel-collapse collapse" collapse="!isOpen">
+        <div class="panel-body" style="text-align: right" ng-transclude></div>
+      </div>
+    </div>
+  </script>
+
+  <accordion close-others="oneAtATime">
+      <accordion-group heading="Customer Records" [isOpen]="isFirstOpen">
+        <accordion close-others="oneAtATime">
+            <accordion-group is-open="status.open">
+                <button class="btn btn-link" accordion-heading>
+                    Patadia, Sagar <i class="pull-right glyphicon"
+                    ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                  </button>
+                  <mat-card class="example-card" >
+                      <mat-card-header>
+                        <div mat-card-avatar class=""></div> <!-- Insert image in the quotes-->
+                        <mat-card-title>2019 Mercedes-Benz C300 4Matic</mat-card-title>
+                      </mat-card-header>
+                      <img mat-card-image
+                      src="https://static.tcimg.net/vehicles/primary/29e2612bcf1a8a85/2019-Mercedes-Benz-C-Class-silver-full_color-driver_side_front_quarter.png">
+                      <mat-card-content>
+                        <p>
+                        2019 Mercedes Benz C300
+                        </p>
+                      </mat-card-content>
+                    </mat-card>
+                    <p>
+            </accordion-group>
+          </accordion>
+    </accordion-group>
+  </accordion>
+</div>
+  </body>
+</html>
+</mat-drawer-container>
