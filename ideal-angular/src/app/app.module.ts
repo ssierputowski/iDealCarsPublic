@@ -16,7 +16,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { TimeClockComponent } from './time-clock/time-clock.component';
-
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
@@ -42,6 +42,7 @@ const routes: Routes = [
     MatInputModule,
     MatProgressSpinnerModule,
     RouterModule.forRoot(routes),
+    AccordionModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

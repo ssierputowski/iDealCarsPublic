@@ -11,5 +11,12 @@ export class TimeClockComponent implements OnInit {
 
   ngOnInit() {
   }
+  function ($scope) {
 
+    $scope.status = {
+      isFirstOpen: true,
+      isFirstDisabled: false
+    };
+  }
 }
+
