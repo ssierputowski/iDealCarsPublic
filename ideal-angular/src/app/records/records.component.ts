@@ -6,12 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./records.component.css']
 })
 export class RecordsComponent implements OnInit {
-
+  isFirstOpen = true;
   showFiller = false;
 
   constructor() { }
 
   ngOnInit() {
+  }
+  function ($scope) {
+
+    $scope.status = {
+      isFirstOpen: true,
+      isFirstDisabled: false
+    };
   }
 
 }
