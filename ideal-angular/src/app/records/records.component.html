@@ -61,7 +61,7 @@
 
 <mat-card class="example-card" >
     <mat-card-header>
-      <div mat-card-avatar class=""></div> Insert image in the quotes
+      <div mat-card-avatar class="http://kempenfeltplayers.com/wp-content/uploads/2015/07/profile-icon-empty.png"></div> Insert image in the quotes
       <mat-card-title>Customer Name 2</mat-card-title>
       <mat-card-subtitle>Vehicle</mat-card-subtitle>
     </mat-card-header>
@@ -111,20 +111,40 @@
                     Patadia, Sagar <i class="pull-right glyphicon"
                     ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
                   </button>
-                  <mat-card class="example-card" >
+                  <mat-card class="example-card" align = center>
                       <mat-card-header>
-                        <div mat-card-avatar class=""></div> <!-- Insert image in the quotes-->
+                        <div mat-card-avatar class="http://kempenfeltplayers.com/wp-content/uploads/2015/07/profile-icon-empty.png"></div>
                         <mat-card-title>2019 Mercedes-Benz C300 4Matic</mat-card-title>
                       </mat-card-header>
-                      <img mat-card-image
-                      src="https://static.tcimg.net/vehicles/primary/29e2612bcf1a8a85/2019-Mercedes-Benz-C-Class-silver-full_color-driver_side_front_quarter.png">
-                      <mat-card-content>
-                        <p>
-                        2019 Mercedes Benz C300
-                        </p>
-                      </mat-card-content>
+                      <img mat-card-image src="https://static.tcimg.net/vehicles/primary/29e2612bcf1a8a85/2019-Mercedes-Benz-C-Class-silver-full_color-driver_side_front_quarter.png" style="max-width: 400px; height: 100%; margin: auto;">
+                          <accordion-group is-open="status.open">
+                              <button class="btn btn-link" accordion-heading>
+                                  Service on 11/27/2018 <i class="pull-right glyphicon"
+                                  ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                                </button>
+                                <p>
+                                    The customer had an oil change, brake fluid flush, flush coolant, refill fluids, microfilter, sparkplugs, and state inspection.
+                                </p>
+                            </accordion-group>
+                              <accordion-group is-open="status.open">
+                                  <button class="btn btn-link" accordion-heading>
+                                      Service on 09/13/2018 <i class="pull-right glyphicon"
+                                      ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                                    </button>
+                                    <p>
+                                        The customer had an oil change and tire rotation.
+                                    </p>
+                                </accordion-group>
+                                <accordion-group is-open="status.open">
+                                    <button class="btn btn-link" accordion-heading>
+                                        Service on 04/24/2018 <i class="pull-right glyphicon"
+                                        ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                                      </button>
+                                      <p>
+                                          The customer had all 4 tires replaced and a car wash.
+                                      </p>
+                                  </accordion-group>
                     </mat-card>
-                    <p>
             </accordion-group>
           </accordion>
     </accordion-group>
