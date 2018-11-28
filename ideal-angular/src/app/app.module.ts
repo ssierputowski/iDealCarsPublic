@@ -16,12 +16,16 @@ import { LoginComponent } from './auth/login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { TimeClockComponent } from './time-clock/time-clock.component';
+import { CenterNavComponent } from './center-nav/center-nav.component';
+import { InventoryComponent } from './inventory/inventory.component';
+import { SidebarNavComponent } from './sidebar-nav/sidebar-nav.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'time-clock', component: TimeClockComponent }
+  { path: 'time-clock', component: TimeClockComponent },
+  { path: 'inventory', component: InventoryComponent }
 ];
 
 @NgModule({
@@ -31,6 +35,9 @@ const routes: Routes = [
     HeaderComponent,
     HomeComponent,
     TimeClockComponent,
+    CenterNavComponent,
+    InventoryComponent,
+    SidebarNavComponent,
   ],
   imports: [
     BrowserModule,
