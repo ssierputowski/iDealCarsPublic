@@ -1,0 +1,35 @@
+.mat-list-icon {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.bodyPage {
+  margin: auto;
+  width: max-content;
+  overflow: hidden;
+}
+
+.example-card {
+  margin: 0 auto;
+  max-width: 0 auto;
+
+}
+
+.panel {
+  margin: 0 auto;
+  max-width: 86%;
+  height: 100%
+}
+
+.example-sidenav{
+  padding: 10px;
+}
+
+.example-container{
+  height: 100 auto;
+}
+
+.example-sidenav-content
+{
+  height: 100%;
+}
+
