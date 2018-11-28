@@ -8,8 +8,8 @@
 </div>
 
 
-<div class="container float-left">
-  <div class="row float-left">
+<div class="d-flex flex-row justify-content-start align-items-top align-items-left p-4">
+  <div class="row float-left p-1"> <!--First in container-->
     <div class="col-lg-12 col-md-12 col-sm-11 col-xs-7">
       <div class="row float-left">
         <div class="col-lg-12 col-md-12 col-sm-11 col-xs-7" style="border-radius: 16px;">
@@ -29,5 +29,16 @@
       </div>
     </div>
   </div>  
-  <!--Still inside first container at top. Need to add activity maybe or create new container-->  
+  <div class="d-flex flex-column align-items-center p-1" style="background-color:aquamarine; border-radius: 1%;border-style: solid; width:64%;">
+    <!--Activity log section-->
+    <div class="row">
+      <h3>Activity Log</h3>
+    </div>
+  </div>
+  <div class="d-flex flex-column align-items-center p-1" style="background-color:beige; width: 24%;">
+    <!--Calendar Section-->
+    <div class="row">
+      <h3>Weekly Calendar</h3>
+    </div>
+  </div>
 </div>
