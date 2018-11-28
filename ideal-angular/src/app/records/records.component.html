@@ -39,7 +39,6 @@
         <mat-icon>menu</mat-icon>
       Menu
     </button>
-  </div>
 <!--
   <mat-card class="example-card" >
     <mat-card-header>
@@ -55,8 +54,6 @@
     </mat-card-content>
   </mat-card>
   <p>
-
-
   </p>
 
 <mat-card class="example-card" >
@@ -73,83 +70,86 @@
     </mat-card-content>
   </mat-card>
   <p>
-
   </p>
-
 -->
 
-<html ng-app="ui.bootstrap.demo">
-  <head>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.js"></script>
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.2.js"></script>
-    <script src="app.js"></script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-  </head>
-  <body>
-
-<div ng-controller="AccordionDemoCtrl">
-  <script type="text/ng-template" id="group-template.html">
-    <div class="panel {{panelClass || 'panel-default'}}">
-      <div class="panel-heading">
-        <h4 class="panel-title" style="color:#fa39c3">
-          <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" accordion-transclude="heading"><span
-            ng-class="{'text-muted': isDisabled}">{{heading}}</span></a>
-        </h4>
-      </div>
-      <div class="panel-collapse collapse" collapse="!isOpen">
-        <div class="panel-body" style="text-align: right" ng-transclude></div>
+<div class="card">
+  <div class="card-body">
+    <h3 style = "text-align: center;">
+     Customer Records
+    </h3>
+  <div class="accordion" id="accordionExample">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Patadia, Sagar <i class="pull-right glyphicon"
+                ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            </button>
+          </h5>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body">
+              <mat-card class="example-card" align = center>
+                  <mat-card-header>
+                    <mat-card-title>2019 Mercedes-Benz C300 4Matic</mat-card-title>
+                  </mat-card-header>
+                  <img mat-card-image src="https://static.tcimg.net/vehicles/primary/29e2612bcf1a8a85/2019-Mercedes-Benz-C-Class-silver-full_color-driver_side_front_quarter.png" style="max-width: 400px; height: 100%; margin: auto;">
+                  <div class="accordion" id="accordionExample1">
+                      <div class="accordion" id="accordionExample2">
+                          <div class="accordion" id="accordionExample3">
+                    <div class="card">
+                      <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Service on 11/27/2018
+                          </button>
+                        </h5>
+                      </div>
+                      <div id="collapseFour" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample1">
+                        <div class="card-body">
+                          <p>
+                            The customer had an oil change, brake fluid flush, flush coolant, refill fluids, microfilter, sparkplugs, and state inspection.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Service on 09/13/2018
+                          </button>
+                        </h5>
+                      </div>
+                      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample2">
+                        <div class="card-body">
+                          The customer had an oil change and tire rotation.</div>
+                        </div>
+                      </div>
+                    <div class="card">
+                      <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Service on 04/24/2018
+                          </button>
+                        </h5>
+                      </div>
+                      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample3">
+                        <div class="card-body">
+                          The customer had all 4 tires replaced and a car wash.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
       </div>
     </div>
-  </script>
-
-  <accordion close-others="oneAtATime">
-      <accordion-group heading="Customer Records" [isOpen]="isFirstOpen">
-        <accordion close-others="oneAtATime">
-            <accordion-group is-open="status.open">
-                <button class="btn btn-link" accordion-heading>
-                    Patadia, Sagar <i class="pull-right glyphicon"
-                    ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                  </button>
-                  <mat-card class="example-card" align = center>
-                      <mat-card-header>
-                        <div mat-card-avatar class="http://kempenfeltplayers.com/wp-content/uploads/2015/07/profile-icon-empty.png"></div>
-                        <mat-card-title>2019 Mercedes-Benz C300 4Matic</mat-card-title>
-                      </mat-card-header>
-                      <img mat-card-image src="https://static.tcimg.net/vehicles/primary/29e2612bcf1a8a85/2019-Mercedes-Benz-C-Class-silver-full_color-driver_side_front_quarter.png" style="max-width: 400px; height: 100%; margin: auto;">
-                          <accordion-group is-open="status.open">
-                              <button class="btn btn-link" accordion-heading>
-                                  Service on 11/27/2018 <i class="pull-right glyphicon"
-                                  ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                                </button>
-                                <p>
-                                    The customer had an oil change, brake fluid flush, flush coolant, refill fluids, microfilter, sparkplugs, and state inspection.
-                                </p>
-                            </accordion-group>
-                              <accordion-group is-open="status.open">
-                                  <button class="btn btn-link" accordion-heading>
-                                      Service on 09/13/2018 <i class="pull-right glyphicon"
-                                      ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                                    </button>
-                                    <p>
-                                        The customer had an oil change and tire rotation.
-                                    </p>
-                                </accordion-group>
-                                <accordion-group is-open="status.open">
-                                    <button class="btn btn-link" accordion-heading>
-                                        Service on 04/24/2018 <i class="pull-right glyphicon"
-                                        ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                                      </button>
-                                      <p>
-                                          The customer had all 4 tires replaced and a car wash.
-                                      </p>
-                                  </accordion-group>
-                    </mat-card>
-            </accordion-group>
-          </accordion>
-    </accordion-group>
-  </accordion>
+  </div>
 </div>
-  </body>
-</html>
-</mat-drawer-container>
+
+
