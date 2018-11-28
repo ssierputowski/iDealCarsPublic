@@ -1,15 +1,7 @@
-<div class="d-flex flex-row justify-content-between align-items-center p-2">
-  <img src="../../assets/images/logo_transparent.png" style="width: 15rem; height: 15rem;">
-  <div class="d-flex flex-column align-items-center">
-    <h2>Company Name</h2>
-    <span><a href="#">HOME</a>|<a href="#">INVENTORY</a>|<a href="#">TIME CLOCK</a></span>
-  </div>
-  <button mat-raised-button color="accent">LOGOUT</button>
-</div>
+<app-header></app-header>
 
-
-<div class="d-flex flex-row justify-content-start align-items-top align-items-left p-4">
-  <div class="row float-left p-1"> <!--First in container-->
+<div class="d-flex flex-row justify-content-start align-items-start pl-4 pr-2">
+  <div class="d-flex flex-column float-left p-1" style="border-radius:1%;border-style:solid;width:auto;"> <!--First in container-->
     <div class="col-lg-12 col-md-12 col-sm-11 col-xs-7">
       <div class="row float-left">
         <div class="col-lg-12 col-md-12 col-sm-11 col-xs-7" style="border-radius: 16px;">
@@ -19,24 +11,34 @@
                 <img src="http://kempenfeltplayers.com/wp-content/uploads/2015/07/profile-icon-empty.png" alt="Profile Pic" class="img-circle" style="width:3rem;" id="user-img">
               </figure>
               <!--All of this information is set to change. Just generic stuff for now.-->
-              <h5 style="text-align:center;"><strong id="user-name">Stanley Sierputowski</strong></h5>
-              <p style="text-align:center;font-size: smaller;" id="user-frid">FBT000000213 </p>
-              <p style="text-align:center;font-size: smaller;overflow-wrap: break-word;" id="user-email">sierputs@email.sc.edu </p>
-              <p style="text-align:center;font-size: smaller;" id="user-role">Mechanic</p>
+              <h5 style="text-align:center;"><strong id="user-name">Stanley Sierputowski<!--{{Employee.name}}--></strong></h5>
+              <p style="text-align:center;font-size: smaller;" id="user-frid">FBT000000213<!--{{Employee.id}}--> </p>
+              <p style="text-align:center;font-size: smaller;overflow-wrap: break-word;" id="user-email">sierputs@email.sc.edu<!--{{Employee.contact}}--> </p>
+              <p style="text-align:center;font-size: smaller;" id="user-role">Mechanic<!--{{Employee.title}}--></p>
             </div>
           </div>
         </div>
+      </div>    
+    </div>
+    <div style="border-radius:1%;border-style:solid;">Hey<br><br>Hey</div>
+  </div>  
+  <div class="d-flex flex-column align-items-center p-1" style="border-radius: 1%;border-style: solid;width: 65%;max-height:40rem;">
+    <div class="d-flex flex-column container">
+      <h3>Activity Log</h3>
+      <div class="row" style="border-radius:1%;border-style:solid;width:auto; overflow: auto">Hey<br><br>Hey
+        <br><br>HeyHEYHEYEEYEHEHEHEYEEYEYEYEY<br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+        Hey
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+        Hey
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+        Hey
       </div>
     </div>
-  </div>  
-  <div class="d-flex flex-column align-items-center p-1" style="background-color:aquamarine; border-radius: 1%;border-style: solid; width:64%;">
-    <!--Activity log section-->
-    <div class="row">
-      <h3>Activity Log</h3>
-    </div>
   </div>
-  <div class="d-flex flex-column align-items-center p-1" style="background-color:beige; width: 24%;">
-    <!--Calendar Section-->
+  <div class="d-flex flex-column align-items-center p-1" style="border-radius: 1%;border-style: solid;width: 25%;">
     <div class="row">
       <h3>Weekly Calendar</h3>
     </div>
