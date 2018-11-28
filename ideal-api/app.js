@@ -30,9 +30,6 @@ app.use((req, res, next) => {
     next();
 });
 
-<<<<<<< HEAD
-=======
 app.use('/api/user', userRoutes);
 
->>>>>>> 1a3ae6665c349dfe0a24d927ebef14803e97beae
 module.exports = app;
