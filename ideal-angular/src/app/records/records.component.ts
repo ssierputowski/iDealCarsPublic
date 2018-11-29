@@ -14,12 +14,12 @@ export class RecordsComponent implements OnInit {
   ngOnInit() {
   }
   function ($scope) {
-
     $scope.status = {
       isFirstOpen: true,
       isFirstDisabled: false
     };
   }
+
 
 }
 /**
