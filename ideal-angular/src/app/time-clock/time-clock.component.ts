@@ -10,13 +10,8 @@ export class TimeClockComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
-  function ($scope) {
 
-    $scope.status = {
-      isFirstOpen: true,
-      isFirstDisabled: false
-    };
   }
+
 }
 
