@@ -20,7 +20,11 @@ import { HomeComponent } from './home/home.component';
 import { RecordsComponent } from './records/records.component';
 import { HeaderComponent } from './header/header.component';
 import { TimeClockComponent } from './time-clock/time-clock.component';
+<<<<<<< HEAD
 
+=======
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+>>>>>>> 3e82585e4c3afb38b46c43a3b08169ef403e481b
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
@@ -54,6 +58,11 @@ const routes: Routes = [
     MatIconModule,
     MatSidenavModule,
     RouterModule.forRoot(routes),
+<<<<<<< HEAD
+=======
+    AccordionModule.forRoot()
+
+>>>>>>> 3e82585e4c3afb38b46c43a3b08169ef403e481b
   ],
   providers: [],
   bootstrap: [AppComponent]

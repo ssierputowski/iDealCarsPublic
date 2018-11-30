@@ -42,8 +42,15 @@ overflow: hidden;
   position: fixed;
   left: 258px;
   top: 450px;
-  border: solid 2px #1972a4
+  border: solid 2px #1972a4;
 }
+
+.scrollText {
+  height: 150px;
+  width: 825.5px;
+  overflow: scroll;
+}
+
 .timeClockBox {
   height: 30vh;
   width: 35vh;
@@ -54,7 +61,7 @@ overflow: hidden;
 }
 
 .timeOffBox {
-  height: 30vh;
+  height: 35vh;
   width: 35vh;
   position: fixed;
   right: 10px;
@@ -64,6 +71,13 @@ overflow: hidden;
 
 table, th, tr, td {
   border: 1px solid #000;
-  height: 3vh;
+  height: 3.5vh;
   width: 125.5vh;
+}
+
+.panel {
+border: 1px #fff;
+margin: 0 auto;
+max-width: 95%;
+font-size: 5pt !important;
 }
