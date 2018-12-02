@@ -20,12 +20,10 @@
 </mat-list>
 -->
 
-
-
 <mat-drawer-container class="example-container " autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <p>Filter</p>
-    <p *ngIf="showFiller">Click to search customer</p>
+
     <div class="example-container">
         <mat-form-field>
           <input matInput placeholder="Input">
@@ -33,8 +31,13 @@
       </div>
     <button (click)="showFiller = !showFiller" mat-raised-button>
         <mat-icon>expand_more</mat-icon>
-      Toggle extra text
+      New Customer
     </button>
+    <p>
+
+    </p>
+    <p *ngIf="showFiller">Click to search customer</p> <!-- Add form inputs here and make it click to add,
+      need to just show data locally for the demo on Friday. -->
   </mat-drawer>
 
   <div class="example-sidenav-content">
@@ -155,3 +158,4 @@
     </div>
   </div>
 </div>
+
