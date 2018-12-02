@@ -23,21 +23,62 @@
 <mat-drawer-container class="example-container " autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <p>Filter</p>
-
     <div class="example-container">
         <mat-form-field>
-          <input matInput placeholder="Input">
+          <input matInput placeholder="Search Client">
         </mat-form-field>
       </div>
+      <button type = "submit" class = "btn btn-success">Search</button>
+      <p>
+      </p>
     <button (click)="showFiller = !showFiller" mat-raised-button>
-        <mat-icon>expand_more</mat-icon>
-      New Customer
+        <mat-icon>person_add</mat-icon>
+      New Client
     </button>
+    <p *ngIf="showFiller">
+      <body ng-app = "myApp" ng-controller = "myCtrl">
+          <div class = "wrapper">
+              <div class = "row">
+                <div class = "col-md-10">
+                  <form>
+                    <p></p>
+                    <div class = "form-group">
+                      <label>First Name</label>
+                        <input type = "text" class = "form-control" placeholder = "Enter Full Name" ng-model = "newContacts.fname">
+                    </div>
+                    <div class = "form-group">
+                        <label>Last Name</label>
+                          <input type = "text" class = "form-control" placeholder = "Enter Full Name" ng-model = "newContacts.lname">
+                      </div>
+                      <div class = "form-group">
+                          <label>Vehicle Year</label>
+                          <input type = "text" class = "form-control" placeholder = "Enter Vehicle Make" ng-model = "newContacts.carYear">
+                        </div>
+                      <div class = "form-group">
+                          <label>Vehicle Make</label>
+                          <input type = "text" class = "form-control" placeholder = "Enter Vehicle Make" ng-model = "newContacts.carMake">
+                        </div>
+                    <div class = "form-group">
+                      <label>Vehicle Model</label>
+                      <input type = "text" class = "form-control" placeholder = "Enter Company Name, if any" ng-model = "newContacts.carModel">
+                    </div>
+                    <div class = "form-group">
+                      <label>Telephone</label>
+                      <input type = "text" class = "form-control" placeholder = "Enter Phone #" ng-model = "newContacts.telephone">
+                    </div>
+                    <div class = "form-group">
+                      <label>Email</label>
+                      <input type = "email" class = "form-control" placeholder = "Enter Email Address" ng-model = "newContacts.email">
+                    </div>
+                    <button type = "submit" class = "btn btn-success" ng-click = "saveContact()">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </body>
+      </p>
     <p>
-
     </p>
-    <p *ngIf="showFiller">Click to search customer</p> <!-- Add form inputs here and make it click to add,
-      need to just show data locally for the demo on Friday. -->
   </mat-drawer>
 
   <div class="example-sidenav-content">
@@ -81,9 +122,9 @@
 
 <div class="card">
   <div class="card-body">
-    <h3 style = "text-align: center;">
-     Customer Records
-    </h3>
+    <h2 style = "text-align: center;">
+    Client Records
+    </h2>
   <div class="accordion" id="accordionExample">
       <div class="card">
         <div class="card-header" id="headingOne">
@@ -159,3 +200,35 @@
   </div>
 </div>
 
+<!--
+<body ng-app = "myApp" ng-controller = "myCtrl">
+  <div class = "wrapper">
+    <div class = "container">
+      <div class = "row">
+        <div class = "col-md-4">
+          <h1>New Customer Information</h1>
+          <form>
+            <div class = "form-group">
+              <label>Full Name</label>
+                <input type = "text" class = "form-control" placeholder = "Enter Full Name" ng-model = "newContacts.fname">
+            </div>
+            <div class = "form-group">
+              <label>Company</label>
+              <input type = "text" class = "form-control" placeholder = "Enter Company Name, if any" ng-model = "newContacts.companyName">
+            </div>
+            <div class = "form-group">
+              <label>Telephone</label>
+              <input type = "text" class = "form-control" placeholder = "Enter Phone #" ng-model = "newContacts.telephone">
+            </div>
+            <div class = "form-group">
+              <label>Email</label>
+              <input type = "email" class = "form-control" placeholder = "Enter Email Address" ng-model = "newContacts.email">
+            </div>
+            <button type = "submit" class = "btn btn-success" ng-click = "saveContact()">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+-->
