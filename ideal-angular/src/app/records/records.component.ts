@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-records',
@@ -9,9 +11,10 @@ export class RecordsComponent implements OnInit {
   isFirstOpen = true;
   showFiller = false;
 
-  constructor() { }
+  constructor(private router: Router, private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Client Records | iDealCars');
   }
   function ($scope) {
     $scope.status = {
@@ -22,7 +25,7 @@ export class RecordsComponent implements OnInit {
     $scope.saved = localStorage.getItem('contacts');
     $scope.contacts = (localStorage.getItem('contacts') !== null) ? JSON.parse($scope.saved) : [
     {fname: 'Sagar', lname: 'Patadia', carYear: '2019', carMake: 'Mercedes',
-    carModel: 'C300', telephone: '0123456789', email: 'sagar@idealcars.com'}
+    carModel: 'C300 4Matic', telephone: '0123456789', email: 'sagar@idealcars.com'}
     ];
 
     localStorage.setItem('contacts', JSON.stringify($scope.contacts));

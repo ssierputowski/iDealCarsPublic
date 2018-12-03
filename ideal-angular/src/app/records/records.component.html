@@ -137,6 +137,35 @@
                 class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
             </button>
           </h5>
+          <div class = "col-md-12 col-offset-md-1">
+            <div class = "table-responsive table-size">
+              <table class = "table">
+                <thead>
+                  <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Year</th>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Number</th>
+                    <th>Email</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat = "contact in contacts track by $index">
+                  <td>Sagar</td>
+                  <td>Patadia</td>
+                  <td>2019</td>
+                  <td>Mercedes-Benz</td>
+                  <td>C300</td>
+                  <td>5402780679</td>
+                  <td>spatadia14@yahoo.com</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
         </div>
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body">
@@ -202,34 +231,3 @@
     </div>
   </div>
 </div>
-
-      <div class = "col-md-12 col-offset-md-1">
-        <div class = "table-responsive table-size">
-          <table class = "table">
-            <thead>
-              <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Year</th>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Number</th>
-                <th>Email</th>
-              </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat = "contact in contacts track by $index">
-              <td>Sagar</td>
-              <td>Patadia</td>
-              <td>2019</td>
-              <td>Mercedes-Benz</td>
-              <td>C300</td>
-              <td>5402780679</td>
-              <td>spatadia14@yahoo.com</td>
-            </tr>
-          </tbody>
-          </table>
-        </div>
-      </div>
-  </div>
-
