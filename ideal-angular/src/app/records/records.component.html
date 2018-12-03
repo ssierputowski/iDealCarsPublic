@@ -1,6 +1,7 @@
 <app-header></app-header>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src = "js/records.component.js"></script>
 
 <!--
 <mat-list>
@@ -28,7 +29,7 @@
           <input matInput placeholder="Search Client">
         </mat-form-field>
       </div>
-      <button type = "submit" class = "btn btn-success">Search</button>
+      <button color= 'accent' type = "submit"  class = "btn btn-success">Search</button>
       <p>
       </p>
     <button (click)="showFiller = !showFiller" mat-raised-button>
@@ -39,7 +40,7 @@
       <body ng-app = "myApp" ng-controller = "myCtrl">
           <div class = "wrapper">
               <div class = "row">
-                <div class = "col-md-10">
+                <div class = "col-md-11">
                   <form>
                     <p></p>
                     <div class = "form-group">
@@ -52,7 +53,7 @@
                       </div>
                       <div class = "form-group">
                           <label>Vehicle Year</label>
-                          <input type = "text" class = "form-control" placeholder = "Enter Vehicle Make" ng-model = "newContacts.carYear">
+                          <input type = "text" class = "form-control" placeholder = "Enter Vehicle Year" ng-model = "newContacts.carYear">
                         </div>
                       <div class = "form-group">
                           <label>Vehicle Make</label>
@@ -60,7 +61,7 @@
                         </div>
                     <div class = "form-group">
                       <label>Vehicle Model</label>
-                      <input type = "text" class = "form-control" placeholder = "Enter Company Name, if any" ng-model = "newContacts.carModel">
+                      <input type = "text" class = "form-control" placeholder = "Enter Vehicle Model" ng-model = "newContacts.carModel">
                     </div>
                     <div class = "form-group">
                       <label>Telephone</label>
@@ -70,7 +71,9 @@
                       <label>Email</label>
                       <input type = "email" class = "form-control" placeholder = "Enter Email Address" ng-model = "newContacts.email">
                     </div>
-                    <button type = "submit" class = "btn btn-success" ng-click = "saveContact()">Submit</button>
+                    <div>
+                    <button mat-raised-button color='accent' type='submit' class = "btn btn-success" ng-click = "saveContact()">Submit</button>
+                  </div>
                   </form>
                 </div>
               </div>
@@ -200,35 +203,35 @@
   </div>
 </div>
 
-<!--
-<body ng-app = "myApp" ng-controller = "myCtrl">
-  <div class = "wrapper">
-    <div class = "container">
-      <div class = "row">
-        <div class = "col-md-4">
-          <h1>New Customer Information</h1>
-          <form>
-            <div class = "form-group">
-              <label>Full Name</label>
-                <input type = "text" class = "form-control" placeholder = "Enter Full Name" ng-model = "newContacts.fname">
-            </div>
-            <div class = "form-group">
-              <label>Company</label>
-              <input type = "text" class = "form-control" placeholder = "Enter Company Name, if any" ng-model = "newContacts.companyName">
-            </div>
-            <div class = "form-group">
-              <label>Telephone</label>
-              <input type = "text" class = "form-control" placeholder = "Enter Phone #" ng-model = "newContacts.telephone">
-            </div>
-            <div class = "form-group">
-              <label>Email</label>
-              <input type = "email" class = "form-control" placeholder = "Enter Email Address" ng-model = "newContacts.email">
-            </div>
-            <button type = "submit" class = "btn btn-success" ng-click = "saveContact()">Submit</button>
-          </form>
+
+
+      <div class = "col-md-12 col-offset-md-1">
+        <div class = "table-responsive table-size">
+          <table class = "table">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Year</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Number</th>
+                <th>Email</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat = "contact in contacts track by $index">
+              <td>Sagar</td>
+              <td>{{contact.fname}}</td>
+              <td>Patadia</td>
+              <td>2019</td>
+              <td>Mercedes-Benz</td>
+              <td>C300</td>
+              <td>5402780679</td>
+              <td>spatadia14@yahoo.com</td>
+            </tr>
+          </tbody>
+          </table>
         </div>
       </div>
     </div>
-  </div>
-</body>
--->
