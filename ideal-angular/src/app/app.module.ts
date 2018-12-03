@@ -22,6 +22,8 @@ import { HeaderComponent } from './header/header.component';
 import { TimeClockComponent } from './time-clock/time-clock.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { InventoryComponent } from './inventory/inventory.component';
+import { PartsComponent } from './parts/parts.component';
+
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -43,6 +45,8 @@ const routes: Routes = [
     HeaderComponent,
     TimeClockComponent,
     InventoryComponent,
+    PartsComponent,
+
   ],
   imports: [
     BrowserModule,
