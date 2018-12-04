@@ -21,9 +21,6 @@ import { RecordsComponent } from './records/records.component';
 import { HeaderComponent } from './header/header.component';
 import { TimeClockComponent } from './time-clock/time-clock.component';
 import { InventoryComponent } from './inventory/inventory.component';
-import { PartCreateComponent } from './parts/part-create/part-create.component';
-import { PartListComponent } from './parts/part-list/part-list.component';
-
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -45,8 +42,6 @@ const routes: Routes = [
     HeaderComponent,
     TimeClockComponent,
     InventoryComponent,
-    PartCreateComponent,
-    PartListComponent,
   ],
   imports: [
     BrowserModule,
