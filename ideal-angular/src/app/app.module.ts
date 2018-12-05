@@ -10,7 +10,8 @@ import {
   MatIconModule,
   MatCardModule,
   MatSidenavModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatDividerModule,
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,10 +23,9 @@ import { RecordsComponent } from './records/records.component';
 import { HeaderComponent } from './header/header.component';
 import { TimeClockComponent } from './time-clock/time-clock.component';
 import { InventoryComponent } from './inventory/inventory.component';
-import { PartsComponent } from './parts/parts.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'records', component: RecordsComponent},
@@ -45,8 +45,6 @@ const routes: Routes = [
     HeaderComponent,
     TimeClockComponent,
     InventoryComponent,
-    PartsComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -61,6 +59,7 @@ const routes: Routes = [
     MatCardModule,
     MatIconModule,
     MatSidenavModule,
+    MatDividerModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
     MatExpansionModule
