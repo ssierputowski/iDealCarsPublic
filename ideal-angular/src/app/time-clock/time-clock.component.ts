@@ -10,6 +10,8 @@ export class TimeClockComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }
+
