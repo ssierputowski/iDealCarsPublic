@@ -10,10 +10,11 @@ import {
   MatIconModule,
   MatCardModule,
   MatSidenavModule,
+  MatExpansionModule,
   MatDividerModule,
 } from '@angular/material';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -59,6 +60,8 @@ const routes: Routes = [
     MatSidenavModule,
     MatDividerModule,
     RouterModule.forRoot(routes),
+    ReactiveFormsModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
