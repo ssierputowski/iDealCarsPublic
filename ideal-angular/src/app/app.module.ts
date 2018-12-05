@@ -23,7 +23,7 @@ import { TimeClockComponent } from './time-clock/time-clock.component';
 import { InventoryComponent } from './inventory/inventory.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'records', component: RecordsComponent},
