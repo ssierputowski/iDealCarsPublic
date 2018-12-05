@@ -1,8 +1,20 @@
-<div class="d-flex flex-row justify-content-between align-items-center p-2">
-  <img src="../../assets/images/logo_transparent.png" style="width: 15rem; height: 15rem;">
-  <div class="d-flex flex-column align-items-center">
-    <h2>Company Name</h2>
-    <span><a href="home">       HOME       </a>|<a href="inventory">       INVENTORY       </a>|<a href="time-clock">       TIME CLOCK       </a>|<a href="records">       CUSTOMER RECORDS       </a></span>
+<div class="container-fluid">
+  <div class="row align-items-center justify-content-center">
+    <div class="col-2">
+      <img src="../../assets/images/logo_transparent.png">
+    </div>
+    <div class="col-8">
+      <h1>Company Name</h1>
+      <mat-divider></mat-divider>
+      <div class="row justify-content-center align-items-center">
+        <a mat-button [routerLink]="['/home']" routerLinkActive="mat-accent bold" >HOME</a>
+        <a mat-button [routerLink]="['/inventory']" routerLinkActive="mat-accent bold" >INVENTORY</a>
+        <a mat-button [routerLink]="['/time-clock']" routerLinkActive="mat-accent bold" >TIME CLOCK</a>
+        <a mat-button [routerLink]="['/records']" routerLinkActive="mat-accent bold" >CUSTOMER RECORDS</a>
+      </div>
+    </div>
+    <div class="col-2">
+      <button mat-raised-button type="submit" color="primary" (click)="onLogout()">LOGOUT</button>
+    </div>
   </div>
-  <button mat-raised-button color="accent" (click)="onLogout()">LOGOUT</button>
 </div>
