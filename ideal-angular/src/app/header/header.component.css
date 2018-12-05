@@ -1,0 +1,5 @@
+a:link {color:#1972a1;}
+a:visited {color: #1972a4;}
+a:hover {color: darkgray; text-decoration: none;}
+a:active {color: darkgray;}
+.activePage a { color: darkgray !important;}
