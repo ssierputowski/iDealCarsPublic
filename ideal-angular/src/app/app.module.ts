@@ -30,7 +30,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'records', component: RecordsComponent},
   { path: 'time-clock', component: TimeClockComponent },
-  { path: 'inventory', component: InventoryComponent }
+  { path: 'inventory', component: InventoryComponent },
+  { path: 'parts', component: PartsComponent },
 ];
 
 @NgModule({
