@@ -31,7 +31,6 @@ const routes: Routes = [
   { path: 'records', component: RecordsComponent},
   { path: 'time-clock', component: TimeClockComponent },
   { path: 'inventory', component: InventoryComponent },
-  { path: 'parts', component: PartsComponent },
 ];
 
 @NgModule({
