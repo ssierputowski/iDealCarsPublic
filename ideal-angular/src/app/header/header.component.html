@@ -5,11 +5,12 @@
     </div>
     <div class="col-8">
       <h1>Company Name</h1>
+      <mat-divider></mat-divider>
       <div class="row justify-content-center align-items-center">
-        <a [routerLink]="['/home']" routerLinkActive="active" >HOME</a>
-        <a [routerLink]="['/inventory']" routerLinkActive="active" >INVENTORY</a>
-        <a [routerLink]="['/time-clock']" routerLinkActive="active" >TIME CLOCK</a>
-        <a [routerLink]="['/records']" routerLinkActive="active" >CUSTOMER RECORDS</a>
+        <a mat-button [routerLink]="['/home']" routerLinkActive="mat-accent bold" >HOME</a>
+        <a mat-button [routerLink]="['/inventory']" routerLinkActive="mat-accent bold" >INVENTORY</a>
+        <a mat-button [routerLink]="['/time-clock']" routerLinkActive="mat-accent bold" >TIME CLOCK</a>
+        <a mat-button [routerLink]="['/records']" routerLinkActive="mat-accent bold" >CUSTOMER RECORDS</a>
       </div>
     </div>
     <div class="col-2">

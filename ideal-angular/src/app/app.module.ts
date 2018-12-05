@@ -9,7 +9,8 @@ import {
   MatListModule,
   MatIconModule,
   MatCardModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatDividerModule,
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -56,6 +57,7 @@ const routes: Routes = [
     MatCardModule,
     MatIconModule,
     MatSidenavModule,
+    MatDividerModule,
     RouterModule.forRoot(routes),
   ],
   providers: [],

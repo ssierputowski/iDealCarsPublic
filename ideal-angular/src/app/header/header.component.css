@@ -7,14 +7,15 @@ h1 {
   font-weight: bold;
   text-align: center;
   color: #1972a4 !important;
+  margin-bottom: 1rem;
 }
 
 a {
+  text-decoration: none;
   font-size: 1.4rem;
   padding: 1rem;
-  color: #1972a4 !important;
 }
 
-.active {
-  color: red;
+.bold {
+  font-weight: bold;
 }
