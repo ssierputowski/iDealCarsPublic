@@ -5,65 +5,21 @@
 
   <!-- NAVIGATION COMPONENT -->
   <div class = "navBox">
-   NAVIGATION
-
+   <Legend>NAVIGATION</Legend>
  </div>
 
 
 <!-- SCHEDULE COMPONENT -->
  <div class = "scheduleBox">
-   SCHEDULE
-   <form action="" style="position: fixed; left: 270px;">
-      Week Of:<br>
-      <input type="date" id="start" name="trip-start" value="11-13-2018" min="01-01-2018" max="12-31-2099">
-    </form>
-    <table style = "position: fixed; left: 270px; top: 230px;">
-      <tr>
-        <th>
-          DAYS
-        </th>
-        <th>
-          TIME SCHEDULED
-        </th>
-        <th>
-          TIME IN
-        </th>
-        <th>
-          TIME OUT
-        </th>
-        <th>
-          HOURS
-        </th>
-      </tr>
-      <tr>
-        <td>SUNDAY</td> <td> <input type="text" type="time"> <input type="text" type="time"> </td> <td> </td> <td> </td> <td> </td>
-      </tr>
-      <tr>
-        <td>MONDAY</td> <td> <input type="text"  type="time"> <input type="text" type="time"></td> <td> </td> <td> </td> <td> </td>
-      </tr>
-      <tr>
-        <td>TUESDAY</td> <td> <input type="text"  type="time"> <input type="text" type="time"> </td> <td> </td> <td> </td> <td> </td>
-      </tr>
-      <tr>
-        <td>WEDNESDAY</td> <td> <input type="text"  type="time"> <input type="text" type="time"> </td> <td> </td> <td> </td> <td> </td>
-      </tr>
-      <tr>
-        <td>THURSDAY</td> <td> <input type="text"  type="time"> <input type="text" type="time"> </td> <td> </td> <td> </td> <td> </td>
-      </tr>
-      <tr>
-        <td>FRIDAY</td> <td> <input type="text"  type="time">  <input type="text" type="time"></td> <td> </td> <td> </td> <td> </td>
-      </tr>
-      <tr>
-        <td>SATURDAY</td> <td> <input type="text"  type="time">  <input type="text" type="time"> </td> <td> </td> <td> </td> <td> </td>
-      </tr>
-    </table>
+  <Legend>SCHEDULE</Legend>
+   <app-schedule></app-schedule>
  </div>
  <br>
 
 
  <!-- NOTES COMPONENT -->
  <div class="notesBox">
-   NOTES
+  <Legend>NOTES</Legend>
    <form>
     <textarea type="text"  class="scrollText" name="Add a note" style="position: fixed; left: 270px;"> </textarea>
     <input color="accent" type="submit" value="Submit" style="position: fixed; right: 270px; bottom: 18px">
@@ -74,7 +30,7 @@
 
  <!-- TIME CLOCK COMPONENT -->
  <div class = "timeClockBox">
-  TIME CLOCK
+  <Legend>TIME CLOCK</Legend>
   <button mat-raised-button color="accent" style = "top: 140px;">
     Clock In/Out
   </button>
@@ -84,7 +40,7 @@
 
  <!-- TIME OFF COMPONENT -->
  <div class = "timeOffBox">
-  TIME OFF
+  <Legend>TIME OFF</Legend>
 
   <p>
     <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">

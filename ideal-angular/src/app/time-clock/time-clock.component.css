@@ -28,7 +28,7 @@ overflow: hidden;
 }
 
 .scheduleBox {
-  height: 40vh;
+  height: 41vh;
   width: 129vh;
   position: fixed;
   left: 258px;
@@ -67,12 +67,6 @@ overflow: hidden;
   right: 10px;
   top: 390px;
   border: solid 2px #1972a4
-}
-
-table, th, tr, td {
-  border: 1px solid #000;
-  height: 3.5vh;
-  width: 125.5vh;
 }
 
 .panel {

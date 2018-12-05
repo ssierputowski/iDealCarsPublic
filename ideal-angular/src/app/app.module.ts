@@ -21,6 +21,7 @@ import { RecordsComponent } from './records/records.component';
 import { HeaderComponent } from './header/header.component';
 import { TimeClockComponent } from './time-clock/time-clock.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { ScheduleComponent } from './schedule/schedule.component';
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
@@ -35,10 +36,10 @@ const routes: Routes = [
     LoginComponent,
     HeaderComponent,
     HomeComponent,
-   // TimeClockComponent,
     RecordsComponent,
     HeaderComponent,
-    TimeClockComponent
+    TimeClockComponent,
+    ScheduleComponent
   ],
   imports: [
     BrowserModule,
