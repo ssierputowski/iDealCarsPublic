@@ -9,10 +9,12 @@ import {
   MatListModule,
   MatIconModule,
   MatCardModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatExpansionModule,
+  MatDividerModule,
 } from '@angular/material';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -24,7 +26,7 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { InventoryComponent } from './inventory/inventory.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'records', component: RecordsComponent},
@@ -57,7 +59,10 @@ const routes: Routes = [
     MatCardModule,
     MatIconModule,
     MatSidenavModule,
+    MatDividerModule,
     RouterModule.forRoot(routes),
+    ReactiveFormsModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
