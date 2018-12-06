@@ -20,14 +20,16 @@ import { HomeComponent } from './home/home.component';
 import { RecordsComponent } from './records/records.component';
 import { HeaderComponent } from './header/header.component';
 import { TimeClockComponent } from './time-clock/time-clock.component';
-import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { InventoryComponent } from './inventory/inventory.component';
+
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'records', component: RecordsComponent},
-  { path: 'time-clock', component: TimeClockComponent }
+  { path: 'time-clock', component: TimeClockComponent },
+  { path: 'inventory', component: InventoryComponent }
 ];
 
 @NgModule({
@@ -39,7 +41,8 @@ const routes: Routes = [
     RecordsComponent,
     HeaderComponent,
     TimeClockComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    InventoryComponent
   ],
   imports: [
     BrowserModule,
@@ -55,8 +58,6 @@ const routes: Routes = [
     MatIconModule,
     MatSidenavModule,
     RouterModule.forRoot(routes),
-    AccordionModule.forRoot()
-
   ],
   providers: [],
   bootstrap: [AppComponent]

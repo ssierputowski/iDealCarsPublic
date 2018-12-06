@@ -1,40 +1,72 @@
 <app-header></app-header>
 
-<div class = "bodyPage">
 
+<div class="d-flex flex-row w-100 h-75 margin-bottom: 100%">
 
   <!-- NAVIGATION COMPONENT -->
-  <div class = "navBox">
-   <Legend>NAVIGATION</Legend>
- </div>
+  <div class="border border-light rounded shadow-lg ml-2 mr-2">
+    <legend>NAVIGATION</legend>
+      <span class="border border-light rounded shadow-lg ml-2 mr-2">
+          <div class="h-100 d-inlineblock" style="width: 20rem;">
+            <div class="p-2 bg-dark rounded align-items-start text-white h-100">
+              <div class = "form-group">
+                <label>Vehicle Year</label>
+                <input type = "text" class = "form-control" placeholder = "Enter Vehicle Year" ng-model = "newContacts.carYear">
+              </div>
+              <div class = "form-group">
+                <label>Vehicle Make</label>
+                <input type = "text" class = "form-control" placeholder = "Enter Vehicle Make" ng-model = "newContacts.carMake">
+              </div>
+              <div class = "form-group">
+                <label>Vehicle Model</label>
+                <input type = "text" class = "form-control" placeholder = "Enter Vehicle Model" ng-model = "newContacts.carModel">
+              </div>
+              <span class="m-2">
+                <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optradio"> Display All
+                    </label>
+                </div>
+              </span>
+              <div>
+                  <button type = "submit"  class="btn btn-outline-info btn-block" style="color: white">Search</button>
+              </div>
+
+            </div>
+          </div>
+        </span>
+  </div>
 
 
 <!-- SCHEDULE COMPONENT -->
- <div class = "scheduleBox">
-  <Legend>SCHEDULE</Legend>
-   <app-schedule></app-schedule>
- </div>
- <br>
+  <div class="border border-light rounded shadow-lg flex-grow-1">
+    <legend>SCHEDULE</legend>
+      <span class="border border-light rounded shadow-lg ml-2 mr-2" style="width:100%">
+          <div class="h-100 d-inlineblock" style="width: 26rem;">
+            <div class="p-2 bg-light flex-grow-1">
+                <app-schedule></app-schedule>
+            </div>
+          </div>
+      </span>
+  </div>
 
 
  <!-- NOTES COMPONENT -->
- <div class="notesBox">
-  <Legend>NOTES</Legend>
-   <form>
-    <textarea type="text"  class="scrollText" name="Add a note" style="position: fixed; left: 270px;"> </textarea>
-    <input color="accent" type="submit" value="Submit" style="position: fixed; right: 270px; bottom: 18px">
-   </form>
- </div>
+
  <br>
 
 
  <!-- TIME CLOCK COMPONENT -->
- <div class = "timeClockBox">
-  <Legend>TIME CLOCK</Legend>
-  <button mat-raised-button color="accent" style = "top: 140px;">
-    Clock In/Out
-  </button>
- </div>
+ <div class="border border-light rounded shadow-lg ml-2 mr-2 right;">
+    <legend>TIME CLOCK</legend>
+      <span class="border border-light rounded shadow-lg ml-2 mr-2" style="width:100%">
+          <div class="h-100 d-inlineblock" style="width: 20rem;">
+            <div class="p-2 bg-dark rounded align-items-start text-white h-100">
+              <button mat-button-raise color="accent"> </button>
+            </div>
+          </div>
+      </span>
+  </div>
  <br>
 
 
@@ -56,5 +88,7 @@
     </div>
   </div>
  </div>
+
+
 </div>
 
