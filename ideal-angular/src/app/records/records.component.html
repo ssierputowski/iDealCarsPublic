@@ -5,7 +5,7 @@
 <!-- Button trigger modal -->
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -53,7 +53,52 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+<ng-template #customerForm let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="modalTitle">Add New Client</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form" (submit)="saveCustomer()" *ngIf="!isLoading">
+      <mat-form-field color="accent">
+        <mat-label>First Name</mat-label>
+        <input matInput type="text" formControlName="fname">
+      </mat-form-field>
+      <mat-form-field color="accent">
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" formControlName="lname">
+      </mat-form-field>
+      <mat-form-field color="accent">
+        <mat-label>Vehicle Year</mat-label>
+        <input matInput type="text" formControlName="carYear">
+      </mat-form-field>
+      <mat-form-field color="accent">
+        <mat-label>Vehicle Make</mat-label>
+        <input matInput type="text" formControlName="carMake">
+      </mat-form-field>
+      <mat-form-field color="accent">
+        <mat-label>Vehicle Model</mat-label>
+        <input matInput type="text" formControlName="carModel">
+      </mat-form-field>
+      <mat-form-field color="accent">
+        <mat-label>Telephone</mat-label>
+        <input matInput type="tel" formControlName="telephone">
+      </mat-form-field>
+      <mat-form-field color="accent">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email">
+      </mat-form-field>
+    </form>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+  </div>
+  <div class="modal-footer">
+    <button mat-raised-button color="accent" (click)="modal.close()">SUBMIT</button>
+  </div>
+</ng-template>
 
 <mat-drawer-container class="example-container " autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
@@ -66,7 +111,7 @@
       <button color= 'accent' type = "submit"  class = "btn btn-secondary">Search</button>
       <p>
       </p>
-    <button (click)="showFiller = !showFiller" mat-raised-button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    <button mat-raised-button color="accent" (click)="open(customerForm)">
       <mat-icon>person_add</mat-icon>
       New Client
     </button>
@@ -88,45 +133,40 @@
     Client Records
     </h2>
   <div class="accordion" id="accordionExample">
-      <div class="card">
-        <div class="card-header" id="headingOne">
-          <h5 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Patadia, Sagar <i class="pull-right glyphicon"
-                class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-            </button>
-          </h5>
-          <div class = "col-md-12 col-offset-md-1">
-            <div class = "table-responsive table-size">
-              <table class = "table">
-                <thead>
-                  <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Year</th>
-                    <th>Make</th>
-                    <th>Model</th>
-                    <th>Number</th>
-                    <th>Email</th>
-                  </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat = "contact in contacts track by $index">
-                  <td>Sagar</td>
-                  <td>Patadia</td>
-                  <td>2019</td>
-                  <td>Mercedes-Benz</td>
-                  <td>C300</td>
-                  <td>5402780679</td>
-                  <td>spatadia14@yahoo.com</td>
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <div class="col-md-12 col-offset-md-1">
+          <div class="table-responsive table-size">
+            <mat-spinner *ngIf="isLoading"></mat-spinner>
+            <table class="table" *ngIf="!isLoading">
+              <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Year</th>
+                  <th>Make</th>
+                  <th>Model</th>
+                  <th>Number</th>
+                  <th>Email</th>
                 </tr>
-              </tbody>
-              </table>
-            </div>
+            </thead>
+            <tbody>
+              <tr *ngFor="let customer of customers">
+                <td>{{customer.fname}}</td>
+                <td>{{customer.lname}}</td>
+                <td>{{customer.carYear}}</td>
+                <td>{{customer.carMake}}</td>
+                <td>{{customer.carModel}}</td>
+                <td>{{customer.telephone}}</td>
+                <td>{{customer.email}}</td>
+              </tr>
+            </tbody>
+            </table>
           </div>
-      </div>
         </div>
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      </div>
+    </div>
+        <!-- <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body">
               <mat-card class="example-card" align=center>
                   <mat-card-header>
@@ -185,7 +225,7 @@
               </div>
             </mat-card>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

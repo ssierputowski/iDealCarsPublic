@@ -24,6 +24,7 @@ import { HeaderComponent } from './header/header.component';
 import { TimeClockComponent } from './time-clock/time-clock.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -61,6 +62,7 @@ const routes: Routes = [
     MatExpansionModule,
     MatDividerModule,
     RouterModule.forRoot(routes),
+    NgbModule.forRoot(),
     ReactiveFormsModule,
     MatExpansionModule
   ],
