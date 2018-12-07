@@ -59,10 +59,7 @@ const routes: Routes = [
     MatCardModule,
     MatIconModule,
     MatSidenavModule,
-<<<<<<< HEAD
-=======
     MatExpansionModule,
->>>>>>> 43c8a3f3354af9062da25a24624263b4cc131f4c
     MatDividerModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
