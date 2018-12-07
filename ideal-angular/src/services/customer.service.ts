@@ -17,7 +17,7 @@ export class CustomerService {
 
   getCustomers() {
     this.http
-      .get<{message: string, customers: any, maxCustomers: number}>(
+      .get<{message: string, customers: any}>(
         'http://localhost:3000/api/customers'
       )
       .pipe(map((customerData) => {
@@ -33,8 +33,7 @@ export class CustomerService {
               email: customer.email,
               id: customer._id
             };
-          }),
-          maxCustomers: customerData.maxCustomers
+          })
         };
       }))
       .subscribe((transformedCustomerData) => {
@@ -56,14 +55,16 @@ export class CustomerService {
     telephone: string,
     email: string
   ) {
-    const customerData = new FormData();
-    customerData.append('fname', fname);
-    customerData.append('lname', lname);
-    customerData.append('carYear', carYear);
-    customerData.append('carMake', carMake);
-    customerData.append('carModel', carModel);
-    customerData.append('telephone', telephone);
-    customerData.append('email', email);
+    const customerData: Customer = {
+      fname: fname,
+      lname: lname,
+      carYear: carYear,
+      carMake: carMake,
+      carModel: carModel,
+      telephone: telephone,
+      email: email
+    };
+    console.log(customerData);
     this.http
       .post<{message: string, customer: Customer}>('http://localhost:3000/api/customers', customerData)
       .subscribe((resData) => {

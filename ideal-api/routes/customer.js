@@ -5,6 +5,7 @@ const Customer = require('../models/customer');
 const router = express.Router();
 
 router.post('', (req, res, next) => {
+    console.log(req.body);
     const customer = new Customer({
         fname: req.body.fname,
         lname: req.body.lname,
@@ -27,15 +28,10 @@ router.post('', (req, res, next) => {
 
 router.get('', (req, res, next) => {
     const customerQuery = Customer.find();
-    let fetchedCustomers;
     customerQuery.then(documents => {
-        fetchedCustomers = documents;
-        return Customer.count();
-    }).then(count => {
         res.status(200).json({
             message: 'Customers fetched successfully',
-            customers: fetchedCustomers,
-            maxCustomers: count
+            customers: documents,
         });
     });
 });
