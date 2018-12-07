@@ -1,94 +1,70 @@
 <app-header></app-header>
 
-
 <div class="d-flex flex-row w-100 h-75 margin-bottom: 100%">
+<span class="border border-light rounded shadow-lg ml-2 mr-2">
+    <div class="h-100 d-inlineblock" style="width: 19.5rem;">
+      <div class="p-2 bg-dark rounded align-items-start text-white h-100">
+        <div>
+          <legend> NAVIGATION </legend>
+          <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select Employee
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Eric Davies</a>
+                <a class="dropdown-item" href="#">Jerrod Mathis</a>
+                <a class="dropdown-item" href="#">Sagar Patadia</a>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</span>
 
-  <!-- NAVIGATION COMPONENT -->
-  <div class="border border-light rounded shadow-lg ml-2 mr-2">
-    <legend>NAVIGATION</legend>
-      <span class="border border-light rounded shadow-lg ml-2 mr-2">
-          <div class="h-100 d-inlineblock" style="width: 20rem;">
-            <div class="p-2 bg-dark rounded align-items-start text-white h-100">
-              <div class = "form-group">
-                <label>Vehicle Year</label>
-                <input type = "text" class = "form-control" placeholder = "Enter Vehicle Year" ng-model = "newContacts.carYear">
-              </div>
-              <div class = "form-group">
-                <label>Vehicle Make</label>
-                <input type = "text" class = "form-control" placeholder = "Enter Vehicle Make" ng-model = "newContacts.carMake">
-              </div>
-              <div class = "form-group">
-                <label>Vehicle Model</label>
-                <input type = "text" class = "form-control" placeholder = "Enter Vehicle Model" ng-model = "newContacts.carModel">
-              </div>
-              <span class="m-2">
-                <div class="form-check">
-                    <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="optradio"> Display All
-                    </label>
+<div class="d-flex flex-row w-100 h-100 margin-bottom: 100%">
+  <span class="border border-light rounded shadow-lg bg-dark " style=" width: 95rem;">
+    <div class="p-2 bg-light flex-grow-1 bg-dark text-white">
+      <legend> SCHEDULE </legend>
+       <app-schedule></app-schedule>
+    </div>
+    <div class="d-flex flex-row w-100 h-50 margin-bottom: 100%">
+        <span class="border border-light rounded shadow-lg ml-2 mr-2">
+            <div class="h-100 d-inlineblock" style="width: 93.5rem;">
+              <div class="p-2 bg-dark rounded align-items-start text-white h-100">
+                <div>
+                  <legend> NOTES</legend>
+
                 </div>
-              </span>
-              <div>
-                  <button type = "submit"  class="btn btn-outline-info btn-block" style="color: white">Search</button>
-              </div>
-
             </div>
           </div>
         </span>
-  </div>
+      </div>
+  </span>
+<div>
 
 
-<!-- SCHEDULE COMPONENT -->
-  <div class="border border-light rounded shadow-lg flex-grow-1">
-    <legend>SCHEDULE</legend>
-      <span class="border border-light rounded shadow-lg ml-2 mr-2" style="width:100%">
-          <div class="h-100 d-inlineblock" style="width: 26rem;">
-            <div class="p-2 bg-light flex-grow-1">
-                <app-schedule></app-schedule>
-            </div>
+<div class="d-flex flex-row w-100 h-50 margin-bottom: 100%">
+  <span class="border border-light rounded shadow-lg ml-2 mr-2">
+      <div class="h-100 d-inlineblock" style="width: 19.5rem;">
+        <div class="p-2 bg-dark rounded align-items-start text-white h-100">
+          <div>
+            <legend> TIME CLOCK </legend>
+              <button mat-button-raised type = "submit"  class="btn btn-outline-info btn-block" style="color: white">ClockIn/ClockOut</button>
           </div>
-      </span>
-  </div>
-
-
- <!-- NOTES COMPONENT -->
-
- <br>
-
-
- <!-- TIME CLOCK COMPONENT -->
- <div class="border border-light rounded shadow-lg ml-2 mr-2 right;">
-    <legend>TIME CLOCK</legend>
-      <span class="border border-light rounded shadow-lg ml-2 mr-2" style="width:100%">
-          <div class="h-100 d-inlineblock" style="width: 20rem;">
-            <div class="p-2 bg-dark rounded align-items-start text-white h-100">
-              <button mat-button-raise color="accent"> </button>
-            </div>
-          </div>
-      </span>
-  </div>
- <br>
-
-
- <!-- TIME OFF COMPONENT -->
- <div class = "timeOffBox">
-  <Legend>TIME OFF</Legend>
-
-  <p>
-    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-      Link with href
-    </a>
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-      Button with data-target
-    </button>
-  </p>
-  <div class="collapse" id="collapseExample">
-    <div class="card card-body">
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+      </div>
     </div>
-  </div>
- </div>
-
-
+  </span>
 </div>
+
+<div class="d-flex flex-row w-100 h-50 margin-bottom: 100%">
+    <span class="border border-light rounded shadow-lg ml-2 mr-2">
+        <div class="h-100 d-inlineblock" style="width: 19.5rem;">
+          <div class="p-2 bg-dark rounded align-items-start text-white h-100">
+            <div>
+              <legend> TIME OFF </legend>
+            </div>
+        </div>
+      </div>
+    </span>
+  </div>
 
