@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inventory',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InventoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Vehicle Inventory | iDealCars');
   }
 
 }
