@@ -22,6 +22,7 @@ import { HomeComponent } from './home/home.component';
 import { RecordsComponent } from './records/records.component';
 import { HeaderComponent } from './header/header.component';
 import { TimeClockComponent } from './time-clock/time-clock.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 import { InventoryComponent } from './inventory/inventory.component';
 
 const routes: Routes = [
@@ -39,11 +40,11 @@ const routes: Routes = [
     LoginComponent,
     HeaderComponent,
     HomeComponent,
-   // TimeClockComponent,
     RecordsComponent,
     HeaderComponent,
     TimeClockComponent,
-    InventoryComponent,
+    ScheduleComponent,
+    InventoryComponent
   ],
   imports: [
     BrowserModule,
