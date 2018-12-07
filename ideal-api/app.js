@@ -7,7 +7,7 @@ const customerRoutes = require('./routes/customer');
 
 const app = express();
 
-mongoose.connect('mongodb+srv://jmathis:a0IDgqsGS7MsKQ8y@ideal-cars-szrks.mongodb.net/test')
+mongoose.connect('mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test')
     .then(() => {
         console.log('Connected to the database!');
     })

@@ -1,0 +1,6 @@
+{
+    "env": {
+        "MONGO_ATLAS_PW": "a0IDgqsGS7MsKQ8y",
+        "JWT_KEY": "secret_change_this_later"
+    }
+}

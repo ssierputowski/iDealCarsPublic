@@ -6,6 +6,10 @@ import { map } from 'rxjs/operators';
 import { Customer } from '../models/customer.model';
 import { Router } from '@angular/router';
 
+import { environment } from '../environments/environment';
+
+const BACKEND_URL = environment.apiUrl + '/customers';
+
 @Injectable({providedIn: 'root'})
 export class CustomerService {
   private customers: Customer[] = [];
@@ -19,7 +23,7 @@ export class CustomerService {
   getCustomers() {
     this.http
       .get<{message: string, customers: any}>(
-        'http://localhost:3000/api/customers'
+        BACKEND_URL
       )
       .pipe(map((customerData) => {
         return {
@@ -66,7 +70,7 @@ export class CustomerService {
       email: email
     };
     this.http
-      .post<{message: string, customer: Customer}>('http://localhost:3000/api/customers', customerData)
+      .post<{message: string, customer: Customer}>(BACKEND_URL, customerData)
       .subscribe((resData) => {
         window.location.reload();
       });
