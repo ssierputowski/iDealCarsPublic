@@ -13,6 +13,7 @@ export class CustomerService {
 
   constructor(
     private http: HttpClient,
+    private router: Router
   ) {}
 
   getCustomers() {
@@ -64,11 +65,10 @@ export class CustomerService {
       telephone: telephone,
       email: email
     };
-    console.log(customerData);
     this.http
       .post<{message: string, customer: Customer}>('http://localhost:3000/api/customers', customerData)
       .subscribe((resData) => {
-        console.log(resData);
+        window.location.reload();
       });
   }
 }

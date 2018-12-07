@@ -77,8 +77,6 @@ export class RecordsComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    console.log(this.form.value);
-    console.log(this.form.value.fname);
     this.customerService.addCustomer(
       this.form.value.fname,
       this.form.value.lname,

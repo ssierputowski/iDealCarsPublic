@@ -133,38 +133,39 @@
     Client Records
     </h2>
   <div class="accordion" id="accordionExample">
-      <div class="card">
-        <div class="card-header" id="headingOne">
-          <div class = "col-md-12 col-offset-md-1">
-            <div class = "table-responsive table-size">
-              <table class = "table">
-                <thead>
-                  <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Year</th>
-                    <th>Make</th>
-                    <th>Model</th>
-                    <th>Number</th>
-                    <th>Email</th>
-                  </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let customer of customers">
-                  <td>{{customer.fname}}</td>
-                  <td>{{customer.lname}}</td>
-                  <td>{{customer.carYear}}</td>
-                  <td>{{customer.carMake}}</td>
-                  <td>{{customer.carModel}}</td>
-                  <td>{{customer.telephone}}</td>
-                  <td>{{customer.email}}</td>
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <div class="col-md-12 col-offset-md-1">
+          <div class="table-responsive table-size">
+            <mat-spinner *ngIf="isLoading"></mat-spinner>
+            <table class="table" *ngIf="!isLoading">
+              <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Year</th>
+                  <th>Make</th>
+                  <th>Model</th>
+                  <th>Number</th>
+                  <th>Email</th>
                 </tr>
-              </tbody>
-              </table>
-            </div>
+            </thead>
+            <tbody>
+              <tr *ngFor="let customer of customers">
+                <td>{{customer.fname}}</td>
+                <td>{{customer.lname}}</td>
+                <td>{{customer.carYear}}</td>
+                <td>{{customer.carMake}}</td>
+                <td>{{customer.carModel}}</td>
+                <td>{{customer.telephone}}</td>
+                <td>{{customer.email}}</td>
+              </tr>
+            </tbody>
+            </table>
           </div>
-      </div>
         </div>
+      </div>
+    </div>
         <!-- <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body">
               <mat-card class="example-card" align=center>
