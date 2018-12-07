@@ -6,6 +6,39 @@ form {
   width: 100%;
 }
 
+#navigationBox {
+  border: solid 2px #1972a4;
+}
+
+#scheduleBox {
+  border: solid 2px #1972a4;
+}
+
+#notesBox {
+  border: solid 2px #1972a4;
+}
+
+#timeClockBox {
+  border: solid 2px #1972a4;
+}
+
+#timeOffBox {
+  border: solid 2px #1972a4;
+}
+
+.panel {
+border: 1px #fff;
+margin: 0 auto;
+max-width: 95%;
+font-size: 5pt !important;
+}
+
+.scrollText {
+  height: 150px;
+  width: 825.5px;
+  overflow: scroll;
+}
+
 .logoutButton {
   position: fixed;
   right: 25px;
@@ -16,68 +49,4 @@ form {
   margin: auto;
   width: max-content;
   overflow: hidden;
-}
-.navBox {
-height: 63.5vh;
-width: 35vh;
-position: fixed;
-left: 10px;
-top: 170px;
-border: solid 2px #1972a4;
-overflow: hidden;
-}
-
-.scheduleBox {
-  height: 40vh;
-  width: 129vh;
-  position: fixed;
-  left: 258px;
-  top: 170px;
-  border: solid 2px #1972a4;
-}
-
-.notesBox {
-  height: 30vh;
-  width: 129vh;
-  position: fixed;
-  left: 258px;
-  top: 450px;
-  border: solid 2px #1972a4;
-}
-
-.scrollText {
-  height: 150px;
-  width: 825.5px;
-  overflow: scroll;
-}
-
-.timeClockBox {
-  height: 30vh;
-  width: 35vh;
-  position: fixed;
-  right: 10px;
-  top: 170px;
-  border: solid 2px #1972a4
-}
-
-.timeOffBox {
-  height: 35vh;
-  width: 35vh;
-  position: fixed;
-  right: 10px;
-  top: 390px;
-  border: solid 2px #1972a4
-}
-
-table, th, tr, td {
-  border: 1px solid #000;
-  height: 3.5vh;
-  width: 125.5vh;
-}
-
-.panel {
-border: 1px #fff;
-margin: 0 auto;
-max-width: 95%;
-font-size: 5pt !important;
 }
