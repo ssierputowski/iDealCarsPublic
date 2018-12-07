@@ -1,5 +1,21 @@
-a:link {color:#1972a1;}
-a:visited {color: #1972a4;}
-a:hover {color: darkgray; text-decoration: none;}
-a:active {color: darkgray;}
-.activePage a { color: darkgray !important;}
+img {
+  width: 15rem;
+  height: 15rem;
+}
+
+h1 {
+  font-weight: bold;
+  text-align: center;
+  color: #1972a4 !important;
+  margin-bottom: 1rem;
+}
+
+a {
+  text-decoration: none;
+  font-size: 1.4rem;
+  padding: 1rem;
+}
+
+.bold {
+  font-weight: bold;
+}

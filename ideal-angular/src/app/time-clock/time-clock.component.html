@@ -1,104 +1,144 @@
 <app-header></app-header>
 
-<div class = "bodyPage">
+<div class="d-flex flex-row w-100 h-75 margin-bottom: 100%">
+<span class="border border-light rounded shadow-lg ml-2 mr-2">
+    <div class="h-100 d-inlineblock" style="width: 19.5rem;">
+      <div class="p-2 bg-dark rounded align-items-start text-white h-100">
+        <div>
+          <legend> NAVIGATION </legend>
 
+          <div class="accordion" id="accordionExample">
+              <div class="card">
+                <div class="card-header bg-dark" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Eric Davies
+                    </button>
+                  </h5>
+                </div>
 
-  <!-- NAVIGATION COMPONENT -->
-  <div class = "navBox">
-   NAVIGATION
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div class="card-body bg-dark">
+                      Position: Salesman
+                      Email: ewdavies@email.sc.edu
+                      Next Shift: Unscheduled
+                    </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header bg-dark" id="headingTwo">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      Jerrod Mathis
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                  <div class="card-body bg-dark">
+                      Position: Mechanic
+                      Email: jmathis@email.sc.edu
+                      Next Shift: 8:00AM
+                    </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header bg-dark" id="headingThree">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      Sagar Patadia
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                  <div class="card-body bg-dark">
+                    Position: Salesman
+                    Email: spatadia@email.sc.edu
+                    Next Shift: 12/8/18 - 8:00AM
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                  <div class="card-header bg-dark" id="headingFour">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                        Stanley Sierputowski
+                      </button>
+                    </h5>
+                  </div>
 
- </div>
+                  <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="card-body bg-dark">
+                        Position: Mechanic
+                        Email: ssierputowski@email.sc.edu
+                        Next Shift: On-Shift
+                      </div>
+                  </div>
+                </div>
+            </div>
 
-
-<!-- SCHEDULE COMPONENT -->
- <div class = "scheduleBox">
-   SCHEDULE
-   <form action="" style="position: fixed; left: 270px;">
-      Week Of:<br>
-      <input type="date" id="start" name="trip-start" value="11-13-2018" min="01-01-2018" max="12-31-2099">
-    </form>
-    <table style = "position: fixed; left: 270px; top: 230px;">
-      <tr>
-        <th>
-          DAYS
-        </th>
-        <th>
-          TIME SCHEDULED
-        </th>
-        <th>
-          TIME IN
-        </th>
-        <th>
-          TIME OUT
-        </th>
-        <th>
-          HOURS
-        </th>
-      </tr>
-      <tr>
-        <td>SUNDAY</td> <td> <input type="text" type="time"> <input type="text" type="time"> </td> <td> </td> <td> </td> <td> </td>
-      </tr>
-      <tr>
-        <td>MONDAY</td> <td> <input type="text"  type="time"> <input type="text" type="time"></td> <td> </td> <td> </td> <td> </td>
-      </tr>
-      <tr>
-        <td>TUESDAY</td> <td> <input type="text"  type="time"> <input type="text" type="time"> </td> <td> </td> <td> </td> <td> </td>
-      </tr>
-      <tr>
-        <td>WEDNESDAY</td> <td> <input type="text"  type="time"> <input type="text" type="time"> </td> <td> </td> <td> </td> <td> </td>
-      </tr>
-      <tr>
-        <td>THURSDAY</td> <td> <input type="text"  type="time"> <input type="text" type="time"> </td> <td> </td> <td> </td> <td> </td>
-      </tr>
-      <tr>
-        <td>FRIDAY</td> <td> <input type="text"  type="time">  <input type="text" type="time"></td> <td> </td> <td> </td> <td> </td>
-      </tr>
-      <tr>
-        <td>SATURDAY</td> <td> <input type="text"  type="time">  <input type="text" type="time"> </td> <td> </td> <td> </td> <td> </td>
-      </tr>
-    </table>
- </div>
- <br>
-
-
- <!-- NOTES COMPONENT -->
- <div class="notesBox">
-   NOTES
-   <form>
-    <textarea type="text"  class="scrollText" name="Add a note" style="position: fixed; left: 270px;"> </textarea>
-    <input color="accent" type="submit" value="Submit" style="position: fixed; right: 270px; bottom: 18px">
-   </form>
- </div>
- <br>
-
-
- <!-- TIME CLOCK COMPONENT -->
- <div class = "timeClockBox">
-  TIME CLOCK
-  <button mat-raised-button color="accent" style = "top: 140px;">
-    Clock In/Out
-  </button>
- </div>
- <br>
-
-
- <!-- TIME OFF COMPONENT -->
- <div class = "timeOffBox">
-  TIME OFF
-
-  <p>
-    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-      Link with href
-    </a>
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-      Button with data-target
-    </button>
-  </p>
-  <div class="collapse" id="collapseExample">
-    <div class="card card-body">
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+        </div>
+      </div>
     </div>
-  </div>
- </div>
+</span>
+
+<div class="d-flex flex-row w-100 h-100 margin-bottom: 100%">
+  <span class="border border-light rounded shadow-lg bg-dark " style=" width: 95rem;">
+    <div class="p-2 bg-light flex-grow-1 bg-dark text-white">
+      <legend> SCHEDULE </legend>
+       <app-schedule></app-schedule>
+    </div>
+    <div class="d-flex flex-row w-100 h-50 margin-bottom: 100%">
+        <span class="border border-light rounded shadow-lg ml-2 mr-2">
+            <div class="h-100 d-inlineblock" style="width: 93.5rem;">
+              <div class="p-2 bg-dark rounded align-items-start text-white h-100">
+                <div>
+                  <legend> NOTES</legend>
+                    <textarea class="bg-dark text-white"rows="10" cols="180"> Enter Notes </textarea>
+                    <button mat-raised-button type="submit" style="color: accent">Submit</button>
+                </div>
+            </div>
+          </div>
+        </span>
+      </div>
+  </span>
+<div>
+
+
+<div class="d-flex flex-row w-100 h-50 margin-bottom: 100%">
+  <span class="border border-light rounded shadow-lg ml-2 mr-2">
+      <div class="h-100 d-inlineblock" style="width: 19.5rem;">
+        <div class="p-2 bg-dark rounded align-items-start text-white h-100">
+          <div>
+            <legend> TIME CLOCK </legend>
+            <div style="text-align:center;padding:1em 0; text-decoration-color: white">
+               <h4>
+                 <a style="text-decoration:none;"
+                  href="https://www.zeitverschiebung.net/en/city/5128581">
+                  <span style="color:white;">
+                   Current local time in
+                  </span>
+                  <br />
+                  Columbia, SC
+                </a>
+              </h4>
+              <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=small&timezone=America%2FNew_York" width="100%" height="90" frameborder="0" seamless></iframe>
+             </div>
+              <button mat-button-raised type = "submit"  class="btn btn-outline-info btn-block" style="color: white">ClockIn/ClockOut</button>
+          </div>
+      </div>
+    </div>
+  </span>
 </div>
+
+<div class="d-flex flex-row w-100 h-50 margin-bottom: 100%">
+    <span class="border border-light rounded shadow-lg ml-2 mr-2">
+        <div class="h-100 d-inlineblock" style="width: 19.5rem;">
+          <div class="p-2 bg-dark rounded align-items-start text-white h-100">
+            <div>
+              <legend> TIME OFF </legend>
+            </div>
+        </div>
+      </div>
+    </span>
+  </div>
 
