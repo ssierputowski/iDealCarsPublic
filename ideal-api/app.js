@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 // This file is the server logic for the app
 
 const userRoutes = require('./routes/user');
+const customerRoutes = require('./routes/customer');
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/user', userRoutes);
+app.use('/api/customers', customerRoutes);
 
 module.exports = app;
 

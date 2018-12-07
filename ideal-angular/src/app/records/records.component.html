@@ -1,80 +1,59 @@
 <app-header></app-header>
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1/css/bootstrap.min.css">
 
 <!-- Button trigger modal -->
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add New Client</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-              <body ng-app = "myApp" ng-controller = "myCtrl">
-                <form>
-                  <p></p>
-                  <div class = "form-group">
-                    <label>First Name</label>
-                      <input type = "text" class = "form-control" placeholder = "Enter Full Name" ng-model = "newContacts.fname">
-                  </div>
-                  <div class = "form-group">
-                      <label>Last Name</label>
-                        <input type = "text" class = "form-control" placeholder = "Enter Full Name" ng-model = "newContacts.lname">
-                    </div>
-                    <div class = "form-group">
-                        <label>Vehicle Year</label>
-                        <input type = "text" class = "form-control" placeholder = "Enter Vehicle Year" ng-model = "newContacts.carYear">
-                      </div>
-                    <div class = "form-group">
-                        <label>Vehicle Make</label>
-                        <input type = "text" class = "form-control" placeholder = "Enter Vehicle Make" ng-model = "newContacts.carMake">
-                      </div>
-                  <div class = "form-group">
-                    <label>Vehicle Model</label>
-                    <input type = "text" class = "form-control" placeholder = "Enter Vehicle Model" ng-model = "newContacts.carModel">
-                  </div>
-                  <div class = "form-group">
-                    <label>Telephone</label>
-                    <input type = "text" class = "form-control" placeholder = "Enter Phone #" ng-model = "newContacts.telephone">
-                  </div>
-                  <div class = "form-group">
-                    <label>Email</label>
-                    <input type = "email" class = "form-control" placeholder = "Enter Email Address" ng-model = "newContacts.email">
-                  </div>
-                </form>
-              </body>
-            </div>
-          <div class="modal-footer">
-        <button mat-raised-button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button  mat-raised-button color='accent' type='submit' class="btn btn-primary" ng-click = "saveContact()">Submit</button>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add New Client</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <body ng-app="myApp" ng-controller="myCtrl">
+          <form [formGroup]="form" (submit)="saveCustomer()" *ngIf="!isLoading">
+            <mat-form-field color="accent">
+              <mat-label>First Name</mat-label>
+              <input matInput type="text" formControlName="fname">
+            </mat-form-field>
+            <mat-form-field color="accent">
+              <mat-label>Last Name</mat-label>
+              <input matInput type="text" formControlName="lname">
+            </mat-form-field>
+            <mat-form-field color="accent">
+              <mat-label>Vehicle Year</mat-label>
+              <input matInput type="number" formControlName="carYear">
+            </mat-form-field>
+            <mat-form-field color="accent">
+              <mat-label>Vehicle Make</mat-label>
+              <input matInput type="text" formControlName="carMake">
+            </mat-form-field>
+            <mat-form-field color="accent">
+              <mat-label>Vehicle Model</mat-label>
+              <input matInput type="text" formControlName="carModel">
+            </mat-form-field>
+            <mat-form-field color="accent">
+              <mat-label>Telephone</mat-label>
+              <input matInput type="tel" formControlName="telephone">
+            </mat-form-field>
+            <mat-form-field color="accent">
+              <mat-label>Email</mat-label>
+              <input matInput type="email" formControlName="email">
+            </mat-form-field>
+            <button mat-raised-button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+            <button mat-raised-button type="submit" color="accent">SUBMIT</button>
+          </form>
+          <mat-spinner *ngIf="isLoading"></mat-spinner>
+        </body>
       </div>
     </div>
   </div>
 </div>
-
-<!--
-<mat-list>
-  <h3 mat-subheader>Name</h3>
-  <mat-list-item *ngFor="let name of name">
-    <mat-icon mat-list-icon>name</mat-icon>
-    <h4 mat-line>{{name.name}}</h4>
-    <p mat-line> {{name.updated | date}} </p>
-  </mat-list-item>
-  <mat-divider></mat-divider>
-  <h3 mat-subheader>Vehicle(s)</h3>
-  <mat-list-item *ngFor="let vehicle of vehicle">
-    <mat-icon mat-list-icon>vehicle</mat-icon>
-    <h4 mat-line>{{vehicle.name}}</h4>
-    <p mat-line> {{vehicle.updated | date}} </p>
-  </mat-list-item>
-</mat-list>
--->
 
 <mat-drawer-container class="example-container " autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
@@ -102,39 +81,6 @@
         <mat-icon>menu</mat-icon>
       Menu
     </button>
-<!--
-  <mat-card class="example-card" >
-    <mat-card-header>
-      <div mat-card-avatar class=""></div> Insert image in the quotes
-      <mat-card-title>Customer Name</mat-card-title>
-      <mat-card-subtitle>Vehicle</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://static.tcimg.net/vehicles/primary/29e2612bcf1a8a85/2019-Mercedes-Benz-C-Class-silver-full_color-driver_side_front_quarter.png">
-    <mat-card-content>
-      <p>
-      2019 Mercedes Benz C300
-      </p>
-    </mat-card-content>
-  </mat-card>
-  <p>
-  </p>
-
-<mat-card class="example-card" >
-    <mat-card-header>
-      <div mat-card-avatar class="http://kempenfeltplayers.com/wp-content/uploads/2015/07/profile-icon-empty.png"></div> Insert image in the quotes
-      <mat-card-title>Customer Name 2</mat-card-title>
-      <mat-card-subtitle>Vehicle</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://static.tcimg.net/vehicles/primary/29e2612bcf1a8a85/2019-Mercedes-Benz-C-Class-silver-full_color-driver_side_front_quarter.png">
-    <mat-card-content>
-      <p>
-      2019 Mercedes Benz C300
-      </p>
-    </mat-card-content>
-  </mat-card>
-  <p>
-  </p>
--->
 
 <div class="card">
   <div class="card-body">
@@ -182,7 +128,7 @@
         </div>
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body">
-              <mat-card class="example-card" align = center>
+              <mat-card class="example-card" align=center>
                   <mat-card-header>
                     <mat-card-title>2019 Mercedes-Benz C300 4Matic</mat-card-title>
                   </mat-card-header>

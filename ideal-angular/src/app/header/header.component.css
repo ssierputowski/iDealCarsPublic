@@ -1,6 +1,7 @@
 img {
   width: 15rem;
   height: 15rem;
+  margin: auto;
 }
 
 h1 {
@@ -18,4 +19,8 @@ a {
 
 .bold {
   font-weight: bold;
+}
+
+button {
+  margin: auto;
 }
