@@ -6,7 +6,7 @@
         "start": "nodemon ./bin/server.js"
     },
     "dependencies": {
-        "bcrypt": "^3.0.2",
+        "bcryptjs": "^2.4.3",
         "bluebird": "^3.5.1",
         "body-parser": "~1.18.2",
         "cookie-parser": "~1.4.3",
@@ -22,10 +22,6 @@
         "mongoose-paginate": "^5.0.3",
         "mongoose-unique-validator": "^2.0.2",
         "morgan": "~1.9.0",
-        "rxjs": "^5.5.6",
         "serve-favicon": "~2.4.5"
-    },
-    "devDependencies": {
-        "nodemon": "^1.12.1"
     }
 }

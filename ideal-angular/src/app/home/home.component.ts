@@ -15,4 +15,12 @@ export class HomeComponent implements OnInit {
     this.titleService.setTitle('Home | iDealCars');
   }
 
+  onTest1() {
+    console.log('');
+  }
+
+  onTest2() {
+    console.log('');
+  }
+
 }
