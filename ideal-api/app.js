@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+const Customer = require('./models/customer');
+
 // I am making a conflict
 
 // This file is the server logic for the app
@@ -20,6 +22,8 @@ mongoose.connect('mongodb://jmathis:ePA0FmXpjtnlzcji@ideal-cars-shard-00-00-szrk
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+const customer = new Customer();
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
