@@ -1,7 +1,7 @@
 /**
  * Module dependencies.
  */
-var app = require('../app');
+var app = require('./app');
 var debug = require('debug')('clo-api:server');
 var http = require('http');
 

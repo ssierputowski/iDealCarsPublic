@@ -2,18 +2,21 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+<<<<<<< HEAD
 const Customer = require('./models/customer');
 
 // I am making a conflict
 
 // This file is the server logic for the app
 
+=======
+>>>>>>> dc19f9ea01afb9dee4620abb401baeed30323288
 const userRoutes = require('./routes/user');
 const customerRoutes = require('./routes/customer');
 
 const app = express();
 
-mongoose.connect('mongodb://jmathis:ePA0FmXpjtnlzcji@ideal-cars-shard-00-00-szrks.mongodb.net:27017,ideal-cars-shard-00-01-szrks.mongodb.net:27017,ideal-cars-shard-00-02-szrks.mongodb.net:27017/test?ssl=true&replicaSet=ideal-cars-shard-0&authSource=admin&retryWrites=true', { useMongoClient: true })
+mongoose.connect('mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test')
     .then(() => {
         console.log('Connected to the database!');
     })

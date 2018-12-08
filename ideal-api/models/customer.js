@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
 const customerSchema = mongoose.Schema({
-    fname:  { type: String, required: true},
-    lname: { type: String, required: true},
-    carYear: { type: String, required: true},
-    carMake: { type: String, require: true},
-    carModel: { type: String, required: true},
-    telephone: { type: String, required: true},
-    email: { type: String, required: true},
+    fname: { type: String },
+    lname: { type: String },
+    carYear: { type: String },
+    carMake: { type: String },
+    carModel: { type: String },
+    telephone: { type: String },
+    email: { type: String },
 });
 
 module.exports = mongoose.model('Customer', customerSchema);
