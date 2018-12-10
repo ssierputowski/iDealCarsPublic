@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatRadioChange } from '@angular/material/radio';
+import { MatRadioModule} from '@angular/material';
 import { VehicleService } from 'src/services/vehicle.service';
 import { Vehicle } from '../../models/vehicle.model';
 import { PartService } from 'src/services/part.service';
@@ -35,9 +37,12 @@ export class InventoryComponent implements OnInit {
     private partService: PartService
   ) {}
 
-
+onRadioChange(event: MatRadioChange) {
+  this.isLoading = event.value;
+}
   ngOnInit() {
-    if (this.checked) {
+    if (this.isLoading) {
+      this.isLoading = true;
       this.titleService.setTitle('Part Inventory | iDealCars');
     this.form = new FormGroup({
       'partId': new FormControl(null, {
@@ -56,11 +61,11 @@ export class InventoryComponent implements OnInit {
       this.partService.getParts();
       this.partsSub = this.partService.getPartUpdateListener()
       .subscribe((partData: { parts: Part[] }) => {
-        this.checked = true;
+        this.isLoading = true;
         this.parts = partData.parts;
       });
   }
-    this.checked = false;
+    this.isLoading = false;
     this.titleService.setTitle('Vehicle Inventory | iDealCars');
     this.form = new FormGroup({
       'vinId': new FormControl(null, {
@@ -104,7 +109,7 @@ export class InventoryComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    this.checked = false;
+    this.isLoading = false;
     this.vehicleService.addVehicle(
       this.form.value.vinId,
       this.form.value.price,
@@ -114,21 +119,21 @@ export class InventoryComponent implements OnInit {
       this.form.value.carColor,
       this.form.value.optionsDescription
     );
-    this.checked = false;
+    this.isLoading = false;
     this.form.reset();
   }
   savePart() {
     if (this.form.invalid) {
       return;
     }
-    this.checked = true;
+    this.isLoading = true;
     this.partService.addPart(
       this.form.value.partId,
       this.form.value.name,
       this.form.value.description,
       this.form.value.price
     );
-    this.checked = true;
+    this.isLoading = true;
     this.form.reset();
   }
 

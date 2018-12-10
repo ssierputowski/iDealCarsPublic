@@ -3,7 +3,7 @@
   <span class="border border-light rounded shadow-lg ml-2 mr-2">
     <div class="h-100 d-inlineblock" style="width: 15rem;">
       <div class="p-2 bg-dark rounded align-items-start text-white h-100">
-        <form [formGroup]="form" (submit)="saveVehicle()" *ngIf="!checked">
+        <form [formGroup]="form" (submit)="saveVehicle()" *ngIf="!isLoading">
         <div class = "form-group">
           <label>Vehicle VIN</label>
           <input type = "text" class = "form-control" placeholder = "Enter Vehicle VIN" formControlName="vinId">
@@ -34,16 +34,16 @@
           </div>
         <span class="m-0">
           <div class="form-check">
-              <label class="form-check-label">
-                <input type="radio" ng-model="checked" ng-init="checked=true">Search Parts Instead
-              </label>
+              <mat-radio-group>
+                <mat-radio-button (change)="onRadioChange($event)" value="true">Search Parts</mat-radio-button>
+              </mat-radio-group>
           </div>
         </span>
         <div>
             <button type = "submit"  class="btn btn-outline-info btn-block" style="color: white">Add to Inventory</button>
         </div>
         </form>
-        <form [formGroup]="form" (submit)="savePart()" *ngIf="checked">
+        <form [formGroup]="form" (submit)="savePart()" *ngIf="isLoading">
             <div class = "form-group">
               <label>Part ID</label>
               <input type = "text" class = "form-control" placeholder = "Enter Part ID" formControlName="partId">
@@ -60,7 +60,14 @@
                 <label>Part Price</label>
                 <input type = "text" class = "form-control" placeholder = "Enter Part Price" formControlName="price">
               </div>
-            <div>
+              <span class="m-0">
+                <div class="form-check">
+                  <mat-radio-group>
+                    <mat-radio-button (change)="onRadioChange($event)" value="false">Search Vehicles</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </span>
+              <div>
                 <button type = "submit"  class="btn btn-outline-info btn-block" style="color: white">Add to Inventory</button>
             </div>
             </form>
@@ -79,10 +86,9 @@
                     <div class="card-header" id="headingOne">
                       <div class="col-md-12 col-offset-md-1">
                         <div class="table-responsive table-size">
-                          <mat-spinner *ngIf="!checked"></mat-spinner>
-                          <table class="table" *ngIf="!checked">
+                          <table class="table" *ngIf="!isLoading">
                             <thead>
-                              <tr  *ngIf="!checked">
+                              <tr>
                                 <th>Vehicle VIN</th>
                                 <th>Price</th>
                                 <th>Year</th>
@@ -104,9 +110,9 @@
                             </tr>
                           </tbody>
                           </table>
-                           <table class="table" *ngIf="checked">
+                           <table class="table" ng-selected="checked" *ngIf="isLoading">
                             <thead>
-                              <tr  *ngIf="checked">
+                              <tr>
                                 <th>Part ID</th>
                                 <th>Part Name</th>
                                 <th>Description</th>

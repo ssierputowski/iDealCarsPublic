@@ -12,7 +12,7 @@ router.post('', (req, res, next) => {
         year: req.body.year,
         make: req.body.make,
         vehicleModel: req.body.vehicleModel,
-        tcarColor: req.body.carColor,
+        carColor: req.body.carColor,
         optionsDescription: req.body.optionsDescription
     });
     vehicle.save().then(newVehicle => {
