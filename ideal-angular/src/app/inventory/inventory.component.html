@@ -79,6 +79,7 @@
                     <div class="card-header" id="headingOne">
                       <div class="col-md-12 col-offset-md-1">
                         <div class="table-responsive table-size">
+                          <mat-spinner *ngIf="!checked"></mat-spinner>
                           <table class="table" *ngIf="!checked">
                             <thead>
                               <tr  *ngIf="!checked">
