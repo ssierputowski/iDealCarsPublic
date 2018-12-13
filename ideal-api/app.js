@@ -9,6 +9,10 @@ const partRoutes = require('./routes/part')
 
 const app = express();
 
+/**'mongodb+srv://EWD:zipGEoVPTIRJvIEh@cluster0-tcbpt.mongodb.net/node-angular?retryWrites=true' */
+
+/**'mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test' */
+
 mongoose.connect('mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test')
     .then(() => {
         console.log('Connected to the database!');

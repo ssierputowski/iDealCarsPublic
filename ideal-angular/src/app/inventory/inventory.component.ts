@@ -15,8 +15,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
-  isFirstOpen = true;
-  showFiller = false;
 
   vehicles: Vehicle[] = [];
   totalVehicles = 0;
@@ -28,7 +26,9 @@ export class InventoryComponent implements OnInit {
 
   isLoading = false;
   checked = false;
-  form: FormGroup;
+  vehicleform: FormGroup;
+  partform: FormGroup;
+
 
   constructor(
     private router: Router,
@@ -39,12 +39,16 @@ export class InventoryComponent implements OnInit {
 
 onRadioChange(event: MatRadioChange) {
   this.isLoading = event.value;
+  this.checked = event.value;
 }
   ngOnInit() {
-    if (this.isLoading) {
-      this.isLoading = true;
-      this.titleService.setTitle('Part Inventory | iDealCars');
-    this.form = new FormGroup({
+      if (this.checked) {
+        this.isLoading = true;
+      } else {
+        this.isLoading = false;
+      }
+      this.titleService.setTitle('Inventory | iDealCars');
+    this.partform = new FormGroup({
       'partId': new FormControl(null, {
         validators: [Validators.required]
       }),
@@ -61,13 +65,11 @@ onRadioChange(event: MatRadioChange) {
       this.partService.getParts();
       this.partsSub = this.partService.getPartUpdateListener()
       .subscribe((partData: { parts: Part[] }) => {
-        this.isLoading = true;
         this.parts = partData.parts;
       });
-  }
-    this.isLoading = false;
-    this.titleService.setTitle('Vehicle Inventory | iDealCars');
-    this.form = new FormGroup({
+
+    /**this.titleService.setTitle('Vehicle Inventory | iDealCars'); */
+    this.vehicleform = new FormGroup({
       'vinId': new FormControl(null, {
         validators: [Validators.required]
       }),
@@ -93,7 +95,6 @@ onRadioChange(event: MatRadioChange) {
     this.vehicleService.getVehicles();
     this.vehiclesSub = this.vehicleService.getVehicleUpdateListener()
       .subscribe((vehicleData: { vehicles: Vehicle[] }) => {
-        this.isLoading = false;
         this.vehicles = vehicleData.vehicles;
       });
   }
@@ -106,35 +107,32 @@ onRadioChange(event: MatRadioChange) {
   }*/
 
   saveVehicle() {
-    if (this.form.invalid) {
+    if (this.vehicleform.invalid) {
       return;
     }
-    this.isLoading = false;
     this.vehicleService.addVehicle(
-      this.form.value.vinId,
-      this.form.value.price,
-      this.form.value.year,
-      this.form.value.make,
-      this.form.value.vehicleModel,
-      this.form.value.carColor,
-      this.form.value.optionsDescription
+      this.vehicleform.value.vinId,
+      this.vehicleform.value.price,
+      this.vehicleform.value.year,
+      this.vehicleform.value.make,
+      this.vehicleform.value.vehicleModel,
+      this.vehicleform.value.carColor,
+      this.vehicleform.value.optionsDescription
     );
-    this.isLoading = false;
-    this.form.reset();
+
+    this.vehicleform.reset();
   }
   savePart() {
-    if (this.form.invalid) {
+    if (this.partform.invalid) {
       return;
     }
-    this.isLoading = true;
     this.partService.addPart(
-      this.form.value.partId,
-      this.form.value.name,
-      this.form.value.description,
-      this.form.value.price
+      this.partform.value.partId,
+      this.partform.value.name,
+      this.partform.value.description,
+      this.partform.value.price
     );
-    this.isLoading = true;
-    this.form.reset();
+    this.partform.reset();
   }
 
 }

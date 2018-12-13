@@ -51,13 +51,13 @@ export class PartService {
     partId: string,
     name: string,
     description: string,
-    price: string,
+    price: string
   ) {
     const partData: Part = {
       partId: partId,
       name: name,
       description: description,
-      price: price,
+      price: price
     };
     this.http
       .post<{message: string, part: Part}>(BACKEND_URL, partData)
