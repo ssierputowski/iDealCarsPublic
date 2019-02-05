@@ -42,10 +42,10 @@ Under development
 
 ### Testing
 * Unit Test
-  * ng test
+  * ng test ( passes the one test that we send to it which returns true if the schedule component is generated )
     
  
- * Behavioral Test
+* Behavioral Test
   * Use Chrome plugin Selenium to run the iDealCarsBehaviorial.side file
 
 ### Built With
