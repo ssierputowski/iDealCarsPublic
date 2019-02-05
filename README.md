@@ -46,7 +46,7 @@ Under development
     
  
  * Behavioral Test
-  * Used the Chrome plugin Selenium to complete and it is in the code files to run through Selenium.
+  * Use Chrome plugin Selenium to run the iDealCarsBehaviorial.side file
 
 ### Built With
 * [Angular 6](https://angular.io/)
