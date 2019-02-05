@@ -43,7 +43,7 @@ Under development
 ### Testing
 * Unit Test
   * ng test
-    -unable to fully test through karma as there are a lot of errors on each of the pages. Will update as we work this week to make it function properly. 
+    
  
  * Behavioral Test
   * Used the Chrome plugin Selenium to complete and it is in the code files to run through Selenium.
