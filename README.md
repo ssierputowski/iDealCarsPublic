@@ -40,6 +40,14 @@ Under development
   * ```ng serve```
 * The iDealCars application should now be available at http://localhost:4200
 
+### Testing
+* Unit Test
+  * ng test
+    -unable to fully test through karma as there are a lot of errors on each of the pages. Will update as we work this week to make it function properly. 
+ 
+ * Behavioral Test
+  * Used the Chrome plugin Selenium to complete and it is in the code files to run through Selenium.
+
 ### Built With
 * [Angular 6](https://angular.io/)
 * [Node.js](https://nodejs.org/en/)
