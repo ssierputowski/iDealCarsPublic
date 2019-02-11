@@ -62,7 +62,7 @@ const routes: Routes = [
     MatExpansionModule,
     MatDividerModule,
     RouterModule.forRoot(routes),
-    NgbModule.forRoot(),
+    NgbModule,
     ReactiveFormsModule,
     MatExpansionModule
   ],
