@@ -43,7 +43,7 @@ Under development
 ### Testing
 After installing through the steps above continue on with these steps
 * Unit Test ( currently passes the one test that we send to it which returns true if the schedule component is generated )
-  * ```cd <path>/iDealCars```
+  * ```cd <path>/ideal-angular/```
     * ```ng test```
   * Doing so will prompt Jasmine to run alongside Karma and do the unit test specified in the *.spec files
     
