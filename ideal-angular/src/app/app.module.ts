@@ -12,6 +12,8 @@ import {
   MatSidenavModule,
   MatExpansionModule,
   MatDividerModule,
+  MatTableModule,
+  MatRadioModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -61,6 +63,8 @@ const routes: Routes = [
     MatSidenavModule,
     MatExpansionModule,
     MatDividerModule,
+    MatTableModule,
+    MatRadioModule,
     RouterModule.forRoot(routes),
     NgbModule,
     ReactiveFormsModule,
