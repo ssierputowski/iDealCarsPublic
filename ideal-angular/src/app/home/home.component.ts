@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   lastName = 'Mathis';
   email = 'jerrodmathis95@gmail.com';
   userImg = '../../assets/images/TestImage.jpg';
-  jobRole = 'Manager';
+  jobRole = 'Salesman';
 
   ngOnInit() {
     this.titleService.setTitle('Home | iDealCars');

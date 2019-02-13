@@ -6,6 +6,7 @@ import { CustomerService } from 'src/services/customer.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Customer } from '../../models/customer.model';
 import { Subscription } from 'rxjs';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-records',
@@ -13,80 +14,61 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./records.component.css']
 })
 export class RecordsComponent implements OnInit {
-  isFirstOpen = true;
-  showFiller = false;
-
-  customers: Customer[] = [];
-  totalCustomers = 0;
-  private customersSub: Subscription;
-
-  isLoading = false;
-
-  form: FormGroup;
 
   constructor(
-    private router: Router,
-    private titleService: Title,
-    private customerService: CustomerService,
-    private modalService: NgbModal
+    private titleService: Title
   ) {}
 
-  ngOnInit() {
-    this.isLoading = true;
-    this.titleService.setTitle('Client Records | iDealCars');
-    this.form = new FormGroup({
-      'fname': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'lname': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'carYear': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'carMake': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'carModel': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'telephone': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'email': new FormControl(null, {
-        validators: [Validators.required]
-      })
-    });
-    this.customerService.getCustomers();
-    this.customersSub = this.customerService.getCustomerUpdateListener()
-      .subscribe((customerData: { customers: Customer[] }) => {
-        this.isLoading = false;
-        this.customers = customerData.customers;
-      });
-  }
+  displayedColumns = [
+    'customerName',
+    'customerEmail',
+    'customerPhone',
+    'vehicleYear',
+    'vehicleMake',
+    'vehicleModel',
+    'vehicleColor',
+    'customerRecords'
+  ];
 
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modalTitle', backdrop: 'static'})
-      .result.then((res) => {
-        this.saveCustomer();
-      });
-  }
-
-  saveCustomer() {
-    if (this.form.invalid) {
-      return;
+  customerData = [
+    {
+      customerId: '1023045',
+      firstName: 'Jerrod',
+      lastName: 'Mathis',
+      vehicleInfo: [
+        {
+          vehicleYear: 1999,
+          vehicleMake: 'Toyota',
+          vehicleModel: '4runner',
+          vehicleColor: 'White',
+          vehicleId: 'TBA10190ASASDF',
+          vehicleDetails: '',
+          vehicleImage: ''
+        },
+      ],
+      phone: '(843) 323-7261',
+      email: 'jerrodmathis95@gmail.com',
+      serviceRecords: [
+        {
+          servicePerformed: 'Ball joints replaced',
+          serviceDate: '01-31-2019',
+          dateReturned: '02-01-2019',
+          whoPerformed: 'Chris Matthews',
+          serviceNotes: '',
+          servicePrice: 1329.00,
+          paymentReceived: true
+        }
+      ]
     }
-    this.isLoading = true;
-    this.customerService.addCustomer(
-      this.form.value.fname,
-      this.form.value.lname,
-      this.form.value.carYear,
-      this.form.value.carMake,
-      this.form.value.carModel,
-      this.form.value.telephone,
-      this.form.value.email
-    );
-    this.isLoading = false;
-    this.form.reset();
+  ];
+
+  dataSource = new MatTableDataSource(this.customerData);
+
+  ngOnInit() {
+    this.titleService.setTitle('Customer Records | iDealCars');
+  }
+
+  print(id: string) {
+    alert(id);
   }
 }
