@@ -8,9 +8,12 @@ import { AuthService } from 'src/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
+  companyName: string;
+
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.companyName = 'iDealCars';
   }
 
   onLogout() {

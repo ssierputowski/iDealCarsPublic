@@ -1,232 +1,81 @@
 <app-header></app-header>
-
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-<!-- Button trigger modal -->
-
-<!-- Modal -->
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add New Client</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <body ng-app="myApp" ng-controller="myCtrl">
-          <form [formGroup]="form" (submit)="saveCustomer()" *ngIf="!isLoading">
-            <mat-form-field color="accent">
-              <mat-label>First Name</mat-label>
-              <input matInput type="text" formControlName="fname">
-            </mat-form-field>
-            <mat-form-field color="accent">
-              <mat-label>Last Name</mat-label>
-              <input matInput type="text" formControlName="lname">
-            </mat-form-field>
-            <mat-form-field color="accent">
-              <mat-label>Vehicle Year</mat-label>
-              <input matInput type="number" formControlName="carYear">
-            </mat-form-field>
-            <mat-form-field color="accent">
-              <mat-label>Vehicle Make</mat-label>
-              <input matInput type="text" formControlName="carMake">
-            </mat-form-field>
-            <mat-form-field color="accent">
-              <mat-label>Vehicle Model</mat-label>
-              <input matInput type="text" formControlName="carModel">
-            </mat-form-field>
-            <mat-form-field color="accent">
-              <mat-label>Telephone</mat-label>
-              <input matInput type="tel" formControlName="telephone">
-            </mat-form-field>
-            <mat-form-field color="accent">
-              <mat-label>Email</mat-label>
-              <input matInput type="email" formControlName="email">
-            </mat-form-field>
-            <button mat-raised-button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
-            <button mat-raised-button type="submit" color="accent">SUBMIT</button>
-          </form>
-          <mat-spinner *ngIf="isLoading"></mat-spinner>
-        </body>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<ng-template #customerForm let-modal>
-  <div class="modal-header">
-    <h5 class="modal-title" id="modalTitle">Add New Client</h5>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form [formGroup]="form" (submit)="saveCustomer()" *ngIf="!isLoading">
-      <mat-form-field color="accent">
-        <mat-label>First Name</mat-label>
-        <input matInput type="text" formControlName="fname">
-      </mat-form-field>
-      <mat-form-field color="accent">
-        <mat-label>Last Name</mat-label>
-        <input matInput type="text" formControlName="lname">
-      </mat-form-field>
-      <mat-form-field color="accent">
-        <mat-label>Vehicle Year</mat-label>
-        <input matInput type="text" formControlName="carYear">
-      </mat-form-field>
-      <mat-form-field color="accent">
-        <mat-label>Vehicle Make</mat-label>
-        <input matInput type="text" formControlName="carMake">
-      </mat-form-field>
-      <mat-form-field color="accent">
-        <mat-label>Vehicle Model</mat-label>
-        <input matInput type="text" formControlName="carModel">
-      </mat-form-field>
-      <mat-form-field color="accent">
-        <mat-label>Telephone</mat-label>
-        <input matInput type="tel" formControlName="telephone">
-      </mat-form-field>
-      <mat-form-field color="accent">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" formControlName="email">
-      </mat-form-field>
-    </form>
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
-  </div>
-  <div class="modal-footer">
-    <button mat-raised-button color="accent" (click)="modal.close()">SUBMIT</button>
-  </div>
-</ng-template>
-
-<mat-drawer-container class="example-container " autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>Filter</p>
-    <div class="example-container">
-        <mat-form-field>
-          <input matInput placeholder="Search Client">
+<main>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2 search-container">
+        <mat-form-field color="accent">
+          <mat-label>Customer Name</mat-label>
+          <input matInput #customerName>
         </mat-form-field>
+        <button mat-raised-button color="accent">SEARCH</button>
       </div>
-      <button color= 'accent' type = "submit"  class = "btn btn-secondary">Search</button>
-      <p>
-      </p>
-    <button mat-raised-button color="accent" (click)="open(customerForm)">
-      <mat-icon>person_add</mat-icon>
-      New Client
-    </button>
-    <p *ngIf="showFiller">
-
-      </p>
-    <p></p>
-  </mat-drawer>
-
-  <div class="example-sidenav-content">
-    <button type="button" mat-button (click)="drawer.toggle()">
-        <mat-icon>menu</mat-icon>
-      Menu
-    </button>
-
-<div class="card">
-  <div class="card-body">
-    <h2 style = "text-align: center;">
-    Client Records
-    </h2>
-  <div class="accordion" id="accordionExample">
-    <div class="card">
-      <div class="card-header" id="headingOne">
-        <div class="col-md-12 col-offset-md-1">
-          <div class="table-responsive table-size">
-            <mat-spinner *ngIf="isLoading"></mat-spinner>
-            <table class="table" *ngIf="!isLoading">
-              <thead>
-                <tr>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Year</th>
-                  <th>Make</th>
-                  <th>Model</th>
-                  <th>Number</th>
-                  <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let customer of customers">
-                <td>{{customer.fname}}</td>
-                <td>{{customer.lname}}</td>
-                <td>{{customer.carYear}}</td>
-                <td>{{customer.carMake}}</td>
-                <td>{{customer.carModel}}</td>
-                <td>{{customer.telephone}}</td>
-                <td>{{customer.email}}</td>
-              </tr>
-            </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-        <!-- <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-          <div class="card-body">
-              <mat-card class="example-card" align=center>
-                  <mat-card-header>
-                    <mat-card-title>2019 Mercedes-Benz C300 4Matic</mat-card-title>
-                  </mat-card-header>
-                  <img mat-card-image src="https://static.tcimg.net/vehicles/primary/29e2612bcf1a8a85/2019-Mercedes-Benz-C-Class-silver-full_color-driver_side_front_quarter.png" style="max-width: 400px; height: 100%; margin: auto;">
-                  <div class="accordion" id="accordionExample1">
-                      <div class="accordion" id="accordionExample2">
-                          <div class="accordion" id="accordionExample3">
-                    <div class="card">
-                      <div class="card-header" id="headingOne">
-                        <h5 class="mb-0">
-                          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                            Service on 11/27/2018 <i class='glyphicon glyphicon-chevron-down'></i>
-                          </button>
-                        </h5>
-                      </div>
-                      <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample1">
-                        <div class="card-body">
-                          <p>
-                            The customer had an oil change, brake fluid flush, flush coolant, refill fluids, microfilter, sparkplugs, and state inspection.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-header" id="headingTwo">
-                        <h5 class="mb-0">
-                          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Service on 09/13/2018
-                            <i class="more-less glyphicon glyphicon-plus"></i>
-                          </button>
-                        </h5>
-                      </div>
-                      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample2">
-                        <div class="card-body">
-                          The customer had an oil change and tire rotation.</div>
-                        </div>
-                      </div>
-                    <div class="card">
-                      <div class="card-header" id="headingThree">
-                        <h5 class="mb-0">
-                          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Service on 04/24/2018
-                          </button>
-                        </h5>
-                      </div>
-                      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample3">
-                        <div class="card-body">
-                          The customer had all 4 tires replaced and a car wash.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+      <div class="col-10 records-container">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <!-- Customer Name Column -->
+          <ng-container matColumnDef="customerName">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td class="customerSelect" mat-cell *matCellDef="let element" (click)="print(element.customerId)">
+              {{ element.lastName }}, {{ element.firstName }}
+            </td>
+          </ng-container>
+          <!-- Customer Email Column -->
+          <ng-container matColumnDef="customerEmail">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+          </ng-container>
+          <!-- Customer Phone Column -->
+          <ng-container matColumnDef="customerPhone">
+            <th mat-header-cell *matHeaderCellDef>Phone Number</th>
+            <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
+          </ng-container>
+          <!-- Vehicle Year Column -->
+          <ng-container matColumnDef="vehicleYear">
+            <th mat-header-cell *matHeaderCellDef>Year</th>
+            <td mat-cell *matCellDef="let element">
+              <div *ngFor="let vehicle of element.vehicleInfo">
+                <span>{{ vehicle.vehicleYear }}</span>
               </div>
-            </mat-card>
-          </div>
-        </div> -->
+            </td>
+          </ng-container>
+          <!-- Vehicle Make Column -->
+          <ng-container matColumnDef="vehicleMake">
+            <th mat-header-cell *matHeaderCellDef>Make</th>
+            <td mat-cell *matCellDef="let element">
+              <div *ngFor="let vehicle of element.vehicleInfo">
+                <span>{{ vehicle.vehicleMake }}</span>
+              </div>
+            </td>
+          </ng-container>
+          <!-- Vehicle Model Column -->
+          <ng-container matColumnDef="vehicleModel">
+            <th mat-header-cell *matHeaderCellDef>Model</th>
+            <td mat-cell *matCellDef="let element">
+              <div *ngFor="let vehicle of element.vehicleInfo">
+                <span>{{ vehicle.vehicleModel }}</span>
+              </div>
+            </td>
+          </ng-container>
+          <!-- Vehicle Color Column -->
+          <ng-container matColumnDef="vehicleColor">
+            <th mat-header-cell *matHeaderCellDef>Color</th>
+            <td mat-cell *matCellDef="let element">
+              <div *ngFor="let vehicle of element.vehicleInfo">
+                <span>{{ vehicle.vehicleColor }}</span>
+              </div>
+            </td>
+          </ng-container>
+          <!-- Customer Records Column -->
+          <ng-container matColumnDef="customerRecords">
+            <th class="max-width" mat-header-cell *matHeaderCellDef>Service Records</th>
+            <td class="max-width" mat-cell *matCellDef="let element">
+              <button mat-raised-button color="primary">SHOW</button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
       </div>
     </div>
   </div>
-</div>
+</main>

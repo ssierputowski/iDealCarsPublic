@@ -12,6 +12,8 @@ import {
   MatSidenavModule,
   MatExpansionModule,
   MatDividerModule,
+  MatTableModule,
+  MatRadioModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,8 +23,6 @@ import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { RecordsComponent } from './records/records.component';
 import { HeaderComponent } from './header/header.component';
-import { TimeClockComponent } from './time-clock/time-clock.component';
-import { ScheduleComponent } from './schedule/schedule.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -30,7 +30,6 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'records', component: RecordsComponent},
-  { path: 'time-clock', component: TimeClockComponent },
   { path: 'inventory', component: InventoryComponent },
 ];
 
@@ -42,8 +41,6 @@ const routes: Routes = [
     HomeComponent,
     RecordsComponent,
     HeaderComponent,
-    TimeClockComponent,
-    ScheduleComponent,
     InventoryComponent
   ],
   imports: [
@@ -61,8 +58,10 @@ const routes: Routes = [
     MatSidenavModule,
     MatExpansionModule,
     MatDividerModule,
+    MatTableModule,
+    MatRadioModule,
     RouterModule.forRoot(routes),
-    NgbModule.forRoot(),
+    NgbModule,
     ReactiveFormsModule,
     MatExpansionModule
   ],
