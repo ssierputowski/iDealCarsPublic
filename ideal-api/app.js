@@ -2,15 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-<<<<<<< HEAD
-const Customer = require('./models/customer');
-
-// I am making a conflict
-
-// This file is the server logic for the app
-
-=======
->>>>>>> dc19f9ea01afb9dee4620abb401baeed30323288
 const userRoutes = require('./routes/user');
 const customerRoutes = require('./routes/customer');
 

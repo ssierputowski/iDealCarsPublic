@@ -11,16 +11,15 @@ export class HomeComponent implements OnInit {
 
   constructor(private router: Router, private titleService: Title) { }
 
+  // User variables
+  // Fetch from database
+  firstName = 'Jerrod';
+  lastName = 'Mathis';
+  email = 'jerrodmathis95@gmail.com';
+  userImg = '../../assets/images/TestImage.jpg';
+  jobRole = 'Salesman';
+
   ngOnInit() {
     this.titleService.setTitle('Home | iDealCars');
   }
-
-  onTest1() {
-    console.log('');
-  }
-
-  onTest2() {
-    console.log('');
-  }
-
 }
