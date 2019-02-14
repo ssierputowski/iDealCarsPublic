@@ -41,7 +41,6 @@ const routes: Routes = [
     HeaderComponent,
     HomeComponent,
     RecordsComponent,
-    HeaderComponent,
     TimeClockComponent,
     ScheduleComponent,
     InventoryComponent
