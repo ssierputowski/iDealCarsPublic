@@ -29,7 +29,7 @@ export class AuthService {
   getAuthStatusListener() {
     return this.authStatusListener.asObservable();
   }
-
+/*
   login(username: string, password: string) {
     const userData: User = { username: username, password: password };
     this.http.post<{token: string}>(BACKEND_URL + '/login', userData)
@@ -43,7 +43,7 @@ export class AuthService {
         }
       });
   }
-
+*/
   logout() {
     this.token = null;
     this.isAuthenticated = false;
