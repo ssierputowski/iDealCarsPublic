@@ -31,6 +31,14 @@ export class HomeComponent implements OnInit {
     private leadService: LeadService
     ) { }
 
+  // User variables
+  // Fetch from database
+  firstName = 'Jerrod';
+  lastName = 'Mathis';
+  email = 'jerrodmathis95@gmail.com';
+  userImg = '../../assets/images/TestImage.jpg';
+  jobRole = 'Salesman';
+
   ngOnInit() {
     this.isLoading = true;
     this.titleService.setTitle('Home | iDealCars');
@@ -62,13 +70,4 @@ export class HomeComponent implements OnInit {
     // this.leadsSub = this.leadService.getLeadUpdateListener()
       // .subscribe((leadData))
   }
-
-  onTest1() {
-    console.log('');
-  }
-
-  onTest2() {
-    console.log('');
-  }
-
 }
