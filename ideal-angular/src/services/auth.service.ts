@@ -29,8 +29,7 @@ export class AuthService {
   getAuthStatusListener() {
     return this.authStatusListener.asObservable();
   }
-/*
-  login(username: string, password: string) {
+  login(username: string, password: string) {/*
     const userData: User = { username: username, password: password };
     this.http.post<{token: string}>(BACKEND_URL + '/login', userData)
       .subscribe(res => {
@@ -41,9 +40,9 @@ export class AuthService {
           this.authStatusListener.next(true);
           this.router.navigate(['/home']);
         }
-      });
+      });*/
   }
-*/
+
   logout() {
     this.token = null;
     this.isAuthenticated = false;

@@ -19,7 +19,7 @@ export class CustomerService {
     private http: HttpClient,
     private router: Router
   ) {}
-
+  /*
   getCustomers() {
     this.http
       .get<{message: string, customers: any}>(
@@ -74,5 +74,5 @@ export class CustomerService {
       .subscribe((resData) => {
         window.location.reload();
       });
-  }
+  }*/
 }
