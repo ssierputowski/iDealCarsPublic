@@ -30,6 +30,7 @@ describe('InventoryComponent', () => {
       ],
       schemas: [
         NO_ERRORS_SCHEMA,
+        CUSTOM_ELEMENTS_SCHEMA
       ],
       providers: [
         { provide: Title,
@@ -54,5 +55,9 @@ describe('InventoryComponent', () => {
     let alert = jasmine.createSpy();
     const oldalert = alert;
     alert = oldalert;
+  });
+
+  it(`should logout`, function () {
+
   });
 });

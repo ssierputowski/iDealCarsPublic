@@ -1,60 +1,54 @@
-import { TestBed, async, fakeAsync, tick, ComponentFixture } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { Title, BrowserModule } from '@angular/platform-browser';
+
 import { LoginComponent } from './login.component';
-import { AuthService } from '../../../services/auth.service';
-import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  let authService: AuthService;
-  let el: DebugElement;
+  let userService: Title;
+
+  const routes: Routes = [
+    { path: 'login', component: LoginComponent },
+  ];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginComponent ]
-    })
-    .compileComponents();
+      declarations: [
+        LoginComponent,
+      ],
+      imports: [
+        RouterModule.forRoot(routes),
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserModule
+      ],
+      schemas: [
+        NO_ERRORS_SCHEMA,
+        CUSTOM_ELEMENTS_SCHEMA
+      ],
+      providers: [
+        { provide: Title,
+          useClass: Title }
+      ]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
-
-    // refine the test module by declaring the test component
-    TestBed.configureTestingModule({
-        declarations: [LoginComponent],
-        providers: [AuthService]
-    });
-
-    // create component and test fixture
     fixture = TestBed.createComponent(LoginComponent);
-
-    // get test component from the fixture
-    component = fixture.componentInstance;
-
-    // UserService provided to the TestBed
-    authService = TestBed.get(AuthService);
-
-    //  get the "a" element by CSS selector (e.g., by class name)
-    el = fixture.debugElement.query(By.css('a'));
+    component = fixture.debugElement.componentInstance;
+    fixture.detectChanges();
   });
 
-  /*it('Button label via jasmine.done', (done) => {
-    fixture.detectChanges();
-    expect(el.nativeElement.textContent.trim()).toBe('Login');
+  it(`should have as title 'Login | iDealCars'`, async(() => {
+    userService = TestBed.get(Title);
+    console.log(userService);
+    expect(userService.getTitle()).toBe('Login | iDealCars');
+  }));
 
-    // Make the authService return a promise that resolves to true
-    const spy = spyOn(authService, 'getIsAuth').and.returnValue(Promise.resolve(true));
-    // We trigger the component to check the authService again
-    component.ngOnInit();
-
-    // We now want to call a function when the Promise returned from authService.isAuthenticated() is resolved
-    spy.calls.mostRecent().returnValue.then(() => {
-        // The needsChanged boolean has been updated on the Component so to update the template we trigger change detection
-        fixture.detectChanges();
-        // Now the label is Logout
-        expect(el.nativeElement.textContent.trim()).toBe('Logout');
-        // We tell jasmine we are done with this test spec
-        done();
-    });
-  });*/
 });
