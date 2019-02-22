@@ -3,15 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 
-import { HomeComponent } from './home.component';
+import { HomeComponent, ManagerActionsComponent } from './home.component';
 import { HeaderComponent } from '../header/header.component';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { MatTableModule } from '@angular/material';
+import { MatTableModule, MatDialogModule } from '@angular/material';
+// import { OperatorFunction } from 'rxjs';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let userService: Title;
+  // let dialog: ComponentFixture<ManagerActionsComponent>;
 
   const routes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -26,7 +28,8 @@ describe('HomeComponent', () => {
       imports: [
         MatTableModule,
         RouterModule.forRoot(routes),
-        HttpClientModule
+        HttpClientModule,
+        MatDialogModule
       ],
       schemas: [
         NO_ERRORS_SCHEMA,
@@ -49,6 +52,12 @@ describe('HomeComponent', () => {
     userService = TestBed.get(Title);
     console.log(userService);
     expect(userService.getTitle()).toBe('Home | iDealCars');
+  }));
+
+  it(`should have a test manager actions component`, async(() => {
+    const manage = new ManagerActionsComponent();
+    manage.test();
+    expect(manage.testVal).toBe(1);
   }));
 
 });
