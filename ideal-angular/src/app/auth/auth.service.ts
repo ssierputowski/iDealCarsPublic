@@ -56,17 +56,17 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-  //   // const userData: User = { username: username, password: password };
-  //   this.http.post<{token: string}>(BACKEND_URL + '/login', userData)
-  //     .subscribe(res => {
-  //       const token = res.token;
-  //       this.token = token;
-  //       if (token) {
-  //         this.isAuthenticated = true;
-  //         this.authStatusListener.next(true);
-  //         this.router.navigate(['/home']);
-  //       }
-  //     });
+    const userData: User = { username: username, password: password };
+    this.http.post<{token: string}>(BACKEND_URL + '/login', userData)
+      .subscribe(res => {
+        const token = res.token;
+        this.token = token;
+        if (token) {
+          this.isAuthenticated = true;
+          this.authStatusListener.next(true);
+          this.router.navigate(['/home']);
+        }
+      });
   }
 
   logout() {
