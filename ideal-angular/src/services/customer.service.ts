@@ -51,28 +51,28 @@ export class CustomerService {
     return this.customersUpdated.asObservable();
   }
 
-  addCustomer(
-    fname: string,
-    lname: string,
-    carYear: string,
-    carMake: string,
-    carModel: string,
-    telephone: string,
-    email: string
-  ) {
-    const customerData: Customer = {
-      fname: fname,
-      lname: lname,
-      carYear: carYear,
-      carMake: carMake,
-      carModel: carModel,
-      telephone: telephone,
-      email: email
-    };
-    this.http
-      .post<{message: string, customer: Customer}>(BACKEND_URL, customerData)
-      .subscribe((resData) => {
-        window.location.reload();
-      });
-  }
+  // addCustomer(
+  //   fname: string,
+  //   lname: string,
+  //   carYear: string,
+  //   carMake: string,
+  //   carModel: string,
+  //   telephone: string,
+  //   email: string
+  // ) {
+  //   const customerData: Customer = {
+  //     fname: fname,
+  //     lname: lname,
+  //     carYear: carYear,
+  //     carMake: carMake,
+  //     carModel: carModel,
+  //     telephone: telephone,
+  //     email: email
+  //   };
+  //   this.http
+  //     .post<{message: string, customer: Customer}>(BACKEND_URL, customerData)
+  //     .subscribe((resData) => {
+  //       window.location.reload();
+  //     });
+  // }
 }

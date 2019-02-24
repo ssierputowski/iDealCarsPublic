@@ -1,7 +1,9 @@
-import { Component, OnInit, Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material';
+
+import { ManagerActionsComponent } from '../manager-actions/manager-actions.component';
 
 @Component({
   selector: 'app-home',
@@ -29,32 +31,14 @@ export class HomeComponent implements OnInit {
   }
 
   openActionsDialog() {
-    const dialogRef = this.dialog.open(ManagerActionsComponent);
+    const dialogRef = this.dialog.open(ManagerActionsComponent, {
+      disableClose: true,
+      minWidth: '50rem',
+      height: '70rem',
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog closed');
     });
   }
 }
-
-@Component({
-  selector: 'app-manager-actions-html',
-  styleUrls: ['./home.component.css'],
-  template: `
-  <h2 mat-dialog-title>Manager Actions</h2>
-  <mat-dialog-content class="mat-typography">
-    <mat-tab-group color="accent" animationDuration="0ms">
-      <mat-tab label="Add Employee">
-       <p>I want to add an employee</p>
-      </mat-tab>
-      <mat-tab label="Generate Schedule">
-      </mat-tab>
-    </mat-tab-group>
-  </mat-dialog-content>
-  <mat-dialog-actions align="end">
-    <button mat-raised-button mat-dialog-close>CANCEL</button>
-    <button mat-raised-button color="accent">SUBMIT</button>
-  </mat-dialog-actions>
-  `
-})
-export class ManagerActionsComponent {}

@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
         if (isValid) {
             error = null;
         }
-        cb(error, 'ideal-api/images');
+        cb(error, 'ideal-api/userImages');
     },
     filename: (req, file, cb) => {
         const name = file.originalname.toLowerCase().split(' ').join('-');
@@ -44,7 +44,7 @@ router.post(
                 emailAddress: req.body.email,
                 phoneNumber: req.body.phoneNumber,
                 jobRole: req.body.jobRole,
-                image: url + '/images/' + req.file.filename
+                image: url + '/userImages/' + req.file.filename
             });
             user.save()
                 .then(result => {

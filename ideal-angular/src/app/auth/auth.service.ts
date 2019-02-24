@@ -30,6 +30,32 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
+  createUser(
+    username: string,
+    password: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    phoneNumber: string,
+    jobRole: string,
+    image: string
+  ) {
+    const user = {
+      username: username,
+      password: password,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phoneNumber: phoneNumber,
+      jobRole: jobRole,
+      image: image
+    }
+    this.http.post(BACKEND_URL + '/register', user)
+      .subscribe(res => {
+        console.log(res);
+      });
+  }
+
   login(username: string, password: string) {
   //   // const userData: User = { username: username, password: password };
   //   this.http.post<{token: string}>(BACKEND_URL + '/login', userData)
