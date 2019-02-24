@@ -6,7 +6,7 @@
   #tabGroup
   (selectedTabChange)="tabChanged($event)">
     <mat-tab label="Add Employee">
-      <form [formGroup]="form" (ngSubmit)="onAddEmployee()" #employeeForm="ngForm">
+      <form [formGroup]="form" (ngSubmit)="onAddEmployee()" #employeeForm="ngForm" autocomplete="off">
         <mat-form-field color="accent">
           <mat-label>Username</mat-label>
           <input matInput type="text" formControlName="username">

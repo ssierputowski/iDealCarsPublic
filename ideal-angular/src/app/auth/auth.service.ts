@@ -38,19 +38,18 @@ export class AuthService {
     email: string,
     phoneNumber: string,
     jobRole: string,
-    image: string
+    image: File
   ) {
-    const user = {
-      username: username,
-      password: password,
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      phoneNumber: phoneNumber,
-      jobRole: jobRole,
-      image: image
-    }
-    this.http.post(BACKEND_URL + '/register', user)
+    const userData = new FormData();
+    userData.append('username', username);
+    userData.append('password', password);
+    userData.append('firstName', firstName);
+    userData.append('lastName', lastName);
+    userData.append('email', email);
+    userData.append('phoneNumber', phoneNumber);
+    userData.append('jobRole', jobRole);
+    userData.append('image', image, image.name);
+    this.http.post(BACKEND_URL + '/register', userData)
       .subscribe(res => {
         console.log(res);
       });
