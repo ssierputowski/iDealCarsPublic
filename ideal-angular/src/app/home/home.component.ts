@@ -31,14 +31,10 @@ export class HomeComponent implements OnInit {
   }
 
   openActionsDialog() {
-    const dialogRef = this.dialog.open(ManagerActionsComponent, {
+    this.dialog.open(ManagerActionsComponent, {
       disableClose: true,
       minWidth: '50rem',
       height: '70rem',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog closed');
     });
   }
 }
