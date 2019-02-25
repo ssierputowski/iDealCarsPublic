@@ -26,6 +26,7 @@
         <button mat-raised-button color="accent" (click)="openDialogEntry()">ADD TO INVENTORY</button>
       </div>
       <div class="col-10 inventory-container">
+
         <table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8" style="overflow: auto; width: 100%;">
           <!-- Id Column -->
           <ng-container matColumnDef="vehVin">
