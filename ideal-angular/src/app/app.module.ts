@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   MatButtonModule,
   MatFormFieldModule,
@@ -29,14 +29,17 @@ import { HeaderComponent } from './header/header.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { ManagerActionsComponent } from './manager-actions/manager-actions.component';
 
+import { AuthInterceptor } from './auth/auth-interceptor';
+import { AuthGuard } from './auth/auth.guard';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'records', component: RecordsComponent},
-  { path: 'inventory', component: InventoryComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'records', component: RecordsComponent, canActivate: [AuthGuard] },
+  { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
@@ -78,7 +81,10 @@ const routes: Routes = [
   entryComponents: [
     ManagerActionsComponent
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
