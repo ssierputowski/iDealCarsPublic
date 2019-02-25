@@ -7,13 +7,15 @@ const router = express.Router();
 router.post('', (req, res, next) => {
     console.log(req.body);
     const vehicle = new Vehicle({
-        vinId: req.body.vinId,
-        price: req.body.price,
-        year: req.body.year,
-        make: req.body.make,
-        vehicleModel: req.body.vehicleModel,
-        carColor: req.body.carColor,
-        optionsDescription: req.body.optionsDescription
+        vehVin: req.body.vehVin,
+        vehYear: req.body.vehYear,
+        vehMake: req.body.vehMake,
+        vehModel: req.body.vehModel,
+        vehColor: req.body.vehColor,
+        vehCondition: req.body.vehCondition,
+        vehDetail: req.body.vehDetail,
+        vehPrice: req.body.vehPrice,
+        vehImage: req.body.vehImage
     });
     vehicle.save().then(newVehicle => {
         res.status(201).json({

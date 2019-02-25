@@ -1,140 +1,81 @@
 <app-header></app-header>
-<div class="d-flex flex-row w-100 h-75 margin-bottom: 100%">
-  <span class="border border-light rounded shadow-lg ml-2 mr-2">
-    <div class="h-100 d-inlineblock" style="width: 15rem;">
-      <div class="p-2 bg-dark rounded align-items-start text-white h-100">
-        <form [formGroup]="vehicleform" (submit)="saveVehicle()" *ngIf="!isLoading">
-        <div class = "form-group">
-          <label>Vehicle VIN</label>
-          <input type = "text" class = "form-control" placeholder = "Enter Vehicle VIN" formControlName="vinId">
-        </div>
-        <div class = "form-group">
-          <label>Vehicle Price</label>
-          <input type = "text" class = "form-control" placeholder = "Enter Vehicle Price" formControlName="price">
-        </div>
-        <div class = "form-group">
-          <label>Vehicle Year</label>
-          <input type = "text" class = "form-control" placeholder = "Enter Vehicle Year" formControlName="year">
-        </div>
-        <div class = "form-group">
-            <label>Vehicle Make</label>
-            <input type = "text" class = "form-control" placeholder = "Enter Vehicle Make" formControlName="make">
-          </div>
-        <div class = "form-group">
-            <label>Vehicle Model</label>
-            <input type = "text" class = "form-control" placeholder = "Enter Vehicle Model" formControlName="vehicleModel">
-          </div>
-        <div class = "form-group">
-            <label>Vehicle Color</label>
-            <input type = "text" class = "form-control" placeholder = "Enter Vehicle Color" formControlName="carColor">
-          </div>
-        <div class = "form-group">
-            <label>Vehicle Options</label>
-            <input type = "text" class = "form-control" placeholder = "Enter Vehicle Options" formControlName="optionsDescription">
-          </div>
-        <span class="m-0">
-          <div class="form-check">
-              <mat-radio-group>
-                <mat-radio-button (change)="onRadioChange($event)" [value]="true">Search Parts</mat-radio-button>
-              </mat-radio-group>
-          </div>
-        </span>
-        <div>
-            <button type = "submit"  class="btn btn-outline-info btn-block" style="color: white">Add to Inventory</button>
-        </div>
+<main>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2 search-container">
+        <form [formGroup]="searchForm">
+          <mat-form-field color="accent">
+            <mat-label>Year</mat-label>
+            <input matInput type="text"  (keyup)="applyFilter($event.target.value)" placeholder="Enter Vehicle Year" formControlName="Year">
+          </mat-form-field>
+          <mat-form-field color="accent">
+            <mat-label>Make</mat-label>
+            <input matInput type="text" (keyup)="applyFilter($event.target.value)" placeholder="Enter Vehicle Make" formControlName="Make">
+          </mat-form-field>
+          <mat-form-field color="accent">
+            <mat-label>Model</mat-label>
+            <input matInput type="text" (keyup)="applyFilter($event.target.value)" placeholder="Enter Vehicle Model" formControlName="Model">
+          </mat-form-field>
+          <mat-form-field color="accent">
+            <mat-label>Color</mat-label>
+            <input matInput type="text" (keyup)="applyFilter($event.target.value)" placeholder="Enter Vehicle Color" formControlName="Color">
+          </mat-form-field>
         </form>
-        <form [formGroup]="partform" (submit)="savePart()" *ngIf="isLoading">
-            <div class = "form-group">
-              <label>Part ID</label>
-              <input type = "text" class = "form-control" placeholder = "Enter Part ID" formControlName="partId">
-            </div>
-            <div class = "form-group">
-              <label>Part Name</label>
-              <input type = "text" class = "form-control" placeholder = "Enter Part Name" formControlName="name">
-            </div>
-            <div class = "form-group">
-                <label>Part Description</label>
-                <input type = "text" class = "form-control" placeholder = "Enter Part Description" formControlName="description">
-              </div>
-            <div class = "form-group">
-                <label>Part Price</label>
-                <input type = "text" class = "form-control" placeholder = "Enter Part Price" formControlName="price">
-              </div>
-              <span class="m-0">
-                <div class="form-check">
-                  <mat-radio-group>
-                    <mat-radio-button (change)="onRadioChange($event)" [value]="false">Search Vehicles</mat-radio-button>
-                  </mat-radio-group>
-                </div>
-              </span>
-              <div>
-                <button type="submit" class="btn btn-outline-info btn-block" style="color: white">Add to Inventory</button>
-            </div>
-            </form>
+        <button mat-raised-button color="accent">SEARCH</button>
+        <mat-divider></mat-divider>
+        <button mat-raised-button color="accent" (click)="openDialogEntry()">ADD TO INVENTORY</button>
+      </div>
+      <div class="col-10 inventory-container">
+        <table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8" style="overflow: auto; width: 100%;">
+          <!-- Id Column -->
+          <ng-container matColumnDef="vehVin">
+            <th mat-header-cell *matHeaderCellDef>VIN</th>
+            <td class="vehicleSelect" mat-cell *matCellDef="let element" (click)="print(element.vehVin)">{{ element.vehVin }}</td>
+          </ng-container>
+          <!-- Year Column -->
+          <ng-container matColumnDef="vehYear">
+            <th mat-header-cell *matHeaderCellDef>Year</th>
+            <td mat-cell *matCellDef="let element">{{ element.vehYear }}</td>
+          </ng-container>
+          <!-- Make Column -->
+          <ng-container matColumnDef="vehMake">
+            <th mat-header-cell *matHeaderCellDef>Make</th>
+            <td mat-cell *matCellDef="let element">{{ element.vehMake }}</td>
+          </ng-container>
+          <!-- Model Column -->
+          <ng-container matColumnDef="vehModel">
+            <th mat-header-cell *matHeaderCellDef>Model</th>
+            <td mat-cell *matCellDef="let element">{{ element.vehModel }}</td>
+          </ng-container>
+          <!-- Color Column -->
+          <ng-container matColumnDef="vehColor">
+            <th mat-header-cell *matHeaderCellDef>Color</th>
+            <td mat-cell *matCellDef="let element">{{ element.vehColor }}</td>
+          </ng-container>
+          <!-- Condition Column -->
+          <ng-container matColumnDef="vehCondition">
+            <th mat-header-cell *matHeaderCellDef>Condition</th>
+            <td mat-cell *matCellDef="let element">{{ element.vehCondition }}</td>
+          </ng-container>
+          <!-- Details Column -->
+          <ng-container matColumnDef="vehDetails">
+            <th mat-header-cell *matHeaderCellDef>Details</th>
+            <td class="max-width" mat-cell *matCellDef="let element">{{ element.vehDetails }}</td>
+          </ng-container>
+          <!-- Price Column -->
+          <ng-container matColumnDef="vehPrice">
+            <th mat-header-cell *matHeaderCellDef>Price</th>
+            <td mat-cell *matCellDef="let element">{{ element.vehPrice }}</td>
+          </ng-container>
+          <!-- Image Column -->
+          <ng-container matColumnDef="vehImage">
+            <th mat-header-cell *matHeaderCellDef>Image</th>
+            <td mat-cell *matCellDef="let element">{{ element.vehImage }}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
       </div>
     </div>
-  </span>
-  <span class="border border-light rounded shadow-lg" style="overflow: auto; width: 100%;">
-    <div class="p-2 bg-light flex-grow-1">
-          <div class="card border-light rounded shadow-lg">
-              <div class="card-body border-light rounded shadow-lg">
-                  <h2 style = "text-align: center;">
-                  Inventory
-                  </h2>
-                <div class="accordion" id="accordionExample">
-                  <div class="card border-light rounded shadow-lg">
-                    <div class="card-header" id="headingOne">
-                      <div class="col-md-12 col-offset-md-1">
-                        <div class="table-responsive table-size">
-                          <table class="table" *ngIf="!isLoading">
-                            <thead>
-                              <tr>
-                                <th>Vehicle VIN</th>
-                                <th>Price</th>
-                                <th>Year</th>
-                                <th>Make</th>
-                                <th>Model</th>
-                                <th>Color</th>
-                                <th>Options</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let vehicle of vehicles">
-                              <td>{{vehicle.vinId}}</td>
-                              <td>{{vehicle.price}}</td>
-                              <td>{{vehicle.year}}</td>
-                              <td>{{vehicle.make}}</td>
-                              <td>{{vehicle.vehicleModel}}</td>
-                              <td>{{vehicle.carColor}}</td>
-                              <td>{{vehicle.optionsDescription}}</td>
-                            </tr>
-                          </tbody>
-                          </table>
-                           <table class="table" *ngIf="isLoading">
-                            <thead>
-                              <tr>
-                                <th>Part ID</th>
-                                <th>Part Name</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let part of parts">
-                              <td>{{part.partId}}</td>
-                              <td>{{part.name}}</td>
-                              <td>{{part.description}}</td>
-                              <td>{{part.price}}</td>
-                            </tr>
-                          </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                </div>
-          </div>
-          </div>
-  </span>
-</div>
+  </div>
+</main>

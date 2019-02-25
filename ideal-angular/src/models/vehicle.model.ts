@@ -1,10 +1,12 @@
 export interface Vehicle {
-  vinId: string;
-  price: string;
-  year: string;
-  make: string;
-  vehicleModel: string;
-  carColor: string;
-  optionsDescription: string;
+  vehVin: string;
+  vehYear: Number;
+  vehMake: string;
+  vehModel: string;
+  vehColor: string;
+  vehCondition: string;
+  vehDetail: string;
+  vehPrice: Number;
+  vehImage: string;
 
 }

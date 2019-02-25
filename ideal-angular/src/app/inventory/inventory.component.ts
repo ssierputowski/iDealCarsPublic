@@ -1,138 +1,109 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatRadioChange } from '@angular/material/radio';
-import { MatRadioModule} from '@angular/material';
 import { VehicleService } from 'src/services/vehicle.service';
 import { Vehicle } from '../../models/vehicle.model';
-import { PartService } from 'src/services/part.service';
-import { Part } from '../../models/part.model';
 import { Subscription } from 'rxjs';
+import { DialogEntryComponent } from '../dialog-entry/dialog-entry.component';
+
+
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
-
   vehicles: Vehicle[] = [];
   totalVehicles = 0;
   private vehiclesSub: Subscription;
-
-  parts: Part[] = [];
-  totalParts = 0;
-  private partsSub: Subscription;
-
+  dialogEntryRef: MatDialogRef<DialogEntryComponent>;
+  dataSource: MatTableDataSource<Vehicle>;
   isLoading = false;
   checked = false;
-  vehicleform: FormGroup;
-  partform: FormGroup;
-
+  searchForm: FormGroup;
 
   constructor(
     private router: Router,
     private titleService: Title,
     private vehicleService: VehicleService,
-    private partService: PartService
-  ) {}
+    private dialog: MatDialog
+    ) {}
 
-onRadioChange(event: MatRadioChange) {
-  this.isLoading = event.value;
-  this.checked = event.value;
-}
+  displayedColumns = [
+     'vehVin',
+     'vehYear',
+     'vehMake',
+     'vehModel',
+     'vehCondition',
+     'vehColor',
+     'vehDetails',
+     'vehImage'
+  ];
+
+  // inventory = [
+  //   { vehicleId: 'TBHF2000201', vehicleYear: 2001, vehicleMake: 'Honda', vehicleModel: 'S2000',
+  //   newOrUsed: 'Used', vehicleColor: 'Silver', vehicleDetails: 'Convertible, A/C, here are some
+  //   more details just to see how it handles extra data space' },
+  //   ];
+
+
+
   ngOnInit() {
       if (this.checked) {
         this.isLoading = true;
       } else {
         this.isLoading = false;
       }
-      this.titleService.setTitle('Inventory | iDealCars');
-    this.partform = new FormGroup({
-      'partId': new FormControl(null, {
+    this.titleService.setTitle('Vehicle Inventory | iDealCars');
+    this.searchForm = new FormGroup({
+      'Year': new FormControl(null, {
         validators: [Validators.required]
       }),
-      'name': new FormControl(null, {
+      'Make': new FormControl(null, {
         validators: [Validators.required]
       }),
-      'description': new FormControl(null, {
+      'Model': new FormControl(null, {
         validators: [Validators.required]
       }),
-      'price': new FormControl(null, {
+      'Color': new FormControl(null, {
         validators: [Validators.required]
-      })
+      }),
+
     });
-      this.partService.getParts();
-      this.partsSub = this.partService.getPartUpdateListener()
-      .subscribe((partData: { parts: Part[] }) => {
-        this.parts = partData.parts;
-      });
-
-    /**this.titleService.setTitle('Vehicle Inventory | iDealCars'); */
-    this.vehicleform = new FormGroup({
-      'vinId': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'price': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'year': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'make': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'vehicleModel': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'carColor': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'optionsDescription': new FormControl(null, {
-        validators: [Validators.required]
-      })
+    this.getCars();
+  }
+getCars(): void {
+  this.vehicleService.getVehicles();
+  this.vehicleService.getVehicleUpdateListener()
+    .subscribe((vehicleData: { vehicles: Vehicle[] }) => {
+      this.vehicles = vehicleData.vehicles;
+      this.dataSource = new MatTableDataSource(this.vehicles);
     });
-    this.vehicleService.getVehicles();
-    this.vehiclesSub = this.vehicleService.getVehicleUpdateListener()
-      .subscribe((vehicleData: { vehicles: Vehicle[] }) => {
-        this.vehicles = vehicleData.vehicles;
-      });
-  }
-
-  /**open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modalTitle', backdrop: 'static'})
-      .result.then((res) => {
-        this.saveVehicle();
-      });
-  }*/
-
-  saveVehicle() {
-    if (this.vehicleform.invalid) {
-      return;
-    }
-    this.vehicleService.addVehicle(
-      this.vehicleform.value.vinId,
-      this.vehicleform.value.price,
-      this.vehicleform.value.year,
-      this.vehicleform.value.make,
-      this.vehicleform.value.vehicleModel,
-      this.vehicleform.value.carColor,
-      this.vehicleform.value.optionsDescription
-    );
-
-    this.vehicleform.reset();
-  }
-  savePart() {
-    if (this.partform.invalid) {
-      return;
-    }
-    this.partService.addPart(
-      this.partform.value.partId,
-      this.partform.value.name,
-      this.partform.value.description,
-      this.partform.value.price
-    );
-    this.partform.reset();
-  }
-
 }
+applyFilter(filterValue: string) {
+  filterValue = filterValue.trim(); // Remove whitespace
+  filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+  this.dataSource.filter = filterValue;
+}
+openDialogEntry() {
+  this.dialogEntryRef = this.dialog.open(DialogEntryComponent, {
+    hasBackdrop: true,
+    autoFocus: true,
+    disableClose: false,
+    width: '350px',
+    height: 'auto'
+  });
+}
+
+  print(id: any) {
+    alert(id);
+  }
+  onRowClicked(row) {
+
+  }
+}
+
+

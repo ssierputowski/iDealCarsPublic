@@ -29,13 +29,15 @@ export class VehicleService {
         return {
           vehicles: vehicleData.vehicles.map(vehicle => {
             return {
-              vinId: vehicle.vinId,
-              price: vehicle.price,
-              year: vehicle.year,
-              make: vehicle.make,
-              vehicleModel: vehicle.vehicleModel,
-              carColor: vehicle.carColor,
-              optionsDescription: vehicle.optionsDescription
+              vehVin: vehicle.vehVin,
+              vehYear: vehicle.vehYear,
+              vehMake: vehicle.vehMake,
+              vehModel: vehicle.vehModel,
+              vehColor: vehicle.vehColor,
+              vehCondition: vehicle.vehCondition,
+              vehDetail: vehicle.vehDetail,
+              vehPrice: vehicle.vehPrice,
+              vehImage: vehicle.vehImage
             };
           })
         };
@@ -51,22 +53,26 @@ export class VehicleService {
   }
 
   addVehicle(
-    vinId: string,
-    price: string,
-    year: string,
-    make: string,
-    vehicleModel: string,
-    carColor: string,
-    optionsDescription: string
+    vehVin: string,
+    vehYear: number,
+    vehMake: string,
+    vehModel: string,
+    vehColor: string,
+    vehicleCon: string,
+    vehDetail: string,
+    vehPrice: number,
+    vehImage: string
   ) {
     const vehicleData: Vehicle = {
-      vinId: vinId,
-      price: price,
-      year: year,
-      make: make,
-      vehicleModel: vehicleModel,
-      carColor: carColor,
-      optionsDescription: optionsDescription
+      vehVin: vehVin,
+      vehYear : vehYear,
+      vehMake: vehMake,
+      vehModel: vehModel,
+      vehColor: vehColor,
+      vehCondition: vehicleCon,
+      vehDetail: vehDetail,
+      vehPrice: vehPrice,
+      vehImage: vehImage
     };
     this.http
       .post<{message: string, vehicle: Vehicle}>(BACKEND_URL, vehicleData)
