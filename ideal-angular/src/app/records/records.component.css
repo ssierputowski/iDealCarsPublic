@@ -1,46 +1,36 @@
-.mat-list-icon {
-  color: rgba(0, 0, 0, 0.54);
-}
-
-.bodyPage {
-  margin: auto;
-  width: max-content;
-  overflow: hidden;
-}
-
-.example-card {
-  margin: 0 auto;
-  max-width: 0 auto;
-
-}
-
-.panel {
-  margin: 0 auto;
-  max-width: 86%;
-  height: 100%
-}
-
-.example-sidenav{
-  padding: 10px;
-}
-
-.example-container{
-  height: 100 auto;
-}
-
-.example-sidenav-content
-{
-  height: 100%;
-}
-
-mat-form-field {
-  width: 100%;
-}
-
-mat-spinner {
-  margin: auto;
+main {
+  font-size: 14px !important;
 }
 
 table {
-  font-size: 1.2rem;
+  width: 100%;
+  background: lightgrey;
+}
+
+th {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.max-width {
+  max-width: 5rem;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.records-container {
+  height: 50rem;
+  overflow: auto;
+}
+
+.customerSelect {
+  cursor: pointer;
+}
+
+.customerSelect:hover {
+  color: #73f7dd;
+  text-decoration: underline;
 }

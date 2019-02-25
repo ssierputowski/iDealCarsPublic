@@ -12,8 +12,11 @@ import {
   MatSidenavModule,
   MatExpansionModule,
   MatDividerModule,
-  MatRadioModule
+  MatTableModule,
+  MatRadioModule,
+  MatTabsModule
 } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
@@ -22,16 +25,15 @@ import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { RecordsComponent } from './records/records.component';
 import { HeaderComponent } from './header/header.component';
-import { TimeClockComponent } from './time-clock/time-clock.component';
-import { ScheduleComponent } from './schedule/schedule.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DialogEntryComponent } from './dialog-entry/dialog-entry.component';
+import { ManagerActionsComponent } from './manager-actions/manager-actions.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'records', component: RecordsComponent},
-  { path: 'time-clock', component: TimeClockComponent },
   { path: 'inventory', component: InventoryComponent },
 ];
 
@@ -43,9 +45,9 @@ const routes: Routes = [
     HomeComponent,
     RecordsComponent,
     HeaderComponent,
-    TimeClockComponent,
-    ScheduleComponent,
-    InventoryComponent
+    InventoryComponent,
+    DialogEntryComponent,
+    ManagerActionsComponent
   ],
   imports: [
     BrowserModule,
@@ -60,15 +62,18 @@ const routes: Routes = [
     MatCardModule,
     MatIconModule,
     MatSidenavModule,
-    MatExpansionModule,
     MatDividerModule,
+    MatTableModule,
+    MatRadioModule,
     RouterModule.forRoot(routes),
-    NgbModule.forRoot(),
+    NgbModule,
     ReactiveFormsModule,
     MatExpansionModule,
-    MatRadioModule
+    MatDialogModule,
+    MatTabsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogEntryComponent, ManagerActionsComponent]
 })
 export class AppModule { }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TimeClockComponent } from './time-clock.component';
+import { ManagerActionsComponent } from './manager-actions.component';
 
-describe('TimeClockComponent', () => {
-  let component: TimeClockComponent;
-  let fixture: ComponentFixture<TimeClockComponent>;
+describe('ManagerActionsComponent', () => {
+  let component: ManagerActionsComponent;
+  let fixture: ComponentFixture<ManagerActionsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TimeClockComponent ]
+      declarations: [ ManagerActionsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TimeClockComponent);
+    fixture = TestBed.createComponent(ManagerActionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

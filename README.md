@@ -40,6 +40,21 @@ Under development
   * ```ng serve```
 * The iDealCars application should now be available at http://localhost:4200
 
+### Testing
+After installing through the steps above continue on with these steps
+* Unit Test ( currently passes the one test that we send to it which returns true if the schedule component is generated )
+  * ```cd <path>/ideal-angular/```
+    * ```ng test```
+  * Doing so will prompt Jasmine to run alongside Karma and do the unit test specified in the *.spec files
+    
+ 
+* Behavioral Test
+  * Download the Chrome plugin Selenium ( via "Selenium IDE - Google Chrome" search on Google ) 
+  * Once downloaded the IDE will pop up on screen
+  * Click on ```open an existing project```
+    * Open the file from the git called iDealCarsBehavioral.side
+      * Hit the play button to run the current test
+
 ### Built With
 * [Angular 6](https://angular.io/)
 * [Node.js](https://nodejs.org/en/)

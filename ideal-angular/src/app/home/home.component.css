@@ -1,28 +1,26 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
-.profile {
-  font-family: 'Lato', 'sans-serif';
+main {
+  font-size: 14px !important;
 }
-.profile {
-  margin-top: 2px;
-  padding:1px;
-  display: inline-block;
+
+span {
+  color: #1972a4;
 }
-.divider {
-  border-top:1px solid rgba(0,0,0,0.1);
+
+h1 {
+  color: #1972a4;
 }
-.emphasis {
-  border-top: 1px solid transparent;
+
+#userInfo {
+  text-align: center;
 }
-.emphasis h2{
-  margin-bottom:0;
+
+#userImage {
+  height: 15rem;
+  width: 15rem;
+  border-radius: 10rem;
+  margin-bottom: 2rem;
 }
-span.tags {
-  background: #1abc9c;
-  border-radius: 2px;
-  color: #f5f5f5;
-  font-weight: bold;
-  padding: 2px 4px;
-}
-.profile strong,span,div {
-  text-transform: initial;
+
+button {
+  margin-top: 5rem;
 }

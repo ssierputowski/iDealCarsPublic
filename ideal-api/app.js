@@ -38,4 +38,3 @@ app.use('/api/customers', customerRoutes);
 app.use( '/api/vehicles', vehicleRoutes);
 
 module.exports = app;
-
