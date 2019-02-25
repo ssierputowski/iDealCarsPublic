@@ -12,14 +12,10 @@ import {
   MatSidenavModule,
   MatExpansionModule,
   MatDividerModule,
-<<<<<<< HEAD
   MatTableModule,
   MatRadioModule,
   MatDialogModule,
   MatTabsModule
-=======
-  MatRadioModule
->>>>>>> 254234dc2bfd279d77a67ba20829a0014f0c9484
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -80,14 +76,10 @@ const routes: Routes = [
     NgbModule,
     ReactiveFormsModule,
     MatExpansionModule,
-<<<<<<< HEAD
     NgxMaskModule.forRoot()
   ],
   entryComponents: [
     ManagerActionsComponent
-=======
-    MatRadioModule
->>>>>>> 254234dc2bfd279d77a67ba20829a0014f0c9484
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
