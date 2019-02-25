@@ -5,7 +5,7 @@
       <div class="col-2 search-container">
         <mat-form-field color="accent">
           <mat-label>Customer Name</mat-label>
-          <input matInput #customerName>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
         <button mat-raised-button color="accent">FILTER</button>
       </div>
@@ -71,7 +71,6 @@
               <button mat-raised-button color="primary">SHOW</button>
             </td>
           </ng-container>
-
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
