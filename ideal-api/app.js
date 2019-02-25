@@ -7,7 +7,15 @@ const customerRoutes = require('./routes/customer');
 
 const app = express();
 
+<<<<<<< HEAD
 mongoose.connect('mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test', { useNewUrlParser: true })
+=======
+/**'mongodb+srv://EWD:zipGEoVPTIRJvIEh@cluster0-tcbpt.mongodb.net/node-angular?retryWrites=true' */
+
+/**'mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test' */
+
+mongoose.connect('mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test')
+>>>>>>> 254234dc2bfd279d77a67ba20829a0014f0c9484
     .then(() => {
         console.log('Connected to the database!');
     })
