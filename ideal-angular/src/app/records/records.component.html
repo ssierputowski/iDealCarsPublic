@@ -7,7 +7,9 @@
           <mat-label>Customer Name</mat-label>
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
-        <button mat-raised-button color="accent">FILTER</button>
+        <button mat-raised-button color="accent">Filter</button>
+        <p></p>
+        <button mat-raised-button color="accent" (click)="openDialogEntry()">Add Customer</button>
       </div>
       <div class="col-10 records-container">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

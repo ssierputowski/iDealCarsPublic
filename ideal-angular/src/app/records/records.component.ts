@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CustomerService } from 'src/services/customer.service';
@@ -7,9 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Customer } from '../../models/customer.model';
 import { Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material';
-
-
-
+import { DialogEntryCustomerComponent } from '../dialog-entry-customer/dialog-entry-customer.component';
 
 
 @Component({
@@ -20,9 +19,11 @@ import { MatTableDataSource } from '@angular/material';
 
 export class RecordsComponent implements OnInit {
 
+  dialogEntryRef: MatDialogRef<DialogEntryCustomerComponent>;
 
   constructor(
-    private titleService: Title
+    private titleService: Title,
+    private dialog: MatDialog
   ) {}
 
   displayedColumns = [
@@ -192,6 +193,16 @@ export class RecordsComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle('Customer Records | iDealCars');
+  }
+
+  openDialogEntry() {
+    this.dialogEntryRef = this.dialog.open(DialogEntryCustomerComponent, {
+      hasBackdrop: true,
+      autoFocus: true,
+      disableClose: false,
+      width: '350px',
+      height: 'auto'
+    });
   }
 
   print(id: string) {
