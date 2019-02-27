@@ -34,6 +34,7 @@ import { AuthGuard } from './auth/auth.guard';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
+import { TimeClockComponent } from './time-clock/time-clock.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -51,7 +52,8 @@ const routes: Routes = [
     RecordsComponent,
     HeaderComponent,
     InventoryComponent,
-    ManagerActionsComponent
+    ManagerActionsComponent,
+    TimeClockComponent
   ],
   imports: [
     BrowserModule,
