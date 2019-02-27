@@ -30,7 +30,7 @@
           <!-- Id Column -->
           <ng-container matColumnDef="vehVin">
             <th mat-header-cell *matHeaderCellDef>VIN</th>
-            <td class="vehicleSelect" mat-cell *matCellDef="let element" (click)="print(element.vehVin)">{{ element.vehVin }}</td>
+            <td class="vehicleSelect" mat-cell *matCellDef="let element" (click)="openDialogVin()">{{ element.vehVin }}</td>
           </ng-container>
           <!-- Year Column -->
           <ng-container matColumnDef="vehYear">

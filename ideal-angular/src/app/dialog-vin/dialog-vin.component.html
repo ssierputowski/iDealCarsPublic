@@ -1,6 +1,4 @@
-
-<form [formGroup]="vehicleform" (ngSubmit)="saveVehicle()">
-  <h2 mat-dialog-title>Vehicle Inventory Upload</h2>
+<h2 mat-dialog-title>Vehicle Inventory Upload</h2>
   <mat-dialog-content class="mat-typography">
     <mat-form-field>
       <mat-label>Vehicle VIN</mat-label>
@@ -39,8 +37,3 @@
         <input matInput type = "text" placeholder = "Enter Vehicle Image" formControlName="vehImage">
       </mat-form-field>
   </mat-dialog-content>
-  <mat-dialog-actions>
-        <button mat-raised-button color="accent" (click)="close()">Cancel</button>
-        <button mat-raised-button type="submit">Upload Vehicle</button>
-  </mat-dialog-actions>
-</form>

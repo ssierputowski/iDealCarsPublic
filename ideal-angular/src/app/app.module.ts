@@ -35,6 +35,7 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
+import { DialogVinComponent } from './dialog-vin/dialog-vin.component';
 
 
 const routes: Routes = [
@@ -54,7 +55,8 @@ const routes: Routes = [
     HeaderComponent,
     InventoryComponent,
     DialogEntryComponent,
-    ManagerActionsComponent
+    ManagerActionsComponent,
+    DialogVinComponent
   ],
   imports: [
     BrowserModule,
