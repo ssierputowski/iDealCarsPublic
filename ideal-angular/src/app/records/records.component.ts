@@ -20,10 +20,18 @@ import { DialogEntryCustomerComponent } from '../dialog-entry-customer/dialog-en
 export class RecordsComponent implements OnInit {
 
   dialogEntryRef: MatDialogRef<DialogEntryCustomerComponent>;
+  searchForm: FormGroup;
+  isLoading = false;
+  checked = false;
+  customers: Customer[] = [];
+  totalCustomers = 0;
+  private customersSub: Subscription;
+  dataSource: MatTableDataSource<Customer>;
 
   constructor(
     private titleService: Title,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private customerService: CustomerService
   ) {}
 
   displayedColumns = [
@@ -185,14 +193,45 @@ export class RecordsComponent implements OnInit {
     },
   ];
 
-  dataSource = new MatTableDataSource(this.customerData);
+  // dataSource = new MatTableDataSource(this.customerData);
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+
   ngOnInit() {
-    this.titleService.setTitle('Customer Records | iDealCars');
+    if (this.checked) {
+      this.isLoading = true;
+    } else {
+      this.isLoading = false;
+    }
+  this.titleService.setTitle('Vehicle Inventory | iDealCars');
+  this.searchForm = new FormGroup({
+    'Year': new FormControl(null, {
+      validators: [Validators.required]
+    }),
+    'Make': new FormControl(null, {
+      validators: [Validators.required]
+    }),
+    'Model': new FormControl(null, {
+      validators: [Validators.required]
+    }),
+    'Color': new FormControl(null, {
+      validators: [Validators.required]
+    }),
+
+  });
+  this.getPeople();
+}
+
+getPeople(): void {
+  this.customerService.getCustomers();
+  this.customerService.getCustomerUpdateListener()
+    .subscribe((customerData: { customers: Customer[] }) => {
+      this.customers = customerData.customers;
+      this.dataSource = new MatTableDataSource(this.customers);
+    });
   }
 
   openDialogEntry() {
