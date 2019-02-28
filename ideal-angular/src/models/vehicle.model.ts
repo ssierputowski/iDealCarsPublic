@@ -8,5 +8,4 @@ export interface Vehicle {
   vehDetail: string;
   vehPrice: Number;
   vehImage: string;
-
 }

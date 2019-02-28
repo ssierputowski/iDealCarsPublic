@@ -19,7 +19,7 @@ export class CustomerService {
     private http: HttpClient,
     private router: Router
   ) {}
-  /*
+
   getCustomers() {
     this.http
       .get<{message: string, customers: any}>(
@@ -29,13 +29,25 @@ export class CustomerService {
         return {
           customers: customerData.customers.map(customer => {
             return {
-              fname: customer.fname,
-              lname: customer.lname,
-              carYear: customer.carYear,
-              carMake: customer.carMake,
-              carModel: customer.carModel,
-              telephone: customer.telephone,
+              customerId: customer.customerId,
+              firstName: customer.firstName,
+              lastName: customer.lastName,
+             // vehicleYear: customer.vehicleYear,
+             // vehicleMake: customer.vehicleMake,
+             // vehicleModel: customer.vehicleModel,
+             // vehicleColor: customer.vehicleColor,
+             // vehicleId: customer.vehicleId,
+             // vehicleDetails: customer.vehicleDetails,
+             // vehicleImage: customer.vehicleImage,
+              phoneNumber: customer.phoneNumber,
               email: customer.email,
+             // servicePerformed: customer.servicePerformed,
+             // serviceDate: customer.serviceDate,
+             // dateReturned: customer.dateReturned,
+             // mechanic: customer.mechanic,
+             // serviceNotes: customer.serviceNotes,
+             // servicePrice: customer.servicePrice,
+             // paymentReceived: customer.paymentReceived,
               id: customer._id
             };
           })
@@ -52,27 +64,47 @@ export class CustomerService {
   }
 
   addCustomer(
-    fname: string,
-    lname: string,
-    carYear: string,
-    carMake: string,
-    carModel: string,
-    telephone: string,
-    email: string
+    customerId: string,
+    firstName: string,
+    lastName: string,
+    vehicleInfo: [
+      {
+        vehicleYear: number,
+        vehicleMake: string,
+        vehicleModel: string,
+        vehicleColor: string,
+        vehicleId: string,
+        vehicleDetails: string,
+        vehicleImage: string,
+      }
+    ],
+    phoneNumber: string,
+    email: string,
+    serviceRecords: [
+      {
+        servicePerformed: string,
+        serviceDate: string,
+        dateReturned: string,
+        mechanic: string,
+        serviceNotes: string[],
+        servicePrice: number,
+        paymentReceived: boolean,
+    }
+  ],
   ) {
     const customerData: Customer = {
-      fname: fname,
-      lname: lname,
-      carYear: carYear,
-      carMake: carMake,
-      carModel: carModel,
-      telephone: telephone,
-      email: email
+      customerId: customerId,
+      firstName: firstName,
+      lastName: lastName,
+      phoneNumber: phoneNumber,
+      email: email,
+      vehicleInfo: vehicleInfo,
+      serviceRecords: serviceRecords,
     };
     this.http
       .post<{message: string, customer: Customer}>(BACKEND_URL, customerData)
       .subscribe((resData) => {
         window.location.reload();
       });
-  }*/
+  }
 }
