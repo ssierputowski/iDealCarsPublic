@@ -5,13 +5,13 @@
       <div class="col-3" id="userInfo">
         <img src="{{ userImg }}" id="userImage">
         <div class="w-100"></div>
-        <span>{{ firstName }} {{ lastName }}</span>
+        <span>{{ userFirstName }} {{ userLastName }}</span>
         <div class="w-100"></div>
-        <span>{{ email }}</span>
+        <span>{{ userEmail }}</span>
         <div class="w-100"></div>
-        <span>{{ jobRole }}</span>
+        <span>{{ userJobRole }}</span>
         <div class="w-100"></div>
-        <button mat-raised-button color="accent" (click)="openActionsDialog()">MANAGER ACTIONS</button>
+        <button mat-raised-button color="accent" (click)="openActionsDialog()" *ngIf="userJobRole === 'MANAGER'">MANAGER ACTIONS</button>
       </div>
       <div class="col-6">
         <h1>Message Board</h1>

@@ -97,4 +97,17 @@ router.post('/login', (req, res, next) => {
         });
 });
 
+router.get('/:id', (req, res, next) => {
+    User.findOne({ _id: req.params.id })
+        .then(user => {
+            if (user) {
+                return res.status(200).json(user);
+            } else {
+                return res.status(404).json({
+                    message: 'User not found'
+                });
+            }
+        });
+});
+
 module.exports = router;
