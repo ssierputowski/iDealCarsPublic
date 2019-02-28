@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { VehicleService } from 'src/services/vehicle.service';
+import { Vehicle } from '../../models/vehicle.model';
+import { Subscription } from 'rxjs';
+import { DialogEntryComponent } from '../dialog-entry/dialog-entry.component';
+
 
 @Component({
   selector: 'app-inventory',
@@ -9,39 +16,94 @@ import { MatTableDataSource } from '@angular/material';
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
+  vehicles: Vehicle[] = [];
+  totalVehicles = 0;
+  private vehiclesSub: Subscription;
+  dialogEntryRef: MatDialogRef<DialogEntryComponent>;
+  dataSource: MatTableDataSource<Vehicle>;
+  isLoading = false;
+  checked = false;
+  searchForm: FormGroup;
 
-  constructor(private router: Router, private titleService: Title) {}
+  constructor(
+    private router: Router,
+    private titleService: Title,
+    private vehicleService: VehicleService,
+    private dialog: MatDialog
+    ) {}
 
   displayedColumns = [
-    'vehicleId',
-    'vehicleYear',
-    'vehicleMake',
-    'vehicleModel',
-    'vehicleCondition',
-    'vehicleColor',
-    'vehicleDetails'
+     'vehVin',
+     'vehYear',
+     'vehMake',
+     'vehModel',
+     'vehCondition',
+     'vehColor',
+     'vehDetails',
+     'vehImage'
   ];
 
-  inventory = [
-    { vehicleId: 'TBHF2000201', vehicleYear: 2001, vehicleMake: 'Honda', vehicleModel: 'S2000', newOrUsed: 'Used', vehicleColor: 'Silver', vehicleDetails: 'Convertible, A/C, here are some more details just to see how it handles extra data space' },
-    { vehicleId: 'TBHF2000202', vehicleYear: 2019, vehicleMake: 'subaru', vehicleModel: 'WRX', newOrUsed: 'New', vehicleColor: 'Rally Blue', vehicleDetails: '' },
-    { vehicleId: 'TBHF2000203', vehicleYear: 2003, vehicleMake: 'Acura', vehicleModel: 'RSX-S', newOrUsed: 'Used', vehicleColor: 'Black', vehicleDetails: 'Sunroof, 5-Speed' },
-    { vehicleId: 'TBHF2000204', vehicleYear: 1999, vehicleMake: 'Toyota', vehicleModel: '4Runner', newOrUsed: 'Used', vehicleColor: 'White', vehicleDetails: '' },
-    { vehicleId: 'TBHF2000205', vehicleYear: 2015, vehicleMake: 'Kia', vehicleModel: 'Optima', newOrUsed: 'Used', vehicleColor: 'Grey', vehicleDetails: 'Sunroof, A/C' },
-    { vehicleId: 'TBHF2000206', vehicleYear: 2005, vehicleMake: 'Honda', vehicleModel: 'Accord EX', newOrUsed: 'Used', vehicleColor: 'Black', vehicleDetails: '5-Speed' },
-    { vehicleId: 'TBHF2000207', vehicleYear: 2006, vehicleMake: 'Honda', vehicleModel: 'Accord EX', newOrUsed: 'Used', vehicleColor: 'Black', vehicleDetails: '' },
-    { vehicleId: 'TBHF2000208', vehicleYear: 2002, vehicleMake: 'Nissan', vehicleModel: 'Skyline R34-GTR', newOrUsed: 'Used', vehicleColor: 'Silver', vehicleDetails: '6-Speed' },
-    { vehicleId: 'TBHF2000209', vehicleYear: 1970, vehicleMake: 'Dodge', vehicleModel: 'Charger', newOrUsed: 'Used', vehicleColor: 'Black', vehicleDetails: '4-Speed' }
-  ];
+  // inventory = [
+  //   { vehicleId: 'TBHF2000201', vehicleYear: 2001, vehicleMake: 'Honda', vehicleModel: 'S2000',
+  //   newOrUsed: 'Used', vehicleColor: 'Silver', vehicleDetails: 'Convertible, A/C, here are some
+  //   more details just to see how it handles extra data space' },
+  //   ];
 
-  dataSource = new MatTableDataSource(this.inventory);
+
 
   ngOnInit() {
+      if (this.checked) {
+        this.isLoading = true;
+      } else {
+        this.isLoading = false;
+      }
     this.titleService.setTitle('Vehicle Inventory | iDealCars');
+    this.searchForm = new FormGroup({
+      'Year': new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      'Make': new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      'Model': new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      'Color': new FormControl(null, {
+        validators: [Validators.required]
+      }),
+
+    });
+    this.getCars();
   }
+getCars(): void {
+  this.vehicleService.getVehicles();
+  this.vehicleService.getVehicleUpdateListener()
+    .subscribe((vehicleData: { vehicles: Vehicle[] }) => {
+      this.vehicles = vehicleData.vehicles;
+      this.dataSource = new MatTableDataSource(this.vehicles);
+    });
+}
+applyFilter(filterValue: string) {
+  filterValue = filterValue.trim(); // Remove whitespace
+  filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+  this.dataSource.filter = filterValue;
+}
+openDialogEntry() {
+  this.dialogEntryRef = this.dialog.open(DialogEntryComponent, {
+    hasBackdrop: true,
+    autoFocus: true,
+    disableClose: false,
+    width: '350px',
+    height: 'auto'
+  });
+}
 
   print(id: any) {
     alert(id);
   }
+  onRowClicked(row) {
 
+  }
 }
+
+

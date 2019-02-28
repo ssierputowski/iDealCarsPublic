@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
 const vehicleSchema = mongoose.Schema({
-    vehicleId: { type: String, required: true, unique: true },
-    vehicleYear: { type: Number, required: true },
-    vehicleMake: { type: String, required: true },
-    vehicleModel: { type: String, required: true },
-    vehicleColor: { type: String, required: true },
-    vehicleCondition: { type: String, required: true },
-    vehicleDetails: { type: String, required: false },
-    vehiclePrice: { type: Number, required: true },
-    vehicleImage: { type: String, required: false }
+    vehVin: { type: String, required: true, unique: true },
+    vehYear: { type: Number, required: true },
+    vehMake: { type: String, required: true },
+    vehModel: { type: String, required: true },
+    vehColor: { type: String, required: true },
+    vehCondition: { type: String, required: true },
+    vehDetail: { type: String, required: false },
+    vehPrice: { type: Number, required: true },
+    vehImage: { type: String, required: false }
 });
 
 vehicleSchema.plugin(uniqueValidator);

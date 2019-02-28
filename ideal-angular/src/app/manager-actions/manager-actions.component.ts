@@ -60,7 +60,7 @@ export class ManagerActionsComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = () => {
       this.imagePreview = reader.result as string;
-    }
+    };
     reader.readAsDataURL(file);
   }
 

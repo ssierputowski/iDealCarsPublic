@@ -14,8 +14,8 @@ import {
   MatDividerModule,
   MatTableModule,
   MatRadioModule,
-  MatDialogModule,
-  MatTabsModule
+  MatTabsModule,
+  MatDialogModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -27,14 +27,16 @@ import { HomeComponent } from './home/home.component';
 import { RecordsComponent } from './records/records.component';
 import { HeaderComponent } from './header/header.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { DialogEntryComponent } from './dialog-entry/dialog-entry.component';
 import { ManagerActionsComponent } from './manager-actions/manager-actions.component';
 
-import { AuthInterceptor } from './auth/auth-interceptor';
 import { AuthGuard } from './auth/auth.guard';
+import { AuthInterceptor } from './auth/auth-interceptor';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
 import { TimeClockComponent } from './time-clock/time-clock.component';
+
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -53,7 +55,8 @@ const routes: Routes = [
     HeaderComponent,
     InventoryComponent,
     ManagerActionsComponent,
-    TimeClockComponent
+    TimeClockComponent,
+    DialogEntryComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,25 +71,24 @@ const routes: Routes = [
     MatCardModule,
     MatIconModule,
     MatSidenavModule,
-    MatExpansionModule,
     MatDividerModule,
     MatTableModule,
     MatRadioModule,
-    MatDialogModule,
-    MatTabsModule,
     RouterModule.forRoot(routes),
     NgbModule,
     ReactiveFormsModule,
     MatExpansionModule,
-    NgxMaskModule.forRoot()
+    MatDialogModule,
+    MatTabsModule,
+    NgxMaskModule.forRoot(),
   ],
   entryComponents: [
+    DialogEntryComponent,
     ManagerActionsComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    AuthGuard
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
