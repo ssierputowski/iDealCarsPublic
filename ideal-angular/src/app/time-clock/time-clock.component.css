@@ -7,11 +7,8 @@ mat-card {
   margin: auto;
 }
 
-h1 {
-  color: #1972a4;
-}
-
 button {
   width: 75%;
   font-size: 2rem;
+  margin: 2rem 0;
 }
