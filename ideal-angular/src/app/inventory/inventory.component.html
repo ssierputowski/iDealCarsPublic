@@ -6,25 +6,40 @@
         <form [formGroup]="searchForm">
           <mat-form-field color="accent">
             <mat-label>Year</mat-label>
-            <input matInput type="text"  (keyup)="applyFilter($event.target.value)" placeholder="Enter Vehicle Year" formControlName="Year">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Enter Vehicle Year"
+              formControlName="Year">
           </mat-form-field>
           <mat-form-field color="accent">
             <mat-label>Make</mat-label>
-            <input matInput type="text" (keyup)="applyFilter($event.target.value)" placeholder="Enter Vehicle Make" formControlName="Make">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Enter Vehicle Make"
+              formControlName="Make">
           </mat-form-field>
           <mat-form-field color="accent">
             <mat-label>Model</mat-label>
-            <input matInput type="text" (keyup)="applyFilter($event.target.value)" placeholder="Enter Vehicle Model" formControlName="Model">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Enter Vehicle Model"
+              formControlName="Model">
           </mat-form-field>
           <mat-form-field color="accent">
             <mat-label>Color</mat-label>
-            <input matInput type="text" (keyup)="applyFilter($event.target.value)" placeholder="Enter Vehicle Color" formControlName="Color">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Enter Vehicle Color"
+              formControlName="Color">
+          </mat-form-field>
+          <mat-form-field color="accent">
+            <mat-label>Condition</mat-label>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Enter Vehicle Condition"
+              formControlName="Color">
           </mat-form-field>
         </form>
         <button mat-raised-button color="accent">SEARCH</button>
         <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
         <button mat-raised-button color="accent" (click)="openDialogEntry()">ADD TO INVENTORY</button>
       </div>
+
+
       <div class="col-10 inventory-container">
         <table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8" style="overflow: auto; width: 100%;">
           <!-- Id Column -->

@@ -94,8 +94,8 @@ openDialogEntry() {
   this.dialogEntryRef = this.dialog.open(DialogEntryComponent, {
     hasBackdrop: true,
     autoFocus: true,
-    disableClose: false,
-    width: '350px',
+    disableClose: true,
+    width: '36%',
     height: '100%'
   });
 }
@@ -110,7 +110,7 @@ openDialogVin() {
     hasBackdrop: true,
     autoFocus: true,
     disableClose: false,
-    width: '350px',
+    width: '36%',
     height: '100%'
   });
   }

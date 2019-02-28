@@ -84,7 +84,8 @@ const routes: Routes = [
   ],
   entryComponents: [
     DialogEntryComponent,
-    ManagerActionsComponent
+    ManagerActionsComponent,
+    DialogVinComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
