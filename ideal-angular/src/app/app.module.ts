@@ -29,6 +29,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { AppComponent } from './app.component';
 import { DialogEntryComponent } from './dialog-entry/dialog-entry.component';
 import { DialogEntryCustomerComponent } from './dialog-entry-customer/dialog-entry-customer.component';
+import { DialogVinComponent } from './dialog-vin/dialog-vin.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { InventoryComponent } from './inventory/inventory.component';
@@ -52,6 +53,7 @@ const routes: Routes = [
     AppComponent,
     DialogEntryComponent,
     DialogEntryCustomerComponent,
+    DialogVinComponent,
     HeaderComponent,
     HomeComponent,
     InventoryComponent,
@@ -87,8 +89,9 @@ const routes: Routes = [
   ],
   entryComponents: [
     DialogEntryComponent,
-    DialogEntryCustomerComponent,
-    ManagerActionsComponent
+    ManagerActionsComponent,
+    DialogVinComponent,
+    DialogEntryCustomerComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

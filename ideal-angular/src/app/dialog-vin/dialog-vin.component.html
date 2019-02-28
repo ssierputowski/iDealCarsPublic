@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>Vehicle Inventory Upload</h2>
+<h2 mat-dialog-title>Edit Vehicle</h2>
 <mat-dialog-content class="mat-typography">
-  <form [formGroup]="vehicleform" (ngSubmit)="saveVehicle()">
+  <form [formGroup]="edit_form" (ngSubmit)="editVehicle(edit_form.value)">
     <mat-form-field>
       <mat-label>Vehicle VIN</mat-label>
       <input matInput type="text" placeholder="Enter Vehicle VIN" formControlName="vehVin">
@@ -39,7 +39,7 @@
     </mat-form-field>
   </form>
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-raised-button color="accent" (click)="close()">Cancel</button>
-  <button mat-raised-button type="submit">Upload Vehicle</button>
+<mat-dialog-actions align="end">
+    <button mat-raised-button class="submit-btn" type="submit" color="accent">EDIT</button>
+    <button mat-raised-button mat-dialog-close color="primary">CANCEL</button>
 </mat-dialog-actions>
