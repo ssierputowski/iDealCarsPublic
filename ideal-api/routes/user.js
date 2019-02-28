@@ -86,13 +86,27 @@ router.post('/login', (req, res, next) => {
             );
             res.status(200).json({
                 token: token,
-                expiresIn: 3600
+                expiresIn: 3600,
+                userId: user._id
             });
         })
         .catch(err => {
             return res.status(401).json({
                 message: 'Auth failed!'
             });
+        });
+});
+
+router.get('/:id', (req, res, next) => {
+    User.findOne({ _id: req.params.id })
+        .then(user => {
+            if (user) {
+                return res.status(200).json(user);
+            } else {
+                return res.status(404).json({
+                    message: 'User not found'
+                });
+            }
         });
 });
 

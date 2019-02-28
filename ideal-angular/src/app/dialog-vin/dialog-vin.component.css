@@ -8,12 +8,12 @@ h2 {
 
 button {
   color: #73f7dd;
-  background-color: grey;
 }
 
 form {
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
-
+  overflow: hidden;
 }
+
