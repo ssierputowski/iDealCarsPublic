@@ -67,8 +67,8 @@ export class DialogEntryCustomerComponent implements OnInit {
         this.customerform.value.lastName,
         this.customerform.value.phoneNumber,
         this.customerform.value.email,
-        this.customerform.value.vehicleInfo,
-        this.customerform.value.serviceRecords
+     //   this.customerform.value.vehicleInfo,
+     //   this.customerform.value.serviceRecords
       );
 
       this.customerform.reset();

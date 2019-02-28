@@ -67,7 +67,7 @@ export class CustomerService {
     customerId: string,
     firstName: string,
     lastName: string,
-    vehicleInfo: [
+    /*vehicleInfo: [
       {
         vehicleYear: number,
         vehicleMake: string,
@@ -77,10 +77,10 @@ export class CustomerService {
         vehicleDetails: string,
         vehicleImage: string,
       }
-    ],
+    ], */
     phoneNumber: string,
     email: string,
-    serviceRecords: [
+   /* serviceRecords: [
       {
         servicePerformed: string,
         serviceDate: string,
@@ -90,7 +90,7 @@ export class CustomerService {
         servicePrice: number,
         paymentReceived: boolean,
     }
-  ],
+  ], */
   ) {
     const customerData: Customer = {
       customerId: customerId,
@@ -98,8 +98,6 @@ export class CustomerService {
       lastName: lastName,
       phoneNumber: phoneNumber,
       email: email,
-      vehicleInfo: vehicleInfo,
-      serviceRecords: serviceRecords,
     };
     this.http
       .post<{message: string, customer: Customer}>(BACKEND_URL, customerData)
