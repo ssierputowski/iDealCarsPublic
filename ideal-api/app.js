@@ -10,7 +10,7 @@ const app = express();
 //'mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test'
 //'mongodb+srv://EWD:zipGEoVPTIRJvIEh@cluster0-tcbpt.mongodb.net/node-angular?retryWrites=true'
 mongoose.connect(
-    'mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test',
+    'mongodb+srv://niraj:testing1' + '@ideal-cars-szrks.mongodb.net/test',
     { useNewUrlParser: true }
     )
     .then(() => {
@@ -40,4 +40,13 @@ app.use('/api/user', userRoutes);
 app.use('/api/customers', customerRoutes);
 app.use('/api/vehicles', vehicleRoutes);
 
+//Delete method for Vehicle Inventory, node.js code
+app.delete('/api/vehicle/:vehVin', (req, res, next) => {
+    Vehicle.deleteOne({vehVin: req.params.vehVin}).then(result => {//Vehicle should be of the model here
+        console.log(result);
+        res.status(200).json({ message: "Vehicle Deleted!"});
+    })
+});
 module.exports = app;
+
+

@@ -20,6 +20,7 @@ export class DialogEntryComponent implements OnInit {
   isLoading = false;
   checked = false;
   vehicleform: FormGroup;
+  imagePreview: string;
 
   constructor(
     public dialog: MatDialog,
@@ -34,7 +35,7 @@ export class DialogEntryComponent implements OnInit {
       } else {
         this.isLoading = false;
       }
-    this.vehicleform = this.formBuild.group({
+    this.vehicleform = new FormGroup({
       'vehVin': new FormControl(null, {
         validators: [Validators.required]
       }),
@@ -95,5 +96,15 @@ export class DialogEntryComponent implements OnInit {
   close() {
     this.dialogRef.close();
 
+  }
+  onImagePicked(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.vehicleform.patchValue({image: file});
+    this.vehicleform.get('image').updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
   }
   }

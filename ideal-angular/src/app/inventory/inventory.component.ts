@@ -24,6 +24,8 @@ export class InventoryComponent implements OnInit {
   isLoading = false;
   checked = false;
   searchForm: FormGroup;
+  searchVal: string;
+  searchStr = [];
 
   constructor(
     private router: Router,
@@ -71,6 +73,9 @@ export class InventoryComponent implements OnInit {
       'Color': new FormControl(null, {
         validators: [Validators.required]
       }),
+      'Condition': new FormControl(null, {
+        validators: [Validators.required]
+      }),
 
     });
     this.getCars();
@@ -83,18 +88,28 @@ getCars(): void {
       this.dataSource = new MatTableDataSource(this.vehicles);
     });
 }
+searchValue() {
+  // this.searchStr = [ this.searchForm];
+  const searchVal = (this.searchForm.value);
+ // this.searchVal = (this.searchForm.get().toString());
+  this.dataSource.filter = searchVal.toString().value;
+  console.log(searchVal);
+  console.log();
+}
 applyFilter(filterValue: string) {
-  filterValue = filterValue.trim(); // Remove whitespace
+  // filterValue = filterValue.trim(); // Remove whitespace
   filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-  this.dataSource.filter = filterValue;
+  return filterValue;
+ // this.dataSource.filter = filterValue;
+  // console.log(filterValue);
 }
 openDialogEntry() {
   this.dialogEntryRef = this.dialog.open(DialogEntryComponent, {
     hasBackdrop: true,
-    autoFocus: true,
-    disableClose: false,
-    width: '350px',
-    height: 'auto'
+     //autoFocus: false,
+    disableClose: true,
+    width: '36%',
+    height: '100%'
   });
 }
 
@@ -106,4 +121,16 @@ openDialogEntry() {
   }
 }
 
+/* This all goes in the dialog component popup for vehicle information
+<button mat-button color="warn" (click)="onDelete(vehicle.vehVin)">Delete</button>
+ // this for component ts file fo dialog
+ onDelete(vehicleVin: string){
+    this.vehicleService.deleteVehicle(vehicleVin);
+    .close()
+}
 
+//edit method for button on vehicle dialog display
+constructor(){}
+
+
+*/
