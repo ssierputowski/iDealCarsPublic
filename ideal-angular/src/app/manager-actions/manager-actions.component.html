@@ -51,16 +51,16 @@
       </form>
     </mat-tab>
     <mat-tab label="Generate Schedule">
-      <form autocomplete="off">
+      <form [formGroup]="scheduleForm" (ngSubmit)="onGenerateSchedule()" #generateScheduleForm="ngForm" autocomplete="off">
         <mat-form-field color="accent">
-          <mat-select placeholder="Employee">
+          <mat-select placeholder="Employee" formControlName="employee">
             <mat-option *ngFor="let user of users" [value]="user.employeeId">
               {{ user.firstName }} {{ user.lastName }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field color="accent">
-          <input matInput [matDatepicker]="picker" placeholder="Week Of">
+          <input matInput [matDatepicker]="picker" placeholder="Week Of" formControlName="weekOf">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -68,77 +68,77 @@
           <span>SUNDAY:</span>
           <mat-form-field color="accent">
             <mat-label>Time In</mat-label>
-            <input matInput type="time">
+            <input matInput type="time" formControlName="sunIn">
           </mat-form-field>
           <mat-form-field color="accent">
             <mat-label>Time Out</mat-label>
-            <input matInput type="time">
+            <input matInput type="time" formControlName="sunOut">
           </mat-form-field>
         </div>
         <div class="time">
           <span>MONDAY:</span>
           <mat-form-field color="accent">
             <mat-label>Time In</mat-label>
-            <input matInput type="time">
+            <input matInput type="time" formControlName="monIn">
           </mat-form-field>
           <mat-form-field color="accent">
             <mat-label>Time Out</mat-label>
-            <input matInput type="time">
+            <input matInput type="time" formControlName="monOut">
           </mat-form-field>
         </div>
         <div class="time">
           <span>TUESDAY:</span>
           <mat-form-field color="accent">
             <mat-label>Time In</mat-label>
-            <input matInput type="time">
+            <input matInput type="time" formControlName="tueIn">
           </mat-form-field>
           <mat-form-field color="accent">
             <mat-label>Time Out</mat-label>
-            <input matInput type="time">
+            <input matInput type="time" formControlName="tueOut">
           </mat-form-field>
         </div>
         <div class="time">
           <span>WEDNESDAY:</span>
           <mat-form-field color="accent">
             <mat-label>Time In</mat-label>
-            <input matInput type="time">
+            <input matInput type="time" formControlName="wedIn">
           </mat-form-field>
           <mat-form-field color="accent">
             <mat-label>Time Out</mat-label>
-            <input matInput type="time">
+            <input matInput type="time" formControlName="wedOut">
           </mat-form-field>
         </div>
         <div class="time">
           <span>THURSDAY:</span>
           <mat-form-field color="accent">
             <mat-label>Time In</mat-label>
-            <input matInput type="time">
+            <input matInput type="time" formControlName="thuIn">
           </mat-form-field>
           <mat-form-field color="accent">
             <mat-label>Time Out</mat-label>
-            <input matInput type="time">
+            <input matInput type="time" formControlName="thuOut">
           </mat-form-field>
         </div>
         <div class="time">
           <span>FRIDAY:</span>
           <mat-form-field color="accent">
             <mat-label>Time In</mat-label>
-            <input matInput type="time">
+            <input matInput type="time" formControlName="friIn">
           </mat-form-field>
           <mat-form-field color="accent">
             <mat-label>Time Out</mat-label>
-            <input matInput type="time">
+            <input matInput type="time" formControlName="friOut">
           </mat-form-field>
         </div>
         <div class="time">
           <span>SATURDAY:</span>
           <mat-form-field color="accent">
             <mat-label>Time In</mat-label>
-            <input matInput type="time">
+            <input matInput type="time" formControlName="satIn">
           </mat-form-field>
           <mat-form-field color="accent">
             <mat-label>Time Out</mat-label>
-            <input matInput type="time">
+            <input matInput type="time" formControlName="satOut">
           </mat-form-field>
         </div>
       </form>
@@ -154,6 +154,8 @@
   mat-dialog-close>ADD EMPLOYEE</button>
   <button *ngIf="tabIndex == 1"
   mat-raised-button
+  (click)="generateScheduleForm.ngSubmit.emit()"
+  [disabled]="!generateScheduleForm.form.valid"
   color="accent"
   mat-dialog-close>GENERATE SCHEDULE</button>
   <button mat-raised-button mat-dialog-close>CANCEL</button>

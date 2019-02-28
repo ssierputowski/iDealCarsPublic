@@ -120,4 +120,8 @@ router.get('/:id', (req, res, next) => {
         });
 });
 
+router.get('/schedule/:id', (req, res, next) => {
+    console.log('something');
+})
+
 module.exports = router;

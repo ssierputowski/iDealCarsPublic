@@ -53,6 +53,20 @@ export class ManagerActionsComponent implements OnInit {
     this.scheduleForm = new FormGroup({
       'employee': new FormControl(null, {validators: [Validators.required]}),
       'weekOf': new FormControl(null, {validators: [Validators.required]}),
+      'sunIn': new FormControl(null),
+      'sunOut': new FormControl(null),
+      'monIn': new FormControl(null),
+      'monOut': new FormControl(null),
+      'tueIn': new FormControl(null),
+      'tueOut': new FormControl(null),
+      'wedIn': new FormControl(null),
+      'wedOut': new FormControl(null),
+      'thuIn': new FormControl(null),
+      'thuOut': new FormControl(null),
+      'friIn': new FormControl(null),
+      'friOut': new FormControl(null),
+      'satIn': new FormControl(null),
+      'satOut': new FormControl(null),
     });
     this.userService.getUsers();
     this.userService.getUserUpdateListener()
@@ -87,6 +101,13 @@ export class ManagerActionsComponent implements OnInit {
       this.employeeForm.value.image
     );
     this.employeeForm.reset();
+  }
+
+  onGenerateSchedule() {
+    if (this.scheduleForm.invalid) {
+      return;
+    }
+    console.log('Form submitted!');
   }
 
   tabChanged(tabChangeEvent: MatTabChangeEvent) {
