@@ -23,7 +23,6 @@ mongoose.connect(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader(
@@ -36,6 +35,9 @@ app.use((req, res, next) => {
     );
     next();
 });
+
+// Serve the static files from the ideal-api directory
+app.use(express.static('./'));
 
 app.use('/api/user', userRoutes);
 app.use('/api/customers', customerRoutes);
