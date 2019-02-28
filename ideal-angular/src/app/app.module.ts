@@ -32,8 +32,8 @@ import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
+import { TimeClockComponent } from './time-clock/time-clock.component';
 import { DialogEntryCustomerComponent } from './dialog-entry-customer/dialog-entry-customer.component';
-
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -51,8 +51,9 @@ const routes: Routes = [
     RecordsComponent,
     HeaderComponent,
     InventoryComponent,
-    DialogEntryComponent,
     ManagerActionsComponent,
+    TimeClockComponent,
+    DialogEntryComponent,
     DialogEntryCustomerComponent
   ],
   imports: [
