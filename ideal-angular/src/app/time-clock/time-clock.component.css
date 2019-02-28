@@ -1,0 +1,17 @@
+mat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75%;
+  background: none;
+  margin: auto;
+}
+
+h1 {
+  color: #1972a4;
+}
+
+button {
+  width: 75%;
+  font-size: 2rem;
+}

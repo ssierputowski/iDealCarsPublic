@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Vehicle Inventory Upload</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="customerform" (ngSubmit)="saveCustomer()">
+    <mat-form-field>
+      <mat-label>Customer ID</mat-label>
+      <input matInput type="text" placeholder="Enter Customer ID" formControlName="customerId">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput type="text" placeholder="Enter First Name" formControlName="firstName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput type="text" placeholder="Enter Last Name" formControlName="lastName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Phone Number</mat-label>
+      <input matInput type="text" placeholder="Enter Phone Number" formControlName="phoneNumber">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="text" placeholder="Enter Email" formControlName="email">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="accent" (click)="close()">Cancel</button>
+  <button mat-raised-button type="submit">Add Customer</button>
+</mat-dialog-actions>

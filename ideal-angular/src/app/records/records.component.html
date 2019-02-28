@@ -5,9 +5,11 @@
       <div class="col-2 search-container">
         <mat-form-field color="accent">
           <mat-label>Customer Name</mat-label>
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Enter Customer Name">
         </mat-form-field>
-        <button mat-raised-button color="accent">FILTER</button>
+        <button mat-raised-button color="accent">Filter</button>
+        <p></p>
+        <button mat-raised-button color="accent" (click)="openDialogCustomer()">Add Customer</button>
       </div>
       <div class="col-10 records-container">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -78,3 +80,38 @@
     </div>
   </div>
 </main>
+
+<!-- TESTTTTTT-->
+<!-- <main>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2 search-container">
+        <button mat-raised-button color="accent" (click)="openDialogEntry()">Add Customer</button>
+      </div>
+      <div class="col-10 inventory-container">
+        <table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8" style="overflow: auto; width: 100%;">
+          <ng-container matColumnDef="customerId">
+            <th mat-header-cell *matHeaderCellDef>VIN</th>
+            <td class="vehicleSelect" mat-cell *matCellDef="let element" (click)="print(element.customerId)">{{ element.customerId }}</td>
+          </ng-container>
+          <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef>Year</th>
+            <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
+          </ng-container>
+          <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef>Make</th>
+            <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
+          </ng-container>
+          <ng-container matColumnDef="phoneNumber">
+            <th mat-header-cell *matHeaderCellDef>Model</th>
+            <td mat-cell *matCellDef="let element">{{ element.phoneNumber }}</td>
+          </ng-container>
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Color</th>
+            <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+          </ng-container>
+        </table>
+      </div>
+    </div>
+  </div>
+</main> -->

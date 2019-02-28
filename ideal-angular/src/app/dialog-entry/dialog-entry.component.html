@@ -1,5 +1,6 @@
 <h2 mat-dialog-title>Vehicle Inventory Upload</h2>
 <mat-dialog-content class="mat-typography">
+<<<<<<< HEAD
    <form [formGroup]="vehicleform" (ngSubmit)="saveVehicle()">
     <mat-form-field>
       <mat-label>Vehicle VIN</mat-label>
@@ -51,3 +52,48 @@
       <button mat-raised-button type="submit">Upload Vehicle</button>
       <button mat-raised-button color="primary" (click)="close()">Cancel</button>
   </mat-dialog-actions>
+=======
+  <form [formGroup]="vehicleform" (ngSubmit)="saveVehicle()">
+    <mat-form-field>
+      <mat-label>Vehicle VIN</mat-label>
+      <input matInput type="text" placeholder="Enter Vehicle VIN" formControlName="vehVin">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Vehicle Year</mat-label>
+      <input matInput type="text" placeholder="Enter Vehicle Year" formControlName="vehYear">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Vehicle Make</mat-label>
+      <input matInput type="text" placeholder="Enter Vehicle Make" formControlName="vehMake">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Vehicle Model</mat-label>
+      <input matInput type="text" placeholder="Enter Vehicle Model" formControlName="vehModel">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Vehicle Color</mat-label>
+      <input matInput type="text" placeholder="Enter Vehicle Color" formControlName="vehColor">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Vehicle Condition</mat-label>
+      <input matInput type="text" placeholder="Enter Vehicle Condition" formControlName="vehCondition">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Vehicle Detail</mat-label>
+      <input matInput type="text" placeholder="Enter Vehicle Detail" formControlName="vehDetail">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Vehicle Price</mat-label>
+      <input matInput type="text" placeholder="Enter Vehicle Price" formControlName="vehPrice">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Vehicle Image</mat-label>
+      <input matInput type="text" placeholder="Enter Vehicle Image" formControlName="vehImage">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="accent" (click)="close()">Cancel</button>
+  <button mat-raised-button type="submit">Upload Vehicle</button>
+</mat-dialog-actions>
+>>>>>>> e52cec76b70392ee6c6232cda5228698a541fec0

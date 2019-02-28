@@ -8,6 +8,7 @@ import { VehicleService } from 'src/services/vehicle.service';
 import { Vehicle } from '../../models/vehicle.model';
 import { Subscription } from 'rxjs';
 import { DialogEntryComponent } from '../dialog-entry/dialog-entry.component';
+import { DialogVinComponent } from '../dialog-vin/dialog-vin.component';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class InventoryComponent implements OnInit {
   totalVehicles = 0;
   private vehiclesSub: Subscription;
   dialogEntryRef: MatDialogRef<DialogEntryComponent>;
+  dialogVinRef: MatDialogRef<DialogVinComponent>;
   dataSource: MatTableDataSource<Vehicle>;
   isLoading = false;
   checked = false;
@@ -106,19 +108,32 @@ applyFilter(filterValue: string) {
 openDialogEntry() {
   this.dialogEntryRef = this.dialog.open(DialogEntryComponent, {
     hasBackdrop: true,
+<<<<<<< HEAD
      //autoFocus: false,
+=======
+    autoFocus: true,
+>>>>>>> e52cec76b70392ee6c6232cda5228698a541fec0
     disableClose: true,
     width: '36%',
     height: '100%'
   });
 }
+// print(id: any) {
+//     alert(id);
+//   }
+// onRowClicked(row) {
 
-  print(id: any) {
-    alert(id);
+//   }
+openDialogVin() {
+  this.dialogVinRef = this.dialog.open(DialogVinComponent, {
+    hasBackdrop: true,
+    autoFocus: true,
+    disableClose: false,
+    width: '36%',
+    height: '100%'
+  });
   }
-  onRowClicked(row) {
 
-  }
 }
 
 /* This all goes in the dialog component popup for vehicle information
