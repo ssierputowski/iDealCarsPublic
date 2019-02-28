@@ -9,7 +9,7 @@
         <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
           <mat-form-field color="accent">
             <mat-label>Username</mat-label>
-            <input matInput name="username" ngModel type="text" #usernameInput="ngModel" required>
+            <input matInput name="username" ngModel type="text" #usernameInput="ngModel" required autocomplete="off">
             <mat-error *ngIf="usernameInput.invalid">Please enter a valid username.</mat-error>
           </mat-form-field>
           <mat-form-field color="accent">
