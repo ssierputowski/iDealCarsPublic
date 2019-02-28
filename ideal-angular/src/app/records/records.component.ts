@@ -234,15 +234,15 @@ getPeople(): void {
     });
   }
 
-  openDialogEntry() {
+ openDialogCustomer() {
     this.dialogEntryRef = this.dialog.open(DialogEntryCustomerComponent, {
       hasBackdrop: true,
       autoFocus: true,
       disableClose: false,
-      width: '350px',
-      height: 'auto'
+      width: '36%',
+      height: '100%'
     });
-  }
+    }
 
   print(id: string) {
     alert(id);
