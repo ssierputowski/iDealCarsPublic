@@ -20,7 +20,6 @@ import {
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -29,14 +28,12 @@ import { HeaderComponent } from './header/header.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { DialogEntryComponent } from './dialog-entry/dialog-entry.component';
 import { ManagerActionsComponent } from './manager-actions/manager-actions.component';
-
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth-interceptor';
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
 import { TimeClockComponent } from './time-clock/time-clock.component';
-
+import { DialogEntryCustomerComponent } from './dialog-entry-customer/dialog-entry-customer.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -57,6 +54,7 @@ const routes: Routes = [
     ManagerActionsComponent,
     TimeClockComponent,
     DialogEntryComponent,
+    DialogEntryCustomerComponent
   ],
   imports: [
     BrowserModule,
@@ -84,6 +82,7 @@ const routes: Routes = [
   ],
   entryComponents: [
     DialogEntryComponent,
+    DialogEntryCustomerComponent,
     ManagerActionsComponent
   ],
   providers: [
