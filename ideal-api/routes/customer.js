@@ -10,7 +10,7 @@ router.post('', (req, res, next) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         phoneNumber: req.body.phoneNumber,
-        emailAddress: req.body.email
+        emailAddress: req.body.emailAddress
     });
     customer.save().then(newCustomer => {
         res.status(201).json({
