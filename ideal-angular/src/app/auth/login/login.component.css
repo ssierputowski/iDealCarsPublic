@@ -29,3 +29,8 @@ form {
 mat-spinner {
   margin: auto;
 }
+
+p {
+  transition:
+  color: red;
+}
