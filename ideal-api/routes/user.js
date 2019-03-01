@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
+const Schedule = require('../models/schedule');
 
 const router = express.Router();
 
@@ -118,6 +119,65 @@ router.get('/:id', (req, res, next) => {
                 });
             }
         });
+});
+
+router.get('/schedule/:id', (req, res, next) => {
+    Schedule.findOne({ employeeId: req.params.id })
+        .then(schedule => {
+            if (schedule) {
+                return res.status(200).json(schedule);
+            } else {
+                return res.status(404).json({
+                    message: 'Schedule not found'
+                });
+            }
+        });
+});
+
+router.post('/schedule', (req, res, next) => {
+    const schedule = new Schedule({
+        employeeId: req.body.employeeId,
+        schedule: {
+            weekOf: req.body.weekOf,
+            sunday: {
+                timeIn: req.body.sunIn,
+                timeOut: req.body.sunOut
+            },
+            monday: {
+                timeIn: req.body.monIn,
+                timeOut: req.body.monOut
+            },
+            tuesday: {
+                timeIn: req.body.tueIn,
+                timeOut: req.body.tueOut
+            },
+            wednesday: {
+                timeIn: req.body.wedIn,
+                timeOut: req.body.wedOut
+            },
+            thursday: {
+                timeIn: req.body.thuIn,
+                timeOut: req.body.thuOut
+            },
+            friday: {
+                timeIn: req.body.friIn,
+                timeOut: req.body.friOut
+            },
+            saturday: {
+                timeIn: req.body.satIn,
+                timeOut: req.body.satOut
+            },
+        }
+    });
+    schedule.save().then(newSchedule => {
+        res.status(201).json({
+            message: 'Schedule created!',
+            schedule: {
+                ...newSchedule,
+                id: newSchedule._id,
+            }
+        });
+    });
 });
 
 module.exports = router;

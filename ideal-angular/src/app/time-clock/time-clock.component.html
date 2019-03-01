@@ -1,10 +1,39 @@
 <mat-card>
-  <h1>{{ now | date: 'mediumDate' }}</h1>
-  <h1>{{ now | date: 'h:mm:ss a' }}</h1>
-  <button mat-raised-button color="accent" (click)="setTime()">CLOCK IN</button>
   <div class="container-fluid">
     <h2>My Weekly Schedule</h2>
     <hr>
-
+    <table>
+      <tr *ngIf="sunday">
+        <td>SUNDAY:</td>
+        <td>{{ sunday.timeIn }} - {{ sunday.timeOut }}</td>
+      </tr>
+      <tr *ngIf="monday">
+        <td>MONDAY:</td>
+        <td>{{ monday.timeIn }} - {{ monday.timeOut }}</td>
+      </tr>
+      <tr *ngIf="tuesday">
+        <td>TUESDAY:</td>
+        <td>{{ tuesday.timeIn }} - {{ tuesday.timeOut }}</td>
+      </tr>
+      <tr *ngIf="wednesday">
+        <td>WEDNESDAY:</td>
+        <td>{{ wednesday.timeIn }} - {{ wednesday.timeOut }}</td>
+      </tr>
+      <tr *ngIf="thursday">
+        <td>THURSDAY:</td>
+        <td>{{ thursday.timeIn }} - {{ thursday.timeOut }}</td>
+      </tr>
+      <tr *ngIf="friday">
+        <td>FRIDAY:</td>
+        <td>{{ friday.timeIn }} - {{ friday.timeOut }}</td>
+      </tr>
+      <tr *ngIf="saturday">
+        <td>SATURDAY:</td>
+        <td>{{ saturday.timeIn }} - {{ saturday.timeOut }}</td>
+      </tr>
+    </table>
   </div>
+  <h1>{{ now | date: 'mediumDate' }}</h1>
+  <h1>{{ now | date: 'h:mm a' }}</h1>
+  <button mat-raised-button color="accent" (click)="setTime()">CLOCK IN</button>
 </mat-card>
