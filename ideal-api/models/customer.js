@@ -5,7 +5,7 @@ const customerSchema = mongoose.Schema({
     customerId: { type: String, required: true, unique: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    vehicleInfo: {
+    /* vehicleInfo: {
         vehicleId: { type: String, required: true, unique: true },
         vehicleYear: { type: Number, required: true },
         vehicleMake: { type: String, required: true },
@@ -14,9 +14,10 @@ const customerSchema = mongoose.Schema({
         vehicleDetails: { type: String, required: true },
         vehicleImage: { type: String }
     },
+    */
     phoneNumber: { type: String, required: true },
     emailAddress: { type: String, required: true },
-    serviceRecords: {
+    /*serviceRecords: {
         servicePerformed: { type: String, required: true },
         serviceDate: { type: String, required: true },
         dateReturned: { type: String, required: true },
@@ -25,6 +26,7 @@ const customerSchema = mongoose.Schema({
         servicePrice: { type: Number, required: true },
         paymentReceived: { type: Boolean, required: true }
     }
+    */
 });
 
 customerSchema.plugin(uniqueValidator);

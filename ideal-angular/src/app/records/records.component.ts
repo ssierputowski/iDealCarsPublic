@@ -38,13 +38,32 @@ export class RecordsComponent implements OnInit {
     'customerName',
     'customerEmail',
     'customerPhone',
+  ];
+
+  /*
+  displayedColumns = [
+    'customerName',
+    'customerEmail',
+    'customerPhone',
     'vehicleYear',
     'vehicleMake',
     'vehicleModel',
     'vehicleColor',
     'customerRecords'
   ];
+  */
 
+  customerData = [
+    {
+      customerId: '1023045',
+      firstName: 'Jerrod',
+      lastName: 'Mathis',
+      phone: '(843) 323-7261',
+      email: 'jerrodmathis95@gmail.com',
+    }
+  ];
+
+  /*
   customerData = [
     {
       customerId: '1023045',
@@ -192,6 +211,7 @@ export class RecordsComponent implements OnInit {
       ]
     },
   ];
+  */
 
   // dataSource = new MatTableDataSource(this.customerData);
 
