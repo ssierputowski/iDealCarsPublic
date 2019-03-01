@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-time-clock',
@@ -6,17 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./time-clock.component.css']
 })
 export class TimeClockComponent implements OnInit {
-  // public now = Math.abs(new Date().getHours() - 12) + ':' + new Date().getMinutes() + ':' + new Date().getSeconds();
   public now: Date = new Date();
 
   constructor() {
     setInterval(() => {
-      // this.now = Math.abs(new Date().getHours() - 12) + ':' + new Date().getMinutes() + ':' + new Date().getSeconds();
       this.now = new Date();
     }, 1);
   }
 
   ngOnInit() {
+  }
+
+  setTime() {
+    const timeIn = formatDate(this.now, 'h:mm:ss a', 'en-001');
+    console.log(timeIn);
   }
 
 }

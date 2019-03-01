@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular
 import { mimeType } from '../manager-actions/mime-type.validator';
 import { MatTabChangeEvent } from '@angular/material';
 import { AuthService } from '../auth/auth.service';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-manager-actions',
@@ -13,50 +14,57 @@ import { AuthService } from '../auth/auth.service';
 export class ManagerActionsComponent implements OnInit {
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) { }
 
-  form: FormGroup;
-  @ViewChild('employeeForm') employeeForm: FormGroupDirective;
+  employeeForm: FormGroup;
+  @ViewChild('addEmployeeForm') addEmployeeForm: FormGroupDirective;
+
+  scheduleForm: FormGroup;
+  @ViewChild('generateScheduleForm') generateScheduleForm: FormGroupDirective;
 
   tabIndex = 0;
 
   imagePreview: string;
 
+  private users: any = [];
+
   ngOnInit() {
-    this.form = new FormGroup({
+    this.employeeForm = new FormGroup({
       'username': new FormControl(null, {
         validators: [Validators.required, Validators.minLength(6)]
       }),
       'password': new FormControl(null, {
         validators: [Validators.required, Validators.minLength(10)]
       }),
-      'firstName': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'lastName': new FormControl(null, {
-        validators: [Validators.required]
-      }),
+      'firstName': new FormControl(null, {validators: [Validators.required]}),
+      'lastName': new FormControl(null, {validators: [Validators.required]}),
       'email': new FormControl(null, {
         validators: [Validators.required, Validators.email]
       }),
-      'phone': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'jobRole': new FormControl(null, {
-        validators: [Validators.required]
-      }),
+      'phone': new FormControl(null, {validators: [Validators.required]}),
+      'jobRole': new FormControl(null, {validators: [Validators.required]}),
       'image': new FormControl(null, {
         validators: [Validators.required],
         asyncValidators: [mimeType]
       })
     });
+    this.scheduleForm = new FormGroup({
+      'employee': new FormControl(null, {validators: [Validators.required]}),
+      'weekOf': new FormControl(null, {validators: [Validators.required]}),
+    });
+    this.userService.getUsers();
+    this.userService.getUserUpdateListener()
+      .subscribe((userData) => {
+        this.users = userData.users;
+      });
   }
 
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
-    this.form.patchValue({image: file});
-    this.form.get('image').updateValueAndValidity();
+    this.employeeForm.patchValue({image: file});
+    this.employeeForm.get('image').updateValueAndValidity();
     const reader = new FileReader();
     reader.onload = () => {
       this.imagePreview = reader.result as string;
@@ -65,20 +73,20 @@ export class ManagerActionsComponent implements OnInit {
   }
 
   onAddEmployee() {
-    if (this.form.invalid) {
+    if (this.employeeForm.invalid) {
       return;
     }
     this.authService.createUser(
-      this.form.value.username,
-      this.form.value.password,
-      this.form.value.firstName,
-      this.form.value.lastName,
-      this.form.value.email,
-      this.form.value.phone,
-      this.form.value.jobRole,
-      this.form.value.image
+      this.employeeForm.value.username,
+      this.employeeForm.value.password,
+      this.employeeForm.value.firstName,
+      this.employeeForm.value.lastName,
+      this.employeeForm.value.email,
+      this.employeeForm.value.phone,
+      this.employeeForm.value.jobRole,
+      this.employeeForm.value.image
     );
-    this.form.reset();
+    this.employeeForm.reset();
   }
 
   tabChanged(tabChangeEvent: MatTabChangeEvent) {

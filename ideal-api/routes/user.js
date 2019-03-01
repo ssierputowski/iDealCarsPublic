@@ -97,6 +97,16 @@ router.post('/login', (req, res, next) => {
         });
 });
 
+router.get('', (req, res, next) => {
+    const userQuery = User.find();
+    userQuery.then(users => {
+        res.status(200).json({
+            message: 'Users fetched successfully',
+            users: users,
+        });
+    });
+});
+
 router.get('/:id', (req, res, next) => {
     User.findOne({ _id: req.params.id })
         .then(user => {

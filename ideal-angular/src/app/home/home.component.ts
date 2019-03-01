@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
     this.dialog.open(ManagerActionsComponent, {
       disableClose: true,
       minWidth: '50rem',
-      height: '70rem',
+      height: '75rem',
     });
   }
 }

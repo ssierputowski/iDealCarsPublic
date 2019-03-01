@@ -6,7 +6,7 @@
   #tabGroup
   (selectedTabChange)="tabChanged($event)">
     <mat-tab label="Add Employee">
-      <form [formGroup]="form" (ngSubmit)="onAddEmployee()" #employeeForm="ngForm" autocomplete="off">
+      <form [formGroup]="employeeForm" (ngSubmit)="onAddEmployee()" #addEmployeeForm="ngForm" autocomplete="off">
         <mat-form-field color="accent">
           <mat-label>Username</mat-label>
           <input matInput type="text" formControlName="username">
@@ -51,16 +51,110 @@
       </form>
     </mat-tab>
     <mat-tab label="Generate Schedule">
-      <p>Generating a schedule will be a RC1 feature.</p>
+      <form autocomplete="off">
+        <mat-form-field color="accent">
+          <mat-select placeholder="Employee">
+            <mat-option *ngFor="let user of users" [value]="user.employeeId">
+              {{ user.firstName }} {{ user.lastName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field color="accent">
+          <input matInput [matDatepicker]="picker" placeholder="Week Of">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div class="time">
+          <span>SUNDAY:</span>
+          <mat-form-field color="accent">
+            <mat-label>Time In</mat-label>
+            <input matInput type="time">
+          </mat-form-field>
+          <mat-form-field color="accent">
+            <mat-label>Time Out</mat-label>
+            <input matInput type="time">
+          </mat-form-field>
+        </div>
+        <div class="time">
+          <span>MONDAY:</span>
+          <mat-form-field color="accent">
+            <mat-label>Time In</mat-label>
+            <input matInput type="time">
+          </mat-form-field>
+          <mat-form-field color="accent">
+            <mat-label>Time Out</mat-label>
+            <input matInput type="time">
+          </mat-form-field>
+        </div>
+        <div class="time">
+          <span>TUESDAY:</span>
+          <mat-form-field color="accent">
+            <mat-label>Time In</mat-label>
+            <input matInput type="time">
+          </mat-form-field>
+          <mat-form-field color="accent">
+            <mat-label>Time Out</mat-label>
+            <input matInput type="time">
+          </mat-form-field>
+        </div>
+        <div class="time">
+          <span>WEDNESDAY:</span>
+          <mat-form-field color="accent">
+            <mat-label>Time In</mat-label>
+            <input matInput type="time">
+          </mat-form-field>
+          <mat-form-field color="accent">
+            <mat-label>Time Out</mat-label>
+            <input matInput type="time">
+          </mat-form-field>
+        </div>
+        <div class="time">
+          <span>THURSDAY:</span>
+          <mat-form-field color="accent">
+            <mat-label>Time In</mat-label>
+            <input matInput type="time">
+          </mat-form-field>
+          <mat-form-field color="accent">
+            <mat-label>Time Out</mat-label>
+            <input matInput type="time">
+          </mat-form-field>
+        </div>
+        <div class="time">
+          <span>FRIDAY:</span>
+          <mat-form-field color="accent">
+            <mat-label>Time In</mat-label>
+            <input matInput type="time">
+          </mat-form-field>
+          <mat-form-field color="accent">
+            <mat-label>Time Out</mat-label>
+            <input matInput type="time">
+          </mat-form-field>
+        </div>
+        <div class="time">
+          <span>SATURDAY:</span>
+          <mat-form-field color="accent">
+            <mat-label>Time In</mat-label>
+            <input matInput type="time">
+          </mat-form-field>
+          <mat-form-field color="accent">
+            <mat-label>Time Out</mat-label>
+            <input matInput type="time">
+          </mat-form-field>
+        </div>
+      </form>
     </mat-tab>
   </mat-tab-group>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button *ngIf="tabIndex == 0"
   mat-raised-button
-  (click)="employeeForm.ngSubmit.emit()"
-  [disabled]="!employeeForm.form.valid"
+  (click)="addEmployeeForm.ngSubmit.emit()"
+  [disabled]="!addEmployeeForm.form.valid"
   color="accent"
   mat-dialog-close>ADD EMPLOYEE</button>
+  <button *ngIf="tabIndex == 1"
+  mat-raised-button
+  color="accent"
+  mat-dialog-close>GENERATE SCHEDULE</button>
   <button mat-raised-button mat-dialog-close>CANCEL</button>
 </mat-dialog-actions>
