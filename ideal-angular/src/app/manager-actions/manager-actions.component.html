@@ -54,7 +54,7 @@
       <form [formGroup]="scheduleForm" (ngSubmit)="onGenerateSchedule()" #generateScheduleForm="ngForm" autocomplete="off">
         <mat-form-field color="accent">
           <mat-select placeholder="Employee" formControlName="employee">
-            <mat-option *ngFor="let user of users" [value]="user.employeeId">
+            <mat-option *ngFor="let user of users" value="{{ user.employeeId }}">
               {{ user.firstName }} {{ user.lastName }}
             </mat-option>
           </mat-select>

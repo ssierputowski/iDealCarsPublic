@@ -47,8 +47,7 @@ const scheduleSchema = mongoose.Schema({
             recordedIn: { type: String },
             recordedOut: { type: String }
         },
-    },
-    schedules: { type: [Object] },
+    }
 });
 
 scheduleSchema.plugin(uniqueValidator);
