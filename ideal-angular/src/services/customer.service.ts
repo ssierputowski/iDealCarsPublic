@@ -64,7 +64,6 @@ export class CustomerService {
   }
 
   addCustomer(
-    customerId: string,
     firstName: string,
     lastName: string,
     /*vehicleInfo: [
@@ -93,7 +92,6 @@ export class CustomerService {
   ], */
   ) {
     const customerData: Customer = {
-      customerId: customerId,
       firstName: firstName,
       lastName: lastName,
       phoneNumber: phoneNumber,
