@@ -53,6 +53,20 @@ export class ManagerActionsComponent implements OnInit {
     this.scheduleForm = new FormGroup({
       'employee': new FormControl(null, {validators: [Validators.required]}),
       'weekOf': new FormControl(null, {validators: [Validators.required]}),
+      'sunIn': new FormControl('OFF'),
+      'sunOut': new FormControl('OFF'),
+      'monIn': new FormControl('OFF'),
+      'monOut': new FormControl('OFF'),
+      'tueIn': new FormControl('OFF'),
+      'tueOut': new FormControl('OFF'),
+      'wedIn': new FormControl('OFF'),
+      'wedOut': new FormControl('OFF'),
+      'thuIn': new FormControl('OFF'),
+      'thuOut': new FormControl('OFF'),
+      'friIn': new FormControl('OFF'),
+      'friOut': new FormControl('OFF'),
+      'satIn': new FormControl('OFF'),
+      'satOut': new FormControl('OFF'),
     });
     this.userService.getUsers();
     this.userService.getUserUpdateListener()
@@ -87,6 +101,31 @@ export class ManagerActionsComponent implements OnInit {
       this.employeeForm.value.image
     );
     this.employeeForm.reset();
+  }
+
+  onGenerateSchedule() {
+    if (this.scheduleForm.invalid) {
+      return;
+    }
+    this.userService.setUserSchedule(
+      this.scheduleForm.value.employee,
+      this.scheduleForm.value.weekOf,
+      this.scheduleForm.value.sunIn,
+      this.scheduleForm.value.sunOut,
+      this.scheduleForm.value.monIn,
+      this.scheduleForm.value.monOut,
+      this.scheduleForm.value.tueIn,
+      this.scheduleForm.value.tueOut,
+      this.scheduleForm.value.wedIn,
+      this.scheduleForm.value.wedOut,
+      this.scheduleForm.value.thuIn,
+      this.scheduleForm.value.thuOut,
+      this.scheduleForm.value.friIn,
+      this.scheduleForm.value.friOut,
+      this.scheduleForm.value.satIn,
+      this.scheduleForm.value.satOut,
+    );
+    this.scheduleForm.reset();
   }
 
   tabChanged(tabChangeEvent: MatTabChangeEvent) {
