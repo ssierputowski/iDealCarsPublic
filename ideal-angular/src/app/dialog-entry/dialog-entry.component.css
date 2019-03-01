@@ -5,7 +5,15 @@ h2 {
   color: #1972a4 !important;
   margin-bottom: 1rem;
 }
+
 button {
   color: #73f7dd;
   background-color: grey;
+}
+
+form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+
 }

@@ -25,6 +25,5 @@ const customerSchema = mongoose.Schema({
     //     paymentReceived: { type: Boolean, required: true }
     // }
 });
-
 customerSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('Customer', customerSchema);

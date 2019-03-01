@@ -16,3 +16,24 @@ input[type="file"] {
 .image-preview img {
   height: 100%;
 }
+
+mat-dialog-content {
+  height: 100%;
+}
+
+.time {
+  width: 75%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.time > span {
+  width: 10rem;
+}
+
+.time > mat-form-field {
+  width: 35%;
+  margin-right: .5rem;
+  font-size: 1.5rem;
+}
