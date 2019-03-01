@@ -16,7 +16,7 @@
           <!-- Customer Name Column -->
           <ng-container matColumnDef="customerName">
             <th mat-header-cell *matHeaderCellDef>Name</th>
-            <td class="customerSelect" mat-cell *matCellDef="let element" (click)="print(element.customerId)">
+            <td class="customerSelect" mat-cell *matCellDef="let element" (click)="print(element.lastName + ', ' + element.firstName)">
               {{ element.lastName }}, {{ element.firstName }}
             </td>
           </ng-container>
