@@ -28,50 +28,7 @@
           <!-- Customer Phone Column -->
           <ng-container matColumnDef="customerPhone">
             <th mat-header-cell *matHeaderCellDef>Phone Number</th>
-            <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
-          </ng-container>
-          <!-- Vehicle Year Column -->
-          <ng-container matColumnDef="vehicleYear">
-            <th mat-header-cell *matHeaderCellDef>Year</th>
-            <td mat-cell *matCellDef="let element">
-              <div *ngFor="let vehicle of element.vehicleInfo">
-                <span>{{ vehicle.vehicleYear }}</span>
-              </div>
-            </td>
-          </ng-container>
-          <!-- Vehicle Make Column -->
-          <ng-container matColumnDef="vehicleMake">
-            <th mat-header-cell *matHeaderCellDef>Make</th>
-            <td mat-cell *matCellDef="let element">
-              <div *ngFor="let vehicle of element.vehicleInfo">
-                <span>{{ vehicle.vehicleMake }}</span>
-              </div>
-            </td>
-          </ng-container>
-          <!-- Vehicle Model Column -->
-          <ng-container matColumnDef="vehicleModel">
-            <th mat-header-cell *matHeaderCellDef>Model</th>
-            <td mat-cell *matCellDef="let element">
-              <div *ngFor="let vehicle of element.vehicleInfo">
-                <span>{{ vehicle.vehicleModel }}</span>
-              </div>
-            </td>
-          </ng-container>
-          <!-- Vehicle Color Column -->
-          <ng-container matColumnDef="vehicleColor">
-            <th mat-header-cell *matHeaderCellDef>Color</th>
-            <td mat-cell *matCellDef="let element">
-              <div *ngFor="let vehicle of element.vehicleInfo">
-                <span>{{ vehicle.vehicleColor }}</span>
-              </div>
-            </td>
-          </ng-container>
-          <!-- Customer Records Column -->
-          <ng-container matColumnDef="customerRecords">
-            <th class="max-width" mat-header-cell *matHeaderCellDef>Service Records</th>
-            <td class="max-width" mat-cell *matCellDef="let element">
-              <button mat-raised-button color="primary">SHOW</button>
-            </td>
+            <td mat-cell *matCellDef="let element">{{ element.phoneNumber }}</td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -115,3 +72,89 @@
     </div>
   </div>
 </main> -->
+
+
+
+<!--
+<main>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2 search-container">
+        <mat-form-field color="accent">
+          <mat-label>Customer Name</mat-label>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Enter Customer Name">
+        </mat-form-field>
+        <button mat-raised-button color="accent">Filter</button>
+        <p></p>
+        <button mat-raised-button color="accent" (click)="openDialogEntry()">Add Customer</button>
+      </div>
+      <div class="col-10 records-container">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="customerName">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td class="customerSelect" mat-cell *matCellDef="let element" (click)="print(element.customerId)">
+              {{ element.lastName }}, {{ element.firstName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="customerEmail">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="customerPhone">
+            <th mat-header-cell *matHeaderCellDef>Phone Number</th>
+            <td mat-cell *matCellDef="let element">{{ element.phoneNumber }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="vehicleYear">
+            <th mat-header-cell *matHeaderCellDef>Year</th>
+            <td mat-cell *matCellDef="let element">
+              <div *ngFor="let vehicle of element.vehicleInfo">
+                <span>{{ vehicle.vehicleYear }}</span>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="vehicleMake">
+            <th mat-header-cell *matHeaderCellDef>Make</th>
+            <td mat-cell *matCellDef="let element">
+              <div *ngFor="let vehicle of element.vehicleInfo">
+                <span>{{ vehicle.vehicleMake }}</span>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="vehicleModel">
+            <th mat-header-cell *matHeaderCellDef>Model</th>
+            <td mat-cell *matCellDef="let element">
+              <div *ngFor="let vehicle of element.vehicleInfo">
+                <span>{{ vehicle.vehicleModel }}</span>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="vehicleColor">
+            <th mat-header-cell *matHeaderCellDef>Color</th>
+            <td mat-cell *matCellDef="let element">
+              <div *ngFor="let vehicle of element.vehicleInfo">
+                <span>{{ vehicle.vehicleColor }}</span>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="customerRecords">
+            <th class="max-width" mat-header-cell *matHeaderCellDef>Service Records</th>
+            <td class="max-width" mat-cell *matCellDef="let element">
+              <button mat-raised-button color="primary">SHOW</button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+-->
