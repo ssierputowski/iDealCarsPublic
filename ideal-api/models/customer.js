@@ -28,6 +28,5 @@ const customerSchema = mongoose.Schema({
     }
     */
 });
-
 customerSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('Customer', customerSchema);
