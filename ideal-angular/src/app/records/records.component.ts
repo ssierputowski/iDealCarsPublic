@@ -206,26 +206,28 @@ export class RecordsComponent implements OnInit {
     } else {
       this.isLoading = false;
     }
-  this.titleService.setTitle('Vehicle Inventory | iDealCars');
+  this.titleService.setTitle('Customer Records | iDealCars');
   this.searchForm = new FormGroup({
-    'Year': new FormControl(null, {
+    'customerId': new FormControl(null, {
       validators: [Validators.required]
     }),
-    'Make': new FormControl(null, {
+    'firstName': new FormControl(null, {
       validators: [Validators.required]
     }),
-    'Model': new FormControl(null, {
+    'lastName': new FormControl(null, {
       validators: [Validators.required]
     }),
-    'Color': new FormControl(null, {
+    'phoneNumber': new FormControl(null, {
       validators: [Validators.required]
     }),
-
+    'email' : new FormControl (null, {
+      validators: [Validators.required]
+    }),
   });
-  this.getPeople();
+  this.getCustomer();
 }
 
-getPeople(): void {
+getCustomer(): void {
   this.customerService.getCustomers();
   this.customerService.getCustomerUpdateListener()
     .subscribe((customerData: { customers: Customer[] }) => {
@@ -234,15 +236,15 @@ getPeople(): void {
     });
   }
 
- openDialogCustomer() {
+  openDialogEntry() {
     this.dialogEntryRef = this.dialog.open(DialogEntryCustomerComponent, {
       hasBackdrop: true,
       autoFocus: true,
       disableClose: false,
-      width: '36%',
-      height: '100%'
+      width: '350px',
+      height: 'auto'
     });
-    }
+  }
 
   print(id: string) {
     alert(id);
