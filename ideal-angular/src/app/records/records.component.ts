@@ -55,11 +55,11 @@ export class RecordsComponent implements OnInit {
 
   customerData = [
     {
-      customerId: '1023045',
+      // customerId: '1023045',
       firstName: 'Jerrod',
       lastName: 'Mathis',
       phone: '(843) 323-7261',
-      email: 'jerrodmathis95@gmail.com',
+      emailAddress: 'jerrodmathis95@gmail.com',
     }
   ];
 
@@ -228,9 +228,9 @@ export class RecordsComponent implements OnInit {
     }
   this.titleService.setTitle('Customer Records | iDealCars');
   this.searchForm = new FormGroup({
-    'customerId': new FormControl(null, {
-      validators: [Validators.required]
-    }),
+  // 'customerId': new FormControl(null, {
+  //  validators: [Validators.required]
+  //  }),
     'firstName': new FormControl(null, {
       validators: [Validators.required]
     }),
@@ -240,7 +240,7 @@ export class RecordsComponent implements OnInit {
     'phoneNumber': new FormControl(null, {
       validators: [Validators.required]
     }),
-    'email' : new FormControl (null, {
+    'emailAddress' : new FormControl (null, {
       validators: [Validators.required]
     }),
   });

@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 
 const BACKEND_URL = environment.apiUrl + '/customers';
 
+
 @Injectable({providedIn: 'root'})
 export class CustomerService {
   private customers: Customer[] = [];
@@ -29,7 +30,7 @@ export class CustomerService {
         return {
           customers: customerData.customers.map(customer => {
             return {
-              customerId: customer.customerId,
+            //  customerId: customer.customerId,
               firstName: customer.firstName,
               lastName: customer.lastName,
              // vehicleYear: customer.vehicleYear,
@@ -40,7 +41,7 @@ export class CustomerService {
              // vehicleDetails: customer.vehicleDetails,
              // vehicleImage: customer.vehicleImage,
               phoneNumber: customer.phoneNumber,
-              email: customer.email,
+              emailAddress: customer.emailAddress,
              // servicePerformed: customer.servicePerformed,
              // serviceDate: customer.serviceDate,
              // dateReturned: customer.dateReturned,
@@ -64,6 +65,7 @@ export class CustomerService {
   }
 
   addCustomer(
+   // customerId: string,
     firstName: string,
     lastName: string,
     /*vehicleInfo: [
@@ -78,7 +80,7 @@ export class CustomerService {
       }
     ], */
     phoneNumber: string,
-    email: string,
+    emailAddress: string,
    /* serviceRecords: [
       {
         servicePerformed: string,
@@ -92,10 +94,11 @@ export class CustomerService {
   ], */
   ) {
     const customerData: Customer = {
+    //  customerId: customerId,
       firstName: firstName,
       lastName: lastName,
       phoneNumber: phoneNumber,
-      email: email,
+      emailAddress: emailAddress,
     };
     this.http
       .post<{message: string, customer: Customer}>(BACKEND_URL, customerData)

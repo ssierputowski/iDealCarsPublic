@@ -1,4 +1,5 @@
 export interface Customer {
+ // customerId: string;
   firstName: string;
   lastName: string;
   /*vehicleInfo: [
@@ -13,7 +14,7 @@ export interface Customer {
     }
   ]; */
   phoneNumber: string;
-  email: string;
+  emailAddress: string;
   /* serviceRecords: [
     {
       servicePerformed: string,
