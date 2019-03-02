@@ -103,7 +103,7 @@ export class CustomerService {
     this.http
       .post<{message: string, customer: Customer}>(BACKEND_URL, customerData)
       .subscribe((resData) => {
-        window.location.reload();
+        this.getCustomers();
       });
   }
 }
