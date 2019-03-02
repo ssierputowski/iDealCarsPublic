@@ -5,6 +5,7 @@ import { mimeType } from '../manager-actions/mime-type.validator';
 import { MatTabChangeEvent } from '@angular/material';
 import { AuthService } from '../auth/auth.service';
 import { UserService } from 'src/services/user.service';
+import { MessageService } from 'src/services/message.service';
 
 @Component({
   selector: 'app-manager-actions',
@@ -15,7 +16,8 @@ export class ManagerActionsComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private messageService: MessageService
   ) { }
 
   employeeForm: FormGroup;
@@ -23,6 +25,9 @@ export class ManagerActionsComponent implements OnInit {
 
   scheduleForm: FormGroup;
   @ViewChild('generateScheduleForm') generateScheduleForm: FormGroupDirective;
+
+  messageForm: FormGroup;
+  @ViewChild('postMessageForm') postMessageForm: FormGroupDirective;
 
   tabIndex = 0;
 
@@ -67,6 +72,9 @@ export class ManagerActionsComponent implements OnInit {
       'friOut': new FormControl('OFF'),
       'satIn': new FormControl('OFF'),
       'satOut': new FormControl('OFF'),
+    });
+    this.messageForm = new FormGroup({
+      'message': new FormControl(null, {validators: [Validators.required]})
     });
     this.userService.getUsers();
     this.userService.getUserUpdateListener()
@@ -126,6 +134,14 @@ export class ManagerActionsComponent implements OnInit {
       this.scheduleForm.value.satOut,
     );
     this.scheduleForm.reset();
+  }
+
+  onPostMessage() {
+    if (this.messageForm.invalid) {
+      return;
+    }
+    this.messageService.postMessage(this.messageForm.value.message);
+    this.messageForm.reset();
   }
 
   tabChanged(tabChangeEvent: MatTabChangeEvent) {
