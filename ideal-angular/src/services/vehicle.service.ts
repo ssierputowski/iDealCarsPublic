@@ -77,7 +77,7 @@ export class VehicleService {
     this.http
       .post<{message: string, vehicle: Vehicle}>(BACKEND_URL, vehicleData)
       .subscribe((resData) => {
-        window.location.reload();
+        this.getVehicles();
       });
   }
 }
