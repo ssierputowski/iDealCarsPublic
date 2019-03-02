@@ -53,15 +53,15 @@ export class RecordsComponent implements OnInit {
   ];
   */
 
-  customerData = [
-    {
-      // customerId: '1023045',
-      firstName: 'Jerrod',
-      lastName: 'Mathis',
-      phone: '(843) 323-7261',
-      emailAddress: 'jerrodmathis95@gmail.com',
-    }
-  ];
+ customerData = [
+  {
+    // customerId: '1023045',
+    firstName: 'Jerrod',
+    lastName: 'Mathis',
+    phone: '(843) 323-7261',
+    emailAddress: 'jerrodmathis95@gmail.com',
+  }
+];
 
   /*
   customerData = [
@@ -226,7 +226,7 @@ export class RecordsComponent implements OnInit {
     } else {
       this.isLoading = false;
     }
-  this.titleService.setTitle('Customer Records | iDealCars');
+    this.titleService.setTitle('Customer Records | iDealCars');
   this.searchForm = new FormGroup({
   // 'customerId': new FormControl(null, {
   //  validators: [Validators.required]

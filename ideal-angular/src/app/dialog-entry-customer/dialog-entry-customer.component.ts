@@ -45,7 +45,7 @@ export class DialogEntryCustomerComponent implements OnInit {
       'phoneNumber': new FormControl(null, {
         validators: [Validators.required]
       }),
-      'emailAddress': new FormControl(null, {
+      'email': new FormControl(null, {
         validators: [Validators.required]
       })
     });
@@ -64,7 +64,7 @@ export class DialogEntryCustomerComponent implements OnInit {
       this.customerform.value.firstName,
       this.customerform.value.lastName,
       this.customerform.value.phoneNumber,
-      this.customerform.value.emailAddress,
+      this.customerform.value.email,
     );
     this.customerform.reset();
 
