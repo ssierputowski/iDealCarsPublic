@@ -37,12 +37,12 @@ import { HomeComponent } from './home/home.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ManagerActionsComponent } from './manager-actions/manager-actions.component';
+import { MessageBoardComponent } from './message-board/message-board.component';
 import { RecordsComponent } from './records/records.component';
 import { TimeClockComponent } from './time-clock/time-clock.component';
 
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth-interceptor';
-import { MessageBoardComponent } from './message-board/message-board.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },

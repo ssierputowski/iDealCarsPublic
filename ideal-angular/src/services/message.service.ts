@@ -42,7 +42,7 @@ export class MessageService {
     };
     this.http.post(BACKEND_URL, messageData)
       .subscribe((response) => {
-        console.log(response);
+        this.getMessages();
       });
   }
 }

@@ -19,5 +19,4 @@ export class MessageBoardComponent implements OnInit {
         this.messages = messageData.messages;
       });
   }
-
 }
