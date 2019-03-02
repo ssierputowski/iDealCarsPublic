@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DialogVinComponent implements OnInit {
 
-  newValues = [];
+
   current_item: any;
   edit_form: FormGroup;
 

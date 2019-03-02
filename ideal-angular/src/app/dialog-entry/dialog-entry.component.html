@@ -41,5 +41,5 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-raised-button color="accent" (click)="close()">Cancel</button>
-  <button mat-raised-button type="submit">Upload Vehicle</button>
+  <button mat-raised-button type="submit" [disabled]="!vehicleform.valid">Upload Vehicle</button>
 </mat-dialog-actions>
