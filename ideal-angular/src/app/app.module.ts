@@ -37,6 +37,7 @@ import { HomeComponent } from './home/home.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ManagerActionsComponent } from './manager-actions/manager-actions.component';
+import { MessageBoardComponent } from './message-board/message-board.component';
 import { RecordsComponent } from './records/records.component';
 import { TimeClockComponent } from './time-clock/time-clock.component';
 
@@ -63,6 +64,7 @@ const routes: Routes = [
     ManagerActionsComponent,
     RecordsComponent,
     TimeClockComponent,
+    MessageBoardComponent,
   ],
   imports: [
     BrowserAnimationsModule,
