@@ -260,23 +260,15 @@ getPeople(): void {
     };
     this.dialogCustEditRef = this.dialog.open(DialogCustomerEditComponent, config);
     this.dialogCustEditRef.componentInstance.data = {
-      // vehVin: data.vehVin,
-      // vehYear: data.vehYear,
-      // vehMake: data.vehMake,
-      // vehModel: data.vehModel,
-      // vehColor: data.vehColor,
-      // vehCondition: data.vehCondition,
-      // vehDetail: data.vehDetail,
-      // vehPrice: data.vehPrice,
-      // vehImage: data.vehImage,
-      customerName: data.customerName,
-      customerEmail: data.customerEmail,
-      customerPhone: data.customerPhone,
-      vehicleYear: data.vehicleYear,
-      vehicleMake: data.vehicleMake,
-      vehicleModel: data.vehicleModel,
-      vehicleColor: data.vehicleColor,
-      customerRecords: data.customerRecords
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      phone: data.phone,
+      // vehicleYear: data.vehicleYear,
+      // vehicleMake: data.vehicleMake,
+      // vehicleModel: data.vehicleModel,
+      // vehicleColor: data.vehicleColor,
+      // customerRecords: data.customerRecords
       };
     }
 }
