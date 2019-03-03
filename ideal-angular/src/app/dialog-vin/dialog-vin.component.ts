@@ -76,7 +76,7 @@ export class DialogVinComponent implements OnInit {
 
   editVehicle(value) {
 
-    let newValues = {
+    const newValues = {
      // id: this.currentInfo.id,
       vehVin: value.vehVin,
       vehYear: value.vehYear,

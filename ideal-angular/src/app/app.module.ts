@@ -40,6 +40,7 @@ import { TimeClockComponent } from './time-clock/time-clock.component';
 
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { DialogCustomerEditComponent } from './dialog-customer-edit/dialog-customer-edit.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -61,6 +62,7 @@ const routes: Routes = [
     ManagerActionsComponent,
     RecordsComponent,
     TimeClockComponent,
+    DialogCustomerEditComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -91,7 +93,8 @@ const routes: Routes = [
     DialogEntryComponent,
     ManagerActionsComponent,
     DialogVinComponent,
-    DialogEntryCustomerComponent
+    DialogEntryCustomerComponent,
+    DialogCustomerEditComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
