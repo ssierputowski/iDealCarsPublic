@@ -7,13 +7,10 @@ const router = express.Router();
 router.post('', (req, res, next) => {
     console.log(req.body);
     const customer = new Customer({
-        fname: req.body.fname,
-        lname: req.body.lname,
-        carYear: req.body.carYear,
-        carMake: req.body.carMake,
-        carModel: req.body.carModel,
-        telephone: req.body.telephone,
-        email: req.body.email
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        phoneNumber: req.body.phoneNumber,
+        emailAddress: req.body.emailAddress
     });
     customer.save().then(newCustomer => {
         res.status(201).json({

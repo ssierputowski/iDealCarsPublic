@@ -29,3 +29,7 @@ form {
 mat-spinner {
   margin: auto;
 }
+
+p {
+  color: red;
+}

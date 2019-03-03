@@ -4,6 +4,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   MatButtonModule,
   MatCardModule,
+  MatDatepickerModule,
   MatDialogModule,
   MatDividerModule,
   MatExpansionModule,
@@ -11,6 +12,7 @@ import {
   MatIconModule,
   MatInputModule,
   MatListModule,
+  MatNativeDateModule,
   MatProgressSpinnerModule,
   MatRadioModule,
   MatSelectModule,
@@ -35,6 +37,7 @@ import { HomeComponent } from './home/home.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ManagerActionsComponent } from './manager-actions/manager-actions.component';
+import { MessageBoardComponent } from './message-board/message-board.component';
 import { RecordsComponent } from './records/records.component';
 import { TimeClockComponent } from './time-clock/time-clock.component';
 
@@ -71,6 +74,7 @@ const routes: Routes = [
     HttpClientModule,
     MatButtonModule,
     MatCardModule,
+    MatDatepickerModule,
     MatDialogModule,
     MatDividerModule,
     MatExpansionModule,
@@ -78,6 +82,7 @@ const routes: Routes = [
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatNativeDateModule,
     MatProgressSpinnerModule,
     MatRadioModule,
     MatSelectModule,

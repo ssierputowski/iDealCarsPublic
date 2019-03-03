@@ -7,6 +7,7 @@
       <div class="col">
         <mat-spinner *ngIf="isLoading"></mat-spinner>
         <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
+          <p *ngIf="loginError">{{ loginError }}</p>
           <mat-form-field color="accent">
             <mat-label>Username</mat-label>
             <input matInput name="username" ngModel type="text" #usernameInput="ngModel" required autocomplete="off">

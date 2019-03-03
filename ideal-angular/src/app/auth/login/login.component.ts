@@ -13,6 +13,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent implements OnInit {
 
   isLoading = false;
+  private loginError = '';
 
   constructor(private router: Router, private titleService: Title, public authService: AuthService) {}
 
@@ -20,6 +21,10 @@ export class LoginComponent implements OnInit {
     if (form.invalid) { return; }
     this.isLoading = true;
     this.authService.login(form.value.username, form.value.password);
+    if (!this.authService.getIsAuth()) {
+      this.isLoading = false;
+      this.loginError = '* Username or password is incorrect *';
+    }
   }
 
   ngOnInit() {
