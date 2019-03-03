@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef, MatDialogConfig, MatRow } from '@angular/material';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
@@ -28,12 +28,13 @@ export class InventoryComponent implements OnInit {
   searchForm: FormGroup;
   searchVal: string;
   searchStr = [];
-
+  row = new MatRow;
   constructor(
     private router: Router,
     private titleService: Title,
     private vehicleService: VehicleService,
     private dialog: MatDialog
+
     ) {}
 
   displayedColumns = [
@@ -41,19 +42,36 @@ export class InventoryComponent implements OnInit {
      'vehYear',
      'vehMake',
      'vehModel',
-     'vehCondition',
      'vehColor',
-     'vehDetails',
+     'vehCondition',
+     'vehDetail',
+     'vehPrice',
      'vehImage'
   ];
+  filterValues = {
+    vehYear: '',
+    vehMake: '',
+    vehModel: '',
+    vehColor: '',
+    vehCondition: '',
 
-  // inventory = [
-  //   { vehicleId: 'TBHF2000201', vehicleYear: 2001, vehicleMake: 'Honda', vehicleModel: 'S2000',
-  //   newOrUsed: 'Used', vehicleColor: 'Silver', vehicleDetails: 'Convertible, A/C, here are some
-  //   more details just to see how it handles extra data space' },
-  //   ];
+  };
 
-
+  Year = new FormControl('', {
+    validators: [Validators.required]
+  });
+  Make = new FormControl('', {
+    validators: [Validators.required]
+  });
+  Model = new FormControl('', {
+    validators: [Validators.required]
+  });
+  Color = new FormControl('', {
+    validators: [Validators.required]
+  });
+  Condition = new FormControl('', {
+    validators: [Validators.required]
+  });
 
   ngOnInit() {
       if (this.checked) {
@@ -62,24 +80,42 @@ export class InventoryComponent implements OnInit {
         this.isLoading = false;
       }
     this.titleService.setTitle('Vehicle Inventory | iDealCars');
-    this.searchForm = new FormGroup({
-      'Year': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'Make': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'Model': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'Color': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'Condition': new FormControl(null, {
-        validators: [Validators.required]
-      }),
 
-    });
+      this.Year.valueChanges
+      .subscribe(
+        Year => {
+          this.filterValues.vehYear = Year;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      );
+      this.Make.valueChanges
+      .subscribe(
+        Make => {
+          this.filterValues.vehMake = Make;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      );
+      this.Model.valueChanges
+      .subscribe(
+        Model => {
+          this.filterValues.vehModel = Model;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      );
+      this.Color.valueChanges
+      .subscribe(
+        Color => {
+          this.filterValues.vehColor = Color;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      );
+      this.Condition.valueChanges
+      .subscribe(
+        Condition => {
+          this.filterValues.vehCondition = Condition;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      );
     this.getCars();
   }
 getCars(): void {
@@ -88,31 +124,25 @@ getCars(): void {
     .subscribe((vehicleData: { vehicles: Vehicle[] }) => {
       this.vehicles = vehicleData.vehicles;
       this.dataSource = new MatTableDataSource(this.vehicles);
+      this.dataSource.filterPredicate = this.tableFilter();
     });
 }
-searchValue() {
-  // this.searchStr = [ this.searchForm];
-  const searchVal = (this.searchForm.value);
- // this.searchVal = (this.searchForm.get().toString());
-  this.dataSource.filter = searchVal.toString().value;
-  console.log(searchVal);
-  console.log();
-}
-applyFilter(filterValue: string) {
-  // filterValue = filterValue.trim(); // Remove whitespace
-  filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-  return filterValue;
- // this.dataSource.filter = filterValue;
-  // console.log(filterValue);
+
+tableFilter(): (data: any, filter: string) => boolean {
+  const filterFunction = function(data, filter): boolean {
+    const searchTerms = JSON.parse(filter);
+    return data.vehYear.toString().toLowerCase().indexOf(searchTerms.vehYear) !== -1
+      && data.vehMake.toString().toLowerCase().indexOf(searchTerms.vehMake) !== -1
+      && data.vehModel.toString().toLowerCase().indexOf(searchTerms.vehModel) !== -1
+      && data.vehColor.toLowerCase().indexOf(searchTerms.vehColor) !== -1
+      && data.vehCondition.toLowerCase().indexOf(searchTerms.vehCondition) !== -1;
+  };
+  return filterFunction;
 }
 openDialogEntry() {
   this.dialogEntryRef = this.dialog.open(DialogEntryComponent, {
     hasBackdrop: true,
-<<<<<<< HEAD
-     //autoFocus: false,
-=======
-    autoFocus: true,
->>>>>>> e52cec76b70392ee6c6232cda5228698a541fec0
+     // autoFocus: false,
     disableClose: true,
     width: '36%',
     height: '100%'
@@ -124,14 +154,28 @@ openDialogEntry() {
 // onRowClicked(row) {
 
 //   }
-openDialogVin() {
-  this.dialogVinRef = this.dialog.open(DialogVinComponent, {
+
+openDialogVin(data: any) {
+  const config: MatDialogConfig = {
     hasBackdrop: true,
     autoFocus: true,
     disableClose: false,
     width: '36%',
-    height: '100%'
-  });
+    height: '100%',
+    // data: { vehVin }
+  };
+  this.dialogVinRef = this.dialog.open(DialogVinComponent, config);
+  this.dialogVinRef.componentInstance.data = {
+    vehVin: data.vehVin,
+    vehYear: data.vehYear,
+    vehMake: data.vehMake,
+    vehModel: data.vehModel,
+    vehColor: data.vehColor,
+    vehCondition: data.vehCondition,
+    vehDetail: data.vehDetail,
+    vehPrice: data.vehPrice,
+    vehImage: data.vehImage
+  };
   }
 
 }

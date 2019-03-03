@@ -83,7 +83,7 @@ export class DialogEntryComponent implements OnInit {
         this.vehicleform.value.vehModel,
         this.vehicleform.value.vehColor,
         this.vehicleform.value.vehCondition,
-        this.vehicleform.value.vehDetails,
+        this.vehicleform.value.vehDetail,
         this.vehicleform.value.vehPrice,
         this.vehicleform.value.vehImage
 
