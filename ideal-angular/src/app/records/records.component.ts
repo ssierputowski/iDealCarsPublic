@@ -262,8 +262,8 @@ getCustomer(): void {
       hasBackdrop: true,
       autoFocus: true,
       disableClose: false,
-      width: '350px',
-      height: 'auto'
+      width: '36%',
+      height: '100%'
     });
   }
 
@@ -284,8 +284,8 @@ getCustomer(): void {
     this.dialogCustEditRef.componentInstance.data = {
       firstName: data.firstName,
       lastName: data.lastName,
-      email: data.email,
-      phone: data.phone,
+      emailAddress: data.emailAddress,
+      phoneNumber: data.phoneNumber,
       // vehicleYear: data.vehicleYear,
       // vehicleMake: data.vehicleMake,
       // vehicleModel: data.vehicleModel,

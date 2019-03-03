@@ -31,7 +31,7 @@ export class DialogCustomerEditComponent implements OnInit {
     }
   ];
   phoneNumber: string;
-  email: string;
+  emailAddress: string;
   serviceRecords: [
     {
       servicePerformed: string,
@@ -58,14 +58,15 @@ export class DialogCustomerEditComponent implements OnInit {
   private route: ActivatedRoute) {
 
     this.editCust = this.formBuild.group({
-    customerName: new FormControl('', Validators.required),
-    customerEmail: new FormControl('', Validators.required),
-    customerPhone: new FormControl('', Validators.required),
-    vehicleYear: new FormControl('', Validators.required),
-    vehicleMake: new FormControl('', Validators.required),
-    vehicleModel: new FormControl('', Validators.required),
-    vehicleColor: new FormControl('', Validators.required),
-    customerRecords: new FormControl('', Validators.required),
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    phoneNumber: new FormControl('', Validators.required),
+    emailAddress: new FormControl('', Validators.required),
+    // vehicleYear: new FormControl('', Validators.required),
+    // vehicleMake: new FormControl('', Validators.required),
+    // vehicleModel: new FormControl('', Validators.required),
+    // vehicleColor: new FormControl('', Validators.required),
+    // customerRecords: new FormControl('', Validators.required),
     });
   }
 
@@ -79,14 +80,14 @@ export class DialogCustomerEditComponent implements OnInit {
         // only to see how far method gets
         // this is where currentInfo prints [object Object] in each form section
         // if I do this.currentInfo.vehVin and so on, none of the information is pulled from the table cell and returns empty input items
-        this.editCust.patchValue({customerName: this.data.customerName});
-        this.editCust.patchValue({customerEmail: this.data.customerEmail});
-        this.editCust.patchValue({customerPhone: this.data.customerPhone});
-        this.editCust.patchValue({vehicleYear: this.data.vehicleYear});
-        this.editCust.patchValue({vehicleMake: this.data.vehicleMake});
-        this.editCust.patchValue({vehicleModel: this.data.vehicleModel});
-        this.editCust.patchValue({vehicleColor: this.data.vehicleColor});
-        this.editCust.patchValue({customerRecords: this.data.customerRecords});
+        this.editCust.patchValue({firstName: this.data.firstName});
+        this.editCust.patchValue({lastName: this.data.lastName});
+        this.editCust.patchValue({phoneNumber: this.data.phoneNumber});
+        this.editCust.patchValue({emailAddress: this.data.emailAddress});
+        // this.editCust.patchValue({vehicleMake: this.data.vehicleMake});
+        // this.editCust.patchValue({vehicleModel: this.data.vehicleModel});
+        // this.editCust.patchValue({vehicleColor: this.data.vehicleColor});
+        // this.editCust.patchValue({customerRecords: this.data.customerRecords});
       }
     );
   }
@@ -103,18 +104,19 @@ export class DialogCustomerEditComponent implements OnInit {
       // vehDetail: value.vehDetail,
       // vehPrice: value.vehPrice,
       // vehImage: value.vehImage
-      customerName: value.customerName,
-      customerEmail: value.customerEmail,
-      customerPhone: value.customerPhone,
-      vehicleYear: value.vehicleYear,
-      vehicleMake: value.vehicleMake,
-      vehicleModel: value.vehicleModel,
-      vehicleColor: value.vehicleColor,
-      customerRecords: value.customerRecords
+      firstName: value.firstName,
+      lastName: value.lastName,
+      emailAddress: value.emailAddress,
+      phoneNumber: value.phoneNumber,
+      // vehicleYear: value.vehicleYear,
+      // vehicleMake: value.vehicleMake,
+      // vehicleModel: value.vehicleModel,
+      // vehicleColor: value.vehicleColor,
+      // customerRecords: value.customerRecords
     };
 
-    // need editVehicle method in vehicle.service.ts to save new information
-    // this.vehicleService.editVehicle(newValues);
+    // need editCustomer method in customer.service.ts to save new information
+    // this.customerService.editCustomer(newValues);
 
   }
   close() {

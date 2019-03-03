@@ -66,6 +66,7 @@ const routes: Routes = [
     RecordsComponent,
     TimeClockComponent,
     DialogCustomerEditComponent,
+    MessageBoardComponent
   ],
   imports: [
     BrowserAnimationsModule,
