@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
@@ -41,7 +41,7 @@ export class InventoryComponent implements OnInit {
      'vehModel',
      'vehCondition',
      'vehColor',
-     'vehDetails',
+     'vehDetail',
      'vehImage'
   ];
 
@@ -105,14 +105,27 @@ openDialogEntry() {
 // onRowClicked(row) {
 
 //   }
-openDialogVin() {
-  this.dialogVinRef = this.dialog.open(DialogVinComponent, {
+openDialogVin(data: any) {
+  const config: MatDialogConfig = {
     hasBackdrop: true,
     autoFocus: true,
     disableClose: false,
     width: '36%',
-    height: '100%'
-  });
+    height: '100%',
+    // data: { vehVin }
+  };
+  this.dialogVinRef = this.dialog.open(DialogVinComponent, config);
+  this.dialogVinRef.componentInstance.data = {
+    vehVin: data.vehVin,
+    vehYear: data.vehYear,
+    vehMake: data.vehMake,
+    vehModel: data.vehModel,
+    vehColor: data.vehColor,
+    vehCondition: data.vehCondition,
+    vehDetail: data.vehDetail,
+    vehPrice: data.vehPrice,
+    vehImage: data.vehImage,
+    };
   }
 
 }

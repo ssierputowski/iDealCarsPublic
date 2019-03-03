@@ -1,9 +1,19 @@
 <h2 mat-dialog-title>Edit Vehicle</h2>
 <mat-dialog-content class="mat-typography">
+
+    <!-- <mat-label>Vehicle VIN</mat-label>
+    <p class="vehicleVIN">{{ vehicleIDnum }}
+        <span contenteditable="true"></span>
+    </p>
+    <mat-label>Vehicle Year</mat-label>
+    <p class="vehicleYear">{{ vehicleYear }}
+        <span contenteditable="true"></span>
+    </p> -->
+
   <form [formGroup]="edit_form" (ngSubmit)="editVehicle(edit_form.value)">
     <mat-form-field>
       <mat-label>Vehicle VIN</mat-label>
-      <input matInput type="text" placeholder="Enter Vehicle VIN" formControlName="vehVin">
+     <input matInput type="text" placeholder="Enter Vehicle VIN" formControlName="vehVin">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Vehicle Year</mat-label>
