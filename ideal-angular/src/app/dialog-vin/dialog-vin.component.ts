@@ -30,7 +30,7 @@ export class DialogVinComponent implements OnInit {
   vehicleDPrice: number;
   vehicleDimage: string;
 
-  vehicleVIN = new FormControl( { value: 'this.vehicleDvin'});
+  // vehicleVIN = new FormControl( { value: 'this.vehicleDvin'});
 
 
   constructor(
@@ -38,7 +38,7 @@ export class DialogVinComponent implements OnInit {
     private vehicleService: VehicleService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuild: FormBuilder,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute) {// this passes the data from the inventory component to this dialog
       this.vehicleDvin = data;
       this.vehicleDYear = data;
       this.vehicleDmake = data;
@@ -64,7 +64,7 @@ export class DialogVinComponent implements OnInit {
 
 
   ngOnInit() {
-    this.vehicleDvin = this.data.vehVin;
+   /*  this.vehicleDvin = this.data.vehVin;
     this.vehicleDYear = this.data.vehYear;
     this.vehicleDmake = this.data.vehMake;
     this.vehicleDmodel = this.data.vehModel;
@@ -73,7 +73,7 @@ export class DialogVinComponent implements OnInit {
     this.vehicleDdetail = this.data.vehDetail;
     this.vehicleDPrice = this.data.vehPrice;
     this.vehicleDimage = this.data.vehImage;
-    console.log(this.vehicleDvin);
+    */ console.log(this.vehicleDvin);
 
     this.route.params.subscribe(
       param => {
@@ -95,7 +95,7 @@ export class DialogVinComponent implements OnInit {
 
   editVehicle(value) {
 
-    let newValues = {
+   /*  let newValues = {
       id: this.current_info.id,
       vehVin: value.vehVin,
       vehYear: value.vehYear,
@@ -106,7 +106,7 @@ export class DialogVinComponent implements OnInit {
       vehDetail: value.vehDetail,
       vehPrice: value.vehPrice,
       vehImage: value.vehImage
-    };
+    }; */
     // this.vehicleService.updateItem(newValues);
 
   }
@@ -114,5 +114,9 @@ export class DialogVinComponent implements OnInit {
     this.dialogRef.close();
 
   }
-
+// this for component ts file fo dialog
+onDelete(vehicleVin: string) {
+  this.vehicleService.deleteVehicle(vehicleVin);
+  this.dialogRef.close();
+}
 }

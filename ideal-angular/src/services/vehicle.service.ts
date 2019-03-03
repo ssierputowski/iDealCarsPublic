@@ -80,7 +80,7 @@ export class VehicleService {
         window.location.reload();
       });
   }
-// delete method for vehicles; used in dialog for vehicle display
+// delete method for vehicles; used in dialog for vehicle display,
   deleteVehicle(vehicleVin: string) {
     this.http.delete(BACKEND_URL + vehicleVin)
     .subscribe(() => {
