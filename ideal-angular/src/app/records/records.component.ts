@@ -261,7 +261,7 @@ getCustomer(): void {
       hasBackdrop: true,
       autoFocus: true,
       disableClose: false,
-      width: '350px',
+      width: '300px',
       height: 'auto'
     });
   }
