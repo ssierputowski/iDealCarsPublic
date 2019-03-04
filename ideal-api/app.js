@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const webpush = require('web-push');
 
 const userRoutes = require('./routes/user');
 const messageRoutes = require('./routes/message');
@@ -11,7 +12,7 @@ const app = express();
 //'mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test'
 //'mongodb+srv://EWD:zipGEoVPTIRJvIEh@cluster0-tcbpt.mongodb.net/node-angular?retryWrites=true'
 mongoose.connect(
-    'mongodb+srv://niraj:testing1' + '@ideal-cars-szrks.mongodb.net/test',
+    'mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test',
     { useNewUrlParser: true }
     )
     .then(() => {
@@ -23,6 +24,12 @@ mongoose.connect(
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+webpush.setVapidDetails(
+    'mailto:you@domain.com',
+    process.env.PUBLIC_VAPID,
+    process.env.PRIVATE_VAPID
+);
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

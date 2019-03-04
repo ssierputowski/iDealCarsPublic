@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000/api'
+  apiUrl: 'http://localhost:3000/api',
+  vapidPublicKey: 'BCx3jeo-HBfi3rKNfv0sK25LIusAgh7U-_6QNr9-plhQEwo_kIECrn5MsVRnQG23OdQyMxssYlHLPU1WhddCfRQ'
 };
 
 /*

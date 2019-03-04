@@ -23,6 +23,8 @@ import {
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -43,6 +45,8 @@ import { TimeClockComponent } from './time-clock/time-clock.component';
 
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth-interceptor';
+
+import { NotificationService } from '../services/notification.service';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -92,6 +96,7 @@ const routes: Routes = [
     NgxMaskModule.forRoot(),
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   entryComponents: [
     DialogEntryComponent,
@@ -101,6 +106,7 @@ const routes: Routes = [
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    NotificationService
   ],
   bootstrap: [AppComponent],
 })

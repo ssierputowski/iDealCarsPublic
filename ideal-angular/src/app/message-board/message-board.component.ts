@@ -10,7 +10,7 @@ export class MessageBoardComponent implements OnInit {
 
   constructor(private messageService: MessageService) { }
 
-  private messages: any = [];
+  messages: any = [];
 
   ngOnInit() {
     this.messageService.getMessages();

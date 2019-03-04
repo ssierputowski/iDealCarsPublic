@@ -33,7 +33,7 @@ export class ManagerActionsComponent implements OnInit {
 
   imagePreview: string;
 
-  private users: any = [];
+  users: any = [];
 
   ngOnInit() {
     this.employeeForm = new FormGroup({
