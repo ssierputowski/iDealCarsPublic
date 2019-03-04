@@ -14,8 +14,7 @@
         <button mat-raised-button color="accent" (click)="openActionsDialog()" *ngIf="userJobRole === 'MANAGER'">MANAGER ACTIONS</button>
       </div>
       <div class="col-6">
-        <h1>Message Board</h1>
-        <hr>
+        <app-message-board></app-message-board>
       </div>
       <div class="col-3">
         <app-time-clock></app-time-clock>

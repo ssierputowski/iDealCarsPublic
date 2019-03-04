@@ -83,7 +83,7 @@ getVehicleByID(id: string) {
       .subscribe((resData) => {
         const id = resData.vehicleID;
         vehicleData.id = id;
-        window.location.reload();
+        this.getVehicles();
       });
   }
   // for editing

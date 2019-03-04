@@ -1,21 +1,11 @@
-h2 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  text-align: center;
-  color: #1972a4 !important;
-  margin-bottom: 1rem;
-}
-
-button {
-  color: #73f7dd;
-  background-color: grey;
-}
-
 form {
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
+}
 
+mat-dialog-content {
+  height: 100%;
 }
 .image-preview {
   height: 5rem;

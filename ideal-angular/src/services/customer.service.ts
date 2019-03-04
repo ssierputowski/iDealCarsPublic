@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 
 const BACKEND_URL = environment.apiUrl + '/customers';
 
+
 @Injectable({providedIn: 'root'})
 export class CustomerService {
   private customers: Customer[] = [];
@@ -29,7 +30,7 @@ export class CustomerService {
         return {
           customers: customerData.customers.map(customer => {
             return {
-              customerId: customer.customerId,
+            //  customerId: customer.customerId,
               firstName: customer.firstName,
               lastName: customer.lastName,
              // vehicleYear: customer.vehicleYear,
@@ -40,7 +41,11 @@ export class CustomerService {
              // vehicleDetails: customer.vehicleDetails,
              // vehicleImage: customer.vehicleImage,
               phoneNumber: customer.phoneNumber,
-              email: customer.email,
+              emailAddress: customer.emailAddress,
+              address: customer.address,
+              city: customer.city,
+              state: customer.state,
+              zipCode: customer.zipCode,
              // servicePerformed: customer.servicePerformed,
              // serviceDate: customer.serviceDate,
              // dateReturned: customer.dateReturned,
@@ -64,10 +69,10 @@ export class CustomerService {
   }
 
   addCustomer(
-    customerId: string,
+   // customerId: string,
     firstName: string,
     lastName: string,
-    vehicleInfo: [
+    /*vehicleInfo: [
       {
         vehicleYear: number,
         vehicleMake: string,
@@ -77,10 +82,14 @@ export class CustomerService {
         vehicleDetails: string,
         vehicleImage: string,
       }
-    ],
+    ], */
     phoneNumber: string,
-    email: string,
-    serviceRecords: [
+    emailAddress: string,
+    address: string,
+    city: string,
+    state: string,
+    zipCode: number,
+   /* serviceRecords: [
       {
         servicePerformed: string,
         serviceDate: string,
@@ -90,21 +99,23 @@ export class CustomerService {
         servicePrice: number,
         paymentReceived: boolean,
     }
-  ],
+  ], */
   ) {
     const customerData: Customer = {
-      customerId: customerId,
+    //  customerId: customerId,
       firstName: firstName,
       lastName: lastName,
       phoneNumber: phoneNumber,
-      email: email,
-      vehicleInfo: vehicleInfo,
-      serviceRecords: serviceRecords,
+      emailAddress: emailAddress,
+      address: address,
+      city: city,
+      state: state,
+      zipCode: zipCode,
     };
     this.http
       .post<{message: string, customer: Customer}>(BACKEND_URL, customerData)
       .subscribe((resData) => {
-        window.location.reload();
+        this.getCustomers();
       });
   }
 }

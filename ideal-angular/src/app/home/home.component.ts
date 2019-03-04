@@ -20,12 +20,12 @@ export class HomeComponent implements OnInit {
     private userService: UserService
   ) { }
 
-  private employeeId: string;
-  private userImg: string;
-  private userFirstName: string;
-  private userLastName: string;
-  private userEmail: string;
-  private userJobRole: string;
+  employeeId: string;
+  userImg: string;
+  userFirstName: string;
+  userLastName: string;
+  userEmail: string;
+  userJobRole: string;
 
   ngOnInit() {
     this.titleService.setTitle('Home | iDealCars');
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
     this.dialog.open(ManagerActionsComponent, {
       disableClose: true,
       minWidth: '50rem',
-      height: '70rem',
+      height: '75rem',
     });
   }
 }

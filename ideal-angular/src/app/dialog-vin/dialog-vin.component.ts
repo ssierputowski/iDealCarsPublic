@@ -14,11 +14,12 @@ import { elementContainerStart } from '@angular/core/src/render3';
   styleUrls: ['./dialog-vin.component.css']
 })
 export class DialogVinComponent implements OnInit {
-
-  newValues = [];
-  current_info: any;
+  editClicked = false;
+  currentInfo: any;
   edit_form: FormGroup;
   dataSource: MatTableDataSource<Vehicle>;
+  newValues = [];
+  current_info: any;
   public dialogRef: MatDialogRef<DialogVinComponent>;
  /*  vehicleDvin: string;
   vehicleDYear: number;
@@ -34,11 +35,10 @@ export class DialogVinComponent implements OnInit {
   private vehicleID: string;
   // vehicleVIN = new FormControl( { value: 'this.vehicleDvin'});
 
-
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
     private vehicleService: VehicleService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuild: FormBuilder,
     private route: ActivatedRoute) {// this passes the data from the inventory component to this dialog
      /*  this.vehicleDvin = data;
@@ -52,18 +52,17 @@ export class DialogVinComponent implements OnInit {
       this.vehicleDimage = data;
  */
       this.edit_form = this.formBuild.group({
-        'vehVin': new FormControl(null, { validators: [Validators.required] }),
-        'vehYear': new FormControl(null, { validators: [Validators.required] }),
-        'vehMake': new FormControl(null, { validators: [Validators.required] }),
-        'vehModel': new FormControl(null, { validators: [Validators.required] }),
-        'vehColor': new FormControl(null, { validators: [Validators.required] }),
-        'vehCondition': new FormControl(null, { validators: [Validators.required] }),
-        'vehDetail': new FormControl(null, { validators: [Validators.required] }),
-        'vehPrice': new FormControl(null, { validators: [Validators.required] }),
-        'vehImage': new FormControl(null, { validators: [Validators.required] }),
+        vehVin: new FormControl('', Validators.required),
+        vehYear: new FormControl('', Validators.required),
+        vehMake: new FormControl('', Validators.required),
+        vehModel: new FormControl('', Validators.required),
+        vehColor: new FormControl('', Validators.required),
+        vehCondition: new FormControl('', Validators.required),
+        vehDetail: new FormControl('', Validators.required),
+        vehPrice: new FormControl('', Validators.required),
+        vehImage: new FormControl('', Validators.required),
       });
      }
-
 
   ngOnInit() {
     console.log(this.data.id);
@@ -76,11 +75,13 @@ export class DialogVinComponent implements OnInit {
         this.vehicle = this.vehicleService.getVehicleByID(this.vehicleID);
       } else { this.vehicleID = null; }
     });
-
     this.route.params.subscribe(
       param => {
-        this.current_info = param;
-
+        this.currentInfo = param;
+        console.log(this.edit_form);
+        // only to see how far method gets
+        // this is where currentInfo prints [object Object] in each form section
+        // if I do this.currentInfo.vehVin and so on, none of the information is pulled from the table cell and returns empty
         this.edit_form.patchValue({vehVin: this.data.vehVin});
         this.edit_form.patchValue({vehYear: this.data.vehYear});
         this.edit_form.patchValue({vehMake: this.data.vehMake});
@@ -90,15 +91,13 @@ export class DialogVinComponent implements OnInit {
         this.edit_form.patchValue({vehDetail: this.data.vehDetail});
         this.edit_form.patchValue({vehPrice: this.data.vehPrice});
         this.edit_form.patchValue({vehImage: this.data.vehImage});
-
       }
     );
   }
 
   editVehicle(value) {
-
-   /*  let newValues = {
-      id: this.current_info.id,
+    const newValues = {
+      id: this.currentInfo.id,
       vehVin: value.vehVin,
       vehYear: value.vehYear,
       vehMake: value.vehMake,
@@ -108,14 +107,19 @@ export class DialogVinComponent implements OnInit {
       vehDetail: value.vehDetail,
       vehPrice: value.vehPrice,
       vehImage: value.vehImage
-    }; */
-    // this.vehicleService.updateItem(newValues);
-
+    };
+    // need editVehicle method in vehicle.service.ts to save new information
+    // this.vehicleService.editVehicle(newValues);
   }
+
   close() {
     this.dialogRef.close();
-
   }
+
+  print(currentInfo: any) {
+    this.print(currentInfo);
+  }
+  
 // this for delete
 onDelete(vehicleID: string) {
   // vehicleVin = this.data.vehVin;

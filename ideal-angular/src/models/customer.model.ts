@@ -1,8 +1,8 @@
 export interface Customer {
-  customerId: string;
+ // customerId: string;
   firstName: string;
   lastName: string;
-  vehicleInfo: [
+  /*vehicleInfo: [
     {
       vehicleYear: number,
       vehicleMake: string,
@@ -12,10 +12,14 @@ export interface Customer {
       vehicleDetails: string,
       vehicleImage: string
     }
-  ];
+  ]; */
   phoneNumber: string;
-  email: string;
-  serviceRecords: [
+  emailAddress: string;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: number;
+  /* serviceRecords: [
     {
       servicePerformed: string,
       serviceDate: string,
@@ -25,5 +29,5 @@ export interface Customer {
       servicePrice: number,
       paymentReceived: boolean
     }
-  ];
+  ]; */
 }
