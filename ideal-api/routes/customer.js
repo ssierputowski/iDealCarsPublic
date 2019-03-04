@@ -10,7 +10,11 @@ router.post('', (req, res, next) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         phoneNumber: req.body.phoneNumber,
-        emailAddress: req.body.emailAddress
+        emailAddress: req.body.emailAddress,
+        address: req.body.address,
+        city: req.body.city,
+        state: req.body.state,
+        zipCode: req.body.zipCode,
     });
     customer.save().then(newCustomer => {
         res.status(201).json({

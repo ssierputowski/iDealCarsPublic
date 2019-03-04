@@ -38,6 +38,7 @@ export class RecordsComponent implements OnInit {
     'customerName',
     'customerEmail',
     'customerPhone',
+    'customerAddress',
   ];
 
   /*
@@ -60,6 +61,10 @@ export class RecordsComponent implements OnInit {
     lastName: 'Mathis',
     phone: '(843) 323-7261',
     emailAddress: 'jerrodmathis95@gmail.com',
+    address: '300 Main St.',
+    city: 'Columbia',
+    state: 'SC',
+    zipCode: '29201',
   }
 ];
 
@@ -243,6 +248,18 @@ export class RecordsComponent implements OnInit {
     'emailAddress' : new FormControl (null, {
       validators: [Validators.required]
     }),
+    'address' : new FormControl (null, {
+      validators: [Validators.required]
+    }),
+    'city' : new FormControl (null, {
+      validators: [Validators.required]
+    }),
+    'state' : new FormControl (null, {
+      validators: [Validators.required]
+    }),
+    'zipCode' : new FormControl (null, {
+      validators: [Validators.required]
+    })
   });
   this.getCustomer();
 }
