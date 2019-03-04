@@ -3,34 +3,29 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-2 search-container">
-        <form [formGroup]="searchForm"> <!-- remove form to even out input fields  -->
-          <mat-form-field color="accent">
+        <form> <!-- remove form to even out input fields  -->
+          <mat-form-field class = "filter" color="accent">
             <mat-label>Year</mat-label>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Enter Vehicle Year"
-              formControlName="Year">
+            <input matInput [formControl]="Year">
           </mat-form-field>
-          <mat-form-field color="accent">
+          <mat-form-field class = "filter" color="accent">
             <mat-label>Make</mat-label>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Enter Vehicle Make"
-              formControlName="Make">
+            <input matInput [formControl]="Make">
           </mat-form-field>
-          <mat-form-field color="accent">
+          <mat-form-field class = "filter" color="accent">
             <mat-label>Model</mat-label>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Enter Vehicle Model"
-              formControlName="Model">
+            <input matInput [formControl]="Model">
           </mat-form-field>
-          <mat-form-field color="accent">
+          <mat-form-field class = "filter" color="accent">
             <mat-label>Color</mat-label>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Enter Vehicle Color"
-              formControlName="Color">
+            <input matInput [formControl]="Color">
           </mat-form-field>
-          <mat-form-field color="accent">
+          <mat-form-field class = "filter" color="accent">
             <mat-label>Condition</mat-label>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Enter Vehicle Condition"
-              formControlName="Color">
+            <input matInput [formControl]="Condition">
           </mat-form-field>
         </form>
-        <button mat-raised-button color="accent">SEARCH</button>
+        <button mat-raised-button color="accent" type ="submit">SEARCH</button>
         <mat-divider></mat-divider>
         <mat-divider></mat-divider>
         <mat-divider></mat-divider>

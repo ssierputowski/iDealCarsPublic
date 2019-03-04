@@ -3,3 +3,8 @@ p {
   margin: 0;
   padding: .5rem;
 }
+
+mat-card {
+  max-height: 75rem;
+  overflow: auto;
+}

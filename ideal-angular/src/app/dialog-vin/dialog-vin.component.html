@@ -49,7 +49,11 @@
     </mat-form-field>
   </form>
 </mat-dialog-content>
+<!-- <mat-label>Vehicle VIN</mat-label>
+<p class="vehicleVIN">{{ vehicleDvin }}</p>
+ -->
 <mat-dialog-actions align="end">
     <button mat-raised-button class="submit-btn" type="submit" color="accent">EDIT</button>
     <button mat-raised-button mat-dialog-close color="primary">CANCEL</button>
+    <button mat-button (click)="onDelete(vehVin)">DELETE</button>
 </mat-dialog-actions>
