@@ -33,19 +33,15 @@
         <mat-label>Vehicle Price</mat-label>
         <input matInput type = "text" formControlName="vehPrice">
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Vehicle Image</mat-label>
         <div>
-            <button mat-stroked-button type="button" (click)="filePicker.click()">Choose Image</button>
-            <span style="margin-left: .5rem;">{{filePicker.value}}</span>
+          <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
             <input type="file" #filePicker (change)="onImagePicked($event)">
-          </div>
-          <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && vehicleform.get('image').valid">
-            <img [src]="imagePreview" [alt]="vehicleform.value.vehMake &&vehicleform.value.vehModel">
-          </div>
+        </div>
+        <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+          <img [src]="imagePreview" [alt]="vehicleform.value.vehModel">
+        </div>
         <input matInput type = "text" formControlName="vehImage">
-      </mat-form-field>
- </form>
+       </form>
    </mat-dialog-content>
   <mat-dialog-actions align="end">
       <button mat-raised-button type="submit">Upload Vehicle</button>

@@ -4,9 +4,9 @@ import { Vehicle } from '../../models/vehicle.model';
 import { FormGroup, FormControl, Validators, FormBuilder, FormGroupDirective } from '@angular/forms';
 import { VehicleService } from '../../services/vehicle.service';
 import { Subscription } from 'rxjs';
-import { DialogEntryComponent } from '../dialog-entry/dialog-entry.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
+import { elementContainerStart } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-dialog-vin',
@@ -20,7 +20,7 @@ export class DialogVinComponent implements OnInit {
   edit_form: FormGroup;
   dataSource: MatTableDataSource<Vehicle>;
   public dialogRef: MatDialogRef<DialogVinComponent>;
-  vehicleDvin: string;
+ /*  vehicleDvin: string;
   vehicleDYear: number;
   vehicleDmake: string;
   vehicleDmodel: string;
@@ -28,8 +28,10 @@ export class DialogVinComponent implements OnInit {
   vehicleDcondition: string;
   vehicleDdetail: string;
   vehicleDPrice: number;
-  vehicleDimage: string;
-
+  vehicleDimage: string; */
+  private mode: 'edit';
+  private vehicle: Vehicle;
+  private vehicleID: string;
   // vehicleVIN = new FormControl( { value: 'this.vehicleDvin'});
 
 
@@ -39,7 +41,7 @@ export class DialogVinComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuild: FormBuilder,
     private route: ActivatedRoute) {// this passes the data from the inventory component to this dialog
-      this.vehicleDvin = data;
+     /*  this.vehicleDvin = data;
       this.vehicleDYear = data;
       this.vehicleDmake = data;
       this.vehicleDmodel = data;
@@ -48,7 +50,7 @@ export class DialogVinComponent implements OnInit {
       this.vehicleDdetail = data;
       this.vehicleDPrice = data;
       this.vehicleDimage = data;
-
+ */
       this.edit_form = this.formBuild.group({
         'vehVin': new FormControl(null, { validators: [Validators.required] }),
         'vehYear': new FormControl(null, { validators: [Validators.required] }),
@@ -64,16 +66,16 @@ export class DialogVinComponent implements OnInit {
 
 
   ngOnInit() {
-   /*  this.vehicleDvin = this.data.vehVin;
-    this.vehicleDYear = this.data.vehYear;
-    this.vehicleDmake = this.data.vehMake;
-    this.vehicleDmodel = this.data.vehModel;
-    this.vehicleDColor = this.data.vehColor;
-    this.vehicleDcondition = this.data.vehCondition;
-    this.vehicleDdetail = this.data.vehDetail;
-    this.vehicleDPrice = this.data.vehPrice;
-    this.vehicleDimage = this.data.vehImage;
-    */ console.log(this.vehicleDvin);
+    console.log(this.data.id);
+    console.log(this.data);
+
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      if (paramMap.has('id')) {
+        this.mode = 'edit';
+        this.vehicleID = paramMap.get('id');
+        this.vehicle = this.vehicleService.getVehicleByID(this.vehicleID);
+      } else { this.vehicleID = null; }
+    });
 
     this.route.params.subscribe(
       param => {
@@ -114,9 +116,10 @@ export class DialogVinComponent implements OnInit {
     this.dialogRef.close();
 
   }
-// this for component ts file fo dialog
-onDelete(vehicleVin: string) {
-  this.vehicleService.deleteVehicle(vehicleVin);
-  this.dialogRef.close();
+// this for delete
+onDelete(vehicleID: string) {
+  // vehicleVin = this.data.vehVin;
+  this.vehicleService.deleteVehicle(vehicleID);
+  // this.dialogRef.close();
 }
 }
