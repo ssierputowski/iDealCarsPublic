@@ -43,10 +43,8 @@ export class InventoryComponent implements OnInit {
      'vehMake',
      'vehModel',
      'vehColor',
-     'vehCondition',
      'vehDetail',
      'vehPrice',
-     'vehImage'
   ];
   filterValues = {
     vehYear: '',
@@ -154,7 +152,7 @@ openDialogEntry() {
 // onRowClicked(row) {
 
 //   }
-
+  
 openDialogVin(data: any) {
   const config: MatDialogConfig = {
     hasBackdrop: true,
@@ -174,8 +172,8 @@ openDialogVin(data: any) {
     vehCondition: data.vehCondition,
     vehDetail: data.vehDetail,
     vehPrice: data.vehPrice,
-    vehImage: data.vehImage
-  };
+    vehImage: data.vehImage,
+    };
   }
 
 }

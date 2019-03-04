@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Edit Customer</h2>
+<mat-dialog-content class="mat-typography">
+
+  <!-- <mat-label>Vehicle VIN</mat-label>
+    <p class="vehicleVIN">{{ vehicleIDnum }}
+        <span contenteditable="true"></span>
+    </p>
+    <mat-label>Vehicle Year</mat-label>
+    <p class="vehicleYear">{{ vehicleYear }}
+        <span contenteditable="true"></span>
+    </p> -->
+
+  <form [formGroup]="editCust" (ngSubmit)="editCustomer(editCust.value)">
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput type="text" placeholder="Enter First Name" formControlName="firstName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput type="text" placeholder="Enter Last Name" formControlName="lastName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Phone Number</mat-label>
+      <input matInput type="text" placeholder="Enter Phone Number" mask='(000) 000-0000' formControlName="phoneNumber">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="text" placeholder="Enter Email" formControlName="emailAddress">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button class="submit-btn" type="submit" color="accent">EDIT</button>
+  <button mat-raised-button mat-dialog-close color="primary">CANCEL</button>
+</mat-dialog-actions>

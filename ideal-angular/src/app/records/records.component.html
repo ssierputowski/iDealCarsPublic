@@ -12,11 +12,11 @@
         <button mat-raised-button color="accent" (click)="openDialogEntry()">Add Customer</button>
       </div>
       <div class="col-10 records-container">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="overflow: auto; width: 100%;">
           <!-- Customer Name Column -->
           <ng-container matColumnDef="customerName">
             <th mat-header-cell *matHeaderCellDef>Name</th>
-            <td class="customerSelect" mat-cell *matCellDef="let element" (click)="print(element.customerId)">
+            <td class="customerSelect" mat-cell *matCellDef="let element">
               {{ element.lastName }}, {{ element.firstName }}
             </td>
           </ng-container>
@@ -28,10 +28,10 @@
           <!-- Customer Phone Column -->
           <ng-container matColumnDef="customerPhone">
             <th mat-header-cell *matHeaderCellDef>Phone Number</th>
-            <td mat-cell *matCellDef="let element">{{ element.phoneNumber }}</td>
+            <td mat-cell *matCellDef="let element">{{ element.phoneNumber | mask: '(000) 000-0000' }}</td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openCustEdit(row)"></tr>
         </table>
       </div>
     </div>
@@ -151,7 +151,7 @@
             </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="openCustEdit(row)"></tr>
         </table>
       </div>
     </div>

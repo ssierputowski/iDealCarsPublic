@@ -45,6 +45,7 @@ import { TimeClockComponent } from './time-clock/time-clock.component';
 
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { DialogCustomerEditComponent } from './dialog-customer-edit/dialog-customer-edit.component';
 
 import { NotificationService } from '../services/notification.service';
 
@@ -69,7 +70,8 @@ const routes: Routes = [
     ManagerActionsComponent,
     RecordsComponent,
     TimeClockComponent,
-    MessageBoardComponent,
+    DialogCustomerEditComponent,
+    MessageBoardComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -103,7 +105,8 @@ const routes: Routes = [
     DialogEntryComponent,
     ManagerActionsComponent,
     DialogVinComponent,
-    DialogEntryCustomerComponent
+    DialogEntryCustomerComponent,
+    DialogCustomerEditComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
