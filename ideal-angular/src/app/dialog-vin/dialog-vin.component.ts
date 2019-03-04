@@ -20,8 +20,6 @@ export class DialogVinComponent implements OnInit {
   dataSource: MatTableDataSource<Vehicle>;
   newValues = [];
   current_info: any;
-  edit_form: FormGroup;
-  dataSource: MatTableDataSource<Vehicle>;
   public dialogRef: MatDialogRef<DialogVinComponent>;
   vehicleDvin: string;
   vehicleDYear: number;
@@ -39,7 +37,6 @@ export class DialogVinComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
     private vehicleService: VehicleService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuild: FormBuilder,
     private route: ActivatedRoute) {// this passes the data from the inventory component to this dialog
       this.vehicleDvin = data;
@@ -103,11 +100,11 @@ export class DialogVinComponent implements OnInit {
     // need editVehicle method in vehicle.service.ts to save new information
     // this.vehicleService.editVehicle(newValues);
   }
-  
+
   close() {
     this.dialogRef.close();
   }
-  
+
   print(currentInfo: any) {
     this.print(currentInfo);
   }
