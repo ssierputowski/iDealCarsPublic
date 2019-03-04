@@ -42,6 +42,7 @@ export class InventoryComponent implements OnInit {
      'vehCondition',
      'vehColor',
      'vehDetail',
+     'vehPrice',
      'vehImage'
   ];
 
