@@ -32,7 +32,7 @@ export class DialogVinComponent implements OnInit {
   vehicleDimage: string; */
   private mode: 'edit';
   private vehicle: Vehicle;
-  private vehicleID: string;
+  vehicleID: string;
   // vehicleVIN = new FormControl( { value: 'this.vehicleDvin'});
 
   constructor(
@@ -119,7 +119,7 @@ export class DialogVinComponent implements OnInit {
   print(currentInfo: any) {
     this.print(currentInfo);
   }
-  
+
 // this for delete
 onDelete(vehicleID: string) {
   // vehicleVin = this.data.vehVin;
