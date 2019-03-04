@@ -66,5 +66,5 @@ ideal-angular/src/app/auth/dialog-entry-customer/dialog-entry.
 ideal-angular/src/app/auth/dialog-entry-customer/dialog-entry-customer.component.ts
 ideal-angular/src/app/auth/dialog-entry-customer/dialog-entry-customer.spec.ts
 
-# Lock files
+# Lock Files
 *-lock.json

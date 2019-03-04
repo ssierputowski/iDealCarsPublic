@@ -16,14 +16,14 @@ export class TimeClockComponent implements OnInit {
     }, 60);
   }
 
-  private employeeId: string;
-  private sunday: any;
-  private monday: any;
-  private tuesday: any;
-  private wednesday: any;
-  private thursday: any;
-  private friday: any;
-  private saturday: any;
+  employeeId: string;
+  sunday: any;
+  monday: any;
+  tuesday: any;
+  wednesday: any;
+  thursday: any;
+  friday: any;
+  saturday: any;
 
   ngOnInit() {
     this.employeeId = localStorage.getItem('employeeId');
