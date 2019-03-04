@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Add Customer</h2>
-  <mat-dialog-content>
-      <form [formGroup]="customerform" (ngSubmit)="saveCustomer()" #addCustomerForm="ngForm">
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="customerform" (ngSubmit)="saveCustomer()" #addCustomerForm="ngForm">
     <mat-form-field color="accent">
       <mat-label>First Name</mat-label>
       <input matInput type="text" placeholder="Enter First Name" formControlName="firstName">
@@ -17,7 +17,7 @@
     </mat-form-field>
     <mat-form-field color="accent">
         <mat-label>Email</mat-label>
-        <input matInput type = "text" placeholder = "Enter Email" formControlName="email">
+        <input matInput type = "text" placeholder = "Enter Email" formControlName="emailAddress">
       </mat-form-field>
     <mat-form-field color="accent">
         <mat-label>Address</mat-label>

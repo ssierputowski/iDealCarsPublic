@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CustomerService } from 'src/services/customer.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Customer } from '../../models/customer.model';
 import { Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material';
 import { DialogEntryCustomerComponent } from '../dialog-entry-customer/dialog-entry-customer.component';
+import { DialogCustomerEditComponent } from '../dialog-customer-edit/dialog-customer-edit.component';
 
 
 @Component({
@@ -20,6 +20,7 @@ import { DialogEntryCustomerComponent } from '../dialog-entry-customer/dialog-en
 export class RecordsComponent implements OnInit {
 
   dialogEntryRef: MatDialogRef<DialogEntryCustomerComponent>;
+  dialogCustEditRef: MatDialogRef<DialogCustomerEditComponent>;
   searchForm: FormGroup;
   isLoading = false;
   checked = false;
@@ -286,4 +287,27 @@ getCustomer(): void {
   print(id: string) {
     alert(id);
   }
+
+  openCustEdit(data: any) {
+    const config: MatDialogConfig = {
+      hasBackdrop: true,
+      autoFocus: true,
+      disableClose: false,
+      width: '36%',
+      height: '100%',
+      // data: { vehVin }
+    };
+    this.dialogCustEditRef = this.dialog.open(DialogCustomerEditComponent, config);
+    this.dialogCustEditRef.componentInstance.data = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      emailAddress: data.emailAddress,
+      phoneNumber: data.phoneNumber,
+      // vehicleYear: data.vehicleYear,
+      // vehicleMake: data.vehicleMake,
+      // vehicleModel: data.vehicleModel,
+      // vehicleColor: data.vehicleColor,
+      // customerRecords: data.customerRecords
+      };
+    }
 }

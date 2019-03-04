@@ -1,9 +1,19 @@
 <h2 mat-dialog-title>Edit Vehicle</h2>
 <mat-dialog-content class="mat-typography">
+
+    <!-- <mat-label>Vehicle VIN</mat-label>
+    <p class="vehicleVIN">{{ vehicleIDnum }}
+        <span contenteditable="true"></span>
+    </p>
+    <mat-label>Vehicle Year</mat-label>
+    <p class="vehicleYear">{{ vehicleYear }}
+        <span contenteditable="true"></span>
+    </p> -->
+
   <form [formGroup]="edit_form" (ngSubmit)="editVehicle(edit_form.value)">
     <mat-form-field>
       <mat-label>Vehicle VIN</mat-label>
-      <input matInput type="text" placeholder="Enter Vehicle VIN" formControlName="vehVin">
+     <input matInput type="text" placeholder="Enter Vehicle VIN" formControlName="vehVin">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Vehicle Year</mat-label>
@@ -31,7 +41,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Vehicle Price</mat-label>
-      <input matInput type="text" placeholder="Enter Vehicle Price" formControlName="vehPrice">
+      <input matInput [value]="edit_form.get('vehPrice').value | currency" type="text" placeholder="Enter Vehicle Price" formControlName="vehPrice">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Vehicle Image</mat-label>
@@ -39,7 +49,11 @@
     </mat-form-field>
   </form>
 </mat-dialog-content>
+<!-- <mat-label>Vehicle VIN</mat-label>
+<p class="vehicleVIN">{{ vehicleDvin }}</p>
+ -->
 <mat-dialog-actions align="end">
     <button mat-raised-button class="submit-btn" type="submit" color="accent">EDIT</button>
     <button mat-raised-button mat-dialog-close color="primary">CANCEL</button>
+    <button mat-button (click)="onDelete(vehVin)">DELETE</button>
 </mat-dialog-actions>

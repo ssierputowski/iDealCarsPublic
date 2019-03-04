@@ -23,6 +23,8 @@ import {
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -43,12 +45,16 @@ import { TimeClockComponent } from './time-clock/time-clock.component';
 
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { DialogCustomerEditComponent } from './dialog-customer-edit/dialog-customer-edit.component';
+
+import { NotificationService } from '../services/notification.service';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'records', component: RecordsComponent, canActivate: [AuthGuard] },
   { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
+  // not sure of name here { path: 'edit/: vehVin', component: vehicleDisplayComponent}
 ];
 
 @NgModule({
@@ -64,7 +70,8 @@ const routes: Routes = [
     ManagerActionsComponent,
     RecordsComponent,
     TimeClockComponent,
-    MessageBoardComponent,
+    DialogCustomerEditComponent,
+    MessageBoardComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -92,15 +99,18 @@ const routes: Routes = [
     NgxMaskModule.forRoot(),
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   entryComponents: [
     DialogEntryComponent,
     ManagerActionsComponent,
     DialogVinComponent,
-    DialogEntryCustomerComponent
+    DialogEntryCustomerComponent,
+    DialogCustomerEditComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    NotificationService
   ],
   bootstrap: [AppComponent],
 })
