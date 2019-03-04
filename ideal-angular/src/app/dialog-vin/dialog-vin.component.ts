@@ -15,16 +15,17 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./dialog-vin.component.css']
 })
 export class DialogVinComponent implements OnInit {
-  // vehicleVin: string;
-  // vehicleYear: Number;
-  // vehicleMake: string;
-  // vehicleModel: string;
-  // vehicleColor: string;
-  // vehicleCondition: string;
-  // vehicleDetail: string;
-  // vehiclePrice: Number;
-  // vehicleImage: string;
+  vehicleVin: string;
+  vehicleYear: Number;
+  vehicleMake: string;
+  vehicleModel: string;
+  vehicleColor: string;
+  vehicleCondition: string;
+  vehicleDetail: string;
+  vehiclePrice: Number;
+  vehicleImage: string;
 
+  editClicked = false;
   currentInfo: any;
   edit_form: FormGroup;
   dataSource: MatTableDataSource<Vehicle>;
