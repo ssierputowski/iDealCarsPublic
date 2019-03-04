@@ -49,6 +49,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'records', component: RecordsComponent, canActivate: [AuthGuard] },
   { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
+  // not sure of name here { path: 'edit/: vehVin', component: vehicleDisplayComponent}
 ];
 
 @NgModule({

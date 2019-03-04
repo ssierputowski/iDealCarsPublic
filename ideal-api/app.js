@@ -45,4 +45,13 @@ app.use('/api/messages', messageRoutes);
 app.use('/api/customers', customerRoutes);
 app.use('/api/vehicles', vehicleRoutes);
 
+//Delete method for Vehicle Inventory, node.js code-->may not need this OPTIONS above
+app.delete('/api/vehicle/:vehVin', (req, res, next) => {
+    Vehicle.deleteOne({vehVin: req.params.vehVin}).then(result => {//Vehicle should be of the model here
+        console.log(result);
+        res.status(200).json({ message: "Vehicle Deleted!"});
+    });
+});
 module.exports = app;
+
+
