@@ -137,30 +137,18 @@ tableFilter(): (data: any, filter: string) => boolean {
   };
   return filterFunction;
 }
+
 openDialogEntry() {
   this.dialogEntryRef = this.dialog.open(DialogEntryComponent, {
-    hasBackdrop: true,
-     // autoFocus: false,
     disableClose: true,
-    width: '36%',
-    height: '100%'
+    minWidth: '50rem',
   });
 }
-// print(id: any) {
-//     alert(id);
-//   }
-// onRowClicked(row) {
 
-//   }
-  
 openDialogVin(data: any) {
   const config: MatDialogConfig = {
-    hasBackdrop: true,
-    autoFocus: true,
-    disableClose: false,
-    width: '36%',
-    height: '100%',
-    // data: { vehVin }
+    disableClose: true,
+    minWidth: '50rem',
   };
   this.dialogVinRef = this.dialog.open(DialogVinComponent, config);
   this.dialogVinRef.componentInstance.data = {
