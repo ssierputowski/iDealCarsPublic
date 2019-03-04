@@ -42,6 +42,10 @@ export class CustomerService {
              // vehicleImage: customer.vehicleImage,
               phoneNumber: customer.phoneNumber,
               emailAddress: customer.emailAddress,
+              address: customer.address,
+              city: customer.city,
+              state: customer.state,
+              zipCode: customer.zipCode,
              // servicePerformed: customer.servicePerformed,
              // serviceDate: customer.serviceDate,
              // dateReturned: customer.dateReturned,
@@ -81,6 +85,10 @@ export class CustomerService {
     ], */
     phoneNumber: string,
     emailAddress: string,
+    address: string,
+    city: string,
+    state: string,
+    zipCode: number,
    /* serviceRecords: [
       {
         servicePerformed: string,
@@ -99,6 +107,10 @@ export class CustomerService {
       lastName: lastName,
       phoneNumber: phoneNumber,
       emailAddress: emailAddress,
+      address: address,
+      city: city,
+      state: state,
+      zipCode: zipCode,
     };
     this.http
       .post<{message: string, customer: Customer}>(BACKEND_URL, customerData)

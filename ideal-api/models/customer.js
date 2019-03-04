@@ -15,6 +15,10 @@ const customerSchema = mongoose.Schema({
     // },
     phoneNumber: { type: String, required: true },
     emailAddress: { type: String, required: true },
+    address: { type: String, required: true },
+    city: { type: String, required: true },
+    state: { type: String, required: true },
+    zipCode: { type: Number, required: true },
     // serviceRecords: {
     //     servicePerformed: { type: String, required: true },
     //     serviceDate: { type: String, required: true },

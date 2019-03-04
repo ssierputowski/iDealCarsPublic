@@ -39,12 +39,12 @@ export class RecordsComponent implements OnInit {
     'customerName',
     'customerEmail',
     'customerPhone',
+    'customerAddress',
   ];
-
+  
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
 
   ngOnInit() {
     if (this.checked) {
@@ -66,6 +66,18 @@ export class RecordsComponent implements OnInit {
     'emailAddress' : new FormControl (null, {
       validators: [Validators.required]
     }),
+    'address' : new FormControl (null, {
+      validators: [Validators.required]
+    }),
+    'city' : new FormControl (null, {
+      validators: [Validators.required]
+    }),
+    'state' : new FormControl (null, {
+      validators: [Validators.required]
+    }),
+    'zipCode' : new FormControl (null, {
+      validators: [Validators.required]
+    })
   });
   this.getCustomer();
 }

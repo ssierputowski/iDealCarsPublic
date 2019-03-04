@@ -47,6 +47,18 @@ export class DialogEntryCustomerComponent implements OnInit {
       }),
       'emailAddress': new FormControl(null, {
         validators: [Validators.required]
+      }),
+      'address': new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      'city': new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      'state': new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      'zipCode': new FormControl(null, {
+        validators: [Validators.required]
       })
     });
     this.customerService.getCustomers();
@@ -65,6 +77,10 @@ export class DialogEntryCustomerComponent implements OnInit {
       this.customerform.value.lastName,
       this.customerform.value.phoneNumber,
       this.customerform.value.emailAddress,
+      this.customerform.value.address,
+      this.customerform.value.city,
+      this.customerform.value.state,
+      this.customerform.value.zipCode,
     );
     this.customerform.reset();
 
