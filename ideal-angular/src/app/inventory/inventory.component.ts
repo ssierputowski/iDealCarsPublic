@@ -152,6 +152,7 @@ openDialogVin(data: any) {
   };
   this.dialogVinRef = this.dialog.open(DialogVinComponent, config);
   this.dialogVinRef.componentInstance.data = {
+    id: data.id,
     vehVin: data.vehVin,
     vehYear: data.vehYear,
     vehMake: data.vehMake,

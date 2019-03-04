@@ -15,60 +15,34 @@
     </mat-form-field>
     <mat-form-field color="accent">
       <mat-label>Vehicle Model</mat-label>
-      <input
-        matInput
-        type="text"
-        placeholder="Enter Vehicle Model"
-        formControlName="vehModel"
-      />
+      <input matInput type = "text" formControlName="vehModel">
     </mat-form-field>
-    <mat-form-field color="accent">
-      <mat-label>Vehicle Color</mat-label>
-      <input
-        matInput
-        type="text"
-        placeholder="Enter Vehicle Color"
-        formControlName="vehColor"
-      />
-    </mat-form-field>
-    <mat-form-field color="accent">
-      <mat-label>Vehicle Condition</mat-label>
-      <input
-        matInput
-        type="text"
-        placeholder="Enter Vehicle Condition"
-        formControlName="vehCondition"
-      />
-    </mat-form-field>
-    <mat-form-field color="accent">
-      <mat-label>Vehicle Detail</mat-label>
-      <input
-        matInput
-        type="text"
-        placeholder="Enter Vehicle Detail"
-        formControlName="vehDetail"
-      />
-    </mat-form-field>
-    <mat-form-field color="accent">
-      <mat-label>Vehicle Price</mat-label>
-      <input
-        matInput
-        type="text"
-        placeholder="Enter Vehicle Price"
-        formControlName="vehPrice"
-      />
-    </mat-form-field>
-    <mat-form-field color="accent">
-      <mat-label>Vehicle Image</mat-label>
-      <input
-        matInput
-        type="text"
-        placeholder="Enter Vehicle Image"
-        formControlName="vehImage"
-      />
-    </mat-form-field>
-  </form>
-</mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Vehicle Color</mat-label>
+        <input matInput type = "text" formControlName="vehColor">
+      </mat-form-field>
+    <mat-form-field>
+        <mat-label>Vehicle Condition</mat-label>
+        <input matInput type = "text" formControlName="vehCondition">
+      </mat-form-field>
+    <mat-form-field>
+        <mat-label>Vehicle Detail</mat-label>
+        <input matInput type = "text" formControlName="vehDetail">
+      </mat-form-field>
+    <mat-form-field>
+        <mat-label>Vehicle Price</mat-label>
+        <input matInput type = "text" formControlName="vehPrice">
+      </mat-form-field>
+        <div>
+          <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
+            <input type="file" #filePicker (change)="onImagePicked($event)">
+        </div>
+        <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+          <img [src]="imagePreview" [alt]="vehicleform.value.vehModel">
+        </div>
+        <input matInput type = "text" formControlName="vehImage">
+       </form>
+   </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-raised-button color="accent" type="submit" [disabled]="!vehicleform.valid">
     UPLOAD VEHICLE
