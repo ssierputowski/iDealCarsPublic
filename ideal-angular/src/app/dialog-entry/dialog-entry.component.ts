@@ -100,7 +100,7 @@ export class DialogEntryComponent implements OnInit {
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     this.vehicleform.patchValue({image: file});
-    this.vehicleform.get('image').updateValueAndValidity();
+    this.vehicleform.get('vehImage').updateValueAndValidity();
     const reader = new FileReader();
     reader.onload = () => {
       this.imagePreview = reader.result as string;

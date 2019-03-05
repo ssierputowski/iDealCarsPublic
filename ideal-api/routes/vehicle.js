@@ -16,7 +16,7 @@ router.post('', (req, res, next) => {
         vehCondition: req.body.vehCondition,
         vehDetail: req.body.vehDetail,
         vehPrice: req.body.vehPrice,
-        vehImage: req.body.vehImage
+        vehImage: url + '/userImages/' + req.file.filename
     });
     vehicle.save().then(newVehicle => {
         res.status(201).json({
