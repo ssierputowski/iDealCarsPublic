@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   MatButtonModule,
   MatFormFieldModule,
@@ -14,25 +14,34 @@ import {
   MatDividerModule,
   MatTableModule,
   MatRadioModule,
-  MatDialogModule,
-  MatTabsModule
+  MatTabsModule,
+  MatDialogModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
-import { HomeComponent, ManagerActionsComponent } from './home/home.component';
+import { HomeComponent } from './home/home.component';
 import { RecordsComponent } from './records/records.component';
 import { HeaderComponent } from './header/header.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { DialogEntryComponent } from './dialog-entry/dialog-entry.component';
+import { ManagerActionsComponent } from './manager-actions/manager-actions.component';
+
+import { AuthGuard } from './auth/auth.guard';
+import { AuthInterceptor } from './auth/auth-interceptor';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxMaskModule } from 'ngx-mask';
+
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'records', component: RecordsComponent},
-  { path: 'inventory', component: InventoryComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'records', component: RecordsComponent, canActivate: [AuthGuard] },
+  { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
@@ -44,6 +53,7 @@ const routes: Routes = [
     RecordsComponent,
     HeaderComponent,
     InventoryComponent,
+    DialogEntryComponent,
     ManagerActionsComponent
   ],
   imports: [
@@ -59,21 +69,24 @@ const routes: Routes = [
     MatCardModule,
     MatIconModule,
     MatSidenavModule,
-    MatExpansionModule,
     MatDividerModule,
     MatTableModule,
     MatRadioModule,
-    MatDialogModule,
-    MatTabsModule,
     RouterModule.forRoot(routes),
     NgbModule,
     ReactiveFormsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule,
+    MatTabsModule,
+    NgxMaskModule.forRoot(),
   ],
   entryComponents: [
+    DialogEntryComponent,
     ManagerActionsComponent
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

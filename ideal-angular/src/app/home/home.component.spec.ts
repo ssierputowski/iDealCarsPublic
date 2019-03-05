@@ -7,7 +7,6 @@ import { HomeComponent, ManagerActionsComponent } from './home.component';
 import { HeaderComponent } from '../header/header.component';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatTableModule, MatDialogModule } from '@angular/material';
-// import { OperatorFunction } from 'rxjs';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;

@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
         if (isValid) {
             error = null;
         }
-        cb(error, 'ideal-api/images');
+        cb(error, 'userImages');
     },
     filename: (req, file, cb) => {
         const name = file.originalname.toLowerCase().split(' ').join('-');
@@ -44,7 +44,7 @@ router.post(
                 emailAddress: req.body.email,
                 phoneNumber: req.body.phoneNumber,
                 jobRole: req.body.jobRole,
-                image: url + '/images/' + req.file.filename
+                image: url + '/userImages/' + req.file.filename
             });
             user.save()
                 .then(result => {
@@ -71,7 +71,7 @@ router.post('/login', (req, res, next) => {
                 });
             }
             user = data;
-            return req.body.password == user.password;
+            return bcrypt.compare(req.body.password, user.password);
         })
         .then(result => {
             if (!result) {
@@ -82,10 +82,11 @@ router.post('/login', (req, res, next) => {
             const token = jwt.sign(
                 { username: user.username, userId: user._id },
                 process.env.JWT_KEY,
-                { expiresIn: '2h' }
+                { expiresIn: '1h' }
             );
             res.status(200).json({
-                token: token
+                token: token,
+                expiresIn: 3600
             });
         })
         .catch(err => {
