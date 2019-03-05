@@ -1,8 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const webpush = require('web-push');
 
 const userRoutes = require('./routes/user');
+const messageRoutes = require('./routes/message');
 const customerRoutes = require('./routes/customer');
 const vehicleRoutes = require('./routes/vehicle')
 
@@ -23,6 +25,12 @@ mongoose.connect(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+webpush.setVapidDetails(
+    'mailto:you@domain.com',
+    process.env.PUBLIC_VAPID,
+    process.env.PRIVATE_VAPID
+);
+
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader(
@@ -36,8 +44,14 @@ app.use((req, res, next) => {
     next();
 });
 
+// Serve the static files from the ideal-api directory
+app.use(express.static('./'));
+
 app.use('/api/user', userRoutes);
+app.use('/api/messages', messageRoutes);
 app.use('/api/customers', customerRoutes);
 app.use('/api/vehicles', vehicleRoutes);
 
 module.exports = app;
+
+

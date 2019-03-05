@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { ManagerActionsComponent } from '../manager-actions/manager-actions.component';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -15,26 +16,35 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
     private titleService: Title,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private userService: UserService
   ) { }
 
-  // User variables
-  // Fetch from database
-  firstName = 'Jerrod';
-  lastName = 'Mathis';
-  email = 'jerrodmathis95@gmail.com';
-  userImg = '../../assets/images/TestImage.jpg';
-  jobRole = 'Manager';
+  employeeId: string;
+  userImg: string;
+  userFirstName: string;
+  userLastName: string;
+  userEmail: string;
+  userJobRole: string;
 
   ngOnInit() {
     this.titleService.setTitle('Home | iDealCars');
+    this.employeeId = localStorage.getItem('employeeId');
+    this.userService.getUser(this.employeeId)
+      .subscribe((data) => {
+        this.userImg = data['image'];
+        this.userFirstName = data['firstName'];
+        this.userLastName = data['lastName'];
+        this.userEmail = data['emailAddress'];
+        this.userJobRole = data['jobRole'].toUpperCase();
+      });
   }
 
   openActionsDialog() {
     this.dialog.open(ManagerActionsComponent, {
       disableClose: true,
       minWidth: '50rem',
-      height: '70rem',
+      height: '75rem',
     });
   }
 }

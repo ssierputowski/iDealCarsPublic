@@ -1,0 +1,9 @@
+form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+mat-dialog-content {
+  height: 100%;
+}

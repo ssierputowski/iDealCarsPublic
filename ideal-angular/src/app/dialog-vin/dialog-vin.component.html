@@ -1,0 +1,47 @@
+<h2 mat-dialog-title>Edit Vehicle</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="edit_form" (ngSubmit)="editVehicle(edit_form.value)">
+    <mat-form-field>
+      <mat-label>Vehicle VIN</mat-label>
+     <input matInput type="text" formControlName="vehVin">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Vehicle Year</mat-label>
+      <input matInput type="text" formControlName="vehYear">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Vehicle Make</mat-label>
+      <input matInput type="text" formControlName="vehMake">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Vehicle Model</mat-label>
+      <input matInput type="text" formControlName="vehModel">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Vehicle Color</mat-label>
+      <input matInput type="text" formControlName="vehColor">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Vehicle Condition</mat-label>
+      <input matInput type="text" formControlName="vehCondition">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Vehicle Detail</mat-label>
+      <input matInput type="text" formControlName="vehDetail">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Vehicle Price</mat-label>
+      <input matInput [value]="edit_form.get('vehPrice').value | currency" type="text" formControlName="vehPrice">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Vehicle Image</mat-label>
+      <input matInput type="text" formControlName="vehImage">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button class="submit-btn" type="submit" color="accent">EDIT</button>
+    <button mat-raised-button color="warn" (click)="onDelete(vehicleID)">DELETE</button>
+    <button mat-raised-button mat-dialog-close>CANCEL</button>
+</mat-dialog-actions>
+<!-- [routerLink]="['/edit', vehicle.id]" -->

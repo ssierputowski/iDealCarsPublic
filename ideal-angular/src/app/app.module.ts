@@ -3,89 +3,114 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   MatButtonModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatProgressSpinnerModule,
-  MatListModule,
-  MatIconModule,
   MatCardModule,
-  MatSidenavModule,
-  MatExpansionModule,
+  MatDatepickerModule,
+  MatDialogModule,
   MatDividerModule,
-  MatTableModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatNativeDateModule,
+  MatProgressSpinnerModule,
   MatRadioModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatTableModule,
   MatTabsModule,
-  MatDialogModule
 } from '@angular/material';
-import { NgModule } from '@angular/core';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
-import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { HomeComponent } from './home/home.component';
-import { RecordsComponent } from './records/records.component';
-import { HeaderComponent } from './header/header.component';
-import { InventoryComponent } from './inventory/inventory.component';
-import { DialogEntryComponent } from './dialog-entry/dialog-entry.component';
-import { ManagerActionsComponent } from './manager-actions/manager-actions.component';
-
-import { AuthGuard } from './auth/auth.guard';
-import { AuthInterceptor } from './auth/auth-interceptor';
-
+import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
 
+import { AppComponent } from './app.component';
+import { DialogEntryComponent } from './dialog-entry/dialog-entry.component';
+import { DialogEntryCustomerComponent } from './dialog-entry-customer/dialog-entry-customer.component';
+import { DialogVinComponent } from './dialog-vin/dialog-vin.component';
+import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from './home/home.component';
+import { InventoryComponent } from './inventory/inventory.component';
+import { LoginComponent } from './auth/login/login.component';
+import { ManagerActionsComponent } from './manager-actions/manager-actions.component';
+import { MessageBoardComponent } from './message-board/message-board.component';
+import { RecordsComponent } from './records/records.component';
+import { TimeClockComponent } from './time-clock/time-clock.component';
+
+import { AuthGuard } from './auth/auth.guard';
+import { AuthInterceptor } from './auth/auth-interceptor';
+import { DialogCustomerEditComponent } from './dialog-customer-edit/dialog-customer-edit.component';
+
+import { NotificationService } from '../services/notification.service';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'records', component: RecordsComponent, canActivate: [AuthGuard] },
   { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
+  { path: 'edit/:id', component: DialogVinComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    DialogEntryComponent,
+    DialogEntryCustomerComponent,
+    DialogVinComponent,
     HeaderComponent,
     HomeComponent,
-    RecordsComponent,
-    HeaderComponent,
     InventoryComponent,
-    DialogEntryComponent,
-    ManagerActionsComponent
+    LoginComponent,
+    ManagerActionsComponent,
+    RecordsComponent,
+    TimeClockComponent,
+    DialogCustomerEditComponent,
+    MessageBoardComponent
   ],
   imports: [
-    BrowserModule,
     BrowserAnimationsModule,
+    BrowserModule,
     FormsModule,
     HttpClientModule,
     MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    MatListModule,
     MatCardModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatDividerModule,
-    MatTableModule,
-    MatRadioModule,
-    RouterModule.forRoot(routes),
-    NgbModule,
-    ReactiveFormsModule,
-    MatExpansionModule,
+    MatDatepickerModule,
     MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatNativeDateModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatTableModule,
     MatTabsModule,
+    NgbModule,
     NgxMaskModule.forRoot(),
+    ReactiveFormsModule,
+    RouterModule.forRoot(routes),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   entryComponents: [
     DialogEntryComponent,
-    ManagerActionsComponent
+    ManagerActionsComponent,
+    DialogVinComponent,
+    DialogEntryCustomerComponent,
+    DialogCustomerEditComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    NotificationService
   ],
   bootstrap: [AppComponent],
 })

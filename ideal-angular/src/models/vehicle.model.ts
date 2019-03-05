@@ -1,4 +1,5 @@
 export interface Vehicle {
+  id: string;
   vehVin: string;
   vehYear: Number;
   vehMake: string;
@@ -8,5 +9,4 @@ export interface Vehicle {
   vehDetail: string;
   vehPrice: Number;
   vehImage: string;
-
 }

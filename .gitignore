@@ -62,3 +62,9 @@ typings/
 
 # XML Files
 *.xml
+ideal-angular/src/app/auth/dialog-entry-customer/dialog-entry.
+ideal-angular/src/app/auth/dialog-entry-customer/dialog-entry-customer.component.ts
+ideal-angular/src/app/auth/dialog-entry-customer/dialog-entry-customer.spec.ts
+
+# Lock Files
+*-lock.json

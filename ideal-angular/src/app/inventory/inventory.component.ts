@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef, MatDialogConfig, MatRow } from '@angular/material';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
@@ -8,6 +8,7 @@ import { VehicleService } from 'src/services/vehicle.service';
 import { Vehicle } from '../../models/vehicle.model';
 import { Subscription } from 'rxjs';
 import { DialogEntryComponent } from '../dialog-entry/dialog-entry.component';
+import { DialogVinComponent } from '../dialog-vin/dialog-vin.component';
 
 
 @Component({
@@ -20,16 +21,20 @@ export class InventoryComponent implements OnInit {
   totalVehicles = 0;
   private vehiclesSub: Subscription;
   dialogEntryRef: MatDialogRef<DialogEntryComponent>;
+  dialogVinRef: MatDialogRef<DialogVinComponent>;
   dataSource: MatTableDataSource<Vehicle>;
   isLoading = false;
   checked = false;
   searchForm: FormGroup;
-
+  searchVal: string;
+  searchStr = [];
+  row = new MatRow;
   constructor(
     private router: Router,
     private titleService: Title,
     private vehicleService: VehicleService,
     private dialog: MatDialog
+
     ) {}
 
   displayedColumns = [
@@ -37,19 +42,34 @@ export class InventoryComponent implements OnInit {
      'vehYear',
      'vehMake',
      'vehModel',
-     'vehCondition',
      'vehColor',
-     'vehDetails',
-     'vehImage'
+     'vehDetail',
+     'vehPrice',
   ];
+  filterValues = {
+    vehYear: '',
+    vehMake: '',
+    vehModel: '',
+    vehColor: '',
+    vehCondition: '',
 
-  // inventory = [
-  //   { vehicleId: 'TBHF2000201', vehicleYear: 2001, vehicleMake: 'Honda', vehicleModel: 'S2000',
-  //   newOrUsed: 'Used', vehicleColor: 'Silver', vehicleDetails: 'Convertible, A/C, here are some
-  //   more details just to see how it handles extra data space' },
-  //   ];
+  };
 
-
+  Year = new FormControl('', {
+    validators: [Validators.required]
+  });
+  Make = new FormControl('', {
+    validators: [Validators.required]
+  });
+  Model = new FormControl('', {
+    validators: [Validators.required]
+  });
+  Color = new FormControl('', {
+    validators: [Validators.required]
+  });
+  Condition = new FormControl('', {
+    validators: [Validators.required]
+  });
 
   ngOnInit() {
       if (this.checked) {
@@ -58,21 +78,42 @@ export class InventoryComponent implements OnInit {
         this.isLoading = false;
       }
     this.titleService.setTitle('Vehicle Inventory | iDealCars');
-    this.searchForm = new FormGroup({
-      'Year': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'Make': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'Model': new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      'Color': new FormControl(null, {
-        validators: [Validators.required]
-      }),
 
-    });
+      this.Year.valueChanges
+      .subscribe(
+        Year => {
+          this.filterValues.vehYear = Year;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      );
+      this.Make.valueChanges
+      .subscribe(
+        Make => {
+          this.filterValues.vehMake = Make;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      );
+      this.Model.valueChanges
+      .subscribe(
+        Model => {
+          this.filterValues.vehModel = Model;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      );
+      this.Color.valueChanges
+      .subscribe(
+        Color => {
+          this.filterValues.vehColor = Color;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      );
+      this.Condition.valueChanges
+      .subscribe(
+        Condition => {
+          this.filterValues.vehCondition = Condition;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      );
     this.getCars();
   }
 getCars(): void {
@@ -81,29 +122,61 @@ getCars(): void {
     .subscribe((vehicleData: { vehicles: Vehicle[] }) => {
       this.vehicles = vehicleData.vehicles;
       this.dataSource = new MatTableDataSource(this.vehicles);
+      this.dataSource.filterPredicate = this.tableFilter();
     });
 }
-applyFilter(filterValue: string) {
-  filterValue = filterValue.trim(); // Remove whitespace
-  filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-  this.dataSource.filter = filterValue;
+
+tableFilter(): (data: any, filter: string) => boolean {
+  const filterFunction = function(data, filter): boolean {
+    const searchTerms = JSON.parse(filter);
+    return data.vehYear.toString().toLowerCase().indexOf(searchTerms.vehYear) !== -1
+      && data.vehMake.toString().toLowerCase().indexOf(searchTerms.vehMake) !== -1
+      && data.vehModel.toString().toLowerCase().indexOf(searchTerms.vehModel) !== -1
+      && data.vehColor.toLowerCase().indexOf(searchTerms.vehColor) !== -1
+      && data.vehCondition.toLowerCase().indexOf(searchTerms.vehCondition) !== -1;
+  };
+  return filterFunction;
 }
+
 openDialogEntry() {
   this.dialogEntryRef = this.dialog.open(DialogEntryComponent, {
-    hasBackdrop: true,
-    autoFocus: true,
-    disableClose: false,
-    width: '350px',
-    height: 'auto'
+    disableClose: true,
+    minWidth: '50rem',
   });
 }
 
-  print(id: any) {
-    alert(id);
+openDialogVin(data: any) {
+  const config: MatDialogConfig = {
+    disableClose: true,
+    minWidth: '50rem',
+  };
+  this.dialogVinRef = this.dialog.open(DialogVinComponent, config);
+  this.dialogVinRef.componentInstance.data = {
+    id: data.id,
+    vehVin: data.vehVin,
+    vehYear: data.vehYear,
+    vehMake: data.vehMake,
+    vehModel: data.vehModel,
+    vehColor: data.vehColor,
+    vehCondition: data.vehCondition,
+    vehDetail: data.vehDetail,
+    vehPrice: data.vehPrice,
+    vehImage: data.vehImage,
+    };
   }
-  onRowClicked(row) {
 
-  }
 }
 
+/* This all goes in the dialog component popup for vehicle information
+<button mat-button color="warn" (click)="onDelete(vehicle.vehVin)">Delete</button>
+ // this for component ts file fo dialog
+ onDelete(vehicleVin: string){
+    this.vehicleService.deleteVehicle(vehicleVin);
+    .close()
+}
 
+//edit method for button on vehicle dialog display
+constructor(){}
+
+
+*/

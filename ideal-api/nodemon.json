@@ -1,6 +1,8 @@
 {
     "env": {
-        "MONGO_ATLAS_PW": "JasKZ6hetqg6Cea0",
-        "JWT_KEY": "secret_change_this_later"
+        "MONGO_ATLAS_PW": "4EfxkzwMtbk9IDj9",
+        "JWT_KEY": "secret_change_this_later",
+        "PUBLIC_VAPID": "BCx3jeo-HBfi3rKNfv0sK25LIusAgh7U-_6QNr9-plhQEwo_kIECrn5MsVRnQG23OdQyMxssYlHLPU1WhddCfRQ",
+        "PRIVATE_VAPID": "dYU79xbeKLz9zQqzXAegFFldEX62aQpRW37MDiIMnAI"
     }
 }

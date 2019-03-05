@@ -1,48 +1,51 @@
-<p>
-  dialog-entry works!
-</p>
-<form [formGroup]="vehicleform" (ngSubmit)="saveVehicle()">
-  <h2 mat-dialog-title>Vehicle Inventory Upload</h2>
-  <mat-dialog-content>
-    <mat-form-field>
+<h2 mat-dialog-title>Vehicle Inventory Upload</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="vehicleform" (ngSubmit)="saveVehicle()">
+    <mat-form-field color="accent">
       <mat-label>Vehicle VIN</mat-label>
-      <input matInput type = "text" placeholder = "Enter Vehicle VIN" formControlName="vehVin">
+      <input matInput type="text" formControlName="vehVin" />
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field color="accent">
       <mat-label>Vehicle Year</mat-label>
-      <input matInput type = "text" placeholder = "Enter Vehicle Year" formControlName="vehYear">
+      <input matInput type="text" formControlName="vehYear" />
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field color="accent">
       <mat-label>Vehicle Make</mat-label>
-      <input matInput type = "text" placeholder = "Enter Vehicle Make" formControlName="vehMake">
+      <input matInput type="text" formControlName="vehMake" />
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field color="accent">
       <mat-label>Vehicle Model</mat-label>
-      <input matInput type = "text" placeholder = "Enter Vehicle Model" formControlName="vehModel">
+      <input matInput type = "text" formControlName="vehModel">
     </mat-form-field>
     <mat-form-field>
         <mat-label>Vehicle Color</mat-label>
-        <input matInput type = "text" placeholder = "Enter Vehicle Color" formControlName="vehColor">
+        <input matInput type = "text" formControlName="vehColor">
       </mat-form-field>
     <mat-form-field>
         <mat-label>Vehicle Condition</mat-label>
-        <input matInput type = "text" placeholder = "Enter Vehicle Condition" formControlName="vehCondition">
+        <input matInput type = "text" formControlName="vehCondition">
       </mat-form-field>
     <mat-form-field>
         <mat-label>Vehicle Detail</mat-label>
-        <input matInput type = "text" placeholder = "Enter Vehicle Detail" formControlName="vehDetail">
+        <input matInput type = "text" formControlName="vehDetail">
       </mat-form-field>
     <mat-form-field>
         <mat-label>Vehicle Price</mat-label>
-        <input matInput type = "text" placeholder = "Enter Vehicle Price" formControlName="vehPrice">
+        <input matInput type = "text" formControlName="vehPrice">
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Vehicle Image</mat-label>
-        <input matInput type = "text" placeholder = "Enter Vehicle Image" formControlName="vehImage">
-      </mat-form-field>
-  </mat-dialog-content>
-  <mat-dialog-actions>
-        <button mat-raised-button color="accent" (click)="close()">Cancel</button>
-        <button mat-raised-button type="submit">Upload Vehicle</button>
-  </mat-dialog-actions>
-</form>
+        <div>
+          <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
+            <input type="file" #filePicker (change)="onImagePicked($event)">
+        </div>
+        <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && vehicleform.get('image').valid">
+          <img [src]="imagePreview" [alt]="vehicleform.value.vehModel">
+        </div>
+        <input matInput type = "text" formControlName="vehImage">
+       </form>
+   </mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="accent" type="submit" [disabled]="!vehicleform.valid">
+    UPLOAD VEHICLE
+  </button>
+  <button mat-raised-button mat-dialog-close>CANCEL</button>
+</mat-dialog-actions>
