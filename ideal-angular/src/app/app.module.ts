@@ -53,8 +53,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'records', component: RecordsComponent, canActivate: [AuthGuard] },
-  { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
-  { path: 'edit/:id', component: DialogVinComponent }
+  { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -93,6 +92,7 @@ const routes: Routes = [
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
+    MatProgressSpinnerModule,
     MatTableModule,
     MatTabsModule,
     NgbModule,
