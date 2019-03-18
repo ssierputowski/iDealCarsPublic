@@ -48,12 +48,14 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { DialogCustomerEditComponent } from './dialog-customer-edit/dialog-customer-edit.component';
 
 import { NotificationService } from '../services/notification.service';
+import { CalculatorComponent } from './calculator/calculator.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'records', component: RecordsComponent, canActivate: [AuthGuard] },
   { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
+  { path: 'calculator', component: CalculatorComponent, canActivate: [AuthGuard] },
   { path: 'edit/:id', component: DialogVinComponent }
 ];
 
@@ -71,7 +73,8 @@ const routes: Routes = [
     RecordsComponent,
     TimeClockComponent,
     DialogCustomerEditComponent,
-    MessageBoardComponent
+    MessageBoardComponent,
+    CalculatorComponent
   ],
   imports: [
     BrowserAnimationsModule,
