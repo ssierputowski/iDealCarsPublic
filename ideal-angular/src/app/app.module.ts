@@ -48,7 +48,6 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { DialogCustomerEditComponent } from './dialog-customer-edit/dialog-customer-edit.component';
 
 import { NotificationService } from '../services/notification.service';
-import { CalculatorComponent } from './calculator/calculator.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -72,7 +71,6 @@ const routes: Routes = [
     TimeClockComponent,
     DialogCustomerEditComponent,
     MessageBoardComponent,
-    CalculatorComponent
   ],
   imports: [
     BrowserAnimationsModule,
