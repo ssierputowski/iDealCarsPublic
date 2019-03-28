@@ -20,6 +20,6 @@ describe('DialogCustomerEditComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component).toEqual(true);
   });
 });
