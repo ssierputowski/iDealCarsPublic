@@ -43,9 +43,12 @@ export class InventoryComponent implements OnInit {
      'vehMake',
      'vehModel',
      'vehColor',
+     'vehCondition',
      'vehDetail',
      'vehPrice',
+     'vehImage'
   ];
+
   filterValues = {
     vehYear: '',
     vehMake: '',
@@ -72,11 +75,7 @@ export class InventoryComponent implements OnInit {
   });
 
   ngOnInit() {
-      if (this.checked) {
-        this.isLoading = true;
-      } else {
-        this.isLoading = false;
-      }
+
     this.titleService.setTitle('Vehicle Inventory | iDealCars');
 
       this.Year.valueChanges
@@ -125,7 +124,7 @@ getCars(): void {
       this.dataSource.filterPredicate = this.tableFilter();
     });
 }
-
+// filter function for table data
 tableFilter(): (data: any, filter: string) => boolean {
   const filterFunction = function(data, filter): boolean {
     const searchTerms = JSON.parse(filter);
@@ -167,16 +166,4 @@ openDialogVin(data: any) {
 
 }
 
-/* This all goes in the dialog component popup for vehicle information
-<button mat-button color="warn" (click)="onDelete(vehicle.vehVin)">Delete</button>
- // this for component ts file fo dialog
- onDelete(vehicleVin: string){
-    this.vehicleService.deleteVehicle(vehicleVin);
-    .close()
-}
 
-//edit method for button on vehicle dialog display
-constructor(){}
-
-
-*/

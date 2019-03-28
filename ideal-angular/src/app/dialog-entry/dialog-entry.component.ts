@@ -4,6 +4,7 @@ import { Vehicle } from '../../models/vehicle.model';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { VehicleService } from '../../services/vehicle.service';
 import { Subscription } from 'rxjs';
+import { mimeType } from '../manager-actions/mime-type.validator';
 
 @Component({
   selector: 'app-dialog-entry',
@@ -14,7 +15,6 @@ import { Subscription } from 'rxjs';
 export class DialogEntryComponent implements OnInit {
 
   vehicles: Vehicle[] = [];
-  totalVehicles = 0;
   private vehiclesSub: Subscription;
 
   isLoading = false;
@@ -30,11 +30,7 @@ export class DialogEntryComponent implements OnInit {
    ) {}
 
   ngOnInit() {
-      if (this.checked) {
-        this.isLoading = true;
-      } else {
-        this.isLoading = false;
-      }
+
     this.vehicleform = new FormGroup({
       'vehVin': new FormControl(null, {
         validators: [Validators.required]
@@ -61,7 +57,7 @@ export class DialogEntryComponent implements OnInit {
         validators: [Validators.required]
       }),
       'vehImage': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required], asyncValidators: [mimeType]
       })
 
     });
@@ -77,18 +73,18 @@ export class DialogEntryComponent implements OnInit {
         return;
       }
       this.vehicleService.addVehicle(
-        this.vehicleform.value.vehVin,
-        this.vehicleform.value.vehYear,
-        this.vehicleform.value.vehMake,
-        this.vehicleform.value.vehModel,
-        this.vehicleform.value.vehColor,
-        this.vehicleform.value.vehCondition,
-        this.vehicleform.value.vehDetail,
-        this.vehicleform.value.vehPrice,
-        this.vehicleform.value.vehImage
+        this.vehicleform.get('vehVin').value,
+        this.vehicleform.get('vehYear').value,
+        this.vehicleform.get('vehMake').value,
+        this.vehicleform.get('vehModel').value,
+        this.vehicleform.get('vehColor').value,
+        this.vehicleform.get('vehCondition').value,
+        this.vehicleform.get('vehDetail').value,
+        this.vehicleform.get('vehPrice').value,
+        this.vehicleform.get('vehImage').value
 
       );
-
+      console.log(this.vehicleform.value );
       this.vehicleform.reset();
 
     }
@@ -99,7 +95,11 @@ export class DialogEntryComponent implements OnInit {
   }
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
+<<<<<<< HEAD
     this.vehicleform.patchValue({image: file});
+=======
+    this.vehicleform.patchValue({vehImage: file});
+>>>>>>> 7a3314cd8d5efe8fc0e84fcbb4aad510fc585d3f
     this.vehicleform.get('vehImage').updateValueAndValidity();
     const reader = new FileReader();
     reader.onload = () => {

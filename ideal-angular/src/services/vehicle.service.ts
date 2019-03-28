@@ -48,79 +48,130 @@ export class VehicleService {
         this.vehiclesUpdated.next({vehicles: [...this.vehicles]});
       });
   }
-getVehicleByID(id: string) {
-  return { ...this.vehicles.find(p => p.id === id)};
-}
+
   getVehicleUpdateListener() {
     return this.vehiclesUpdated.asObservable();
   }
-
+  // SAVE functions for dialog-entry
   addVehicle(
     vehVin: string,
-    vehYear: number,
-    vehMake: string,
-    vehModel: string,
-    vehColor: string,
-    vehicleCon: string,
-    vehDetail: string,
-    vehPrice: number,
-    vehImage: string
-  ) {
-    const vehicleData: Vehicle = {
-      id: null,
-      vehVin: vehVin,
-      vehYear : vehYear,
-      vehMake: vehMake,
-      vehModel: vehModel,
-      vehColor: vehColor,
-      vehCondition: vehicleCon,
-      vehDetail: vehDetail,
-      vehPrice: vehPrice,
-      vehImage: vehImage
-    };
-    this.http
-      .post<{message: string, vehicle: Vehicle, vehicleID: string}>(BACKEND_URL, vehicleData)
-      .subscribe((resData) => {
-        const id = resData.vehicleID;
-        vehicleData.id = id;
-        this.getVehicles();
-      });
-  }
-  // for editing
-  updateVehicle(
-    id: string,
-    vehVin: string,
-    vehYear: Number,
+    vehYear: string,
     vehMake: string,
     vehModel: string,
     vehColor: string,
     vehCondition: string,
     vehDetail: string,
-    vehPrice: Number,
-    vehImage: string
-    ) { const vehicle: Vehicle = {
-      id: id,
-      vehVin: vehVin,
-      vehYear: vehYear,
-      vehMake: vehMake,
-      vehModel: vehModel,
-      vehColor: vehColor,
-      vehCondition: vehCondition,
-      vehDetail: vehDetail,
-      vehImage: vehImage,
-      vehPrice: vehPrice
-    };
-      this.http.put(BACKEND_URL + '/' + id, vehicle)
-    .subscribe(response => console.log(response));
+    vehPrice: string,
+    vehImage: File
+  ) {
+    const vehicleData  = new FormData();
+    vehicleData.append('vehVin', vehVin);
+    vehicleData.append('vehYear', vehYear);
+    vehicleData.append('vehMake', vehMake);
+    vehicleData.append('vehModel', vehModel);
+    vehicleData.append('vehColor', vehColor);
+    vehicleData.append('vehCondition', vehCondition);
+    vehicleData.append('vehDetail', vehDetail);
+    vehicleData.append('vehPrice', vehPrice);
+    vehicleData.append('vehImage', vehImage, vehModel);
+    return this.http
+      .post<{message: string, vehicle: Vehicle }>(BACKEND_URL, vehicleData)
+      .subscribe((resData) => {
+        const vehicle: Vehicle = {
+          id: resData.vehicle.id,
+          vehVin: vehVin,
+          vehYear: vehYear,
+          vehMake: vehMake,
+          vehModel: vehModel,
+          vehColor: vehColor,
+          vehCondition: vehCondition,
+          vehDetail: vehDetail,
+          vehPrice: vehPrice,
+          vehImage: resData.vehicle.vehImage
+        };
+        this.vehicles.push(vehicle);
+        this.vehiclesUpdated.next({vehicles: [...this.vehicles]});
+        console.log(resData);
+        window.location.reload();
+      });
   }
-// delete method for vehicles; used in dialog for vehicle display
+  // helper method (not used) for edit vehicle
+  getVehicleByID(id: string) {
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<{_id: string, vehVin: string, vehYear: string, vehMake: string, vehModel: string, vehColor: string, vehCondition: string, vehDetail: string, vehPrice: string, vehImage: string }>( BACKEND_URL + '/' + id);
+  }
+  // EDIT functions for dialogVin
+  updateVehicle(
+    id: string,
+    vehVin: string,
+    vehYear: string,
+    vehMake: string,
+    vehModel: string,
+    vehColor: string,
+    vehCondition: string,
+    vehDetail: string,
+    vehPrice: string,
+    vehImage: File | string
+    ) {
+    let vehicleData: Vehicle | FormData;
+    if (typeof(vehImage) === 'object') {
+        vehicleData = new FormData();
+        vehicleData.append('id', id);
+        vehicleData.append('vehVin', vehVin);
+        vehicleData.append('vehYear', vehYear);
+        vehicleData.append('vehMake', vehMake);
+        vehicleData.append('vehModel', vehModel);
+        vehicleData.append('vehColor', vehColor);
+        vehicleData.append('vehCondition', vehCondition);
+        vehicleData.append('vehDetail', vehDetail);
+        vehicleData.append('vehPrice', vehPrice);
+        vehicleData.append('vehImage', vehImage, vehModel);
+    } else {
+        vehicleData = {
+        id: id,
+        vehVin: vehVin,
+        vehYear: vehYear,
+        vehMake: vehMake,
+        vehModel: vehModel,
+        vehColor: vehColor,
+        vehCondition: vehCondition,
+        vehDetail: vehDetail,
+        vehPrice: vehPrice,
+        vehImage: vehImage
+    };
+  }
+    return this.http.put(BACKEND_URL + '/' + id, vehicleData)
+    .subscribe(response => {
+      const updatedVehicles = [...this.vehicles];
+      const oldVehicleIndex = updatedVehicles.findIndex(p => p.id === id);
+      const vehicle: Vehicle = {
+        id: id,
+        vehVin: vehVin,
+        vehYear: vehYear,
+        vehMake: vehMake,
+        vehModel: vehModel,
+        vehColor: vehColor,
+        vehCondition: vehCondition,
+        vehDetail: vehDetail,
+        vehPrice: vehPrice,
+        vehImage: ''
+      };
+      updatedVehicles[oldVehicleIndex] = vehicle;
+      this.vehicles = updatedVehicles;
+      this.vehiclesUpdated.next({vehicles: [...this.vehicles ]});
+      this.router.navigate(['/inventory']);
+      window.location.reload();
+    });
+  }
+// DELETE method for vehicles; used in dialogVin
   deleteVehicle(vehicleID: string) {
-    this.http.delete(BACKEND_URL + '/' + vehicleID)
-    .subscribe(() => {
+    console.log('Deleted! ' + vehicleID);
+    return this.http.delete(BACKEND_URL + '/' + vehicleID)
+     .subscribe(() => {
       const updatedVehicles = this.vehicles.filter(vehicle => vehicle.id !== vehicleID);
       this.vehicles = updatedVehicles;
       this.vehiclesUpdated.next({vehicles: [...this.vehicles]});
-      console.log('Deleted!');
+
     });
   }
 }

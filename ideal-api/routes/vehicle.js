@@ -1,11 +1,35 @@
 const express = require('express');
+const multer = require('multer');
 
 const Vehicle = require('../models/vehicle');
 
 const router = express.Router();
-
-router.post('', (req, res, next) => {
+const MIME_TYPE_MAP = {
+    'image/png': 'png',
+    'image/jpeg': 'jpg',
+    'image/jpg': 'jpg'
+};
+// Disk-file storage code for storing on the app vehicleImages file
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const isValid = MIME_TYPE_MAP[file.mimetype];
+        let error = new Error('Invalid mime type');
+        if (isValid) {
+            error = null;
+        }
+        cb(error, 'vehicleImages');
+    },
+    filename: (req, file, cb) => {
+        const name = file.originalname.toLowerCase().split(' ').join('-');
+        const ext = MIME_TYPE_MAP[file.mimetype];
+        cb(null, name + '-' + Date.now() + '.' + ext);
+    }
+});
+// For SAVE vehicle for vehicle dialog-entry
+router.post('', multer({ storage: storage }).single('vehImage'),
+(req, res, next) => {
     console.log(req.body);
+    const url = req.protocol + '://' + req.get('host');
     const vehicle = new Vehicle({
         id: req.body.id,
         vehVin: req.body.vehVin,
@@ -16,7 +40,11 @@ router.post('', (req, res, next) => {
         vehCondition: req.body.vehCondition,
         vehDetail: req.body.vehDetail,
         vehPrice: req.body.vehPrice,
+<<<<<<< HEAD
         vehImage: url + '/userImages/' + req.file.filename
+=======
+        vehImage: url + '/vehicleImages/' + req.file.filename
+>>>>>>> 7a3314cd8d5efe8fc0e84fcbb4aad510fc585d3f
     });
     vehicle.save().then(newVehicle => {
         res.status(201).json({
@@ -29,16 +57,29 @@ router.post('', (req, res, next) => {
     });
 });
 
-//Delete method for Vehicle Inventory, node.js code-->may not need this OPTIONS above
-router.delete('/api/vehicle/:id', (req, res, next) => {
-    Vehicle.deleteOne({_id: req.params.id}).then(result => {//Vehicle should be of the model here
-        console.log(result);
-        res.status(200).json({ message: "Vehicle Deleted!"});
+//DELETE method for Vehicle Inventory, node.js code-->may not need this OPTIONS above
+router.delete('/:id', function(req, res, next) {
+    console.log('Deleting a vehicle');
+    Vehicle.findByIdAndRemove(req.params.id, req.body, function(err, deletedVehicle){
+        if(err){
+            res.send("Error deleting vehicle");
+        } else{
+            res.json(deletedVehicle);
+        }
     });
 });
-router.put("api/vehicle/:id", (req,res,next) => {
+
+// EDIT function on dialogVin
+router.put('/:id', multer({ storage: storage }).single('vehImage'),
+(req,res,next) => {
+    let vehImage = req.body.vehImage;
+    console.log(req.file);
+    if (req.file) {
+        const url = req.protocol + '://' + req.get('host');
+        vehImage = url + '/vehicleImages/' + req.file.filename;
+    }
     const vehicle = new Vehicle({
-        id: req.body.id,
+        _id: req.body.id,
         vehVin: req.body.vehVin,
         vehYear: req.body.vehYear,
         vehMake: req.body.vehMake,
@@ -47,13 +88,26 @@ router.put("api/vehicle/:id", (req,res,next) => {
         vehCondition: req.body.vehCondition,
         vehDetail: req.body.vehDetail,
         vehPrice: req.body.vehPrice,
-        vehImage: req.body.vehImage
+        vehImage: vehImage
     });
     Vehicle.updateOne({_id: req.params.id}, vehicle).then(result => {
         console.log(result);
         res.status(200).json({message: 'Update success!'})
     });
+
 })
+//For EDIT helper function
+router.get('/:id', (req, res, next) => {
+    Vehicle.findById(req.params).then(vehicle => {
+        if(vehicle) {
+            res.status(200).json(vehicle);
+        } else {
+            res.status(404).json({message: 'Vehicle not found!'});
+        }
+    });
+});
+
+
 router.get('', (req, res, next) => {
     const vehicleQuery = Vehicle.find();
     vehicleQuery.then(documents => {

@@ -1,47 +1,89 @@
-<h2 mat-dialog-title>Edit Vehicle</h2>
 <mat-dialog-content class="mat-typography">
-  <form [formGroup]="edit_form" (ngSubmit)="editVehicle(edit_form.value)">
+    <h1 *ngIf="edit" mat-dialog-title>Edit Vehicle</h1>
+  <form [formGroup]="edit_form" *ngIf="edit">
     <mat-form-field>
-      <mat-label>Vehicle VIN</mat-label>
+      <h6>Vehicle VIN</h6>
      <input matInput type="text" formControlName="vehVin">
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Vehicle Year</mat-label>
+      <h6>Vehicle Year</h6>
       <input matInput type="text" formControlName="vehYear">
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Vehicle Make</mat-label>
+      <h6>Vehicle Make</h6>
       <input matInput type="text" formControlName="vehMake">
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Vehicle Model</mat-label>
+      <h6>Vehicle Model</h6>
       <input matInput type="text" formControlName="vehModel">
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Vehicle Color</mat-label>
+      <h6>Vehicle Color</h6>
       <input matInput type="text" formControlName="vehColor">
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Vehicle Condition</mat-label>
+      <h6>Vehicle Condition</h6>
       <input matInput type="text" formControlName="vehCondition">
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Vehicle Detail</mat-label>
+      <h6>Vehicle Detail</h6>
       <input matInput type="text" formControlName="vehDetail">
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Vehicle Price</mat-label>
-      <input matInput [value]="edit_form.get('vehPrice').value | currency" type="text" formControlName="vehPrice">
+      <h6>Vehicle Price</h6>
+      <input matInput type="text" formControlName="vehPrice">
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Vehicle Image</mat-label>
-      <input matInput type="text" formControlName="vehImage">
-    </mat-form-field>
+    <div>
+      <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
+        <input type="file" #filePicker (change)="onImagePicked($event)">
+    </div>
+    <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && edit_form.get('vehImage').valid">
+      <img [src]="imagePreview" [alt]="edit_form.value.vehModel">
+    </div>
+  </form>
+  <!-- ============================================================================================== -->
+  <form *ngIf="!edit">
+    <div class="flex-container">
+      <div align="center">
+        <h6>{{ this.data.vehMake }} {{ this.data.vehModel}}</h6>
+          <div class="image-preview">
+            <img [src]="this.data.vehImage">
+          </div>
+      </div>
+      <div>
+        <h1 mat-dialog-title>{{ this.data.vehYear }} {{ this.data.vehMake }} {{ this.data.vehModel }}</h1>
+      </div>
+    </div>
+    <div class="flex-container">
+      <h6>Vehicle Price</h6>
+      <p >{{ this.data.vehPrice | currency }}</p>
+    </div>
+      <div class="flex-container">
+      <h6>Vehicle VIN</h6>
+      <p >{{ this.data.vehVin }}</p>
+    </div>
+    <div class="flex-container">
+      <h6>Vehicle Color</h6>
+      <p >{{ this.data.vehColor }}</p>
+    </div>
+    <div class="flex-container">
+      <h6>Vehicle Condition</h6>
+      <p >{{ this.data.vehCondition }}</p>
+    </div>
+    <div class="flex-container">
+      <h6>Vehicle Detail</h6>
+      <p >{{ this.data.vehDetail }}</p>
+    </div>
   </form>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-    <button mat-raised-button class="submit-btn" type="submit" color="accent">EDIT</button>
-    <button mat-raised-button color="warn" (click)="onDelete(vehicleID)">DELETE</button>
+<mat-dialog-actions *ngIf="edit" align="end">
+    <button mat-raised-button color="accent" type="submit" (click)="saveEditedVehicle()">SAVE</button>
+    <button mat-raised-button color="warn" (click)="onDelete(this.data.id)">DELETE</button>
     <button mat-raised-button mat-dialog-close>CANCEL</button>
 </mat-dialog-actions>
+<mat-dialog-actions *ngIf="!edit" align="end">
+  <button mat-raised-button color="warn" (click)="edit=true">EDIT</button>
+  <button mat-raised-button mat-dialog-close color="primary">CANCEL</button>
+</mat-dialog-actions>
 <!-- [routerLink]="['/edit', vehicle.id]" -->
+
