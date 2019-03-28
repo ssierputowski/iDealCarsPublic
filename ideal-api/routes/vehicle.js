@@ -40,11 +40,7 @@ router.post('', multer({ storage: storage }).single('vehImage'),
         vehCondition: req.body.vehCondition,
         vehDetail: req.body.vehDetail,
         vehPrice: req.body.vehPrice,
-<<<<<<< HEAD
-        vehImage: url + '/userImages/' + req.file.filename
-=======
         vehImage: url + '/vehicleImages/' + req.file.filename
->>>>>>> 7a3314cd8d5efe8fc0e84fcbb4aad510fc585d3f
     });
     vehicle.save().then(newVehicle => {
         res.status(201).json({

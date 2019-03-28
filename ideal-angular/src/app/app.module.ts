@@ -54,13 +54,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'records', component: RecordsComponent, canActivate: [AuthGuard] },
-<<<<<<< HEAD
-  { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
-  { path: 'calculator', component: CalculatorComponent, canActivate: [AuthGuard] },
-  { path: 'edit/:id', component: DialogVinComponent }
-=======
   { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] }
->>>>>>> 7a3314cd8d5efe8fc0e84fcbb4aad510fc585d3f
 ];
 
 @NgModule({

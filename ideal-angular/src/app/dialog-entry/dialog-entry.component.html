@@ -40,18 +40,10 @@
         <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && vehicleform.get('vehImage').valid">
           <img [src]="imagePreview" [alt]="vehicleform.value.vehModel">
         </div>
-<<<<<<< HEAD
-        <!-- <input matInput type = "text" formControlName="vehImage"> -->
-       </form>
-   </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-raised-button color="accent" type="submit" [disabled]="!vehicleform.valid">
-=======
        </form>
    </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-raised-button color="accent" type="submit" (click)="saveVehicle()">
->>>>>>> 7a3314cd8d5efe8fc0e84fcbb4aad510fc585d3f
     UPLOAD VEHICLE
   </button>
   <button mat-raised-button mat-dialog-close>CANCEL</button>
