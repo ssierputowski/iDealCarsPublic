@@ -7,7 +7,7 @@ const userRoutes = require('./routes/user');
 const messageRoutes = require('./routes/message');
 const customerRoutes = require('./routes/customer');
 const vehicleRoutes = require('./routes/vehicle')
-
+const path = require('path');
 const app = express();
 //'mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test'
 //'mongodb+srv://EWD:zipGEoVPTIRJvIEh@cluster0-tcbpt.mongodb.net/node-angular?retryWrites=true'
@@ -24,6 +24,7 @@ mongoose.connect(
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/vehicleImages', express.static(path.join('/vehicleImages')));
 
 webpush.setVapidDetails(
     'mailto:you@domain.com',
@@ -39,7 +40,7 @@ app.use((req, res, next) => {
     );
     res.setHeader(
         'Access-Control-Allow-Methods',
-        'GET, POST, PATCH, DELETE, OPTIONS'
+        'GET, POST, PATCH, PUT, DELETE, OPTIONS'
     );
     next();
 });

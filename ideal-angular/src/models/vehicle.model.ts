@@ -1,12 +1,12 @@
 export interface Vehicle {
   id: string;
   vehVin: string;
-  vehYear: Number;
+  vehYear: string;
   vehMake: string;
   vehModel: string;
   vehColor: string;
   vehCondition: string;
   vehDetail: string;
-  vehPrice: Number;
+  vehPrice: string;
   vehImage: string;
 }

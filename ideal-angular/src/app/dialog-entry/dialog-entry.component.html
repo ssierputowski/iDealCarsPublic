@@ -1,17 +1,17 @@
-<h2 mat-dialog-title>Vehicle Inventory Upload</h2>
 <mat-dialog-content class="mat-typography">
-  <form [formGroup]="vehicleform" (ngSubmit)="saveVehicle()">
+  <h1 mat-dialog-title>Vehicle Inventory Upload</h1>
+  <form [formGroup]="vehicleform" >
     <mat-form-field color="accent">
       <mat-label>Vehicle VIN</mat-label>
-      <input matInput type="text" formControlName="vehVin" />
+      <input matInput type="text" formControlName="vehVin">
     </mat-form-field>
     <mat-form-field color="accent">
       <mat-label>Vehicle Year</mat-label>
-      <input matInput type="text" formControlName="vehYear" />
+      <input matInput type="text" formControlName="vehYear">
     </mat-form-field>
     <mat-form-field color="accent">
       <mat-label>Vehicle Make</mat-label>
-      <input matInput type="text" formControlName="vehMake" />
+      <input matInput type="text" formControlName="vehMake">
     </mat-form-field>
     <mat-form-field color="accent">
       <mat-label>Vehicle Model</mat-label>
@@ -37,14 +37,13 @@
           <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
             <input type="file" #filePicker (change)="onImagePicked($event)">
         </div>
-        <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && vehicleform.get('image').valid">
+        <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && vehicleform.get('vehImage').valid">
           <img [src]="imagePreview" [alt]="vehicleform.value.vehModel">
         </div>
-        <input matInput type = "text" formControlName="vehImage">
        </form>
    </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-raised-button color="accent" type="submit" [disabled]="!vehicleform.valid">
+  <button mat-raised-button color="accent" type="submit" (click)="saveVehicle()">
     UPLOAD VEHICLE
   </button>
   <button mat-raised-button mat-dialog-close>CANCEL</button>

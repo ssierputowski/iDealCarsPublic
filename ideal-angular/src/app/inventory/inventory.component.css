@@ -34,3 +34,11 @@ th {
   color: #73f7dd;
   text-decoration: underline;
 }
+.thumbnail {
+  height: 3rem;
+  width: 3rem;
+}
+.thumbnail img {
+  height: 90%;
+
+}
