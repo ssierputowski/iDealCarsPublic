@@ -1,4 +1,5 @@
 export interface Part {
+  id: string;
   partID: string;
   partName: string;
   partPrice: string;

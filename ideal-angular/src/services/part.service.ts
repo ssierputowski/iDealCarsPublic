@@ -29,8 +29,8 @@ export class PartService {
         return {
           parts: partData.parts.map(part => {
             return {
-              // id: part._id,
-              partID: part._partID,
+              id: part._id,
+              partID: part.partID,
               partName: part.partName,
               partPrice: part.partPrice,
               partQuantity: part.partQuantity,
@@ -72,7 +72,8 @@ export class PartService {
       .post<{message: string, part: Part }>(BACKEND_URL, partData)
       .subscribe((resData) => {
         const part: Part = {
-          partID: resData.part.partID,
+          id: resData.part.id,
+          partID: partID,
           partName: partName,
           partPrice: partPrice,
           partQuantity: partQuantity,
@@ -87,19 +88,21 @@ export class PartService {
       });
   }
   // helper method (not used) for edit part
-  getPartByID(partID: string) {
+  getPartByID(id: string) {
     return this.http.get<{
-      _partID: string,
+      _id: string,
+      partID: string,
       partName: string,
       partPrice: string,
       partQuantity: string,
       partCompatibility: string,
       partDescription: string,
-      partImage: string; }>( BACKEND_URL + '/' + partID);
+      partImage: string; }>( BACKEND_URL + '/' + id);
   }
 
   // EDIT functions for parts dialog-edit-part
   updatePart(
+    id: string,
     partID: string,
     partName: string,
     partPrice: string,
@@ -111,6 +114,7 @@ export class PartService {
     let partData: Part | FormData;
     if (typeof(partImage) === 'object') {
       partData = new FormData();
+      partData.append('id', id);
       partData.append('partID', partID);
       partData.append('partName', partName);
       partData.append('partPrice', partPrice);
@@ -120,6 +124,7 @@ export class PartService {
       partData.append('partImage', partImage, partName);
     } else {
         partData = {
+          id: id,
           partID: partID,
           partName: partName,
           partPrice: partPrice,
@@ -129,11 +134,12 @@ export class PartService {
           partImage: partImage
     };
   }
-    return this.http.put(BACKEND_URL + '/' + partID, partData)
+    return this.http.put(BACKEND_URL + '/' + id, partData)
     .subscribe(response => {
       const updatedParts = [...this.parts];
-      const oldPartIndex = updatedParts.findIndex(p => p.partID === partID);
+      const oldPartIndex = updatedParts.findIndex(p => p.id === id);
       const part: Part = {
+        id: id,
         partID: partID,
         partName: partName,
         partPrice: partPrice,
@@ -155,7 +161,7 @@ export class PartService {
     console.log('Deleted! ' + partID);
     return this.http.delete(BACKEND_URL + '/' + partID)
      .subscribe(() => {
-      const updatedParts = this.parts.filter(part => part.partID !== partID);
+      const updatedParts = this.parts.filter(part => part.id !== partID);
       this.parts = updatedParts;
       this.partsUpdated.next({parts: [...this.parts]});
 

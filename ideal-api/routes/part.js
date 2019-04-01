@@ -31,10 +31,11 @@ router.post('', multer({ storage: storage }).single('partImage'),
     console.log(req.body);
     const url = req.protocol + '://' + req.get('host');
     const part = new Part({
+        id: req.body.id,
         partID: req.body.partID,
         partName: req.body.partName,
         partPrice: req.body.partPrice,
-        partQauntity: req.body.partQauntity,
+        partQuantity: req.body.partQuantity,
         partCompatibility: req.body.partCompatibility,
         partDescription: req.body.partDescription,
         partImage: url + '/partImages/' + req.file.filename
@@ -44,8 +45,7 @@ router.post('', multer({ storage: storage }).single('partImage'),
             message: 'Part created successfully',
             part: {
                 ...newPart,
-                // id: newPart._id,
-                partID: newPart._partID
+                id: newPart._id,
             }
         });
     });
@@ -73,10 +73,11 @@ router.put('/:id', multer({ storage: storage }).single('partImage'),
         partImage = url + '/partImages/' + req.file.filename;
     }
     const part = new Part({
-        _partID: req.body.partID,
+        _id: req.body.id,
+        partID: req.body.partID,
         partName: req.body.partName,
         partPrice: req.body.partPrice,
-        partQauntity: req.body.partQauntity,
+        partQuantity: req.body.partQuantity,
         partCompatibility: req.body.partCompatibility,
         partDescription: req.body.partDescription,
         partImage: partImage
