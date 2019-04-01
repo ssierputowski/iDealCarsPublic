@@ -21,10 +21,10 @@ export class EditPartComponent implements OnInit {
   edit_part: FormGroup;
   dataSourceParts: MatTableDataSource<Part>;
 
-  private mode: 'edit';
-  private edit: false;
-  private part: Part;
-  private partID: string;
+  mode: 'edit';
+  edit: false;
+  part: Part;
+  partID: string;
 
 
   constructor(

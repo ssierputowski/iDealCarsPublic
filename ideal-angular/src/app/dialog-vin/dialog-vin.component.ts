@@ -30,10 +30,10 @@ export class DialogVinComponent implements OnInit {
   vehicleDdetail: string;
   vehicleDPrice: number;
   vehicleDimage: string; */
-  private mode: 'edit';
-  private edit: false;
-  private vehicle: Vehicle;
-  private vehicleID: string;
+  mode: 'edit';
+  edit: false;
+  vehicle: Vehicle;
+  vehicleID: string;
   // vehicleVIN = new FormControl( { value: 'this.vehicleDvin'});
 
 
