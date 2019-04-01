@@ -6,7 +6,8 @@ const webpush = require('web-push');
 const userRoutes = require('./routes/user');
 const messageRoutes = require('./routes/message');
 const customerRoutes = require('./routes/customer');
-const vehicleRoutes = require('./routes/vehicle')
+const vehicleRoutes = require('./routes/vehicle');
+const partRoutes = require('./routes/part')
 const path = require('path');
 const app = express();
 //'mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test'
@@ -25,6 +26,7 @@ mongoose.connect(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/vehicleImages', express.static(path.join('/vehicleImages')));
+app.use('/partImages', express.static(path.join('/partImages')));
 
 webpush.setVapidDetails(
     'mailto:you@domain.com',
@@ -52,6 +54,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/customers', customerRoutes);
 app.use('/api/vehicles', vehicleRoutes);
+app.use('/api/parts', partRoutes);
 
 module.exports = app;
 
