@@ -57,7 +57,7 @@ export class InventoryComponent implements OnInit {
     vehCondition: '',
 
   };
-
+// might be able to make search bitton work here by removing validators putting in constructor etc.
   Year = new FormControl('', {
     validators: [Validators.required]
   });
@@ -122,6 +122,7 @@ getCars(): void {
       this.vehicles = vehicleData.vehicles;
       this.dataSource = new MatTableDataSource(this.vehicles);
       this.dataSource.filterPredicate = this.tableFilter();
+      console.log(this.vehicles);
     });
 }
 // filter function for table data

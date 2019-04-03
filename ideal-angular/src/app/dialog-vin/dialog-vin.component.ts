@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angul
 import { Vehicle } from '../../models/vehicle.model';
 import { FormGroup, FormControl, Validators, FormBuilder, FormGroupDirective } from '@angular/forms';
 import { VehicleService } from '../../services/vehicle.service';
+import { DialogEntryCustomerComponent } from '../dialog-entry-customer/dialog-entry-customer.component';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
@@ -20,21 +21,13 @@ export class DialogVinComponent implements OnInit {
   newValues = [];
   current_info: any;
   edit_form: FormGroup;
+  dialogEntryCustomerRef: MatDialogRef<DialogEntryCustomerComponent>;
   dataSource: MatTableDataSource<Vehicle>;
-   /*  vehicleDvin: string;
-  vehicleDYear: number;
-  vehicleDmake: string;
-  vehicleDmodel: string;
-  vehicleDColor: string;
-  vehicleDcondition: string;
-  vehicleDdetail: string;
-  vehicleDPrice: number;
-  vehicleDimage: string; */
+
   private mode: 'edit';
   private edit: false;
   private vehicle: Vehicle;
   private vehicleID: string;
-  // vehicleVIN = new FormControl( { value: 'this.vehicleDvin'});
 
 
   constructor(
@@ -79,6 +72,7 @@ export class DialogVinComponent implements OnInit {
       }
     );
   }
+  // Image selection function
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     this.edit_form.patchValue({vehImage: file});
@@ -120,4 +114,24 @@ onDelete(vehicleID: string) {
   this.vehicleService.deleteVehicle(vehicleID);
   // this.dialogRef.close();
 }
+// opens customer entry dialog
+sellVehicle() {
+  const config: MatDialogConfig = {
+    disableClose: true,
+    minWidth: '50rem',
+  };
+  this.dialogEntryCustomerRef = this.dialog.open(DialogEntryCustomerComponent, config);
+  this.dialogEntryCustomerRef.componentInstance.data = {
+    id: this.data.id,
+    vehVin: this.data.vehVin,
+    vehYear: this.data.vehYear,
+    vehMake: this.data.vehMake,
+    vehModel: this.data.vehModel,
+    vehColor: this.data.vehColor,
+    vehCondition: this.data.vehCondition,
+    vehDetail: this.data.vehDetail,
+    vehPrice: this.data.vehPrice,
+    vehImage: this.data.vehImage,
+    };
+  }
 }

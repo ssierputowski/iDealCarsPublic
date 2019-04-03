@@ -111,7 +111,7 @@ router.get('', (req, res, next) => {
             message: 'Vehicles fetched successfully',
             vehicles: documents,
         });
-    });
+    });console.log(res);
 });
 
 module.exports = router;

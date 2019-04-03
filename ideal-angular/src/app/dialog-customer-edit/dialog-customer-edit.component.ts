@@ -1,126 +1,403 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { Vehicle } from '../../models/vehicle.model';
 import { FormGroup, FormControl, Validators, FormBuilder, FormGroupDirective } from '@angular/forms';
-import { VehicleService } from '../../services/vehicle.service';
+import { MatTabChangeEvent } from '@angular/material';
+
 import { CustomerService } from '../../services/customer.service';
-import { Subscription } from 'rxjs';
-import { DialogEntryCustomerComponent } from '../dialog-entry-customer/dialog-entry-customer.component';
+import { CustomerVehicleService } from '../../services/customerVehicle.service';
+import { CustomerServiceRecordService } from '../../services/customerServiceRecord.service';
+
 import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
+import { mimeType } from '../manager-actions/mime-type.validator';
+import { Customer } from 'src/models/customer.model';
+import { CustomerVehicle } from 'src/models/customerVehicle.model';
+import { CustomerServiceRecord } from 'src/models/customerServiceRecord.model';
 
+export interface Car {
+  objID: string;
+  custID: string;
+  carvin: string;
+  // miles: string;
+  year: string;
+  make: string;
+  model: string;
+  color: string;
+  details: string;
+  pricePaid: string;
+  carPic: string;
+}
+export interface Record {
+  objID: string;
+  custID: string;
+  carvin: string;
+  miles: string;
+  service: string;
+  date: string;
+  returnDate: string;
+  mechanic: string;
+  note: string;
+  price: string;
+  payment: string;
+}
+/* export interface CarRecord {
+
+  custID: string;
+  carvin: string;
+} */
 @Component({
   selector: 'app-dialog-customer-edit',
   templateUrl: './dialog-customer-edit.component.html',
   styleUrls: ['./dialog-customer-edit.component.css']
 })
+
 export class DialogCustomerEditComponent implements OnInit {
-
-  customerId: string;
-  firstName: string;
-  lastName: string;
-  vehicleInfo: [
-    {
-      vehicleYear: number,
-      vehicleMake: string,
-      vehicleModel: string,
-      vehicleColor: string,
-      vehicleId: string,
-      vehicleDetails: string,
-      vehicleImage: string
-    }
+  @ViewChild('tabGroup') tabGroup;
+  tabIndex = 0;
+  imagePreview: string;
+  customerInfoForm: FormGroup;
+  customerVehicleForm: FormGroup;
+  customerServiceRecordForm: FormGroup;
+  addCustomerVehicleForm: FormGroup;
+  addCustomerServiceRecordForm: FormGroup;
+  cars: Car[] = [];
+  records: Record[] = [];
+  customerVehicles: CustomerVehicle[] = [];
+  customerServiceRecords: CustomerServiceRecord[] = [];
+  states: string[] = [
+    'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
+    'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+    'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+    'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
+    'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
+    'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+    'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
   ];
-  phoneNumber: string;
-  emailAddress: string;
-  serviceRecords: [
-    {
-      servicePerformed: string,
-      serviceDate: string,
-      dateReturned: string,
-      mechanic: string,
-      serviceNotes: string[],
-      servicePrice: number,
-      paymentReceived: boolean
-    }
+  payStatus: string[] = [
+    'Awaiting Payment', 'Paid In Full'
   ];
-
-  currentInfo: any;
-  editCust: FormGroup;
-  dataSource: MatTableDataSource<Vehicle>;
+  vehicleSelector = new FormControl('', { validators: [Validators.required]});
+  recordSelector = new FormControl('', { validators: [Validators.required]});
 
   constructor(
   @Inject(MAT_DIALOG_DATA) public data: any,
   public dialog: MatDialog,
-  private vehicleService: VehicleService,
+
+  private customerServiceRecordService: CustomerServiceRecordService,
+  private customerVehicleService: CustomerVehicleService,
   private customerService: CustomerService,
-  private dialogRef: MatDialogRef<DialogEntryCustomerComponent>,
+
+  private dialogRef: MatDialogRef<DialogCustomerEditComponent>,
   private formBuild: FormBuilder,
   private route: ActivatedRoute) {
 
-    this.editCust = this.formBuild.group({
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    phoneNumber: new FormControl('', Validators.required),
-    emailAddress: new FormControl('', Validators.required),
-    // vehicleYear: new FormControl('', Validators.required),
-    // vehicleMake: new FormControl('', Validators.required),
-    // vehicleModel: new FormControl('', Validators.required),
-    // vehicleColor: new FormControl('', Validators.required),
-    // customerRecords: new FormControl('', Validators.required),
+    this.customerInfoForm = this.formBuild.group({
+      'customerId': new FormControl(null, { validators: [Validators.required] }),
+      'firstName': new FormControl(null, { validators: [Validators.required] }),
+      'lastName': new FormControl(null, { validators: [Validators.required] }),
+      'phoneNumber': new FormControl(null, { validators: [Validators.required] }),
+      'emailAddress': new FormControl(null, { validators: [Validators.required] }),
+      'address': new FormControl(null, { validators: [Validators.required] }),
+      'city': new FormControl(null, { validators: [Validators.required] }),
+      'state': new FormControl(null, { validators: [Validators.required] }),
+      'zipCode': new FormControl(null, { validators: [Validators.required] }),
+    });
+    this.customerVehicleForm = this.formBuild.group({
+      'vehicleId': new FormControl(null, { validators: [Validators.required] }),
+      'vehicleYear': new FormControl(null, { validators: [Validators.required] }),
+      'vehicleMake': new FormControl(null, { validators: [Validators.required] }),
+      'vehicleModel': new FormControl(null, { validators: [Validators.required] }),
+      'vehicleColor': new FormControl(null, { validators: [Validators.required] }),
+      'vehicleDetails': new FormControl(null, { validators: [Validators.required] }),
+      'vehiclePriceSold': new FormControl(null, { validators: [Validators.required] }),
+      'vehicleImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
+    });
+    this.customerServiceRecordForm = this.formBuild.group({
+      'vehicleId': new FormControl(null, { validators: [Validators.required] }),
+      'mileage': new FormControl(null, { validators: [Validators.required] }),
+      'servicePerformed': new FormControl(null, { validators: [Validators.required] }),
+      'serviceDate': new FormControl(null, { validators: [Validators.required] }),
+      'dateReturned': new FormControl(null, { validators: [Validators.required] }),
+      'mechanic': new FormControl(null, { validators: [Validators.required] }),
+      'serviceNotes': new FormControl(null, { validators: [Validators.required] }),
+      'servicePrice': new FormControl(null, { validators: [Validators.required] }),
+      'paymentReceived': new FormControl(null, { validators: [Validators.required] }),
+    });
+    // These below for ADDING to record of vehicles
+    this.addCustomerVehicleForm = this.formBuild.group({
+      'vehicleId': new FormControl(null, { validators: [Validators.required] }),
+      'vehicleYear': new FormControl(null, { validators: [Validators.required] }),
+      'vehicleMake': new FormControl(null, { validators: [Validators.required] }),
+      'vehicleModel': new FormControl(null, { validators: [Validators.required] }),
+      'vehicleColor': new FormControl(null, { validators: [Validators.required] }),
+      'vehicleDetails': new FormControl(null, { validators: [Validators.required] }),
+      'vehiclePriceSold': new FormControl(null, { validators: [Validators.required] }),
+      'vehicleImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
+    }); // These below for ADDING to record on customer
+    this.addCustomerServiceRecordForm = this.formBuild.group({
+      'vehicleId': new FormControl(null, { validators: [Validators.required] }),
+      'mileage': new FormControl(null, { validators: [Validators.required] }),
+      'servicePerformed': new FormControl(null, { validators: [Validators.required] }),
+      'serviceDate': new FormControl(null, { validators: [Validators.required] }),
+      'dateReturned': new FormControl(null, { validators: [Validators.required] }),
+      'mechanic': new FormControl(null, { validators: [Validators.required] }),
+      'serviceNotes': new FormControl(null, { validators: [Validators.required] }),
+      'servicePrice': new FormControl(null, { validators: [Validators.required] }),
+      'paymentReceived': new FormControl(null, { validators: [Validators.required] }),
     });
   }
 
-
   ngOnInit() {
-    console.log('onInit');
+    console.log(this.data);
+    this.displayCustomerVehicles(this.data.customerId);
+    this.vehicleSelector.valueChanges.subscribe(value => {
+      value = this.vehicleSelector.value.carvin;
+      this.displayCustomerVehicleRecords(value);
+    });
+    console.log(this.cars);
+
     this.route.params.subscribe(
       param => {
-        this.currentInfo = param;
-        console.log(this.editCust);
-        // only to see how far method gets
-        // this is where currentInfo prints [object Object] in each form section
-        // if I do this.currentInfo.vehVin and so on, none of the information is pulled from the table cell and returns empty input items
-        this.editCust.patchValue({firstName: this.data.firstName});
-        this.editCust.patchValue({lastName: this.data.lastName});
-        this.editCust.patchValue({phoneNumber: this.data.phoneNumber});
-        this.editCust.patchValue({emailAddress: this.data.emailAddress});
-        // this.editCust.patchValue({vehicleMake: this.data.vehicleMake});
-        // this.editCust.patchValue({vehicleModel: this.data.vehicleModel});
-        // this.editCust.patchValue({vehicleColor: this.data.vehicleColor});
-        // this.editCust.patchValue({customerRecords: this.data.customerRecords});
-      }
+        this.customerInfoForm.patchValue({customerId: this.data.customerId});
+        this.customerInfoForm.patchValue({firstName: this.data.firstName});
+        this.customerInfoForm.patchValue({lastName: this.data.lastName});
+        this.customerInfoForm.patchValue({phoneNumber: this.data.phoneNumber});
+        this.customerInfoForm.patchValue({emailAddress: this.data.emailAddress});
+        this.customerInfoForm.patchValue({address: this.data.address});
+        this.customerInfoForm.patchValue({city: this.data.city});
+        this.customerInfoForm.patchValue({state: this.data.state});
+        this.customerInfoForm.patchValue({zipCode: this.data.zipCode});
+
+      this.vehicleSelector.valueChanges.subscribe(value => {
+        value.carvin = this.vehicleSelector.value.carvin;
+        value.year = this.vehicleSelector.value.year;
+        value.make = this.vehicleSelector.value.make;
+        value.model = this.vehicleSelector.value.model;
+        value.color = this.vehicleSelector.value.color;
+        value.details = this.vehicleSelector.value.details;
+        value.pricePaid = this.vehicleSelector.value.pricePaid;
+        value.carPic = this.vehicleSelector.value.carPic;
+
+        this.customerVehicleForm.patchValue({vehicleId: value.carvin});
+        this.customerVehicleForm.patchValue({vehicleYear: value.year});
+        this.customerVehicleForm.patchValue({vehicleMake: value.make});
+        this.customerVehicleForm.patchValue({vehicleModel: value.model});
+        this.customerVehicleForm.patchValue({vehicleColor: value.color});
+        this.customerVehicleForm.patchValue({vehicleDetails: value.details});
+        this.customerVehicleForm.patchValue({vehiclePriceSold:  value.pricePaid});
+        this.customerVehicleForm.patchValue({vehicleImage:  value.carPic});
+      });
+
+      this.recordSelector.valueChanges.subscribe(value => {
+        value.carvin = this.recordSelector.value.carvin,
+        value.miles = this.recordSelector.value.miles,
+        value.service = this.recordSelector.value.service,
+        value.date = this.recordSelector.value.date,
+        value.returnDate = this.recordSelector.value.returnDate,
+        value.mechanic = this.recordSelector.value.mechanic,
+        value.note = this.recordSelector.value.note,
+        value.price = this.recordSelector.value.price,
+        value.payment = this.recordSelector.value.payment,
+
+        this.customerServiceRecordForm.patchValue({vehicleId:  value.carvin});
+        this.customerServiceRecordForm.patchValue({mileage: value.miles});
+        this.customerServiceRecordForm.patchValue({servicePerformed: value.service});
+        this.customerServiceRecordForm.patchValue({serviceDate: value.date});
+        this.customerServiceRecordForm.patchValue({dateReturned:  value.returnDate});
+        this.customerServiceRecordForm.patchValue({mechanic:  value.mechanic});
+        this.customerServiceRecordForm.patchValue({serviceNotes: value.note});
+        this.customerServiceRecordForm.patchValue({servicePrice: value.price});
+        this.customerServiceRecordForm.patchValue({paymentReceived: value.payment});
+      });
+  });
+}
+  // Image selection Function
+  onImagePicked(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.customerVehicleForm.patchValue({vehicleImage: file});
+    this.customerVehicleForm.get('vehicleImage').updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
+  // Image selection Function
+  addOnImagePicked(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.addCustomerVehicleForm.patchValue({vehicleImage: file});
+    this.addCustomerVehicleForm.get('vehicleImage').updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
+  // ADD customer vehicle to dB referencing customerId
+  addCustomerVehicle() {
+    if (this.tabIndex === 1) {
+        this.addCustomerVehicleForm.patchValue({customerId: this.data.customerId});
+    }
+  }
+
+  // Saves ADDed customer vehicle to dB
+  saveAddedCustomerVehicle() {
+    this.customerVehicleService.addCustomerVehicle(
+      this.data.customerId,
+      this.addCustomerVehicleForm.get('vehicleId').value,
+      this.addCustomerVehicleForm.get('vehicleYear').value,
+      this.addCustomerVehicleForm.get('vehicleMake').value,
+      this.addCustomerVehicleForm.get('vehicleModel').value,
+      this.addCustomerVehicleForm.get('vehicleColor').value,
+      this.addCustomerVehicleForm.get('vehicleDetails').value,
+      this.addCustomerVehicleForm.get('vehiclePriceSold').value,
+      this.addCustomerVehicleForm.get('vehicleImage').value
     );
   }
-  editCustomer(value) {
-
-    const newValues = {
-     // id: this.currentInfo.id,
-      // vehVin: value.vehVin,
-      // vehYear: value.vehYear,
-      // vehMake: value.vehMake,
-      // vehModel: value.vehModel,
-      // vehColor: value.vehColor,
-      // vehCondition: value.vehCondition,
-      // vehDetail: value.vehDetail,
-      // vehPrice: value.vehPrice,
-      // vehImage: value.vehImage
-      firstName: value.firstName,
-      lastName: value.lastName,
-      emailAddress: value.emailAddress,
-      phoneNumber: value.phoneNumber,
-      // vehicleYear: value.vehicleYear,
-      // vehicleMake: value.vehicleMake,
-      // vehicleModel: value.vehicleModel,
-      // vehicleColor: value.vehicleColor,
-      // customerRecords: value.customerRecords
-    };
-
-    // need editCustomer method in customer.service.ts to save new information
-    // this.customerService.editCustomer(newValues);
-
+   // ADD customer vehicle record to dB referencing customerId
+   addCustomerVehicleServiceRecord() {
+    if (this.tabIndex === 2) {
+        this.addCustomerServiceRecordForm.patchValue({customerId: this.data.customerId});
+    }
   }
+
+  // Saves ADDed customer vehicle service record to dB
+  saveAddedCustomerVehicleServiceRecord() {
+    this.customerServiceRecordService.addCustomerServiceRecord(
+      this.data.customerId,
+      this.addCustomerServiceRecordForm.get('vehicleId').value,
+      this.addCustomerServiceRecordForm.get('mileage').value,
+      this.addCustomerServiceRecordForm.get('servicePerformed').value,
+      this.addCustomerServiceRecordForm.get('serviceDate').value,
+      this.addCustomerServiceRecordForm.get('dateReturned').value,
+      this.addCustomerServiceRecordForm.get('mechanic').value,
+      this.addCustomerServiceRecordForm.get('serviceNotes').value,
+      this.addCustomerServiceRecordForm.get('servicePrice').value,
+      this.addCustomerServiceRecordForm.get('paymentReceived').value,
+    );
+  }
+  // Saves customer data edited: one vehicle and one record at a time
+  saveEditedCustomer() {
+    if (this.customerInfoForm.invalid || this.customerVehicleForm.invalid || this.customerServiceRecordForm.invalid) {
+      return;
+    }
+    this.customerService.updateCustomer(
+      this.data.id,
+      this.customerInfoForm.get('customerId').value,
+      this.customerInfoForm.get('firstName').value,
+      this.customerInfoForm.get('lastName').value,
+      this.customerInfoForm.get('phoneNumber').value,
+      this.customerInfoForm.get('emailAddress').value,
+      this.customerInfoForm.get('address').value,
+      this.customerInfoForm.get('city').value,
+      this.customerInfoForm.get('state').value,
+      this.customerInfoForm.get('zipCode').value,
+    );
+    this.customerVehicleService.updateCustomerVehicle(
+      this.vehicleSelector.value.objID,
+      this.vehicleSelector.value.custID,
+      this.customerVehicleForm.get('vehicleId').value,
+      this.customerVehicleForm.get('vehicleYear').value,
+      this.customerVehicleForm.get('vehicleMake').value,
+      this.customerVehicleForm.get('vehicleModel').value,
+      this.customerVehicleForm.get('vehicleColor').value,
+      this.customerVehicleForm.get('vehicleDetails').value,
+      this.customerVehicleForm.get('vehiclePriceSold').value,
+      this.customerVehicleForm.get('vehicleImage').value,
+    );
+    this.customerServiceRecordService.updateCustomerServiceRecord(
+      this.recordSelector.value.objID,
+      this.recordSelector.value.custID,
+      this.customerServiceRecordForm.get('vehicleId').value,
+      this.customerServiceRecordForm.get('mileage').value,
+      this.customerServiceRecordForm.get('servicePerformed').value,
+      this.customerServiceRecordForm.get('serviceDate').value,
+      this.customerServiceRecordForm.get('dateReturned').value,
+      this.customerServiceRecordForm.get('mechanic').value,
+      this.customerServiceRecordForm.get('serviceNotes').value,
+      this.customerServiceRecordForm.get('servicePrice').value,
+      this.customerServiceRecordForm.get('paymentReceived').value,
+    );
+ }
+
+ // get all customer vehicle method for testing ONLY
+ getCars(): void {
+  this.customerVehicleService.getCustomerVehicles();
+  this.customerVehicleService.getCustomerVehicleUpdateListener()
+    .subscribe((customerVehicleData: { customerVehicles: CustomerVehicle[] }) => {
+      this.customerVehicles = customerVehicleData.customerVehicles;
+      console.log(this.customerVehicles);
+    });
+}
+
+ // retrieves vehicles owned by customer
+ displayCustomerVehicles(customerId: string): void {
+   this.cars.length = 0;
+   this.customerVehicleService.getCustomerVehiclesByCustomerID(customerId);
+   this.customerVehicleService.getCustomerVehicleUpdateListener()
+   .subscribe((customerVehicleData: { customerVehicles: CustomerVehicle[] }) => {
+      this.customerVehicles = customerVehicleData.customerVehicles;
+      this.customerVehicles.map(customerVehicle => {
+        this.cars.push(
+          { objID: customerVehicle.id,
+            custID: customerVehicle.customerId,
+            carvin: customerVehicle.vehicleId,
+            year: customerVehicle.vehicleYear,
+            make: customerVehicle.vehicleMake,
+            model: customerVehicle.vehicleModel,
+            color: customerVehicle.vehicleColor,
+            details: customerVehicle.vehicleDetails,
+            pricePaid: customerVehicle.vehiclePriceSold,
+            carPic: customerVehicle.vehicleImage
+          });
+      });
+    }); console.log(this.cars);
+  }
+
+  // retrieves records of vehicles owned by customer
+ displayCustomerVehicleRecords(vehicleId: string): void {
+  this.records.length = 0;
+  this.customerServiceRecordService.getCustomerServiceRecordsByVehicleID(vehicleId);
+  this.customerServiceRecordService.getCustomerServiceRecordUpdateListener()
+  .subscribe((customerServiceRecordData: { customerServiceRecords: CustomerServiceRecord[] }) => {
+     this.customerServiceRecords = customerServiceRecordData.customerServiceRecords;
+     this.customerServiceRecords.map(customerServiceRecord => {
+        this.records.push(
+          { objID: customerServiceRecord.id,
+            custID: customerServiceRecord.customerId,
+            carvin: customerServiceRecord.vehicleId,
+            miles: customerServiceRecord.mileage,
+            service: customerServiceRecord.servicePerformed,
+            date: customerServiceRecord.serviceDate,
+            returnDate: customerServiceRecord.dateReturned,
+            mechanic: customerServiceRecord.mechanic,
+            note: customerServiceRecord.serviceNotes,
+            price: customerServiceRecord.servicePrice,
+            payment: customerServiceRecord.paymentReceived
+          });
+        }); console.log(this.records);
+    });
+  }
+
+  // fires tabchange index print statement
+  tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
+    this.tabIndex = tabChangeEvent.index;
+    console.log('tabChangeEvent => ', tabChangeEvent);
+    console.log('index => ', tabChangeEvent.index);
+  }
+
   close() {
     this.dialogRef.close();
-
   }
+
+
+  // Delete ALL entire record method for dialog going to need multiple id here from data
+  onDelete(customerId: string) {
+    this.customerService.deleteCustomer(customerId);
+    this.customerVehicleService.deleteCustomerVehicle(this.vehicleSelector.value.objID);
+    this.customerServiceRecordService.deleteCustomerServiceRecord(this.recordSelector.value.objID);
+    this.dialogRef.close();
+  }
+
+
 }
