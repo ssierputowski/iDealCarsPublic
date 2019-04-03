@@ -24,11 +24,6 @@ export class DialogVinComponent implements OnInit {
   dialogEntryCustomerRef: MatDialogRef<DialogEntryCustomerComponent>;
   dataSource: MatTableDataSource<Vehicle>;
 
-  private mode: 'edit';
-  private edit: false;
-  private vehicle: Vehicle;
-  private vehicleID: string;
-
 
   constructor(
     public dialog: MatDialog,
