@@ -59,10 +59,7 @@ export class InventoryComponent implements OnInit {
     vehCondition: '',
 
   };
-
-
-
-  // form for vehicle fitler
+  
   Year = new FormControl('', {
     validators: [Validators.required]
   });
@@ -130,6 +127,7 @@ getCars(): void {
       this.vehicles = vehicleData.vehicles;
       this.dataSource = new MatTableDataSource(this.vehicles);
       this.dataSource.filterPredicate = this.tableFilter();
+      console.log(this.vehicles);
     });
 }
 // filter function for table data

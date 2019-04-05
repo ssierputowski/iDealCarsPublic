@@ -21,7 +21,9 @@ export class DialogEntryComponent implements OnInit {
   checked = false;
   vehicleform: FormGroup;
   imagePreview: string;
-
+  carStates: string[] = [
+    'USED', 'NEW'
+  ];
   constructor(
     public dialog: MatDialog,
     private vehicleService: VehicleService,

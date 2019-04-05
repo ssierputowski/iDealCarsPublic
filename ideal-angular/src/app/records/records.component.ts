@@ -11,6 +11,7 @@ import { DialogEntryCustomerComponent } from '../dialog-entry-customer/dialog-en
 import { DialogCustomerEditComponent } from '../dialog-customer-edit/dialog-customer-edit.component';
 
 
+
 @Component({
   selector: 'app-records',
   templateUrl: './records.component.html',
@@ -37,11 +38,12 @@ export class RecordsComponent implements OnInit {
 
   displayedColumns = [
     'customerName',
+    'customerId',
     'customerEmail',
     'customerPhone',
     'customerAddress',
   ];
-  
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
@@ -106,18 +108,20 @@ getCustomer(): void {
     const config: MatDialogConfig = {
       disableClose: true,
       minWidth: '50rem',
-    };
+    }; // data listed below determines the data passed
     this.dialogCustEditRef = this.dialog.open(DialogCustomerEditComponent, config);
     this.dialogCustEditRef.componentInstance.data = {
+      id: data.id,
+      customerId: data.customerId,
       firstName: data.firstName,
       lastName: data.lastName,
-      emailAddress: data.emailAddress,
       phoneNumber: data.phoneNumber,
-      // vehicleYear: data.vehicleYear,
-      // vehicleMake: data.vehicleMake,
-      // vehicleModel: data.vehicleModel,
-      // vehicleColor: data.vehicleColor,
-      // customerRecords: data.customerRecords
+      emailAddress: data.emailAddress,
+      address: data.address,
+      city: data.city,
+      state: data.state,
+      zipCode: data.zipCode
+
       };
     }
 }
