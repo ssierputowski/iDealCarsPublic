@@ -1,9 +1,14 @@
 <h1>Message Board</h1>
 <mat-card>
-  <div class="container-fluid">
+  <div class="container-fluid" *ngIf="messages">
     <div class="row align-items-center" *ngFor="let message of messages.slice().reverse(); last as last">
       <p>{{ message.message.message }}</p>
       <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+    </div>
+  </div>
+  <div class="container-fluid" *ngIf="messages.length === 0">
+    <div class="row align-items-center">
+      <p>No messages</p>
     </div>
   </div>
 </mat-card>

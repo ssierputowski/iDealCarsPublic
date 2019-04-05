@@ -48,6 +48,8 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { DialogCustomerEditComponent } from './dialog-customer-edit/dialog-customer-edit.component';
 
 import { NotificationService } from '../services/notification.service';
+import { AddPartComponent } from './add-part/add-part.component';
+import { EditPartComponent } from './edit-part/edit-part.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -70,7 +72,9 @@ const routes: Routes = [
     RecordsComponent,
     TimeClockComponent,
     DialogCustomerEditComponent,
-    MessageBoardComponent
+    MessageBoardComponent,
+    AddPartComponent,
+    EditPartComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -106,7 +110,9 @@ const routes: Routes = [
     ManagerActionsComponent,
     DialogVinComponent,
     DialogEntryCustomerComponent,
-    DialogCustomerEditComponent
+    DialogCustomerEditComponent,
+    AddPartComponent,
+    EditPartComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
