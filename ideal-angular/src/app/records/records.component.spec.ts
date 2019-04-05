@@ -1,12 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 
 import { RecordsComponent } from './records.component';
 import { HeaderComponent } from '../header/header.component';
-import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA, Pipe } from '@angular/core';
+import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA, Pipe, inject } from '@angular/core';
 import { MatTableModule, MatDialogModule, MatCardModule } from '@angular/material';
+import { APP_BASE_HREF } from '@angular/common';
+import { AuthService } from '../auth/auth.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('RecordsComponent', () => {
   let component: RecordsComponent;
@@ -28,7 +31,8 @@ describe('RecordsComponent', () => {
         RouterModule.forRoot(routes),
         HttpClientModule,
         MatDialogModule,
-        MatCardModule
+        MatCardModule,
+        RouterTestingModule
       ],
       schemas: [
         NO_ERRORS_SCHEMA,
@@ -37,7 +41,8 @@ describe('RecordsComponent', () => {
       providers: [
         { provide: Title,
           useClass: Title,
-          Pipe }
+          Pipe },
+        { provide: APP_BASE_HREF, useValue: '/'}
       ]
     }).compileComponents();
   }));
@@ -50,8 +55,16 @@ describe('RecordsComponent', () => {
 
   it(`should have as title 'Customer Records | iDealCars'`, async(() => {
     userService = TestBed.get(Title);
-    console.log(userService);
+    // console.log(userService);
     expect(userService.getTitle()).toBe('Customer Records | iDealCars');
   }));
+
+  // it(`should not let user past without authentication`, 
+  //   fakeAsync(inject([AuthService], (auth: AuthService) => {
+  //     console.log(auth.getIsAuth());
+      
+  //     expect(auth.getIsAuth()).toBeFalsy();
+  //   })
+  // ));
 
 });

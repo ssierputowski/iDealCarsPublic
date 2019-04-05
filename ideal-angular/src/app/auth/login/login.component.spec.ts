@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { APP_BASE_HREF } from '@angular/common';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -38,7 +39,8 @@ describe('LoginComponent', () => {
       ],
       providers: [
         { provide: Title,
-          useClass: Title }
+          useClass: Title },
+        { provide: APP_BASE_HREF, useValue: '/'}
       ]
     }).compileComponents();
   }));

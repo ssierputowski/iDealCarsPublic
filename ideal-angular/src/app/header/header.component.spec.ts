@@ -12,15 +12,16 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ MatDividerModule, RouterModule, HttpClientModule ],
+      imports: [ 
+        MatDividerModule, 
+        RouterModule, 
+        HttpClientModule, 
+        RouterTestingModule, 
+        MatDividerModule, 
+      ],
       declarations: [ 
         HeaderComponent 
       ],
-      imports: [
-        RouterTestingModule,
-        MatDividerModule,
-        HttpClientModule
-      ]
     })
     .compileComponents();
   }));
