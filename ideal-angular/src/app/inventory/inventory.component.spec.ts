@@ -6,7 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { InventoryComponent } from './inventory.component';
 import { HeaderComponent } from '../header/header.component';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { MatTableModule } from '@angular/material';
+import { MatTableModule, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material';
 
 describe('InventoryComponent', () => {
   let component: InventoryComponent;
@@ -26,7 +26,8 @@ describe('InventoryComponent', () => {
       imports: [
         MatTableModule,
         RouterModule.forRoot(routes),
-        HttpClientModule
+        HttpClientModule,
+        MatDialogModule
       ],
       schemas: [
         NO_ERRORS_SCHEMA,
@@ -34,7 +35,10 @@ describe('InventoryComponent', () => {
       ],
       providers: [
         { provide: Title,
-          useClass: Title }
+          useClass: Title,
+        },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} }
       ]
     }).compileComponents();
   }));

@@ -5,8 +5,8 @@ import { Title } from '@angular/platform-browser';
 
 import { RecordsComponent } from './records.component';
 import { HeaderComponent } from '../header/header.component';
-import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { MatTableModule } from '@angular/material';
+import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA, Pipe } from '@angular/core';
+import { MatTableModule, MatDialogModule, MatCardModule } from '@angular/material';
 
 describe('RecordsComponent', () => {
   let component: RecordsComponent;
@@ -26,7 +26,9 @@ describe('RecordsComponent', () => {
       imports: [
         MatTableModule,
         RouterModule.forRoot(routes),
-        HttpClientModule
+        HttpClientModule,
+        MatDialogModule,
+        MatCardModule
       ],
       schemas: [
         NO_ERRORS_SCHEMA,
@@ -34,7 +36,8 @@ describe('RecordsComponent', () => {
       ],
       providers: [
         { provide: Title,
-          useClass: Title }
+          useClass: Title,
+          Pipe }
       ]
     }).compileComponents();
   }));

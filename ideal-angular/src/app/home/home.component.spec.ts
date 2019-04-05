@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
@@ -18,7 +18,7 @@ describe('HomeComponent', () => {
     { path: 'home', component: HomeComponent },
   ];
 
-  beforeEach(async(() => {
+  beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         HomeComponent,
@@ -47,16 +47,16 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it(`should have as title 'Home | iDealCars'`, async(() => {
+  it(`should have as title 'Home | iDealCars'`, fakeAsync(() => {
     userService = TestBed.get(Title);
     console.log(userService);
     expect(userService.getTitle()).toBe('Home | iDealCars');
   }));
 
-  it(`should have a test manager actions component`, async(() => {
-    const manage = new ManagerActionsComponent();
-    manage.test();
-    expect(manage.testVal).toBe(1);
-  }));
+  // it(`should have a test manager actions component`, fakeAsync(() => {
+  //   const manage = new ManagerActionsComponent();
+  //   manage.test();
+  //   expect(manage.testVal).toBe(1);
+  // }));
 
 });
