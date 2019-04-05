@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-2 search-container">
-        <form *ngIf="!isparts"> <!-- remove form to even out input fields  -->
+        <form> <!-- remove form to even out input fields  -->
           <mat-form-field class = "filter" color="accent">
             <mat-label>Year</mat-label>
             <input matInput [formControl]="Year">
@@ -26,43 +26,18 @@
           </mat-form-field>
         </form>
 
-        <!--########################################### PARTS FILTER ##################################################-->
-
-        <form *ngIf="isparts"> <!-- remove form to even out input fields  -->
-          <mat-form-field class = "filter" color="accent">
-            <mat-label>ID</mat-label>
-            <input matInput [formControl]="PartID">
-          </mat-form-field>
-          <mat-form-field class = "filter" color="accent">
-            <mat-label>Name</mat-label>
-            <input matInput [formControl]="Name">
-          </mat-form-field>
-          <mat-form-field class = "filter" color="accent">
-            <mat-label>Compatibility</mat-label>
-            <input matInput [formControl]="Compatibility">
-          </mat-form-field>
-        </form>
-
         <button mat-raised-button color="accent" type ="submit">SEARCH</button>
         <mat-divider></mat-divider>
         <mat-divider></mat-divider>
         <mat-divider></mat-divider>
         <mat-divider></mat-divider>
         <mat-divider></mat-divider>
-        <button mat-raised-button color="accent" (click)="openDialogEntry()" *ngIf="!isparts">ADD VEHICLE</button>
-        <button mat-raised-button color="accent" (click)="openAddPart()" *ngIf="isparts">ADD PART</button>
-        <mat-divider></mat-divider>
-        <mat-divider></mat-divider>
-        <mat-divider></mat-divider>
-        <mat-divider></mat-divider>
-        <mat-divider></mat-divider>
-        <button mat-raised-button color="warn" (click)="isparts=true" *ngIf="!isparts">VIEW PARTS</button>
-        <button mat-raised-button color="warn" (click)="isparts=false" *ngIf="isparts">VIEW VEHICLES</button>
+        <button mat-raised-button color="accent" (click)="openDialogEntry()">ADD VEHICLE</button>
       </div>
 
 
       <div class="col-10 inventory-container">
-        <table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8" style="overflow: auto; width: 100%;" *ngIf="!isparts">
+        <table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8" style="overflow: auto; width: 100%;">
           <!-- Id Column -->
           <ng-container matColumnDef="vehVin">
             <th mat-header-cell *matHeaderCellDef>VIN</th>
@@ -110,50 +85,6 @@
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="openDialogVin(row)"></tr>
-        </table>
-
-
-      <!--########################################### PARTS TABLE ##################################################-->
-
-
-        <table mat-table #table [dataSource]="dataSourceParts" class="mat-elevation-z8" style="overflow: auto; width: 100%;" *ngIf="isparts">
-          <!-- Id Column -->
-          <ng-container matColumnDef="partID">
-            <th mat-header-cell *matHeaderCellDef>ID</th>
-            <td class="vehicleSelect" mat-cell *matCellDef="let element">{{ element.partID }}</td>
-          </ng-container>
-          <!-- Name Column -->
-          <ng-container matColumnDef="partName">
-            <th mat-header-cell *matHeaderCellDef>Name</th>
-            <td mat-cell *matCellDef="let element">{{ element.partName }}</td>
-          </ng-container>
-          <!-- Price Column -->
-          <ng-container matColumnDef="partPrice">
-            <th mat-header-cell *matHeaderCellDef>Price</th>
-            <td mat-cell *matCellDef="let element">{{ element.partPrice }}</td>
-          </ng-container>
-          <!-- Quantity Column -->
-          <ng-container matColumnDef="partQuantity">
-            <th mat-header-cell *matHeaderCellDef>Quantity</th>
-            <td mat-cell *matCellDef="let element">{{ element.partQuantity }}</td>
-          </ng-container>
-          <!-- Compatibility Column -->
-          <ng-container matColumnDef="partCompatibility">
-            <th mat-header-cell *matHeaderCellDef>Compatibility</th>
-            <td mat-cell *matCellDef="let element">{{ element.partCompatibility }}</td>
-          </ng-container>
-          <!-- Description Column -->
-          <ng-container matColumnDef="partDescription">
-            <th mat-header-cell *matHeaderCellDef>Description</th>
-            <td mat-cell *matCellDef="let element">{{ element.partDescription }}</td>
-          </ng-container>
-          <!-- Image Column -->
-          <ng-container matColumnDef="partImage">
-            <th mat-header-cell *matHeaderCellDef>Image</th>
-            <td mat-cell *matCellDef="let element"><img class="thumbnail" [src]= "element.partImage"></td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumnsParts; sticky: true"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumnsParts" (click)="openEditPart(row)"></tr>
         </table>
       </div>
     </div>

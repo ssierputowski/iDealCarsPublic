@@ -10,11 +10,6 @@ import { Subscription } from 'rxjs';
 import { DialogEntryComponent } from '../dialog-entry/dialog-entry.component';
 import { DialogVinComponent } from '../dialog-vin/dialog-vin.component';
 
-import { AddPartComponent } from '../add-part/add-part.component';
-import { EditPartComponent } from '../edit-part/edit-part.component';
-import { Part } from 'src/models/part.model';
-import { PartService } from 'src/services/part.service';
-
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
@@ -22,11 +17,6 @@ import { PartService } from 'src/services/part.service';
 })
 export class InventoryComponent implements OnInit {
 
-  parts: Part[] = [];
-  totalParts = 0;
-  addPartRef: MatDialogRef<AddPartComponent>;
-  editPartRef: MatDialogRef<EditPartComponent>;
-  dataSourceParts: MatTableDataSource<Part>;
 
   vehicles: Vehicle[] = [];
   totalVehicles = 0;
@@ -45,7 +35,6 @@ export class InventoryComponent implements OnInit {
     private router: Router,
     private titleService: Title,
     private vehicleService: VehicleService,
-    private partService: PartService,
     private dialog: MatDialog
 
     ) {}
@@ -62,16 +51,6 @@ export class InventoryComponent implements OnInit {
      'vehImage'
   ];
 
-  displayedColumnsParts = [
-    'partID',
-    'partName',
-    'partPrice',
-    'partQuantity',
-    'partCompatibility',
-    'partDescription',
-    'partImage'
- ];
-
   filterValues = {
     vehYear: '',
     vehMake: '',
@@ -81,11 +60,7 @@ export class InventoryComponent implements OnInit {
 
   };
 
-  filterValuesParts = {
-    partID: '',
-    partName: '',
-    partCompatibility: ''
-  };
+
 
   // form for vehicle fitler
   Year = new FormControl('', {
@@ -104,16 +79,6 @@ export class InventoryComponent implements OnInit {
     validators: [Validators.required]
   });
 
-  // form for parts filter
-  PartID = new FormControl('', {
-    validators: [Validators.required]
-  });
-  Name = new FormControl('', {
-    validators: [Validators.required]
-  });
-  Compatibility = new FormControl('', {
-    validators: [Validators.required]
-  });
 
   ngOnInit() {
 
@@ -156,47 +121,7 @@ export class InventoryComponent implements OnInit {
       );
     this.getCars();
 
-    // ######## PARTS #########
-    // tslint:disable-next-line:triple-equals
-    if (this.isparts == true) {
-      this.titleService.setTitle('Parts Inventory | iDealCars');
-
-      this.PartID.valueChanges
-      .subscribe(
-        PartID => {
-          this.filterValuesParts.partID = PartID;
-          this.dataSourceParts.filter = JSON.stringify(this.filterValues);
-        }
-      );
-      this.Name.valueChanges
-      .subscribe(
-        Name => {
-          this.filterValuesParts.partName = Name;
-          this.dataSourceParts.filter = JSON.stringify(this.filterValues);
-        }
-      );
-      this.Compatibility.valueChanges
-      .subscribe(
-        Compatibility => {
-          this.filterValuesParts.partCompatibility = Compatibility;
-          this.dataSourceParts.filter = JSON.stringify(this.filterValues);
-        }
-      );
-
-    this.getParts();
-    }
-
   }
-
-getParts(): void {
-  this.partService.getParts();
-  this.partService.getPartUpdateListener()
-    .subscribe((partData: { parts: Part[] }) => {
-      this.parts = partData.parts;
-      this.dataSourceParts = new MatTableDataSource(this.parts);
-      this.dataSourceParts.filterPredicate = this.tableFilter();
-    });
-}
 
 getCars(): void {
   this.vehicleService.getVehicles();
@@ -218,17 +143,6 @@ tableFilter(): (data: any, filter: string) => boolean {
       && data.vehCondition.toLowerCase().indexOf(searchTerms.vehCondition) !== -1;
   };
   return filterFunction;
-  // // tslint:disable-next-line:triple-equals
-  // if (this.isparts == true) {
-  //   const filterFunctionParts = function(data, filter): boolean {
-  //     const searchTerms = JSON.parse(filter);
-  //     return data.partID.toString().toLowerCase().indexOf(searchTerms.partID) !== -1
-  //       && data.partName.toString().toLowerCase().indexOf(searchTerms.partName) !== -1
-  //       && data.partCompatibility.toString().toLowerCase().indexOf(searchTerms.partCompatibility) !== -1;
-  //   };
-  //   return filterFunctionParts;
-  // }
-
 }
 
 openDialogEntry() {
@@ -257,32 +171,6 @@ openDialogVin(data: any) {
     vehImage: data.vehImage,
     };
   }
-
-  openAddPart() {
-    this.addPartRef = this.dialog.open(AddPartComponent, {
-      disableClose: true,
-      minWidth: '50rem',
-    });
-  }
-
-  openEditPart(data: any) {
-    const config: MatDialogConfig = {
-      disableClose: true,
-      minWidth: '50rem',
-    };
-    this.editPartRef = this.dialog.open(EditPartComponent, config);
-    this.editPartRef.componentInstance.data = {
-      id: data.id,
-      partID: data.partID,
-      partName: data.partName,
-      partPrice: data.partPrice,
-      partQuantity: data.partQuantity,
-      partCompatibility: data.partCompatibility,
-      partDescription: data.partDescription,
-      partImage: data.partImage,
-
-      };
-    }
 }
 
 

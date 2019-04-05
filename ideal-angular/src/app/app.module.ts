@@ -50,12 +50,14 @@ import { DialogCustomerEditComponent } from './dialog-customer-edit/dialog-custo
 import { NotificationService } from '../services/notification.service';
 import { AddPartComponent } from './add-part/add-part.component';
 import { EditPartComponent } from './edit-part/edit-part.component';
+import { PartsInventoryComponent } from './parts-inventory/parts-inventory.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'records', component: RecordsComponent, canActivate: [AuthGuard] },
-  { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] }
+  { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
+  { path: 'parts', component: PartsInventoryComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -74,7 +76,8 @@ const routes: Routes = [
     DialogCustomerEditComponent,
     MessageBoardComponent,
     AddPartComponent,
-    EditPartComponent
+    EditPartComponent,
+    PartsInventoryComponent
   ],
   imports: [
     BrowserAnimationsModule,
