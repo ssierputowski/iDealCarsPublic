@@ -101,7 +101,7 @@ export class EditPartComponent implements OnInit {
   // this for delete
   onDelete(partID: string) {
     this.partService.deletePart(partID);
-    // this.dialogRef.close();
+    this.editPartRef.close();
   }
 
 }

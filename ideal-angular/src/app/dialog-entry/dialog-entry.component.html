@@ -38,7 +38,7 @@
       </mat-form-field>
         <div>
           <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
-            <input type="file" #filePicker (change)="onImagePicked($event)">
+            <input type="file" #filePicker (change)="onImagePicked($event)" formControlName="vehImage">
         </div>
         <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && vehicleform.get('vehImage').valid">
           <img [src]="imagePreview" [alt]="vehicleform.value.vehModel">
