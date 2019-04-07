@@ -104,9 +104,9 @@ router.get('/:id', (req, res, next) => {
     });
 });
  */
-// find by vehicleId helper
-router.get('/:vehicleId', (req, res, next) => {
-    const customerServiceRecordQuery = CustomerServiceRecord.find({vehicleId: req.params.vehicleId});
+// find by vehicleId helper===>changed here from vehicleId
+router.get('/:customerId', (req, res, next) => {
+    const customerServiceRecordQuery = CustomerServiceRecord.find({customerId: req.params.customerId});
     customerServiceRecordQuery.then(documents => {
         res.status(200).json({
             message: 'Customer Vehicle Record fetched successfully',
@@ -115,7 +115,7 @@ router.get('/:vehicleId', (req, res, next) => {
     });console.log(res);
 });
 
-router.get('', (req, res, next) => {
+/* router.get('', (req, res, next) => {
     const customerServiceRecordQuery = CustomerServiceRecord.find();
     customerServiceRecordQuery.then(documents => {
         res.status(200).json({
@@ -123,6 +123,6 @@ router.get('', (req, res, next) => {
             customerServiceRecords: documents,
         });
     });
-});
+}); */
 
 module.exports = router;

@@ -115,15 +115,16 @@ export class DialogEntryCustomerComponent implements OnInit {
 
       }
     );
-  }}
+  }
+  this.customerVehicleForm.valueChanges.subscribe(val => {
+    val = this.customerVehicleForm.get('vehicleId').value;
+    this.customerServiceRecordForm.patchValue({vehicleId: val});
+  });
+}
 
   saveCustomer() {
     if (this.customerInfoForm.invalid || this.customerVehicleForm.invalid || this.customerServiceRecordForm.invalid) {
       console.log(this.createCustomerID());
-      console.log('invalid form');
-      console.log(this.customerInfoForm.value);
-      console.log(this.customerVehicleForm.value);
-      console.log(this.customerServiceRecordForm.value);
 
       return;
     }
@@ -166,11 +167,6 @@ export class DialogEntryCustomerComponent implements OnInit {
     if (this.pulledFromInventory) {
       this.vehicleService.deleteVehicle(this.data.id);
     }
-    console.log(this.createCustomerID());
-    console.log(this.customerInfoForm.value);
-    console.log(this.customerVehicleForm.value);
-    console.log(this.customerServiceRecordForm.value);
-    // console.log(this.custID);
     this.dialogRef.close();
  }
   // method creates customerId from first, last names and number
