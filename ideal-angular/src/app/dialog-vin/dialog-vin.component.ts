@@ -23,7 +23,7 @@ export class DialogVinComponent implements OnInit {
   edit_form: FormGroup;
   dialogEntryCustomerRef: MatDialogRef<DialogEntryCustomerComponent>;
   dataSource: MatTableDataSource<Vehicle>;
-  
+
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<DialogVinComponent>,

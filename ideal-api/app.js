@@ -9,7 +9,7 @@ const vehicleRoutes = require('./routes/vehicle')
 const customerRoutes = require('./routes/customer');
 const customerVehicleRoutes = require('./routes/customerVehicle')
 const customerServiceRecordRoutes = require('./routes/customerServiceRecord');
-// const partRoutes = require('./routes/part')
+const partRoutes = require('./routes/part');
 const path = require('path');
 const app = express();
 //'mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test'
@@ -58,7 +58,7 @@ app.use('/api/vehicles', vehicleRoutes);
 app.use('/api/customers', customerRoutes);
 app.use('/api/customerVehicles', customerVehicleRoutes);
 app.use('/api/customerServiceRecords', customerServiceRecordRoutes);
-// app.use('/api/parts', partRoutes);
+app.use('/api/parts', partRoutes);
 
 module.exports = app;
 

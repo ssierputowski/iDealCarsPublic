@@ -28,13 +28,7 @@ export class PartsInventoryComponent implements OnInit {
     editPartRef: MatDialogRef<EditPartComponent>;
     dataSourceParts: MatTableDataSource<Part>;
 
-    vehicles: Vehicle[] = [];
-    totalVehicles = 0;
     private vehiclesSub: Subscription;
-    dialogEntryRef: MatDialogRef<DialogEntryComponent>;
-    dialogVinRef: MatDialogRef<DialogVinComponent>;
-    dataSource: MatTableDataSource<Vehicle>;
-    isparts = true;
     isLoading = false;
     checked = false;
     searchForm: FormGroup;
@@ -53,10 +47,10 @@ export class PartsInventoryComponent implements OnInit {
     displayedColumnsParts = [
       'partID',
       'partName',
-      'partPrice',
       'partQuantity',
       'partCompatibility',
       'partDescription',
+      'partPrice',
       'partImage'
    ];
 
@@ -65,23 +59,6 @@ export class PartsInventoryComponent implements OnInit {
       partName: '',
       partCompatibility: ''
     };
-
-    // form for vehicle fitler
-    Year = new FormControl('', {
-      validators: [Validators.required]
-    });
-    Make = new FormControl('', {
-      validators: [Validators.required]
-    });
-    Model = new FormControl('', {
-      validators: [Validators.required]
-    });
-    Color = new FormControl('', {
-      validators: [Validators.required]
-    });
-    Condition = new FormControl('', {
-      validators: [Validators.required]
-    });
 
     // form for parts filter
     PartID = new FormControl('', {
@@ -97,8 +74,6 @@ export class PartsInventoryComponent implements OnInit {
     ngOnInit() {
 
       // ######## PARTS #########
-      // tslint:disable-next-line:triple-equals
-      if (this.isparts == true) {
         this.titleService.setTitle('Parts Inventory | iDealCars');
 
         this.PartID.valueChanges
@@ -124,7 +99,6 @@ export class PartsInventoryComponent implements OnInit {
         );
 
       this.getParts();
-      }
 
     }
 
