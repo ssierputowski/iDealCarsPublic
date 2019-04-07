@@ -47,10 +47,10 @@ export class PartsInventoryComponent implements OnInit {
     displayedColumnsParts = [
       'partID',
       'partName',
-      'partPrice',
       'partQuantity',
       'partCompatibility',
       'partDescription',
+      'partPrice',
       'partImage'
    ];
 
