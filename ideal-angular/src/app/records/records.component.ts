@@ -27,7 +27,6 @@ export class RecordsComponent implements OnInit {
   checked = false;
   customers: Customer[] = [];
   totalCustomers = 0;
-  private customersSub: Subscription;
   dataSource: MatTableDataSource<Customer>;
 
   constructor(

@@ -55,10 +55,10 @@ export class CustomerServiceRecordService {
     return this.customerServiceRecordsUpdated.asObservable();
   }
   //  Find by internal customerId
-  getCustomerServiceRecordsByVehicleID(vehicleId: string) {
+  getCustomerServiceRecordsByVehicleID(customerId: string) {
     this.http
       .get<{message: string, customerServiceRecords: any}>(
-        BACKEND_URL + '/' + vehicleId
+        BACKEND_URL + '/' + customerId
       )
       .pipe(map((customerServiceRecordData) => {
         return {

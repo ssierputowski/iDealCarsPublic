@@ -27,7 +27,7 @@
       </mat-form-field>
       <mat-form-field color="accent">
         <mat-label>State</mat-label>
-        <mat-select>
+        <mat-select [formControl]="stateSelector" placeholder="PLEASE SELECT STATE">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
         </mat-select>
@@ -109,7 +109,7 @@
       </div>
     </form>
     <form *ngIf="!edit && !addVehicle">
-      <mat-select [formControl]="vehicleSelector" placeholder="PLEASE SELECT CUSTOMER VEHICLE" required [value]="car">
+      <mat-select [formControl]="vehicleSelector" placeholder="PLEASE SELECT CUSTOMER VEHICLE">
         <mat-option *ngFor="let car of cars" [value]="car">
         {{this.car?.make}} {{this.car?.model}}
         </mat-option>
@@ -118,7 +118,7 @@
           <div align="center">
             <h6>{{ vehicleSelector.value?.make }} {{ vehicleSelector.value?.model}}</h6>
               <div class="image-preview">
-                <img [src]="vehicleSelector.value?.carPic">
+                <img [src]="vehicleSelector.value?.carPic || ''">
               </div>
           </div>
           <div>
@@ -228,16 +228,11 @@
         </mat-form-field>
       </form>
       <form *ngIf="!edit &&!addRecord">
-          <mat-select [formControl]="recordSelector" placeholder="PLEASE SELECT VEHICLE SERVICE RECORD" [value]="record">
-              <mat-option *ngFor="let record of records" [value]="record">
-              {{this.record?.date}}
+          <mat-select [formControl]="recordSelector" placeholder="PLEASE SELECT VEHICLE SERVICE RECORD">
+              <mat-option *ngFor="let filteredRecord of filteredRecords" [value]="filteredRecord">
+              {{this.filteredRecord?.date}}
               </mat-option>
             </mat-select>
-          <div class="flex-container">
-            <div>
-              <h1 mat-dialog-title>{{ this.car?.vehicleMake }} {{ this.car?.vehicleModel }}</h1>
-            </div>
-          </div>
           <div class="flex-container">
               <h6>Customer ID</h6>
               <p >{{ recordSelector.value?.custID }}</p>
@@ -272,7 +267,7 @@
           </div>
           <div class="flex-container">
             <h6>Service Price</h6>
-            <p >{{ recordSelector.value?.price }}</p>
+            <p >{{ recordSelector.value?.price | currency }}</p>
           </div>
           <div class="flex-container">
               <h6>Payment Received</h6>
@@ -325,21 +320,27 @@
   </mat-tab-group>
 </mat-dialog-content>
 <mat-dialog-actions *ngIf="edit" align="end">
-  <button mat-raised-button type="submit" color="accent" (click)="saveEditedCustomer()">SAVE</button>
-  <button mat-raised-button color="warn" (click)="onDelete(this.data.id, vehicleSelector.value?.carvin)">DELETE CUSTOMER</button>
-  <button mat-raised-button mat-dialog-close color="primary">CANCEL</button>
+  <button mat-raised-button type="submit" color="accent" [disabled]="customerInfoForm.invalid || customerVehicleForm.invalid || customerServiceRecordForm.invalid" (click)="saveEditedCustomerALL() && edit=false">SAVE ALL</button>
+  <button mat-raised-button type="submit" color="accent" *ngIf="customerInfoForm.valid && tabIndex==0"(click)="saveEditedCustomerONLY() && edit=false">SAVE CUSTOMER</button>
+  <button mat-raised-button type="submit" color="accent" *ngIf="customerVehicleForm.valid && tabIndex==1"(click)="saveEditedCustomerVehicleONLY() && edit=false">SAVE VEHICLE</button>
+  <button mat-raised-button type="submit" color="accent" *ngIf="customerServiceRecordForm.valid && tabIndex==2"(click)="saveEditedCustomerServiceRecordONLY() && edit=false">SAVE SERVICE RECORD</button>
+
+  <button mat-raised-button mat-dialog-close color="warn" *ngIf="edit && tabIndex==0" (click)="onDelete(this.data.id)">DELETE CUSTOMER</button>
+  <button mat-raised-button mat-dialog-close color="warn" *ngIf="edit && tabIndex==1" (click)="onVehicleDelete(); edit=false;">DELETE VEHICLE</button>
+  <button mat-raised-button mat-dialog-close color="warn" *ngIf="edit && tabIndex==2" (click)="onRecordDelete(); edit=false;">DELETE RECORD</button>
+  <button mat-raised-button color="primary" (click)="edit=false">CANCEL</button>
 </mat-dialog-actions>
 <mat-dialog-actions *ngIf="!edit && !addVehicle && !addRecord" align="end">
   <button mat-raised-button type="submit" color="accent" (click)="edit=true">EDIT ALL</button>
-  <button mat-raised-button mat-dialog-close color="primary">CANCEL</button>
+  <button mat-raised-button mat-dialog-close color="primary" (click)="close()">CANCEL</button>
   <button mat-raised-button type="submit" color="accent" [disabled]="tabIndex!=1" (click)="addVehicle=true; addCustomerVehicle()">ADD VEHICLE</button>
   <button mat-raised-button type="submit" color="accent" [disabled]="tabIndex!=2" (click)="addRecord=true; addCustomerVehicleServiceRecord()">ADD RECORD</button>
 </mat-dialog-actions>
 <mat-dialog-actions *ngIf="addVehicle && tabIndex==1" align="end">
-    <button mat-raised-button type="submit" color="accent" (click)="saveAddedCustomerVehicle()">SAVE</button>
-    <button mat-raised-button (click)="edit=false; addVehicle=false" color="primary">CANCEL</button>
+    <button mat-raised-button type="submit" color="accent" (click)="saveAddedCustomerVehicle(); addVehicle=false;">SAVE</button>
+    <button mat-raised-button (click)="edit=false; addVehicle=false;" color="primary">CANCEL</button>
 </mat-dialog-actions>
 <mat-dialog-actions *ngIf="addRecord && tabIndex==2" align="end">
-    <button mat-raised-button type="submit" color="accent" (click)="saveAddedCustomerVehicleServiceRecord()">SAVE</button>
-    <button mat-raised-button (click)="edit=false; addRecord=false" color="primary">CANCEL</button>
+    <button mat-raised-button type="submit" color="accent" (click)="saveAddedCustomerVehicleServiceRecord(); addRecord=false;">SAVE</button>
+    <button mat-raised-button (click)="edit=false; addRecord=false;" color="primary">CANCEL</button>
 </mat-dialog-actions>
