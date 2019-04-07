@@ -9,10 +9,10 @@ mat-dialog-content {
 }
 
 .image-preview {
-  max-width: 100%;
-
+  max-width: 300px;
+  max-height: 300px;
 }
 .image-preview img {
-
-  max-width: 100%;
+  max-width: 300px;
+  max-height: 300px;
 }

@@ -15,12 +15,12 @@ input[type="file"] {
 .image-preview {
   max-width: 300px;
   max-height: 300px;
-  min-width: 300px;
-  min-height: 300px;
+  /* min-width: 300px;
+  min-height: 300px; */
 }
 .image-preview img {
   max-width: 300px;
   max-height: 300px;
-  min-width: 300px;
-  min-height: 300px;
+  /* min-width: 300px;
+  min-height: 300px; */
 }
