@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MessageBoardComponent } from './message-board.component';
+import { MatDividerModule, MatCardModule } from '@angular/material';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('MessageBoardComponent', () => {
   let component: MessageBoardComponent;
@@ -8,7 +13,16 @@ describe('MessageBoardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MessageBoardComponent ]
+      declarations: [ 
+        MessageBoardComponent 
+      ],
+      imports: [
+        MatDividerModule,
+        MatCardModule,
+        HttpClientModule,
+      ],
+      schemas: [
+      ]
     })
     .compileComponents();
   }));
