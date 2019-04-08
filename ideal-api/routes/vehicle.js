@@ -28,7 +28,6 @@ const storage = multer.diskStorage({
 // For SAVE vehicle for vehicle dialog-entry
 router.post('', multer({ storage: storage }).single('vehImage'),
 (req, res, next) => {
-    console.log(req.body);
     const url = req.protocol + '://' + req.get('host');
     const vehicle = new Vehicle({
         id: req.body.id,
@@ -69,7 +68,6 @@ router.delete('/:id', function(req, res, next) {
 router.put('/:id', multer({ storage: storage }).single('vehImage'),
 (req,res,next) => {
     let vehImage = req.body.vehImage;
-    console.log(req.file);
     if (req.file) {
         const url = req.protocol + '://' + req.get('host');
         vehImage = url + '/vehicleImages/' + req.file.filename;
@@ -87,7 +85,6 @@ router.put('/:id', multer({ storage: storage }).single('vehImage'),
         vehImage: vehImage
     });
     Vehicle.updateOne({_id: req.params.id}, vehicle).then(result => {
-        console.log(result);
         res.status(200).json({message: 'Update success!'})
     });
 
@@ -111,7 +108,7 @@ router.get('', (req, res, next) => {
             message: 'Vehicles fetched successfully',
             vehicles: documents,
         });
-    });console.log(res);
+    });
 });
 
 module.exports = router;

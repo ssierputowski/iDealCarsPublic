@@ -7,26 +7,32 @@
     <mat-form-field color="accent">
       <h6>First Name</h6>
       <input matInput type="text" formControlName="firstName">
+      <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
       <h6>Last Name</h6>
       <input matInput type="text" formControlName="lastName">
+      <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
       <h6>Phone Number</h6>
       <input matInput type="text" type="tel" mask='(000) 000-0000' formControlName="phoneNumber">
+      <mat-error>{{getPHONEErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
         <h6>Email</h6>
-        <input matInput type="text" formControlName="emailAddress">
+        <input matInput type="text" formControlName="emailAddress" type="email">
+        <mat-error>{{getEMAILErrorMessage()}}</mat-error>
       </mat-form-field>
     <mat-form-field color="accent">
         <h6>Address</h6>
         <input matInput type="text" formControlName="address">
+        <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
     <mat-form-field color="accent">
         <h6>City</h6>
         <input matInput type="text" formControlName="city">
+        <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
     <mat-form-field color="accent">
         <h6>State</h6>
@@ -38,6 +44,7 @@
     <mat-form-field color="accent">
         <h6>Zip Code</h6>
         <input matInput type="text" formControlName="zipCode">
+        <mat-error>{{getZIPErrorMessage()}}</mat-error>
       </mat-form-field>
     </form>
   </mat-tab>
@@ -46,31 +53,38 @@
     <form [formGroup]="customerVehicleForm">
     <mat-form-field>
       <h6>Vehicle VIN</h6>
-      <input matInput type="text" formControlName="vehicleId">
+      <input matInput type="text" class="uppercase" formControlName="vehicleId" required minlength="17" required maxlength="17" required pattern="[A-Za-z0-9]*">
+      <mat-error>{{getVINErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <h6>Vehicle Year</h6>
-      <input matInput type="text" formControlName="vehicleYear">
+      <input matInput type="text" formControlName="vehicleYear" required minlength="4" required maxlength="4">
+      <mat-error>{{getYEARErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <h6>Vehicle Make</h6>
       <input matInput type="text" formControlName="vehicleMake">
+      <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <h6>Vehicle Model</h6>
       <input matInput type="text" formControlName="vehicleModel">
+      <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <h6>Vehicle Color</h6>
       <input matInput type="text" formControlName="vehicleColor">
+      <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <h6>Vehicle Details</h6>
       <input matInput type="text" formControlName="vehicleDetails">
+      <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <h6>Vehicle Price Sold</h6>
       <input matInput type="text" formControlName="vehiclePriceSold">
+      <mat-error>{{getPRICEErrorMessage()}}</mat-error>
     </mat-form-field>
     <div>
       <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
@@ -91,30 +105,37 @@
     <mat-form-field>
         <h6>Mileage</h6>
         <input matInput type="text" formControlName="mileage">
+        <mat-error>{{getMILEAGEErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
       <h6>Service Performed</h6>
       <input matInput type="text" formControlName="servicePerformed">
+      <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
       <h6>Service Date</h6>
       <input matInput type="text" formControlName="serviceDate">
+      <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
       <h6>Date Returned</h6>
       <input matInput type="text" formControlName="dateReturned">
+      <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
       <h6>Mechanic</h6>
       <input matInput type="text" formControlName="mechanic">
+      <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
       <h6>Service Notes</h6>
       <input matInput type="text" formControlName="serviceNotes">
+      <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
       <h6>Service Price</h6>
       <input matInput type="text" formControlName="servicePrice">
+      <mat-error>{{getPRICEErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
       <h6>Payment Received</h6>

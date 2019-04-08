@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { Vehicle } from '../../models/vehicle.model';
-import { FormGroup, FormControl, Validators, FormBuilder, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidationErrors, FormBuilder, FormGroupDirective } from '@angular/forms';
 import { VehicleService } from '../../services/vehicle.service';
 import { DialogEntryCustomerComponent } from '../dialog-entry-customer/dialog-entry-customer.component';
 import { Subscription } from 'rxjs';
@@ -18,8 +18,10 @@ import { mimeType } from '../manager-actions/mime-type.validator';
 export class DialogVinComponent implements OnInit {
 
   imagePreview: string;
-  newValues = [];
-  current_info: any;
+  carStates: string[] = [
+    'USED', 'NEW'
+  ];
+  stateSelector = new FormControl('', { validators: [Validators.required]});
   edit_form: FormGroup;
   dialogEntryCustomerRef: MatDialogRef<DialogEntryCustomerComponent>;
   dataSource: MatTableDataSource<Vehicle>;
@@ -33,22 +35,24 @@ export class DialogVinComponent implements OnInit {
     private route: ActivatedRoute) {// this passes the data from the inventory component to this dialog
 
       this.edit_form = this.formBuild.group({
-        'vehVin': new FormControl(null, { validators: [Validators.required] }),
-        'vehYear': new FormControl(null, { validators: [Validators.required] }),
+        // tslint:disable-next-line:max-line-length
+        'vehVin': new FormControl(null, { validators: [Validators.required, Validators.minLength(17), Validators.maxLength(17), Validators.pattern('[A-Za-z0-9]*')] }),
+        // tslint:disable-next-line:max-line-length
+        'vehYear': new FormControl(null, { validators: [Validators.required, Validators.min(1900), Validators.max(2050), Validators.pattern('[0-9]*')] }),
         'vehMake': new FormControl(null, { validators: [Validators.required] }),
         'vehModel': new FormControl(null, { validators: [Validators.required] }),
         'vehColor': new FormControl(null, { validators: [Validators.required] }),
         'vehCondition': new FormControl(null, { validators: [Validators.required] }),
         'vehDetail': new FormControl(null, { validators: [Validators.required] }),
-        'vehPrice': new FormControl(null, { validators: [Validators.required] }),
+        // tslint:disable-next-line:max-line-length
+        'vehPrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern('[0-9]*')] }),
         'vehImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
       });
      }
 
 
   ngOnInit() {
-    console.log(this.data.id);
-    console.log(this.data);
+    this.stateSelector.setValue(this.data.vehCondition || this.stateSelector.markAsPristine);
     // Patches form with vehicle data for EDIT
     this.route.params.subscribe(
       param => {
@@ -95,7 +99,6 @@ export class DialogVinComponent implements OnInit {
       this.edit_form.get('vehImage').value
 
     );
-    console.log(this.edit_form.value);
      this.dialogRef.close();
   }
 
@@ -127,5 +130,21 @@ sellVehicle() {
     vehPrice: this.data.vehPrice,
     vehImage: this.data.vehImage,
     };
+  }
+    // ERROR Messaging=======================================
+  getVINErrorMessage() {
+    return  'VIN must be 17 letters, numbers in length!';
+  }
+  getYEARErrorMessage() {
+    return  'YEAR must be between 1900-2050!';
+  }
+  getPRICEErrorMessage() {
+    return  'PRICE must be a number less than 20,000,000!';
+  }
+  getMILEAGEErrorMessage() {
+    return  'MILEAGE must be a number less than 20,000,000!';
+  }
+  getGENErrorMessage() {
+    return  'FIELD REQUIRED!';
   }
 }

@@ -128,8 +128,7 @@ export class CustomerServiceRecordService {
             };
             this.customerServiceRecords.push(customerServiceRecord);
             this.customerServiceRecordsUpdated.next({customerServiceRecords: [...this.customerServiceRecords]});
-            console.log(resData);
-           // this.router.navigate(['/records']);
+            // this.router.navigate(['/records']);
             // window.location.reload();
           });
       }
