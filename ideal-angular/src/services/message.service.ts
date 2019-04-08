@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
-
 import { environment } from '../environments/environment';
-
 import { Message } from '../models/message.model';
+import { User } from '../models/user.model';
+import { UserService } from './user.service';
+
+
 
 const BACKEND_URL = environment.apiUrl + '/messages';
 
@@ -15,19 +16,11 @@ export class MessageService {
   private messages: Message[] = [];
   private messagesUpdatedListener = new Subject<{messages: Message[]}>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public userService: UserService) { }
 
   getMessages() {
-    this.http.get<{response: string, messages: any}>(BACKEND_URL).pipe(map((messageData) => {
-      return { messages: messageData.messages.map(message => {
-        return {
-          message: message,
-        };
-      })
-    };
-    }))
-    .subscribe((updatedMessageData) => {
-      this.messages = updatedMessageData.messages;
+    this.http.get<Message[]>(BACKEND_URL).subscribe(res => {
+      this.messages = res;
       this.messagesUpdatedListener.next({messages: [...this.messages]});
     });
   }
@@ -36,13 +29,20 @@ export class MessageService {
     return this.messagesUpdatedListener.asObservable();
   }
 
-  postMessage(message: string) {
-    const messageData: Message = {
-      message: message,
-    };
-    this.http.post(BACKEND_URL, messageData)
-      .subscribe((response) => {
-        this.getMessages();
-      });
+  postMessage(creator: string, date: string, content: string) {
+    let user = '';
+    this.userService.getUser(creator).subscribe(res => {
+      user += res.firstName + ' ';
+      user += res.lastName;
+      const messageData: Message = {
+        creator: user,
+        date: date,
+        content: content
+      };
+      this.http.post(BACKEND_URL, messageData)
+        .subscribe(() => {
+          this.getMessages();
+        });
+    });
   }
 }

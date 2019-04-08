@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'src/services/message.service';
+import { UserService } from 'src/services/user.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-message-board',
@@ -8,7 +10,10 @@ import { MessageService } from 'src/services/message.service';
 })
 export class MessageBoardComponent implements OnInit {
 
-  constructor(private messageService: MessageService) { }
+  constructor(
+    private messageService: MessageService,
+    private authService: AuthService,
+  ) { }
 
   messages: any = [];
 

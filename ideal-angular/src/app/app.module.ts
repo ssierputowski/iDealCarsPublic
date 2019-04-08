@@ -30,6 +30,7 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
 
+import { AlertComponent } from './auth/alert/alert.component';
 import { AppComponent } from './app.component';
 import { DialogEntryComponent } from './dialog-entry/dialog-entry.component';
 import { DialogEntryCustomerComponent } from './dialog-entry-customer/dialog-entry-customer.component';
@@ -51,6 +52,7 @@ import { NotificationService } from '../services/notification.service';
 import { AddPartComponent } from './add-part/add-part.component';
 import { EditPartComponent } from './edit-part/edit-part.component';
 import { PartsInventoryComponent } from './parts-inventory/parts-inventory.component';
+import { ErrorInterceptor } from './auth/error-interceptor';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -62,6 +64,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
+    AlertComponent,
     AppComponent,
     DialogEntryComponent,
     DialogEntryCustomerComponent,
@@ -119,6 +122,7 @@ const routes: Routes = [
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     NotificationService
   ],
   bootstrap: [AppComponent],

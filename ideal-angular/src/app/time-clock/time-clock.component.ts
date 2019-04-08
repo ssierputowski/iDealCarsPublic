@@ -17,6 +17,7 @@ export class TimeClockComponent implements OnInit {
   }
 
   employeeId: string;
+  weekOf: any;
   sunday: any;
   monday: any;
   tuesday: any;
@@ -29,6 +30,7 @@ export class TimeClockComponent implements OnInit {
     this.employeeId = localStorage.getItem('employeeId');
     this.userService.getUserSchedule(this.employeeId)
       .subscribe((data) => {
+        this.weekOf = data.schedule.weekOf;
         this.sunday = data.schedule.sunday;
         this.monday = data.schedule.monday;
         this.tuesday = data.schedule.tuesday;
@@ -36,6 +38,7 @@ export class TimeClockComponent implements OnInit {
         this.thursday = data.schedule.thursday;
         this.friday = data.schedule.friday;
         this.saturday = data.schedule.saturday;
+        console.log(this.weekOf);
       });
   }
 

@@ -4,7 +4,7 @@ mat-card {
   align-items: center;
   width: 75%;
   background: none;
-  margin: auto;
+  margin: 0;
 }
 
 button {
