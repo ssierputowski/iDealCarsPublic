@@ -74,6 +74,9 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
   vehicleSelector = new FormControl('', { validators: [Validators.required]});
   recordSelector = new FormControl('', { validators: [Validators.required]});
   stateSelector = new FormControl('', { validators: [Validators.required]});
+  public edit: boolean;
+  public addRecord: boolean;
+  public addVehicle: boolean;
 
   constructor(
   @Inject(MAT_DIALOG_DATA) public data: any,
@@ -506,5 +509,23 @@ addCustomerVehicle() {
   }
   ngOnDestroy() {
     console.log('destroyed');
+  }
+  setEdit() {
+    this.edit = true;
+  }
+  unSetEdit() {
+    this.edit = false;
+  }
+  setAddRecord() {
+    this.addRecord = true;
+  }
+  unSetAddRecord() {
+    this.addRecord = false;
+  }
+  setAddVehicle() {
+    this.addVehicle = true;
+  }
+  unSetAddVehicle() {
+    this.addVehicle = false;
   }
 }

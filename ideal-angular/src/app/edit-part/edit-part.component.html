@@ -4,26 +4,32 @@
   <mat-form-field>
     <h6>Part ID</h6>
    <input matInput type="text" formControlName="partID">
+   <mat-error>{{getGENErrorMessage()}}</mat-error>
   </mat-form-field>
   <mat-form-field>
     <h6>Part Name</h6>
     <input matInput type="text" formControlName="partName">
+    <mat-error>{{getGENErrorMessage()}}</mat-error>
   </mat-form-field>
   <mat-form-field>
     <h6>Part Price</h6>
     <input matInput type="text" formControlName="partPrice">
+    <mat-error>{{getPRICEErrorMessage()}}</mat-error>
   </mat-form-field>
   <mat-form-field>
     <h6>Part Quantity</h6>
-    <input matInput type="text" formControlName="partQuantity">
+    <input matInput type="text" formControlName="partQuantity"required minlength="1" required maxlength="4">
+    <mat-error>{{getQUANTITYErrorMessage()}}</mat-error>
   </mat-form-field>
   <mat-form-field>
     <h6>Part Compatibility</h6>
     <input matInput type="text" formControlName="partCompatibility">
+    <mat-error>{{getGENErrorMessage()}}</mat-error>
   </mat-form-field>
   <mat-form-field>
     <h6>Part Description</h6>
     <input matInput type="text" formControlName="partDescription">
+    <mat-error>{{getGENErrorMessage()}}</mat-error>
   </mat-form-field>
   <div>
     <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { Part } from '../../models/part.model';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidationErrors, FormBuilder } from '@angular/forms';
 import { PartService } from '../../services/part.service';
 import { Subscription } from 'rxjs';
 import { mimeType } from '../manager-actions/mime-type.validator';
@@ -38,10 +38,10 @@ export class AddPartComponent implements OnInit {
         validators: [Validators.required]
       }),
       'partPrice': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern('[0-9]*')]
       }),
       'partQuantity': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.min(1), Validators.max(1000), Validators.pattern('[0-9]*')]
       }),
       'partCompatibility': new FormControl(null, {
         validators: [Validators.required]
@@ -93,6 +93,16 @@ export class AddPartComponent implements OnInit {
       this.imagePreview = reader.result as string;
     };
     reader.readAsDataURL(file);
+  }
+  // ERROR Messaging=======================================
+  getPRICEErrorMessage() {
+    return  'PRICE must be a number less than 20,000,000!';
+  }
+  getQUANTITYErrorMessage() {
+    return  'QUANTITY must be a number less than 1,000!';
+  }
+  getGENErrorMessage() {
+    return  'FIELD REQUIRED!';
   }
 }
 

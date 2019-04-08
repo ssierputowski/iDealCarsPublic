@@ -38,8 +38,10 @@ export class EditPartComponent implements OnInit {
       this.edit_part = this.formBuild.group({
         'partID': new FormControl(null, { validators: [Validators.required] }),
         'partName': new FormControl(null, { validators: [Validators.required] }),
-        'partPrice': new FormControl(null, { validators: [Validators.required] }),
-        'partQuantity': new FormControl(null, { validators: [Validators.required] }),
+        // tslint:disable-next-line:max-line-length
+        'partPrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern('[0-9]*')] }),
+        // tslint:disable-next-line:max-line-length
+        'partQuantity': new FormControl(null, { validators: [Validators.required, Validators.min(1), Validators.max(1000), Validators.pattern('[0-9]*')] }),
         'partCompatibility': new FormControl(null, { validators: [Validators.required] }),
         'partDescription': new FormControl(null, { validators: [Validators.required] }),
         'partImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
@@ -48,8 +50,7 @@ export class EditPartComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.data.id);
-    console.log(this.data);
+
     // Patches form with part data for EDIT
     this.route.params.subscribe(
       param => {
@@ -103,5 +104,14 @@ export class EditPartComponent implements OnInit {
     this.partService.deletePart(partID);
     this.editPartRef.close();
   }
-
+  // ERROR Messaging=======================================
+  getPRICEErrorMessage() {
+    return  'PRICE must be a number less than 20,000,000!';
+  }
+  getQUANTITYErrorMessage() {
+    return  'QUANTITY must be a number less than 1,000!';
+  }
+  getGENErrorMessage() {
+    return  'FIELD REQUIRED!';
+  }
 }
