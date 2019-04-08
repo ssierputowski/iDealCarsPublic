@@ -76,9 +76,14 @@
     <!--     =================this is a TAB========================================================== -->
     <mat-tab label="Customer Vehicles">
       <form [formGroup]="customerVehicleForm" *ngIf="edit">
-      <mat-form-field>
+        <div class="flex-container">
+            <h6>Vehicle VIN</h6>
+            <p >{{ vehicleSelector.value?.carvin }}</p>
+        </div>
+        <mat-form-field>
         <h6>Vehicle Year</h6>
-        <input matInput type="text" formControlName="vehicleYear">
+        <input matInput type="text" formControlName="vehicleYear" required minlength="4" required maxlength="4">
+        <mat-error>{{getYEARErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field>
         <h6>Vehicle Make</h6>
@@ -99,6 +104,7 @@
       <mat-form-field>
         <h6>Vehicle Price Sold</h6>
         <input matInput type="text" formControlName="vehiclePriceSold">
+        <mat-error>{{getPRICEErrorMessage()}}</mat-error>
       </mat-form-field>
       <div>
         <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
@@ -149,11 +155,13 @@
           </div>
           <mat-form-field>
             <h6>Vehicle VIN</h6>
-            <input matInput type="text" formControlName="vehicleId">
+            <input matInput type="text" class="uppercase" formControlName="vehicleId" required minlength="17" required maxlength="17" required pattern="[A-Za-z0-9]*">
+            <mat-error>{{getVINErrorMessage()}}</mat-error>
           </mat-form-field>
           <mat-form-field>
             <h6>Vehicle Year</h6>
-            <input matInput type="text" formControlName="vehicleYear">
+            <input matInput type="text" formControlName="vehicleYear" required minlength="4" required maxlength="4">
+            <mat-error>{{getYEARErrorMessage()}}</mat-error>
           </mat-form-field>
           <mat-form-field>
             <h6>Vehicle Make</h6>
@@ -174,6 +182,7 @@
           <mat-form-field>
             <h6>Vehicle Price Sold</h6>
             <input matInput type="text" formControlName="vehiclePriceSold">
+            <mat-error>{{getPRICEErrorMessage()}}</mat-error>
           </mat-form-field>
           <div>
             <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
@@ -195,6 +204,11 @@
             <h6>Vehicle VIN</h6>
             <p >{{ this.recordSelector?.value.carvin }}</p>
         </div>
+        <mat-form-field color="accent">
+          <mat-label>Mileage</mat-label>
+          <input matInput type="text" formControlName="mileage">
+          <mat-error>{{getMILEAGEErrorMessage()}}</mat-error>
+        </mat-form-field>
         <mat-form-field color="accent">
           <mat-label>Service Performed</mat-label>
           <input matInput type="text" formControlName="servicePerformed">
@@ -218,6 +232,7 @@
         <mat-form-field color="accent">
           <mat-label>Service Price</mat-label>
           <input matInput type="text" formControlName="servicePrice">
+          <mat-error>{{getPRICEErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field color="accent">
         <h6>Payment Received</h6>
@@ -284,6 +299,11 @@
                 <p >{{ this.vehicleSelector?.value.carvin }}</p>
             </div>
             <mat-form-field color="accent">
+              <mat-label>Mileage</mat-label>
+              <input matInput type="text" formControlName="mileage">
+              <mat-error>{{getMILEAGEErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field color="accent">
               <mat-label>Service Performed</mat-label>
               <input matInput type="text" formControlName="servicePerformed">
             </mat-form-field>
@@ -306,6 +326,7 @@
             <mat-form-field color="accent">
               <mat-label>Service Price</mat-label>
               <input matInput type="text" formControlName="servicePrice">
+              <mat-error>{{getPRICEErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field color="accent">
             <h6>Payment Received</h6>

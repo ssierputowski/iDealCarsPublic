@@ -3,35 +3,46 @@
   <form [formGroup]="edit_form" *ngIf="edit">
     <mat-form-field>
       <h6>Vehicle VIN</h6>
-     <input matInput type="text" formControlName="vehVin">
+     <input matInput type="text"  class="uppercase" formControlName="vehVin"required minlength="17" required maxlength="17" required pattern="[A-Za-z0-9]*">
+     <mat-error>{{getVINErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <h6>Vehicle Year</h6>
-      <input matInput type="text" formControlName="vehYear">
+      <input matInput type="text" formControlName="vehYear" required minlength="4" required maxlength="4">
+      <mat-error>{{getYEARErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <h6>Vehicle Make</h6>
       <input matInput type="text" formControlName="vehMake">
+      <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <h6>Vehicle Model</h6>
       <input matInput type="text" formControlName="vehModel">
+      <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <h6>Vehicle Color</h6>
       <input matInput type="text" formControlName="vehColor">
+      <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <h6>Vehicle Condition</h6>
-      <input matInput type="text" formControlName="vehCondition">
+      <mat-select formControlName="vehCondition">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let carState of carStates" [value]="carState">{{carState}}</mat-option>
+      </mat-select>
+      <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <h6>Vehicle Detail</h6>
       <input matInput type="text" formControlName="vehDetail">
+      <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <h6>Vehicle Price</h6>
       <input matInput type="text" formControlName="vehPrice">
+      <mat-error>{{getPRICEErrorMessage()}}</mat-error>
     </mat-form-field>
     <div>
       <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
@@ -60,7 +71,7 @@
     </div>
       <div class="flex-container">
       <h6>Vehicle VIN</h6>
-      <p >{{ this.data.vehVin }}</p>
+      <p >{{ this.data.vehVin | uppercase }}</p>
     </div>
     <div class="flex-container">
       <h6>Vehicle Color</h6>

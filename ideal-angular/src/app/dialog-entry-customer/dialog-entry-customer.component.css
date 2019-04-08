@@ -3,6 +3,12 @@ form {
   display: flex;
   flex-direction: column;
 }
+input[type="file"] {
+  visibility: hidden;
+}
+.uppercase{
+  text-transform: uppercase;
+}
 
 mat-dialog-content {
   height: 100%;

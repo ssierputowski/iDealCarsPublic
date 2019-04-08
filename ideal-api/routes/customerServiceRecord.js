@@ -27,7 +27,6 @@ const storage = multer.diskStorage({
 });
 router.post('',  multer({ storage: storage }).single('vehicleImage'),
 (req, res, next) => {
-    console.log(req.body);
     const url = req.protocol + '://' + req.get('host');
     const customerServiceRecord = new CustomerServiceRecord({
         id: req.body.id,
@@ -69,7 +68,6 @@ router.delete('/:id', function(req, res, next) {
 router.put('/:id', multer({ storage: storage }).single('vehicleImage'),
 (req,res,next) => {
     let vehicleImage = req.body.vehicleImage;
-    console.log(req.file);
     if (req.file) {
         const url = req.protocol + '://' + req.get('host');
         vehicleImage = url + '/customerVehicleImages/' + req.file.filename;
@@ -88,7 +86,6 @@ router.put('/:id', multer({ storage: storage }).single('vehicleImage'),
         paymentReceived: req.body.paymentReceived
     });
     CustomerServiceRecord.updateOne({_id: req.params.id}, customerServiceRecord).then(result => {
-        console.log(result);
         res.status(200).json({message: 'Update success!'})
     });
 })
@@ -112,7 +109,7 @@ router.get('/:customerId', (req, res, next) => {
             message: 'Customer Vehicle Record fetched successfully',
             customerServiceRecords: documents,
         });
-    });console.log(res);
+    });
 });
 
 /* router.get('', (req, res, next) => {

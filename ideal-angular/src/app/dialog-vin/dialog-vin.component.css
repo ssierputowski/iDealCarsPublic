@@ -11,6 +11,9 @@ mat-dialog-content {
 input[type="file"] {
   visibility: hidden;
 }
+.uppercase{
+  text-transform: uppercase;
+}
 
 .image-preview {
   max-width: 300px;

@@ -93,8 +93,7 @@ export class CustomerService {
             };
             this.customers.push(customer);
             this.customersUpdated.next({customers: [...this.customers]});
-            console.log(resData);
-           // this.router.navigate(['/records']);
+            // this.router.navigate(['/records']);
             // window.location.reload();
           });
       }

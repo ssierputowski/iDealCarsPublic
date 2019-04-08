@@ -41,7 +41,7 @@
           <!-- Id Column -->
           <ng-container matColumnDef="vehVin">
             <th mat-header-cell *matHeaderCellDef>VIN</th>
-            <td class="vehicleSelect" mat-cell *matCellDef="let element">{{ element.vehVin }}</td>
+            <td class="vehicleSelect" mat-cell *matCellDef="let element">{{ element.vehVin | uppercase }}</td>
           </ng-container>
           <!-- Year Column -->
           <ng-container matColumnDef="vehYear">

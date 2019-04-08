@@ -28,7 +28,6 @@ const storage = multer.diskStorage({
 // For SAVE part for part dialog-add-part
 router.post('', multer({ storage: storage }).single('partImage'),
 (req, res, next) => {
-    console.log(req.body);
     const url = req.protocol + '://' + req.get('host');
     const part = new Part({
         id: req.body.id,
@@ -67,7 +66,6 @@ router.delete('/:id', function(req, res, next) {
 router.put('/:id', multer({ storage: storage }).single('partImage'),
 (req,res,next) => {
     let partImage = req.body.partImage;
-    console.log(req.file);
     if (req.file) {
         const url = req.protocol + '://' + req.get('host');
         partImage = url + '/partImages/' + req.file.filename;
@@ -83,7 +81,6 @@ router.put('/:id', multer({ storage: storage }).single('partImage'),
         partImage: partImage
     });
     Part.updateOne({_id: req.params.id}, part).then(result => {
-        console.log(result);
         res.status(200).json({message: 'Update success!'})
     });
 

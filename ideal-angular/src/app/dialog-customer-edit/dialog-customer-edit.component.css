@@ -3,11 +3,16 @@ form {
   display: flex;
   flex-direction: column;
 }
+.uppercase{
+  text-transform: uppercase;
+}
 
 mat-dialog-content {
   height: 100%;
 }
-
+input[type="file"] {
+  visibility: hidden;
+}
 .image-preview {
   max-width: 100%;
 

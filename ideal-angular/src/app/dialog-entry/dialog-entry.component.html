@@ -3,23 +3,28 @@
   <form [formGroup]="vehicleform" >
     <mat-form-field color="accent">
       <mat-label>Vehicle VIN</mat-label>
-      <input matInput type="text" formControlName="vehVin">
+      <input matInput type="text" class="uppercase" formControlName="vehVin" required minlength="17" required maxlength="17" required pattern="[A-Za-z0-9]*">
+      <mat-error>{{getVINErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
       <mat-label>Vehicle Year</mat-label>
-      <input matInput type="text" formControlName="vehYear">
+      <input matInput type="text" formControlName="vehYear" required minlength="4" required maxlength="4">
+      <mat-error>{{getYEARErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
       <mat-label>Vehicle Make</mat-label>
       <input matInput type="text" formControlName="vehMake">
+      <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
       <mat-label>Vehicle Model</mat-label>
       <input matInput type = "text" formControlName="vehModel">
+      <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
         <mat-label>Vehicle Color</mat-label>
         <input matInput type = "text" formControlName="vehColor">
+        <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
         <h6>Vehicle Condition</h6>
@@ -27,22 +32,25 @@
             <mat-option>None</mat-option>
             <mat-option *ngFor="let carState of carStates" [value]="carState">{{carState}}</mat-option>
         </mat-select>
+        <mat-error>{{getGENErrorMessage()}}</mat-error>
         </mat-form-field>
     <mat-form-field>
       <mat-label>Vehicle Detail</mat-label>
       <input matInput type = "text" formControlName="vehDetail">
+      <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
         <mat-label>Vehicle Price</mat-label>
         <input matInput type = "text" formControlName="vehPrice">
+        <mat-error>{{getPRICEErrorMessage()}}</mat-error>
       </mat-form-field>
-        <div>
+      <div>
           <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
-            <input type="file" #filePicker (change)="onImagePicked($event)" formControlName="vehImage">
-        </div>
-        <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && vehicleform.get('vehImage').valid">
-          <img [src]="imagePreview" [alt]="vehicleform.value.vehModel">
-        </div>
+          <input type="file" #filePicker (change)="onImagePicked($event)">
+      </div>
+      <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && vehicleform.get('vehImage').valid">
+        <img [src]="imagePreview" [alt]="vehicleform.value.vehModel">
+      </div>
        </form>
    </mat-dialog-content>
 <mat-dialog-actions align="end">
