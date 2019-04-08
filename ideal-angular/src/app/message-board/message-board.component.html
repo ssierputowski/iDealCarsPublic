@@ -2,7 +2,13 @@
 <mat-card>
   <div class="container-fluid" *ngIf="messages">
     <div class="row align-items-center" *ngFor="let message of messages.slice().reverse(); last as last">
-      <p>{{ message.message.message }}</p>
+      <div class="col-12 p-2">
+        <span><b>{{ message.creator }}</b></span>
+        <span> on <b>{{ message.date | date: 'mediumDate' }}</b></span>
+        <span> at <b>{{ message.date | date: 'hh:mm a' }}</b></span>
+        <br>
+        <p>{{ message.content }}</p>
+      </div>
       <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
     </div>
   </div>
