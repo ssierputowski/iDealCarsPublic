@@ -25,6 +25,7 @@ export class DialogVinComponent implements OnInit {
   edit_form: FormGroup;
   dialogEntryCustomerRef: MatDialogRef<DialogEntryCustomerComponent>;
   dataSource: MatTableDataSource<Vehicle>;
+  public edit = false;
 
   constructor(
     public dialog: MatDialog,
@@ -146,5 +147,12 @@ sellVehicle() {
   }
   getGENErrorMessage() {
     return  'FIELD REQUIRED!';
+  }
+
+  setEdit() {
+    this.edit = true;
+  }
+  unSetEdit() {
+    this.edit = false;
   }
 }

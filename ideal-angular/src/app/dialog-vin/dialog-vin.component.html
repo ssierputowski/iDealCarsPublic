@@ -93,7 +93,7 @@
     <button mat-raised-button mat-dialog-close>CANCEL</button>
 </mat-dialog-actions>
 <mat-dialog-actions *ngIf="!edit" align="end">
-  <button mat-raised-button color="warn" (click)="edit=true">EDIT</button>
+  <button mat-raised-button color="warn" (click)="setEdit()">EDIT</button>
   <button mat-raised-button mat-dialog-close color="primary">CANCEL</button>
   <button mat-raised-button mat-dialog-close color="accent" (click)="sellVehicle()">MARK AS SOLD</button>
 </mat-dialog-actions>
