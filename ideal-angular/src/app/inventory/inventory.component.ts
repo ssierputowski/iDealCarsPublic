@@ -10,19 +10,21 @@ import { Subscription } from 'rxjs';
 import { DialogEntryComponent } from '../dialog-entry/dialog-entry.component';
 import { DialogVinComponent } from '../dialog-vin/dialog-vin.component';
 
-
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
+
+
   vehicles: Vehicle[] = [];
   totalVehicles = 0;
   private vehiclesSub: Subscription;
   dialogEntryRef: MatDialogRef<DialogEntryComponent>;
   dialogVinRef: MatDialogRef<DialogVinComponent>;
   dataSource: MatTableDataSource<Vehicle>;
+  isparts = true;
   isLoading = false;
   checked = false;
   searchForm: FormGroup;
@@ -74,6 +76,7 @@ export class InventoryComponent implements OnInit {
     validators: [Validators.required]
   });
 
+
   ngOnInit() {
 
     this.titleService.setTitle('Vehicle Inventory | iDealCars');
@@ -114,7 +117,9 @@ export class InventoryComponent implements OnInit {
         }
       );
     this.getCars();
+
   }
+
 getCars(): void {
   this.vehicleService.getVehicles();
   this.vehicleService.getVehicleUpdateListener()
@@ -122,6 +127,7 @@ getCars(): void {
       this.vehicles = vehicleData.vehicles;
       this.dataSource = new MatTableDataSource(this.vehicles);
       this.dataSource.filterPredicate = this.tableFilter();
+     // console.log(this.vehicles);
     });
 }
 // filter function for table data
@@ -163,7 +169,6 @@ openDialogVin(data: any) {
     vehImage: data.vehImage,
     };
   }
-
 }
 
 

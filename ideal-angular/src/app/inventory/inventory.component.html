@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-2 search-container">
-        <form> <!-- remove form to even out input fields  -->
+        <!-- <form> remove form to even out input fields  -->
           <mat-form-field class = "filter" color="accent">
             <mat-label>Year</mat-label>
             <input matInput [formControl]="Year">
@@ -24,14 +24,15 @@
             <mat-label>Condition</mat-label>
             <input matInput [formControl]="Condition">
           </mat-form-field>
-        </form>
-        <button mat-raised-button color="accent" type ="submit">SEARCH</button>
+        <!-- </form> -->
+
+        <!-- <button mat-raised-button color="accent" type ="submit">SEARCH</button>
         <mat-divider></mat-divider>
         <mat-divider></mat-divider>
         <mat-divider></mat-divider>
         <mat-divider></mat-divider>
-        <mat-divider></mat-divider>
-        <button mat-raised-button color="accent" (click)="openDialogEntry()">ADD TO INVENTORY</button>
+        <mat-divider></mat-divider> -->
+        <button mat-raised-button color="accent" (click)="openDialogEntry()">ADD VEHICLE</button>
       </div>
 
 
@@ -40,7 +41,7 @@
           <!-- Id Column -->
           <ng-container matColumnDef="vehVin">
             <th mat-header-cell *matHeaderCellDef>VIN</th>
-            <td class="vehicleSelect" mat-cell *matCellDef="let element">{{ element.vehVin }}</td>
+            <td class="vehicleSelect" mat-cell *matCellDef="let element">{{ element.vehVin | uppercase }}</td>
           </ng-container>
           <!-- Year Column -->
           <ng-container matColumnDef="vehYear">
@@ -75,7 +76,7 @@
           <!-- Price Column -->
           <ng-container matColumnDef="vehPrice">
             <th mat-header-cell *matHeaderCellDef>Price</th>
-            <td mat-cell *matCellDef="let element">{{ element.vehPrice }}</td>
+            <td mat-cell *matCellDef="let element">{{ element.vehPrice | currency }}</td>
           </ng-container>
           <!-- Image Column -->
           <ng-container matColumnDef="vehImage">

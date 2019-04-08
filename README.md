@@ -54,6 +54,10 @@ After installing through the steps above continue on with these steps
   * Click on ```open an existing project```
     * Open the file from the git called iDealCarsBehavioral.side
       * Hit the play button to run the current test
+  * run ```npm install -g selenium-web-driver``` to install the command line runner
+  * run ```npm install -g "internet driver"``` to install the driver that you wish to run (interet driver = 'chromedriver', 'edgedriver', 'safaridriver', etc.)
+    * run ```selenium-web-driver iDealCarsBehavioral.side``` to run the test
+  
 
 ### Built With
 * [Angular 6](https://angular.io/)

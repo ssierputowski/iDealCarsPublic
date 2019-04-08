@@ -17,6 +17,7 @@ export class TimeClockComponent implements OnInit {
   }
 
   employeeId: string;
+  weekOf: any;
   sunday: any;
   monday: any;
   tuesday: any;
@@ -28,7 +29,8 @@ export class TimeClockComponent implements OnInit {
   ngOnInit() {
     this.employeeId = localStorage.getItem('employeeId');
     this.userService.getUserSchedule(this.employeeId)
-      .subscribe((data) => {
+      .subscribe((data: any) => {
+        this.weekOf = data.schedule.weekOf;
         this.sunday = data.schedule.sunday;
         this.monday = data.schedule.monday;
         this.tuesday = data.schedule.tuesday;

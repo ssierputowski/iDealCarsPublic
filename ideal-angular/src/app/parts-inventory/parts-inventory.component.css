@@ -1,0 +1,44 @@
+main {
+  font-size: 14px !important;
+}
+
+table {
+  width: 100%;
+  background: lightgrey;
+}
+
+th {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.max-width {
+  max-width: 25rem;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.inventory-container {
+  height: 50rem;
+  overflow: auto;
+}
+
+.vehicleSelect {
+  cursor: pointer;
+}
+
+.vehicleSelect:hover {
+  color: #73f7dd;
+  text-decoration: underline;
+}
+.thumbnail {
+  height: 3rem;
+  width: 3rem;
+}
+.thumbnail img {
+  height: 90%;
+
+}

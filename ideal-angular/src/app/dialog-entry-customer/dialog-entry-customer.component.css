@@ -3,7 +3,21 @@ form {
   display: flex;
   flex-direction: column;
 }
+input[type="file"] {
+  visibility: hidden;
+}
+.uppercase{
+  text-transform: uppercase;
+}
 
 mat-dialog-content {
+  height: 100%;
+}
+.image-preview {
+  height: 5rem;
+  margin: 1rem 0;
+}
+
+.image-preview img {
   height: 100%;
 }

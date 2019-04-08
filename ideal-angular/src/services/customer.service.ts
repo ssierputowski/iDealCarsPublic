@@ -30,30 +30,16 @@ export class CustomerService {
         return {
           customers: customerData.customers.map(customer => {
             return {
-            //  customerId: customer.customerId,
+              id: customer._id,
+              customerId: customer.customerId,
               firstName: customer.firstName,
               lastName: customer.lastName,
-             // vehicleYear: customer.vehicleYear,
-             // vehicleMake: customer.vehicleMake,
-             // vehicleModel: customer.vehicleModel,
-             // vehicleColor: customer.vehicleColor,
-             // vehicleId: customer.vehicleId,
-             // vehicleDetails: customer.vehicleDetails,
-             // vehicleImage: customer.vehicleImage,
               phoneNumber: customer.phoneNumber,
               emailAddress: customer.emailAddress,
               address: customer.address,
               city: customer.city,
               state: customer.state,
-              zipCode: customer.zipCode,
-             // servicePerformed: customer.servicePerformed,
-             // serviceDate: customer.serviceDate,
-             // dateReturned: customer.dateReturned,
-             // mechanic: customer.mechanic,
-             // serviceNotes: customer.serviceNotes,
-             // servicePrice: customer.servicePrice,
-             // paymentReceived: customer.paymentReceived,
-              id: customer._id
+              zipCode: customer.zipCode
             };
           })
         };
@@ -68,54 +54,109 @@ export class CustomerService {
     return this.customersUpdated.asObservable();
   }
 
+// ADD method for Customer dialog
   addCustomer(
-   // customerId: string,
+    customerId: string,
     firstName: string,
     lastName: string,
-    /*vehicleInfo: [
-      {
-        vehicleYear: number,
-        vehicleMake: string,
-        vehicleModel: string,
-        vehicleColor: string,
-        vehicleId: string,
-        vehicleDetails: string,
-        vehicleImage: string,
-      }
-    ], */
     phoneNumber: string,
     emailAddress: string,
     address: string,
     city: string,
     state: string,
-    zipCode: number,
-   /* serviceRecords: [
-      {
-        servicePerformed: string,
-        serviceDate: string,
-        dateReturned: string,
-        mechanic: string,
-        serviceNotes: string[],
-        servicePrice: number,
-        paymentReceived: boolean,
-    }
-  ], */
+    zipCode: string,
   ) {
-    const customerData: Customer = {
-    //  customerId: customerId,
-      firstName: firstName,
-      lastName: lastName,
-      phoneNumber: phoneNumber,
-      emailAddress: emailAddress,
-      address: address,
-      city: city,
-      state: state,
-      zipCode: zipCode,
-    };
-    this.http
+    const customerData = new FormData();
+      customerData.append('customerId', customerId);
+      customerData.append('firstName', firstName);
+      customerData.append('lastName', lastName);
+      customerData.append('phoneNumber', phoneNumber);
+      customerData.append('emailAddress', emailAddress);
+      customerData.append('address', address);
+      customerData.append('city', city);
+      customerData.append('state', state);
+      customerData.append('zipCode', zipCode);
+    return this.http
       .post<{message: string, customer: Customer}>(BACKEND_URL, customerData)
       .subscribe((resData) => {
-        this.getCustomers();
+        const customer: Customer = {
+              id: resData.customer.id,
+              customerId: customerId,
+              firstName: firstName,
+              lastName: lastName,
+              phoneNumber: phoneNumber,
+              emailAddress: emailAddress,
+              address: address,
+              city: city,
+              state: state,
+              zipCode: zipCode,
+            };
+            this.customers.push(customer);
+            this.customersUpdated.next({customers: [...this.customers]});
+            // this.router.navigate(['/records']);
+            // window.location.reload();
+          });
+      }
+
+// UPDATE method for Customer dialogs
+  updateCustomer(
+    id: string,
+    customerId: string,
+    firstName: string,
+    lastName: string,
+    phoneNumber: string,
+    emailAddress: string,
+    address: string,
+    city: string,
+    state: string,
+    zipCode: string,
+  ) {
+    let customerData: Customer | FormData;
+      customerData = {
+        id: id,
+        customerId: customerId,
+        firstName: firstName,
+        lastName: lastName,
+        phoneNumber: phoneNumber,
+        emailAddress: emailAddress,
+        address: address,
+        city: city,
+        state: state,
+        zipCode: zipCode,
+      };
+      return this.http.put(BACKEND_URL + '/' + id, customerData)
+      .subscribe(response => {
+        const updatedCustomers = [...this.customers];
+        const oldCustomerIndex = updatedCustomers.findIndex(p => p.id === id);
+        const customer: Customer = {
+          id: id,
+          customerId: customerId,
+          firstName: firstName,
+          lastName: lastName,
+          phoneNumber: phoneNumber,
+          emailAddress: emailAddress,
+          address: address,
+          city: city,
+          state: state,
+          zipCode: zipCode,
+        };
+        updatedCustomers[oldCustomerIndex] = customer;
+        this.customers = updatedCustomers;
+        this.customersUpdated.next({customers: [...this.customers ]});
+        this.router.navigate(['/records']);
+        window.location.reload();
       });
-  }
+    }
+
+    // DELETE method Customer dialog
+  deleteCustomer(idCustomerID: string) {
+    console.log('Customer Deleted! ' + idCustomerID);
+    return this.http.delete(BACKEND_URL + '/' + idCustomerID)
+      .subscribe(() => {
+        const updatedCustomers = this.customers.filter(customer => customer.id !== idCustomerID);
+        this.customers = updatedCustomers;
+        this.customersUpdated.next({customers: [...this.customers]});
+      });
+    }
 }
+

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { Vehicle } from '../../models/vehicle.model';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidationErrors, FormBuilder } from '@angular/forms';
 import { VehicleService } from '../../services/vehicle.service';
 import { Subscription } from 'rxjs';
 import { mimeType } from '../manager-actions/mime-type.validator';
@@ -21,7 +21,9 @@ export class DialogEntryComponent implements OnInit {
   checked = false;
   vehicleform: FormGroup;
   imagePreview: string;
-
+  carStates: string[] = [
+    'USED', 'NEW'
+  ];
   constructor(
     public dialog: MatDialog,
     private vehicleService: VehicleService,
@@ -33,10 +35,10 @@ export class DialogEntryComponent implements OnInit {
 
     this.vehicleform = new FormGroup({
       'vehVin': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.minLength(17), Validators.maxLength(17), Validators.pattern('[A-Za-z0-9]*')]
       }),
       'vehYear': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.min(1900), Validators.max(2050), Validators.pattern('[0-9]*')]
       }),
       'vehMake': new FormControl(null, {
         validators: [Validators.required]
@@ -54,7 +56,7 @@ export class DialogEntryComponent implements OnInit {
         validators: [Validators.required]
       }),
       'vehPrice': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern('[0-9]*')]
       }),
       'vehImage': new FormControl(null, {
         validators: [Validators.required], asyncValidators: [mimeType]
@@ -91,8 +93,8 @@ export class DialogEntryComponent implements OnInit {
   /* closes 'Add Vehicle Inventory' form */
   close() {
     this.dialogRef.close();
-
   }
+  // Image selection function
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     this.vehicleform.patchValue({vehImage: file});
@@ -103,4 +105,20 @@ export class DialogEntryComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
+     // ERROR Messaging=======================================
+    getVINErrorMessage() {
+      return  'VIN must be 17 letters, numbers in length!';
+    }
+    getYEARErrorMessage() {
+      return  'YEAR must be between 1900-2050!';
+    }
+    getPRICEErrorMessage() {
+      return  'PRICE must be a number less than 20,000,000!';
+    }
+    getMILEAGEErrorMessage() {
+      return  'MILEAGE must be a number less than 20,000,000!';
+    }
+    getGENErrorMessage() {
+      return  'FIELD REQUIRED!';
+    }
   }

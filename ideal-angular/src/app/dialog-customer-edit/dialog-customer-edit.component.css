@@ -3,8 +3,21 @@ form {
   display: flex;
   flex-direction: column;
 }
+.uppercase{
+  text-transform: uppercase;
+}
 
 mat-dialog-content {
   height: 100%;
 }
-
+input[type="file"] {
+  visibility: hidden;
+}
+.image-preview {
+  max-width: 300px;
+  max-height: 300px;
+}
+.image-preview img {
+  max-width: 300px;
+  max-height: 300px;
+}

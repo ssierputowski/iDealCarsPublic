@@ -30,6 +30,7 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
 
+import { AlertComponent } from './auth/alert/alert.component';
 import { AppComponent } from './app.component';
 import { DialogEntryComponent } from './dialog-entry/dialog-entry.component';
 import { DialogEntryCustomerComponent } from './dialog-entry-customer/dialog-entry-customer.component';
@@ -48,16 +49,22 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { DialogCustomerEditComponent } from './dialog-customer-edit/dialog-customer-edit.component';
 
 import { NotificationService } from '../services/notification.service';
+import { AddPartComponent } from './add-part/add-part.component';
+import { EditPartComponent } from './edit-part/edit-part.component';
+import { PartsInventoryComponent } from './parts-inventory/parts-inventory.component';
+import { ErrorInterceptor } from './auth/error-interceptor';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'records', component: RecordsComponent, canActivate: [AuthGuard] },
-  { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] }
+  { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
+  { path: 'parts', component: PartsInventoryComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
   declarations: [
+    AlertComponent,
     AppComponent,
     DialogEntryComponent,
     DialogEntryCustomerComponent,
@@ -70,7 +77,10 @@ const routes: Routes = [
     RecordsComponent,
     TimeClockComponent,
     DialogCustomerEditComponent,
-    MessageBoardComponent
+    MessageBoardComponent,
+    AddPartComponent,
+    EditPartComponent,
+    PartsInventoryComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -106,10 +116,13 @@ const routes: Routes = [
     ManagerActionsComponent,
     DialogVinComponent,
     DialogEntryCustomerComponent,
-    DialogCustomerEditComponent
+    DialogCustomerEditComponent,
+    AddPartComponent,
+    EditPartComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     NotificationService
   ],
   bootstrap: [AppComponent],
