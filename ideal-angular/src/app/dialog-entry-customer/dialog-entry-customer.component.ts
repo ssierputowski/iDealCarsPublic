@@ -85,7 +85,7 @@ export class DialogEntryCustomerComponent implements OnInit {
       'vehicleColor': new FormControl(null, { validators: [Validators.required] }),
       'vehicleDetails': new FormControl(null, { validators: [Validators.required] }),
       // tslint:disable-next-line:max-line-length
-      'vehiclePriceSold': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern('[0-9]*')] }),
+      'vehiclePriceSold': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'vehicleImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
     });
     this.customerServiceRecordForm = this.formBuild.group({
@@ -98,7 +98,7 @@ export class DialogEntryCustomerComponent implements OnInit {
       'mechanic': new FormControl(null, { validators: [Validators.required] }),
       'serviceNotes': new FormControl(null, { validators: [Validators.required] }),
       // tslint:disable-next-line:max-line-length
-      'servicePrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern('[0-9]*')] }),
+      'servicePrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'paymentReceived': new FormControl(null, { validators: [Validators.required] }),
     });
    }
@@ -211,7 +211,7 @@ export class DialogEntryCustomerComponent implements OnInit {
     return  'YEAR must be between 1900-2050!';
   }
   getPRICEErrorMessage() {
-    return  'PRICE must be a number less than 20,000,000!';
+    return  'PRICE must be a number of format 0.00 less than 20,000,000.00!';
   }
   getMILEAGEErrorMessage() {
     return  'MILEAGE must be a number less than 20,000,000!';
@@ -231,6 +231,10 @@ export class DialogEntryCustomerComponent implements OnInit {
   getEMAILErrorMessage() {
     return  'EMAIL must be a valid email!';
   }
+  getDATEErrorMessage() {
+    return  'DATE must be in format 00/00/0000 !';
+  }
+
   /* closes 'Add Customer Inventory' form */
   close() {
     this.dialogRef.close();

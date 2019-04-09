@@ -94,12 +94,13 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
       'customerId': new FormControl(null, { validators: [Validators.required] }),
       'firstName': new FormControl(null, { validators: [Validators.required] }),
       'lastName': new FormControl(null, { validators: [Validators.required] }),
-      'phoneNumber': new FormControl(null, { validators: [Validators.required] }),
-      'emailAddress': new FormControl(null, { validators: [Validators.required] }),
+      'phoneNumber': new FormControl(null, { validators: [Validators.required, Validators.minLength(10)] }),
+      'emailAddress': new FormControl(null, { validators: [Validators.required, Validators.email] }),
       'address': new FormControl(null, { validators: [Validators.required] }),
       'city': new FormControl(null, { validators: [Validators.required] }),
       'state': new FormControl(null, { validators: [Validators.required] }),
-      'zipCode': new FormControl(null, { validators: [Validators.required] }),
+      // tslint:disable-next-line:max-line-length
+      'zipCode': new FormControl(null, { validators: [Validators.required, Validators.minLength(5), Validators.maxLength(5), Validators.max(99999), Validators.pattern('[0-9]*')] }),
     });
     this.customerVehicleForm = this.formBuild.group({
       // tslint:disable-next-line:max-line-length
@@ -111,7 +112,7 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
       'vehicleColor': new FormControl(null, { validators: [Validators.required] }),
       'vehicleDetails': new FormControl(null, { validators: [Validators.required] }),
       // tslint:disable-next-line:max-line-length
-      'vehiclePriceSold': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern('[0-9]*')] }),
+      'vehiclePriceSold': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'vehicleImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
     });
     this.customerServiceRecordForm = this.formBuild.group({
@@ -124,7 +125,7 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
       'mechanic': new FormControl(null, { validators: [Validators.required] }),
       'serviceNotes': new FormControl(null, { validators: [Validators.required] }),
       // tslint:disable-next-line:max-line-length
-      'servicePrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern('[0-9]*')] }),
+      'servicePrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'paymentReceived': new FormControl(null, { validators: [Validators.required] }),
     });
     // These below for ADDING to record of vehicles
@@ -138,7 +139,7 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
       'vehicleColor': new FormControl(null, { validators: [Validators.required] }),
       'vehicleDetails': new FormControl(null, { validators: [Validators.required] }),
       // tslint:disable-next-line:max-line-length
-      'vehiclePriceSold': new FormControl(null, { validators: [Validators.required, Validators.min(1), Validators.max(20000000), Validators.pattern('[0-9]*')] }),
+      'vehiclePriceSold': new FormControl(null, { validators: [Validators.required, Validators.min(1), Validators.max(20000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'vehicleImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
     });
     // These below for ADDING to record on customer
@@ -152,7 +153,7 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
       'mechanic': new FormControl(null, { validators: [Validators.required] }),
       'serviceNotes': new FormControl(null, { validators: [Validators.required] }),
       // tslint:disable-next-line:max-line-length
-      'servicePrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(20000000), Validators.pattern('[0-9]*')] }),
+      'servicePrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(20000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'paymentReceived': new FormControl(null, { validators: [Validators.required] }),
     });
   }
@@ -274,10 +275,28 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
     return  'YEAR must be between 1900-2050!';
   }
   getPRICEErrorMessage() {
-    return  'PRICE must be a number less than 20,000,000!';
+    return  'PRICE must be a number of format 0.00 less than 20,000,000.00!';
   }
   getMILEAGEErrorMessage() {
     return  'MILEAGE must be a number less than 20,000,000!';
+  }
+  getGENErrorMessage() {
+    return  'FIELD REQUIRED!';
+  }
+  getEMAILErrorMessage() {
+    return  'EMAIL must be a valid email!';
+  }
+  getZIPErrorMessage() {
+    return  'ZIPCODE must be a 5 digit number!';
+  }
+  getPHONEErrorMessage() {
+    return  'PHONENUMBER must be a 10 digit number!';
+  }
+  getSERVICEErrorMessage() {
+    return  'SERVICE FORM must be filled out, all vehicles checked before sold, put NA or Current Condition if applicable!';
+  }
+  getDATEErrorMessage() {
+    return  'DATE must be in format 00/00/0000 !';
   }
 /* ==================================================================================THESE ARE ADD METHODS */
 // ADD customer vehicle to dB referencing customerId

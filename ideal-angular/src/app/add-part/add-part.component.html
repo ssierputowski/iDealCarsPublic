@@ -1,9 +1,10 @@
 <mat-dialog-content class="mat-typography">
-  <h1 mat-dialog-title>Part Upload</h1>
+  <h2 mat-dialog-title>Part Upload</h2>
+  <h6 style="color: red" *ngIf="(partform.invalid)">This dissappears when Part Form inputs valid!</h6>
   <form [formGroup]="partform" >
     <mat-form-field color="accent">
       <mat-label>Part ID</mat-label>
-      <input matInput type="text" formControlName="partID">
+      <input matInput type="text" formControlName="partID" class="uppercase">
       <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
@@ -21,12 +22,12 @@
       <input matInput type = "text" formControlName="partQuantity"required minlength="1" required maxlength="4">
       <mat-error>{{getQUANTITYErrorMessage()}}</mat-error>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field color="accent">
         <mat-label>Part Compatibility</mat-label>
         <input matInput type = "text" formControlName="partCompatibility">
         <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
-    <mat-form-field>
+    <mat-form-field color="accent">
         <mat-label>Part Description</mat-label>
         <input matInput type = "text" formControlName="partDescription">
         <mat-error>{{getGENErrorMessage()}}</mat-error>
@@ -41,8 +42,6 @@
        </form>
    </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-raised-button color="accent" type="submit" (click)="savePart()">
-    UPLOAD PART
-  </button>
-  <button mat-raised-button mat-dialog-close>CANCEL</button>
+  <button mat-raised-button color="accent" type="submit" [disabled]="partform.invalid" (click)="savePart()">UPLOAD PART</button>
+  <button mat-raised-button color="primary" mat-dialog-close>CANCEL</button>
 </mat-dialog-actions>
