@@ -56,7 +56,7 @@ export class DialogEntryComponent implements OnInit {
         validators: [Validators.required]
       }),
       'vehPrice': new FormControl(null, {
-        validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern('[0-9]*')]
+        validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)]
       }),
       'vehImage': new FormControl(null, {
         validators: [Validators.required], asyncValidators: [mimeType]
@@ -113,7 +113,7 @@ export class DialogEntryComponent implements OnInit {
       return  'YEAR must be between 1900-2050!';
     }
     getPRICEErrorMessage() {
-      return  'PRICE must be a number less than 20,000,000!';
+      return  'PRICE must be a number of format 0.00 less than 20,000,000.00!';
     }
     getMILEAGEErrorMessage() {
       return  'MILEAGE must be a number less than 20,000,000!';
