@@ -1,12 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, inject } from '@angular/core/testing';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 
+import { AuthService } from '../auth/auth.service';
 import { InventoryComponent } from './inventory.component';
 import { HeaderComponent } from '../header/header.component';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { MatTableModule } from '@angular/material';
+import { MatTableModule, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material';
+import { APP_BASE_HREF } from '@angular/common';
 
 describe('InventoryComponent', () => {
   let component: InventoryComponent;
@@ -26,14 +28,20 @@ describe('InventoryComponent', () => {
       imports: [
         MatTableModule,
         RouterModule.forRoot(routes),
-        HttpClientModule
+        HttpClientModule,
+        MatDialogModule
       ],
       schemas: [
         NO_ERRORS_SCHEMA,
+        CUSTOM_ELEMENTS_SCHEMA
       ],
       providers: [
         { provide: Title,
-          useClass: Title }
+          useClass: Title,
+        },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} },
+        { provide: APP_BASE_HREF, useValue: '/'}
       ]
     }).compileComponents();
   }));
@@ -46,7 +54,7 @@ describe('InventoryComponent', () => {
 
   it(`should have as title 'Vehicle Inventory | iDealCars'`, async(() => {
     userService = TestBed.get(Title);
-    console.log(userService);
+    // console.log(userService);
     expect(userService.getTitle()).toBe('Vehicle Inventory | iDealCars');
   }));
 
@@ -55,4 +63,17 @@ describe('InventoryComponent', () => {
     const oldalert = alert;
     alert = oldalert;
   });
+
+  it(`should logout`, function () {
+
+  });
+
+  it(`should not let user past without authentication`, 
+  fakeAsync(inject([AuthService], (auth: AuthService) => {
+    console.log(auth.getIsAuth());
+    // router.navigate(['../inventory'])
+    expect(auth.getIsAuth()).toBeFalsy();
+  })
+));
+
 });

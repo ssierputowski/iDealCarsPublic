@@ -4,6 +4,7 @@ import { HeaderComponent } from './header.component';
 import { MatDividerModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -11,8 +12,16 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ MatDividerModule, RouterModule, HttpClientModule ],
-      declarations: [ HeaderComponent ]
+      imports: [ 
+        MatDividerModule, 
+        RouterModule, 
+        HttpClientModule, 
+        RouterTestingModule, 
+        MatDividerModule, 
+      ],
+      declarations: [ 
+        HeaderComponent 
+      ],
     })
     .compileComponents();
   }));
@@ -23,4 +32,7 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
   });
 
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });
