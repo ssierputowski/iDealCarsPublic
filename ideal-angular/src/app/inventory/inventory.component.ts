@@ -60,21 +60,11 @@ export class InventoryComponent implements OnInit {
 
   };
 
-  Year = new FormControl('', {
-    validators: [Validators.required]
-  });
-  Make = new FormControl('', {
-    validators: [Validators.required]
-  });
-  Model = new FormControl('', {
-    validators: [Validators.required]
-  });
-  Color = new FormControl('', {
-    validators: [Validators.required]
-  });
-  Condition = new FormControl('', {
-    validators: [Validators.required]
-  });
+  Year = new FormControl('');
+  Make = new FormControl('');
+  Model = new FormControl('');
+  Color = new FormControl('');
+  Condition = new FormControl('');
 
 
   ngOnInit() {
