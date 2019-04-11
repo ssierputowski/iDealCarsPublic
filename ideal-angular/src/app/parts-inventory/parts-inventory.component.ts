@@ -61,15 +61,9 @@ export class PartsInventoryComponent implements OnInit {
     };
 
     // form for parts filter
-    PartID = new FormControl('', {
-      validators: [Validators.required]
-    });
-    Name = new FormControl('', {
-      validators: [Validators.required]
-    });
-    Compatibility = new FormControl('', {
-      validators: [Validators.required]
-    });
+    PartID = new FormControl('');
+    Name = new FormControl('');
+    Compatibility = new FormControl('');
 
     ngOnInit() {
 
