@@ -13,7 +13,7 @@ services:
   angular:
     build: .
     ports:
-      - "127.0.0.1:8090:80"
+      - "8090:80"
     links:
       - database
     environment:
