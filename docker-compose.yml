@@ -1,21 +1,28 @@
-version: '3.0'
+# Project: iDealCars
+# Description:
 
-# Define the services/containers to be run
+# Technology Stack (MEAN Stack):
+# - MongoDB
+# - Express.js
+# - Angular 2+
+# - Node.js
+
+version: '3.6'
 services:
-
-  angular: # name of the first service
-    build: ideal-angular
+  # The Angular front-end and Express.js server
+  angular:
+    build: .
     ports:
-    - "4200:4200" # specify port mapping
-
-  express: # name of the second service
-    build: ideal-api
-    ports:
-    - "3000:3000" # specify port mapping
+      - "127.0.0.1:8090:80"
     links:
-    - database # link this service to the database service
-  
-  database: # name of the third service
-    image: mongo
-    ports:
-    - "27017:27017" #specify port forwarding
+      - database
+    environment:
+      DB_HOST: mongodb://database:27017/idealcars
+    container_name: ideal_web
+
+  # MongoDB
+  database:
+    build: ./ideal-database
+    expose:
+      - 27017
+    container_name: ideal_db
