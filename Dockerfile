@@ -24,7 +24,7 @@ RUN ls -lah
 ### STAGE 2: Build the server ###
 WORKDIR /
 
-COPY .${e}/package.json .${e}/package-lock.json ./
+COPY .${e}/package.json ./
 
 # Install node_modules
 RUN npm install -dd && mkdir ${e} && cp -R ./node_modules ${e} && cp package.json ${e}
