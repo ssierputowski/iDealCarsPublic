@@ -15,11 +15,11 @@ const app = express();
 //'mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test'
 //'mongodb+srv://EWD:zipGEoVPTIRJvIEh@cluster0-tcbpt.mongodb.net/node-angular?retryWrites=true'
 mongoose.connect(
-    'mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test',
+    process.env.DB_HOST,
     { useNewUrlParser: true }
     )
     .then(() => {
-        console.log('Connected to the database!');
+        console.log('Connected to the database at: ' + process.env.DB_HOST + '!');
     })
     .catch(() => {
         console.log('Connection failed!');
