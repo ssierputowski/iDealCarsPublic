@@ -320,11 +320,11 @@
         </form>
         <form [formGroup]="addCustomerServiceRecordForm" *ngIf="this.addRecord && tabIndex==2">
             <div class="flex-container">
-                <h6>Customer ID</h6>
+                <h4>Customer ID</h4>
                 <p >{{ this.data.customerId }}</p>
             </div>
             <div class="flex-container">
-                <h6>Vehicle VIN</h6>
+                <h4>Vehicle VIN</h4>
                 <p >{{ this.vehicleSelector?.value.carvin }}</p>
             </div>
             <mat-form-field color="accent">
