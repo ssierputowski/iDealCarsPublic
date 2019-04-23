@@ -74,7 +74,7 @@ export class ManagerActionsComponent implements OnInit {
       'satOut': new FormControl('OFF'),
     });
     this.messageForm = new FormGroup({
-      'message': new FormControl(null, {validators: [Validators.required]})
+      'content': new FormControl(null, {validators: [Validators.required]})
     });
     this.userService.getUsers();
     this.userService.getUserUpdateListener()
@@ -140,7 +140,11 @@ export class ManagerActionsComponent implements OnInit {
     if (this.messageForm.invalid) {
       return;
     }
-    this.messageService.postMessage(this.messageForm.value.message);
+    this.messageService.postMessage(
+      localStorage.getItem('employeeId'),
+      Date.now().toString(),
+      this.messageForm.value.content
+    );
     this.messageForm.reset();
   }
 

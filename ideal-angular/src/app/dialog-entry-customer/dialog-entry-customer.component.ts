@@ -3,7 +3,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angul
 import { Customer } from '../../models/customer.model';
 import { CustomerVehicle } from '../../models/customerVehicle.model';
 import { CustomerServiceRecord} from '../../models/customerServiceRecord.model';
-import { FormGroup, FormControl, Validators, FormBuilder, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidationErrors, FormBuilder, FormGroupDirective } from '@angular/forms';
 import { MatTabChangeEvent } from '@angular/material';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
@@ -65,34 +65,40 @@ export class DialogEntryCustomerComponent implements OnInit {
     private route: ActivatedRoute
    ) {
     this.customerInfoForm = this.formBuild.group({
-      'firstName': new FormControl(null, { validators: [Validators.required] }),
-      'lastName': new FormControl(null, { validators: [Validators.required] }),
-      'phoneNumber': new FormControl(null, { validators: [Validators.required] }),
-      'emailAddress': new FormControl(null, { validators: [Validators.required] }),
-      'address': new FormControl(null, { validators: [Validators.required] }),
-      'city': new FormControl(null, { validators: [Validators.required] }),
+      'firstName': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
+      'lastName': new FormControl(null, { validators: [Validators.required, Validators.maxLength(20)] }),
+      'phoneNumber': new FormControl(null, { validators: [Validators.required, Validators.minLength(10)] }),
+      'emailAddress': new FormControl(null, { validators: [Validators.required, Validators.email] }),
+      'address': new FormControl(null, { validators: [Validators.required, Validators.maxLength(30)] }),
+      'city': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
       'state': new FormControl(null, { validators: [Validators.required] }),
-      'zipCode': new FormControl(null, { validators: [Validators.required] }),
+      // tslint:disable-next-line:max-line-length
+      'zipCode': new FormControl(null, { validators: [Validators.required, Validators.minLength(5), Validators.maxLength(5), Validators.max(99999), Validators.pattern('[0-9]*')] }),
     });
     this.customerVehicleForm = this.formBuild.group({
-      'vehicleId': new FormControl(null, { validators: [Validators.required] }),
-      'vehicleYear': new FormControl(null, { validators: [Validators.required] }),
-      'vehicleMake': new FormControl(null, { validators: [Validators.required] }),
-      'vehicleModel': new FormControl(null, { validators: [Validators.required] }),
-      'vehicleColor': new FormControl(null, { validators: [Validators.required] }),
-      'vehicleDetails': new FormControl(null, { validators: [Validators.required] }),
-      'vehiclePriceSold': new FormControl(null, { validators: [Validators.required] }),
+      // tslint:disable-next-line:max-line-length
+      'vehicleId': new FormControl(null, { validators: [Validators.required, Validators.minLength(17), Validators.maxLength(17), Validators.pattern('[A-Za-z0-9]*')] }),
+      // tslint:disable-next-line:max-line-length
+      'vehicleYear': new FormControl(null, { validators: [Validators.required, Validators.min(1900), Validators.max(2050), Validators.pattern('[0-9]*')] }),
+      'vehicleMake': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+      'vehicleModel': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
+      'vehicleColor': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
+      'vehicleDetails': new FormControl(null, { validators: [Validators.required, Validators.maxLength(20)] }),
+      // tslint:disable-next-line:max-line-length
+      'vehiclePriceSold': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'vehicleImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
     });
     this.customerServiceRecordForm = this.formBuild.group({
       'vehicleId': new FormControl(null, { validators: [Validators.required] }),
-      'mileage': new FormControl(null, { validators: [Validators.required] }),
-      'servicePerformed': new FormControl(null, { validators: [Validators.required] }),
+      // tslint:disable-next-line:max-line-length
+      'mileage': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern('[0-9]*')] }),
+      'servicePerformed': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
       'serviceDate': new FormControl(null, { validators: [Validators.required] }),
       'dateReturned': new FormControl(null, { validators: [Validators.required] }),
-      'mechanic': new FormControl(null, { validators: [Validators.required] }),
-      'serviceNotes': new FormControl(null, { validators: [Validators.required] }),
-      'servicePrice': new FormControl(null, { validators: [Validators.required] }),
+      'mechanic': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
+      'serviceNotes': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+      // tslint:disable-next-line:max-line-length
+      'servicePrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'paymentReceived': new FormControl(null, { validators: [Validators.required] }),
     });
    }
@@ -197,6 +203,38 @@ export class DialogEntryCustomerComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
+   // ERROR Messaging=======================================
+   getVINErrorMessage() {
+    return  'VIN must be 17 letters, numbers in length!';
+  }
+  getYEARErrorMessage() {
+    return  'YEAR must be between 1900-2050!';
+  }
+  getPRICEErrorMessage() {
+    return  'PRICE must be a number of format 0.00 less than 20,000,000.00!';
+  }
+  getMILEAGEErrorMessage() {
+    return  'MILEAGE must be a number less than 20,000,000!';
+  }
+  getZIPErrorMessage() {
+    return  'ZIPCODE must be a 5 digit number!';
+  }
+  getPHONEErrorMessage() {
+    return  'PHONENUMBER must be a 10 digit number!';
+  }
+  getSERVICEErrorMessage() {
+    return  'SERVICE FORM must be filled out, all vehicles checked before sold, put NA or Current Condition if applicable!';
+  }
+  getGENErrorMessage() {
+    return  'FIELD REQUIRED!';
+  }
+  getEMAILErrorMessage() {
+    return  'EMAIL must be a valid email!';
+  }
+  getDATEErrorMessage() {
+    return  'DATE must be in format 00/00/0000 !';
+  }
+
   /* closes 'Add Customer Inventory' form */
   close() {
     this.dialogRef.close();

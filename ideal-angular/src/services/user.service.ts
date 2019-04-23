@@ -49,11 +49,11 @@ export class UserService {
   }
 
   getUser(id: string) {
-    return this.http.get<{ user: any }>(BACKEND_URL + '/' + id);
+    return this.http.get<User>(BACKEND_URL + '/' + id);
   }
 
   getUserSchedule(id: string) {
-    return this.http.get<{ schedule: any }>(BACKEND_URL + '/schedule/' + id);
+    return this.http.get(BACKEND_URL + '/schedule/' + id);
   }
 
   setUserSchedule(
@@ -93,6 +93,48 @@ export class UserService {
       satOut: satOut
     };
     this.http.post<{message: string, schedule: Schedule}>(BACKEND_URL + '/schedule', scheduleData)
+      .subscribe((response) => {
+        console.log(response);
+      });
+  }
+
+  updateUserSchedule(
+    employeeId: string,
+    weekOf: string,
+    sunIn: string,
+    sunOut: string,
+    monIn: string,
+    monOut: string,
+    tueIn: string,
+    tueOut: string,
+    wedIn: string,
+    wedOut: string,
+    thuIn: string,
+    thuOut: string,
+    friIn: string,
+    friOut: string,
+    satIn: string,
+    satOut: string
+  ) {
+    const scheduleData = {
+      employeeId: employeeId,
+      weekOf: weekOf,
+      sunIn: sunIn,
+      sunOut: sunOut,
+      monIn: monIn,
+      monOut: monOut,
+      tueIn: tueIn,
+      tueOut: tueOut,
+      wedIn: wedIn,
+      wedOut: wedOut,
+      thuIn: thuIn,
+      thuOut: thuOut,
+      friIn: friIn,
+      friOut: friOut,
+      satIn: satIn,
+      satOut: satOut
+    };
+    this.http.put<{message: string}>(BACKEND_URL + '/schedule', scheduleData)
       .subscribe((response) => {
         console.log(response);
       });

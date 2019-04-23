@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { Part } from '../../models/part.model';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidationErrors, FormBuilder } from '@angular/forms';
 import { PartService } from '../../services/part.service';
 import { Subscription } from 'rxjs';
 import { mimeType } from '../manager-actions/mime-type.validator';
@@ -32,22 +32,22 @@ export class AddPartComponent implements OnInit {
 
     this.partform = new FormGroup({
       'partID': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.maxLength(30)]
       }),
       'partName': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.maxLength(25)]
       }),
       'partPrice': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)]
       }),
       'partQuantity': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.min(0), Validators.max(1000), Validators.pattern('[0-9]*')]
       }),
       'partCompatibility': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.maxLength(25)]
       }),
       'partDescription': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.maxLength(25)]
       }),
       'partImage': new FormControl(null, {
         validators: [Validators.required], asyncValidators: [mimeType]
@@ -93,6 +93,16 @@ export class AddPartComponent implements OnInit {
       this.imagePreview = reader.result as string;
     };
     reader.readAsDataURL(file);
+  }
+  // ERROR Messaging=======================================
+  getPRICEErrorMessage() {
+    return  'PRICE must be a number of format 0.00 less than 20,000,000.00!';
+  }
+  getQUANTITYErrorMessage() {
+    return  'QUANTITY must be a number between 0 and 1,000!';
+  }
+  getGENErrorMessage() {
+    return  'FIELD REQUIRED!';
   }
 }
 

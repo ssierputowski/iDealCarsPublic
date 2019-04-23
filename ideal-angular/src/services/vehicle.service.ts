@@ -91,7 +91,6 @@ export class VehicleService {
         };
         this.vehicles.push(vehicle);
         this.vehiclesUpdated.next({vehicles: [...this.vehicles]});
-        console.log(resData);
         window.location.reload();
       });
   }

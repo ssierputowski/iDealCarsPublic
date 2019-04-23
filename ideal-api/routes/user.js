@@ -68,7 +68,7 @@ router.post('/login', (req, res, next) => {
         .then(data => {
             if (!data) {
                 return res.status(401).json({
-                    message: 'Auth failed!'
+                    message: 'Username or password is incorrect'
                 });
             }
             user = data;
@@ -77,7 +77,7 @@ router.post('/login', (req, res, next) => {
         .then(result => {
             if (!result) {
                 return res.status(401).json({
-                    message: 'Auth failed!'
+                    message: 'Username or password is incorrect'
                 });
             } 
             const token = jwt.sign(
@@ -93,7 +93,7 @@ router.post('/login', (req, res, next) => {
         })
         .catch(err => {
             return res.status(401).json({
-                message: 'Auth failed!'
+                message: 'Username or password is incorrect'
             });
         });
 });
@@ -179,5 +179,48 @@ router.post('/schedule', (req, res, next) => {
         });
     });
 });
+
+router.put('/schedule', (req, res, next) => {
+    const schedule = new Schedule({
+        employeeId: req.body.employeeId,
+        schedule: {
+            weekOf: req.body.weekOf,
+            sunday: {
+                timeIn: req.body.sunIn,
+                timeOut: req.body.sunOut
+            },
+            monday: {
+                timeIn: req.body.monIn,
+                timeOut: req.body.monOut
+            },
+            tuesday: {
+                timeIn: req.body.tueIn,
+                timeOut: req.body.tueOut
+            },
+            wednesday: {
+                timeIn: req.body.wedIn,
+                timeOut: req.body.wedOut
+            },
+            thursday: {
+                timeIn: req.body.thuIn,
+                timeOut: req.body.thuOut
+            },
+            friday: {
+                timeIn: req.body.friIn,
+                timeOut: req.body.friOut
+            },
+            saturday: {
+                timeIn: req.body.satIn,
+                timeOut: req.body.satOut
+            },
+        }
+    });
+    Schedule.updateOne({ employeeId: req.body.employeeId }, schedule)
+        .then(res => {
+            res.status(200).json({
+                message: 'Update successful!'
+            });
+        });
+})
 
 module.exports = router;

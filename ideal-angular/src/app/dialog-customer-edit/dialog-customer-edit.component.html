@@ -1,29 +1,40 @@
-<h2 mat-dialog-title *ngIf="edit">Edit {{this.data.lastName}}, {{this.data.firstName}} Data</h2>
-<h2 mat-dialog-title *ngIf="!edit">{{this.data.lastName}}, {{this.data.firstName}}</h2>
+<h2 mat-dialog-title *ngIf="this.edit">Edit {{this.data.lastName}}, {{this.data.firstName}} Data</h2>
+<h2 mat-dialog-title *ngIf="!this.edit">{{this.data.lastName}}, {{this.data.firstName}}</h2>
 <mat-dialog-content class="mat-typography">
   <mat-tab-group  #tabGroup (selectedTabChange)="tabChanged($event)">
     <!--     =================this is a TAB========================================================== -->
     <mat-tab label="Customer Info">
-    <form [formGroup]="customerInfoForm" *ngIf="edit">
+    <h6 style="color: red" *ngIf="(this.edit) && (customerInfoForm.invalid)">This dissappears when Customer Info Form inputs valid!</h6>
+    <form [formGroup]="customerInfoForm" *ngIf="this.edit">
       <mat-form-field color="accent">
         <mat-label>First Name</mat-label>
-        <input matInput type="text" formControlName="firstName">
+        <input matInput type="text" formControlName="firstName"required maxlength="15">
+        <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field color="accent">
         <mat-label>Last Name</mat-label>
-        <input matInput type="text" formControlName="lastName">
+        <input matInput type="text" formControlName="lastName"required maxlength="20">
+        <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field color="accent">
         <mat-label>Phone Number</mat-label>
         <input matInput type="text" mask='(000) 000-0000' formControlName="phoneNumber">
+        <mat-error>{{getPHONEErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field color="accent">
         <mat-label>Email</mat-label>
-        <input matInput type="text" formControlName="emailAddress">
+        <input matInput type="text" formControlName="emailAddress" type="email">
+        <mat-error>{{getEMAILErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field color="accent">
+        <mat-label>Address</mat-label>
+        <input matInput type="text" formControlName="address"required maxlength="30">
+        <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field color="accent">
         <mat-label>City</mat-label>
-        <input matInput type="text" formControlName="city">
+        <input matInput type="text" formControlName="city"required maxlength="25">
+        <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field color="accent">
         <mat-label>State</mat-label>
@@ -31,13 +42,15 @@
             <mat-option>None</mat-option>
             <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
         </mat-select>
+        <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field color="accent">
         <mat-label>ZipCode</mat-label>
         <input matInput type="text" formControlName="zipCode">
+        <mat-error>{{getZIPErrorMessage()}}</mat-error>
       </mat-form-field>
     </form>
-    <form *ngIf="!edit">
+    <form *ngIf="!this.edit">
         <div class="flex-container">
           <div>
             <h1 mat-dialog-title>{{ this.data.firstName }} {{ this.data.lastName }}</h1>
@@ -75,30 +88,41 @@
     </mat-tab>
     <!--     =================this is a TAB========================================================== -->
     <mat-tab label="Customer Vehicles">
-      <form [formGroup]="customerVehicleForm" *ngIf="edit">
-      <mat-form-field>
-        <h6>Vehicle Year</h6>
-        <input matInput type="text" formControlName="vehicleYear">
+    <h6 style="color: red" *ngIf="(this.edit || this.addVehicle) && (customerVehicleForm.invalid)">This dissappears when Customer Vehicle Form inputs valid!</h6>
+      <form [formGroup]="customerVehicleForm" *ngIf="this.edit">
+        <div class="flex-container">
+            <h6>Vehicle VIN</h6>
+            <p >{{ vehicleSelector.value?.carvin | uppercase }}</p>
+        </div>
+        <mat-form-field color="accent">
+        <mat-label>Vehicle Year</mat-label>
+        <input matInput type="text" formControlName="vehicleYear" required minlength="4" required maxlength="4">
+        <mat-error>{{getYEARErrorMessage()}}</mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <h6>Vehicle Make</h6>
-        <input matInput type="text" formControlName="vehicleMake">
+      <mat-form-field color="accent">
+        <mat-label>Vehicle Make</mat-label>
+        <input matInput type="text" formControlName="vehicleMake"required maxlength="25">
+        <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <h6>Vehicle Model</h6>
-        <input matInput type="text" formControlName="vehicleModel">
+      <mat-form-field color="accent">
+        <mat-label>Vehicle Model</mat-label>
+        <input matInput type="text" formControlName="vehicleModel"required maxlength="15">
+        <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <h6>Vehicle Color</h6>
-        <input matInput type="text" formControlName="vehicleColor">
+      <mat-form-field color="accent">
+        <mat-label>Vehicle Color</mat-label>
+        <input matInput type="text" formControlName="vehicleColor"required maxlength="15">
+        <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <h6>Vehicle Details</h6>
-        <input matInput type="text" formControlName="vehicleDetails">
+      <mat-form-field color="accent">
+        <mat-label>Vehicle Details</mat-label>
+        <input matInput type="text" formControlName="vehicleDetails"required maxlength="20">
+        <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <h6>Vehicle Price Sold</h6>
+      <mat-form-field color="accent">
+        <mat-label>Vehicle Price Sold</mat-label>
         <input matInput type="text" formControlName="vehiclePriceSold">
+        <mat-error>{{getPRICEErrorMessage()}}</mat-error>
       </mat-form-field>
       <div>
         <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
@@ -108,7 +132,7 @@
         <img [src]="imagePreview" [alt]="customerVehicleForm.value.vehicleModel">
       </div>
     </form>
-    <form *ngIf="!edit && !addVehicle">
+    <form *ngIf="!this.edit && !this.addVehicle">
       <mat-select [formControl]="vehicleSelector" placeholder="PLEASE SELECT CUSTOMER VEHICLE">
         <mat-option *ngFor="let car of cars" [value]="car">
         {{this.car?.make}} {{this.car?.model}}
@@ -131,7 +155,7 @@
         </div>
           <div class="flex-container">
           <h6>Vehicle VIN</h6>
-          <p >{{ vehicleSelector.value?.carvin }}</p>
+          <p >{{ vehicleSelector.value?.carvin | uppercase }}</p>
         </div>
         <div class="flex-container">
           <h6>Vehicle Color</h6>
@@ -142,38 +166,45 @@
           <p >{{ vehicleSelector.value?.details }}</p>
         </div>
       </form>
-      <form [formGroup]="addCustomerVehicleForm" *ngIf="addVehicle && tabIndex==1">
+      <form [formGroup]="addCustomerVehicleForm" *ngIf="this.addVehicle && tabIndex==1">
           <div class="flex-container">
               <h6>Customer ID</h6>
               <p >{{ this.data.customerId }}</p>
           </div>
-          <mat-form-field>
-            <h6>Vehicle VIN</h6>
-            <input matInput type="text" formControlName="vehicleId">
+          <mat-form-field color="accent">
+            <mat-label>Vehicle VIN</mat-label>
+            <input matInput type="text" class="uppercase" formControlName="vehicleId" required minlength="17" required maxlength="17" required pattern="[A-Za-z0-9]*">
+            <mat-error>{{getVINErrorMessage()}}</mat-error>
           </mat-form-field>
-          <mat-form-field>
-            <h6>Vehicle Year</h6>
-            <input matInput type="text" formControlName="vehicleYear">
+          <mat-form-field color="accent">
+            <mat-label>Vehicle Year</mat-label>
+            <input matInput type="text" formControlName="vehicleYear" required minlength="4" required maxlength="4">
+            <mat-error>{{getYEARErrorMessage()}}</mat-error>
           </mat-form-field>
-          <mat-form-field>
-            <h6>Vehicle Make</h6>
-            <input matInput type="text" formControlName="vehicleMake">
+          <mat-form-field color="accent">
+            <mat-label>Vehicle Make</mat-label>
+            <input matInput type="text" formControlName="vehicleMake"required maxlength="25">
+            <mat-error>{{getGENErrorMessage()}}</mat-error>
           </mat-form-field>
-          <mat-form-field>
-            <h6>Vehicle Model</h6>
-            <input matInput type="text" formControlName="vehicleModel">
+          <mat-form-field color="accent">
+            <mat-label>Vehicle Model</mat-label>
+            <input matInput type="text" formControlName="vehicleModel"required maxlength="15">
+            <mat-error>{{getGENErrorMessage()}}</mat-error>
           </mat-form-field>
-          <mat-form-field>
-            <h6>Vehicle Color</h6>
-            <input matInput type="text" formControlName="vehicleColor">
+          <mat-form-field color="accent">
+            <mat-label>Vehicle Color</mat-label>
+            <input matInput type="text" formControlName="vehicleColor"required maxlength="15">
+            <mat-error>{{getGENErrorMessage()}}</mat-error>
           </mat-form-field>
-          <mat-form-field>
-            <h6>Vehicle Details</h6>
-            <input matInput type="text" formControlName="vehicleDetails">
+          <mat-form-field color="accent">
+            <mat-label>Vehicle Details</mat-label>
+            <input matInput type="text" formControlName="vehicleDetails"required maxlength="20">
+            <mat-error>{{getGENErrorMessage()}}</mat-error>
           </mat-form-field>
-          <mat-form-field>
-            <h6>Vehicle Price Sold</h6>
+          <mat-form-field color="accent">
+            <mat-label>Vehicle Price Sold</mat-label>
             <input matInput type="text" formControlName="vehiclePriceSold">
+            <mat-error>{{getPRICEErrorMessage()}}</mat-error>
           </mat-form-field>
           <div>
             <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
@@ -186,49 +217,62 @@
     </mat-tab>
     <!--     =================this is a TAB========================================================== -->
     <mat-tab label="Customer Service Records">
-        <form [formGroup]="customerServiceRecordForm" *ngIf="edit">
+        <h6 style="color: red" *ngIf="(this.edit || this.addRecord) && (customerServiceRecordForm.invalid )">This dissappears when Service Record Form inputs valid!</h6>
+        <form [formGroup]="customerServiceRecordForm" *ngIf="this.edit">
         <div class="flex-container">
             <h6>Customer ID</h6>
             <p >{{ this.data.customerId }}</p>
         </div>
         <div class="flex-container">
             <h6>Vehicle VIN</h6>
-            <p >{{ this.recordSelector?.value.carvin }}</p>
+            <p >{{ this.recordSelector?.value.carvin | uppercase }}</p>
         </div>
         <mat-form-field color="accent">
+          <mat-label>Mileage</mat-label>
+          <input matInput type="text" formControlName="mileage" type="number">
+          <mat-error>{{getMILEAGEErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field color="accent">
           <mat-label>Service Performed</mat-label>
-          <input matInput type="text" formControlName="servicePerformed">
+          <input matInput type="text" formControlName="servicePerformed"required maxlength="25">
+          <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field color="accent">
           <mat-label>Service Date</mat-label>
-          <input matInput type="text" formControlName="serviceDate">
+          <input matInput type="text" formControlName="serviceDate" type="date">
+          <mat-error>{{getDATEErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field color="accent">
           <mat-label>Date Returned</mat-label>
-          <input matInput type="text" formControlName="dateReturned">
+          <input matInput type="text" formControlName="dateReturned" type="date">
+          <mat-error>{{getDATEErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field color="accent">
           <mat-label>Mechanic</mat-label>
-          <input matInput type="text" formControlName="mechanic">
+          <input matInput type="text" formControlName="mechanic"required maxlength="15">
+          <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field color="accent">
           <mat-label>Service Notes</mat-label>
-          <input matInput type="text" formControlName="serviceNotes">
+          <input matInput type="text" formControlName="serviceNotes"required maxlength="25">
+          <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field color="accent">
           <mat-label>Service Price</mat-label>
           <input matInput type="text" formControlName="servicePrice">
+          <mat-error>{{getPRICEErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field color="accent">
-        <h6>Payment Received</h6>
+        <mat-label>Payment Received</mat-label>
         <mat-select formControlName="paymentReceived">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let payStatus of payStatus" [value]="payStatus">{{payStatus}}</mat-option>
         </mat-select>
+        <mat-error>{{getGENErrorMessage()}}</mat-error>
         </mat-form-field>
       </form>
-      <form *ngIf="!edit &&!addRecord">
-          <mat-select [formControl]="recordSelector" placeholder="PLEASE SELECT VEHICLE SERVICE RECORD">
+      <form *ngIf="!this.edit && !this.addRecord">
+          <mat-select [formControl]="recordSelector" placeholder="PLEASE SELECT VEHICLE FROM CUSTOMER VEHICLES TAB FIRST">
               <mat-option *ngFor="let filteredRecord of filteredRecords" [value]="filteredRecord">
               {{this.filteredRecord?.date}}
               </mat-option>
@@ -239,7 +283,7 @@
           </div>
           <div class="flex-container">
               <h6>Vehicle VIN</h6>
-              <p >{{ recordSelector.value?.carvin }}</p>
+              <p >{{ recordSelector.value?.carvin | uppercase }}</p>
           </div>
           <div class="flex-container">
               <h6>Mileage</h6>
@@ -274,7 +318,7 @@
               <p >{{ recordSelector.value?.payment }}</p>
           </div>
         </form>
-        <form [formGroup]="addCustomerServiceRecordForm" *ngIf="addRecord && tabIndex==2">
+        <form [formGroup]="addCustomerServiceRecordForm" *ngIf="this.addRecord && tabIndex==2">
             <div class="flex-container">
                 <h6>Customer ID</h6>
                 <p >{{ this.data.customerId }}</p>
@@ -284,63 +328,75 @@
                 <p >{{ this.vehicleSelector?.value.carvin }}</p>
             </div>
             <mat-form-field color="accent">
+              <mat-label>Mileage</mat-label>
+              <input matInput type="text" formControlName="mileage" type="number">
+              <mat-error>{{getMILEAGEErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field color="accent">
               <mat-label>Service Performed</mat-label>
-              <input matInput type="text" formControlName="servicePerformed">
+              <input matInput type="text" formControlName="servicePerformed"required maxlength="25">
+              <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field color="accent">
               <mat-label>Service Date</mat-label>
-              <input matInput type="text" formControlName="serviceDate">
+              <input matInput type="text" formControlName="serviceDate" type="date">
+              <mat-error>{{getDATEErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field color="accent">
               <mat-label>Date Returned</mat-label>
-              <input matInput type="text" formControlName="dateReturned">
+              <input matInput type="text" formControlName="dateReturned" type="date">
+              <mat-error>{{getDATEErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field color="accent">
               <mat-label>Mechanic</mat-label>
-              <input matInput type="text" formControlName="mechanic">
+              <input matInput type="text" formControlName="mechanic"required maxlength="15">
+              <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field color="accent">
               <mat-label>Service Notes</mat-label>
-              <input matInput type="text" formControlName="serviceNotes">
+              <input matInput type="text" formControlName="serviceNotes"required maxlength="25">
+              <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field color="accent">
               <mat-label>Service Price</mat-label>
               <input matInput type="text" formControlName="servicePrice">
+              <mat-error>{{getPRICEErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field color="accent">
-            <h6>Payment Received</h6>
+            <mat-label>Payment Received</mat-label>
             <mat-select formControlName="paymentReceived">
                 <mat-option>None</mat-option>
                 <mat-option *ngFor="let payStatus of payStatus" [value]="payStatus">{{payStatus}}</mat-option>
             </mat-select>
+            <mat-error>{{getGENErrorMessage()}}</mat-error>
             </mat-form-field>
           </form>
       </mat-tab>
     <!--     =================this is END TAB========================================================== -->
   </mat-tab-group>
 </mat-dialog-content>
-<mat-dialog-actions *ngIf="edit" align="end">
-  <button mat-raised-button type="submit" color="accent" [disabled]="customerInfoForm.invalid || customerVehicleForm.invalid || customerServiceRecordForm.invalid" (click)="saveEditedCustomerALL() && edit=false">SAVE ALL</button>
-  <button mat-raised-button type="submit" color="accent" *ngIf="customerInfoForm.valid && tabIndex==0"(click)="saveEditedCustomerONLY() && edit=false">SAVE CUSTOMER</button>
-  <button mat-raised-button type="submit" color="accent" *ngIf="customerVehicleForm.valid && tabIndex==1"(click)="saveEditedCustomerVehicleONLY() && edit=false">SAVE VEHICLE</button>
-  <button mat-raised-button type="submit" color="accent" *ngIf="customerServiceRecordForm.valid && tabIndex==2"(click)="saveEditedCustomerServiceRecordONLY() && edit=false">SAVE SERVICE RECORD</button>
+<mat-dialog-actions *ngIf="this.edit" align="end">
+  <button mat-raised-button type="submit" color="accent" [disabled]="customerInfoForm.invalid || customerVehicleForm.invalid || customerServiceRecordForm.invalid" (click)="saveEditedCustomerALL() && unSetEdit()">SAVE ALL</button>
+  <button mat-raised-button type="submit" color="accent" *ngIf="customerInfoForm.valid && tabIndex==0"(click)="saveEditedCustomerONLY() && unSetEdit()">SAVE CUSTOMER</button>
+  <button mat-raised-button type="submit" color="accent" *ngIf="customerVehicleForm.valid && tabIndex==1"(click)="saveEditedCustomerVehicleONLY() && unSetEdit()">SAVE VEHICLE</button>
+  <button mat-raised-button type="submit" color="accent" *ngIf="customerServiceRecordForm.valid && tabIndex==2"(click)="saveEditedCustomerServiceRecordONLY() && unSetEdit()">SAVE SERVICE RECORD</button>
 
-  <button mat-raised-button mat-dialog-close color="warn" *ngIf="edit && tabIndex==0" (click)="onDelete(this.data.id)">DELETE CUSTOMER</button>
-  <button mat-raised-button mat-dialog-close color="warn" *ngIf="edit && tabIndex==1" (click)="onVehicleDelete(); edit=false;">DELETE VEHICLE</button>
-  <button mat-raised-button mat-dialog-close color="warn" *ngIf="edit && tabIndex==2" (click)="onRecordDelete(); edit=false;">DELETE RECORD</button>
-  <button mat-raised-button color="primary" (click)="edit=false">CANCEL</button>
+  <button mat-raised-button mat-dialog-close color="warn" *ngIf="this.edit && tabIndex==0" (click)="onDelete(this.data.id)">DELETE CUSTOMER</button>
+  <button mat-raised-button mat-dialog-close color="warn" *ngIf="this.edit && tabIndex==1" (click)="onVehicleDelete(); unSetEdit();">DELETE VEHICLE</button>
+  <button mat-raised-button mat-dialog-close color="warn" *ngIf="this.edit && tabIndex==2" (click)="onRecordDelete(); unSetEdit();">DELETE RECORD</button>
+  <button mat-raised-button color="primary" (click)="unSetEdit()">CANCEL</button>
 </mat-dialog-actions>
-<mat-dialog-actions *ngIf="!edit && !addVehicle && !addRecord" align="end">
-  <button mat-raised-button type="submit" color="accent" (click)="edit=true">EDIT ALL</button>
+<mat-dialog-actions *ngIf="!this.edit && !this.addVehicle && !this.addRecord" align="end">
+  <button mat-raised-button type="submit" color="accent" (click)="setEdit()">EDIT ALL</button>
   <button mat-raised-button mat-dialog-close color="primary" (click)="close()">CANCEL</button>
-  <button mat-raised-button type="submit" color="accent" [disabled]="tabIndex!=1" (click)="addVehicle=true; addCustomerVehicle()">ADD VEHICLE</button>
-  <button mat-raised-button type="submit" color="accent" [disabled]="tabIndex!=2" (click)="addRecord=true; addCustomerVehicleServiceRecord()">ADD RECORD</button>
+  <button mat-raised-button type="submit" color="accent" [disabled]="tabIndex!=1" (click)="setAddVehicle(); addCustomerVehicle()">ADD VEHICLE</button>
+  <button mat-raised-button type="submit" color="accent" [disabled]="tabIndex!=2" (click)="setAddRecord(); addCustomerVehicleServiceRecord()">ADD RECORD</button>
 </mat-dialog-actions>
-<mat-dialog-actions *ngIf="addVehicle && tabIndex==1" align="end">
-    <button mat-raised-button type="submit" color="accent" (click)="saveAddedCustomerVehicle(); addVehicle=false;">SAVE</button>
-    <button mat-raised-button (click)="edit=false; addVehicle=false;" color="primary">CANCEL</button>
+<mat-dialog-actions *ngIf="this.addVehicle && tabIndex==1" align="end">
+    <button mat-raised-button type="submit" color="accent" [disabled]="customerVehicleForm.invalid"(click)="saveAddedCustomerVehicle(); unSetAddVehicle();">SAVE</button>
+    <button mat-raised-button (click)="unSetEdit(); unSetAddVehicle();" color="primary">CANCEL</button>
 </mat-dialog-actions>
-<mat-dialog-actions *ngIf="addRecord && tabIndex==2" align="end">
-    <button mat-raised-button type="submit" color="accent" (click)="saveAddedCustomerVehicleServiceRecord(); addRecord=false;">SAVE</button>
-    <button mat-raised-button (click)="edit=false; addRecord=false;" color="primary">CANCEL</button>
+<mat-dialog-actions *ngIf="this.addRecord && tabIndex==2" align="end">
+    <button mat-raised-button type="submit" color="accent" [disabled]="customerServiceRecordForm.invalid"(click)="saveAddedCustomerVehicleServiceRecord(); unSetAddRecord();">SAVE</button>
+    <button mat-raised-button (click)="unSetEdit(); unSetAddRecord();" color="primary">CANCEL</button>
 </mat-dialog-actions>

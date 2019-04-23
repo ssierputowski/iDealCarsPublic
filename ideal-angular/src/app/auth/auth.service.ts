@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+
+import { Router, CanActivate } from '@angular/router';
+import { Subject, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 
 import { environment } from '../../environments/environment';
 
+import { User } from '../../models/user.model';
 import { AuthData } from './auth-data.model';
 
 const BACKEND_URL = environment.apiUrl + '/user';
@@ -16,6 +20,7 @@ export class AuthService {
   private token: string;
   private tokenTimer: NodeJS.Timer;
   private authStatusListener = new Subject<boolean>();
+  private currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -29,6 +34,10 @@ export class AuthService {
 
   getAuthStatusListener() {
     return this.authStatusListener.asObservable();
+  }
+
+  public get currentUserValue(): User {
+    return this.currentUserSubject.value;
   }
 
   createUser(
@@ -58,22 +67,25 @@ export class AuthService {
 
   login(username: string, password: string) {
     const authData: AuthData = { username: username, password: password };
-    this.http.post<{token: string, expiresIn: number, userId: string}>(BACKEND_URL + '/login', authData)
-      .subscribe(response => {
-        const token = response.token;
-        this.token = token;
-        if (token) {
-          const expiresInDuration = response.expiresIn;
-          const employeeId = response.userId;
-          this.setAuthTimer(expiresInDuration);
+    return this.http.post<any>(BACKEND_URL + '/login', authData)
+      .pipe(map(user => {
+        // login successful if there's a jwt token in the response
+        if (user && user.token) {
+          // store user details and jwt token in local storage
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUserSubject.next(user);
+          const expiresIn = user.expiresIn;
+          const employeeId = user.userId;
+          this.setAuthTimer(expiresIn);
           this.isAuthenticated = true;
           this.authStatusListener.next(true);
           const now = new Date();
-          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
-          this.saveAuthData(token, expirationDate, employeeId);
-          this.router.navigate(['/home']);
+          const expDate = new Date(now.getTime() + expiresIn * 1000);
+          this.saveAuthData(user.token, expDate, employeeId);
         }
-      });
+
+        return user;
+      }));
   }
 
   autoAuthUser() {
@@ -99,6 +111,8 @@ export class AuthService {
   }
 
   logout() {
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
     this.token = null;
     this.isAuthenticated = false;
     this.authStatusListener.next(false);

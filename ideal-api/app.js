@@ -19,7 +19,7 @@ mongoose.connect(
     { useNewUrlParser: true }
     )
     .then(() => {
-        console.log('Connected to the database!');
+        console.log('Connected to the database at: ' + process.env.DB_HOST + '!');
     })
     .catch(() => {
         console.log('Connection failed!');

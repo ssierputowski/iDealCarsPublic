@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, ViewChild, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { FormGroup, FormControl, Validators, FormBuilder, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidationErrors, FormBuilder, FormGroupDirective } from '@angular/forms';
 import { MatTabChangeEvent } from '@angular/material';
 
 import { CustomerService } from '../../services/customer.service';
@@ -74,6 +74,9 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
   vehicleSelector = new FormControl('', { validators: [Validators.required]});
   recordSelector = new FormControl('', { validators: [Validators.required]});
   stateSelector = new FormControl('', { validators: [Validators.required]});
+  public edit: boolean;
+  public addRecord: boolean;
+  public addVehicle: boolean;
 
   constructor(
   @Inject(MAT_DIALOG_DATA) public data: any,
@@ -89,69 +92,80 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
 
     this.customerInfoForm = this.formBuild.group({
       'customerId': new FormControl(null, { validators: [Validators.required] }),
-      'firstName': new FormControl(null, { validators: [Validators.required] }),
-      'lastName': new FormControl(null, { validators: [Validators.required] }),
-      'phoneNumber': new FormControl(null, { validators: [Validators.required] }),
-      'emailAddress': new FormControl(null, { validators: [Validators.required] }),
-      'address': new FormControl(null, { validators: [Validators.required] }),
-      'city': new FormControl(null, { validators: [Validators.required] }),
+      'firstName': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
+      'lastName': new FormControl(null, { validators: [Validators.required, Validators.maxLength(20)] }),
+      'phoneNumber': new FormControl(null, { validators: [Validators.required, Validators.minLength(10)] }),
+      'emailAddress': new FormControl(null, { validators: [Validators.required, Validators.email] }),
+      'address': new FormControl(null, { validators: [Validators.required, Validators.maxLength(30)] }),
+      'city': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
       'state': new FormControl(null, { validators: [Validators.required] }),
-      'zipCode': new FormControl(null, { validators: [Validators.required] }),
+      // tslint:disable-next-line:max-line-length
+      'zipCode': new FormControl(null, { validators: [Validators.required, Validators.minLength(5), Validators.maxLength(5), Validators.max(99999), Validators.pattern('[0-9]*')] }),
     });
     this.customerVehicleForm = this.formBuild.group({
-      'vehicleId': new FormControl(null, { validators: [Validators.required] }),
-      'vehicleYear': new FormControl(null, { validators: [Validators.required] }),
-      'vehicleMake': new FormControl(null, { validators: [Validators.required] }),
-      'vehicleModel': new FormControl(null, { validators: [Validators.required] }),
-      'vehicleColor': new FormControl(null, { validators: [Validators.required] }),
-      'vehicleDetails': new FormControl(null, { validators: [Validators.required] }),
-      'vehiclePriceSold': new FormControl(null, { validators: [Validators.required] }),
+      // tslint:disable-next-line:max-line-length
+      'vehicleId': new FormControl(null, { validators: [Validators.required, Validators.minLength(17), Validators.maxLength(17), Validators.pattern('[A-Za-z0-9]*')] }),
+      // tslint:disable-next-line:max-line-length
+      'vehicleYear': new FormControl(null, { validators: [Validators.required, Validators.min(1900), Validators.max(2050), Validators.pattern('[0-9]*')] }),
+      'vehicleMake': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+      'vehicleModel': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
+      'vehicleColor': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
+      'vehicleDetails': new FormControl(null, { validators: [Validators.required, Validators.maxLength(20)] }),
+      // tslint:disable-next-line:max-line-length
+      'vehiclePriceSold': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'vehicleImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
     });
     this.customerServiceRecordForm = this.formBuild.group({
       'vehicleId': new FormControl(null, { validators: [Validators.required] }),
-      'mileage': new FormControl(null, { validators: [Validators.required] }),
-      'servicePerformed': new FormControl(null, { validators: [Validators.required] }),
+      // tslint:disable-next-line:max-line-length
+      'mileage': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern('[0-9]*')] }),
+      'servicePerformed': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
       'serviceDate': new FormControl(null, { validators: [Validators.required] }),
       'dateReturned': new FormControl(null, { validators: [Validators.required] }),
-      'mechanic': new FormControl(null, { validators: [Validators.required] }),
-      'serviceNotes': new FormControl(null, { validators: [Validators.required] }),
-      'servicePrice': new FormControl(null, { validators: [Validators.required] }),
+      'mechanic': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
+      'serviceNotes': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+      // tslint:disable-next-line:max-line-length
+      'servicePrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'paymentReceived': new FormControl(null, { validators: [Validators.required] }),
     });
     // These below for ADDING to record of vehicles
     this.addCustomerVehicleForm = this.formBuild.group({
-      'vehicleId': new FormControl(null, { validators: [Validators.required] }),
-      'vehicleYear': new FormControl(null, { validators: [Validators.required] }),
+      // tslint:disable-next-line:max-line-length
+      'vehicleId': new FormControl(null, { validators: [Validators.required, Validators.minLength(17), Validators.maxLength(17), Validators.pattern('[A-Za-z0-9]*')] }),
+      // tslint:disable-next-line:max-line-length
+      'vehicleYear': new FormControl(null, { validators: [Validators.required, Validators.min(1900), Validators.max(2050), Validators.pattern('[0-9]*')] }),
       'vehicleMake': new FormControl(null, { validators: [Validators.required] }),
       'vehicleModel': new FormControl(null, { validators: [Validators.required] }),
       'vehicleColor': new FormControl(null, { validators: [Validators.required] }),
       'vehicleDetails': new FormControl(null, { validators: [Validators.required] }),
-      'vehiclePriceSold': new FormControl(null, { validators: [Validators.required] }),
+      // tslint:disable-next-line:max-line-length
+      'vehiclePriceSold': new FormControl(null, { validators: [Validators.required, Validators.min(1), Validators.max(20000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'vehicleImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
     });
     // These below for ADDING to record on customer
     this.addCustomerServiceRecordForm = this.formBuild.group({
       'vehicleId': new FormControl(null, { validators: [Validators.required] }),
-      'mileage': new FormControl(null, { validators: [Validators.required] }),
+      // tslint:disable-next-line:max-line-length
+      'mileage': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(20000000), Validators.pattern('[0-9]*')] }),
       'servicePerformed': new FormControl(null, { validators: [Validators.required] }),
       'serviceDate': new FormControl(null, { validators: [Validators.required] }),
       'dateReturned': new FormControl(null, { validators: [Validators.required] }),
       'mechanic': new FormControl(null, { validators: [Validators.required] }),
       'serviceNotes': new FormControl(null, { validators: [Validators.required] }),
-      'servicePrice': new FormControl(null, { validators: [Validators.required] }),
+      // tslint:disable-next-line:max-line-length
+      'servicePrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(20000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'paymentReceived': new FormControl(null, { validators: [Validators.required] }),
     });
   }
 
   ngOnInit() {
 
-    console.log(this.data);
+    // console.log(this.data);
     this.stateSelector.setValue(this.data.state || this.stateSelector.markAsPristine);
     this.displayCustomerVehicles(this.data.customerId);
     this.displayCustomerVehicleRecords(this.data.customerId);
     this.vehicleSelector.valueChanges.subscribe(value => {
-      console.log(value);
+      // console.log(value);
       value = this.vehicleSelector.value.carvin;
       this.filteredRecords = this.records.filter(function(record) {
         return record.carvin === value;
@@ -159,9 +173,9 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
       this.customerServiceRecordForm.reset();
       this.recordSelector.setValue(this.filteredRecords[0] || this.recordSelector.markAsPristine);
     });
-    console.log(this.filteredRecords);
-    console.log(this.records);
-    console.log(this.cars);
+    // console.log(this.filteredRecords);
+    // console.log(this.records);
+    // console.log(this.cars);
 
 
     this.route.params.subscribe(
@@ -252,14 +266,46 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
     this.cars.length = 0;
    // this.dialogRef.close();
   }
-  // ADD customer vehicle to dB referencing customerId
-  addCustomerVehicle() {
-    if (this.tabIndex === 1) {
-        this.addCustomerVehicleForm.patchValue({customerId: this.data.customerId});
-    }
+
+  // ERROR Messaging=======================================
+  getVINErrorMessage() {
+    return  'VIN must be 17 letters, numbers in length!';
+  }
+  getYEARErrorMessage() {
+    return  'YEAR must be between 1900-2050!';
+  }
+  getPRICEErrorMessage() {
+    return  'PRICE must be a number of format 0.00 less than 20,000,000.00!';
+  }
+  getMILEAGEErrorMessage() {
+    return  'MILEAGE must be a number less than 20,000,000!';
+  }
+  getGENErrorMessage() {
+    return  'FIELD REQUIRED!';
+  }
+  getEMAILErrorMessage() {
+    return  'EMAIL must be a valid email!';
+  }
+  getZIPErrorMessage() {
+    return  'ZIPCODE must be a 5 digit number!';
+  }
+  getPHONEErrorMessage() {
+    return  'PHONENUMBER must be a 10 digit number!';
+  }
+  getSERVICEErrorMessage() {
+    return  'SERVICE FORM must be filled out, all vehicles checked before sold, put NA or Current Condition if applicable!';
+  }
+  getDATEErrorMessage() {
+    return  'DATE must be in format 00/00/0000 !';
   }
 /* ==================================================================================THESE ARE ADD METHODS */
-  // Saves ADDed customer vehicle to dB
+// ADD customer vehicle to dB referencing customerId
+addCustomerVehicle() {
+  if (this.tabIndex === 1) {
+      this.addCustomerVehicleForm.patchValue({customerId: this.data.customerId});
+  }
+}
+// Saves ADDed customer vehicle to dB
   saveAddedCustomerVehicle() {
     this.customerVehicleService.addCustomerVehicle(
       this.data.customerId,
@@ -482,5 +528,23 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     console.log('destroyed');
+  }
+  setEdit() {
+    this.edit = true;
+  }
+  unSetEdit() {
+    this.edit = false;
+  }
+  setAddRecord() {
+    this.addRecord = true;
+  }
+  unSetAddRecord() {
+    this.addRecord = false;
+  }
+  setAddVehicle() {
+    this.addVehicle = true;
+  }
+  unSetAddVehicle() {
+    this.addVehicle = false;
   }
 }

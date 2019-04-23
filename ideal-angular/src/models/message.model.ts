@@ -1,3 +1,5 @@
 export interface Message {
-  message: string;
+  creator: string;
+  date: string;
+  content: string;
 }

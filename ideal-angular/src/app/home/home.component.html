@@ -1,8 +1,8 @@
 <app-header></app-header>
 <main>
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-3" id="userInfo">
+    <div class="row justify-content-between">
+      <div class="col-md-3 col-sm-12" id="userInfo">
         <img src="{{ userImg }}" id="userImage">
         <div class="w-100"></div>
         <span>{{ userFirstName }} {{ userLastName }}</span>
@@ -13,12 +13,16 @@
         <div class="w-100"></div>
         <button mat-raised-button color="accent" (click)="openActionsDialog()" *ngIf="userJobRole === 'MANAGER'">MANAGER ACTIONS</button>
       </div>
-      <div class="col-6">
-        <app-message-board></app-message-board>
-      </div>
-      <div class="col-3">
-        <app-time-clock></app-time-clock>
+      <div class="col-lg-9 col-md-8">
+        <div class="row">
+          <div class="col-xl-8 col-md-12">
+            <app-message-board></app-message-board>
+          </div>
+          <div class="col-xl-4 ml-auto">
+            <app-time-clock></app-time-clock>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</main>
+</main> 

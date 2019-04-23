@@ -59,22 +59,12 @@ export class InventoryComponent implements OnInit {
     vehCondition: '',
 
   };
-  
-  Year = new FormControl('', {
-    validators: [Validators.required]
-  });
-  Make = new FormControl('', {
-    validators: [Validators.required]
-  });
-  Model = new FormControl('', {
-    validators: [Validators.required]
-  });
-  Color = new FormControl('', {
-    validators: [Validators.required]
-  });
-  Condition = new FormControl('', {
-    validators: [Validators.required]
-  });
+
+  Year = new FormControl('');
+  Make = new FormControl('');
+  Model = new FormControl('');
+  Color = new FormControl('');
+  Condition = new FormControl('');
 
 
   ngOnInit() {
@@ -127,18 +117,18 @@ getCars(): void {
       this.vehicles = vehicleData.vehicles;
       this.dataSource = new MatTableDataSource(this.vehicles);
       this.dataSource.filterPredicate = this.tableFilter();
-      console.log(this.vehicles);
+     // console.log(this.vehicles);
     });
 }
 // filter function for table data
 tableFilter(): (data: any, filter: string) => boolean {
   const filterFunction = function(data, filter): boolean {
     const searchTerms = JSON.parse(filter);
-    return data.vehYear.toString().toLowerCase().indexOf(searchTerms.vehYear) !== -1
-      && data.vehMake.toString().toLowerCase().indexOf(searchTerms.vehMake) !== -1
-      && data.vehModel.toString().toLowerCase().indexOf(searchTerms.vehModel) !== -1
-      && data.vehColor.toLowerCase().indexOf(searchTerms.vehColor) !== -1
-      && data.vehCondition.toLowerCase().indexOf(searchTerms.vehCondition) !== -1;
+    return data.vehYear.toString().indexOf(searchTerms.vehYear) !== -1
+      && data.vehMake.toString().indexOf(searchTerms.vehMake) !== -1
+      && data.vehModel.toString().indexOf(searchTerms.vehModel) !== -1
+      && data.vehColor.toString().indexOf(searchTerms.vehColor) !== -1
+      && data.vehCondition.toString().indexOf(searchTerms.vehCondition) !== -1;
   };
   return filterFunction;
 }

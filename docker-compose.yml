@@ -1,0 +1,28 @@
+# Project: iDealCars
+# Description:
+
+# Technology Stack (MEAN Stack):
+# - MongoDB
+# - Express.js
+# - Angular 2+
+# - Node.js
+
+version: '3.6'
+services:
+  # The Angular front-end and Express.js server
+  angular:
+    build: .
+    ports:
+      - "8090:80"
+    links:
+      - database
+    environment:
+      DB_HOST: mongodb://database:27017/idealcars
+    container_name: ideal_web
+
+  # MongoDB
+  database:
+    build: ./ideal-database
+    expose:
+      - 27017
+    container_name: ideal_db

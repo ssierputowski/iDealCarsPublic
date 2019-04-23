@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row align-items-center justify-content-center">
     <div class="col-2 p-0">
-      <img class="float-right" src="../../assets/images/logo_transparent.png">
+      <img [routerLink]="['/home']" routerLinkActive="mat-accent-bold" class="float-right" src="../../assets/images/logo_transparent.png">
     </div>
     <div class="col-8">
       <h1>{{ companyName }}</h1>
@@ -11,7 +11,6 @@
         <a mat-button [routerLink]="['/inventory']" routerLinkActive="mat-accent bold" >VEHICLES</a>
         <a mat-button [routerLink]="['/parts']" routerLinkActive="mat-accent bold" >PARTS</a>
         <a mat-button [routerLink]="['/records']" routerLinkActive="mat-accent bold" >CUSTOMER RECORDS</a>
-
       </div>
     </div>
     <div class="col-2">

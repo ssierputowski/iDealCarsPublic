@@ -6,7 +6,6 @@ import { Part } from '../models/part.model';
 import { Router } from '@angular/router';
 
 import { environment } from '../environments/environment';
-import { puts } from 'util';
 
 const BACKEND_URL = environment.apiUrl + '/parts';
 
@@ -83,12 +82,11 @@ export class PartService {
         };
         this.parts.push(part);
         this.partsUpdated.next({parts: [...this.parts]});
-        console.log(resData);
-        window.location.reload();
+        // window.location.reload();
       });
   }
   // helper method (not used) for edit part
-  getPartByID(id: string) {
+ /*  getPartByID(id: string) {
     return this.http.get<{
       _id: string,
       partID: string,
@@ -98,7 +96,7 @@ export class PartService {
       partCompatibility: string,
       partDescription: string,
       partImage: string; }>( BACKEND_URL + '/' + id);
-  }
+  } */
 
   // EDIT functions for parts dialog-edit-part
   updatePart(

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { Part } from '../../models/part.model';
-import { FormGroup, FormControl, Validators, FormBuilder, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidationErrors, FormBuilder, FormGroupDirective } from '@angular/forms';
 import { PartService } from '../../services/part.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -21,8 +21,7 @@ export class EditPartComponent implements OnInit {
   edit_part: FormGroup;
   dataSourceParts: MatTableDataSource<Part>;
 
-  mode: 'edit';
-  edit: false;
+  public edit = false;
   part: Part;
   partID: string;
 
@@ -36,20 +35,21 @@ export class EditPartComponent implements OnInit {
     private route: ActivatedRoute) {// this passes the data from the inventory component to this dialog
 
       this.edit_part = this.formBuild.group({
-        'partID': new FormControl(null, { validators: [Validators.required] }),
-        'partName': new FormControl(null, { validators: [Validators.required] }),
-        'partPrice': new FormControl(null, { validators: [Validators.required] }),
-        'partQuantity': new FormControl(null, { validators: [Validators.required] }),
-        'partCompatibility': new FormControl(null, { validators: [Validators.required] }),
-        'partDescription': new FormControl(null, { validators: [Validators.required] }),
+        'partID': new FormControl(null, { validators: [Validators.required, Validators.maxLength(30)] }),
+        'partName': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+        // tslint:disable-next-line:max-line-length
+        'partPrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
+        // tslint:disable-next-line:max-line-length
+        'partQuantity': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000), Validators.pattern('[0-9]*')] }),
+        'partCompatibility': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+        'partDescription': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
         'partImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
       });
      }
 
 
   ngOnInit() {
-    console.log(this.data.id);
-    console.log(this.data);
+
     // Patches form with part data for EDIT
     this.route.params.subscribe(
       param => {
@@ -103,5 +103,21 @@ export class EditPartComponent implements OnInit {
     this.partService.deletePart(partID);
     this.editPartRef.close();
   }
+  // ERROR Messaging=======================================
+  getPRICEErrorMessage() {
+    return  'PRICE must be a number of format 0.00 less than 20,000,000.00!';
+  }
+  getQUANTITYErrorMessage() {
+    return  'QUANTITY must be a number between 0 and 1,000!';
+  }
+  getGENErrorMessage() {
+    return  'FIELD REQUIRED!';
+  }
 
+  setEdit() {
+    this.edit = true;
+  }
+  unSetEdit() {
+    this.edit = false;
+  }
 }

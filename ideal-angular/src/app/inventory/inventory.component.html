@@ -3,6 +3,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-2 search-container">
+          <mat-label align="center" style="color: #1972a4">SEARCH VEHICLES</mat-label>
         <!-- <form> remove form to even out input fields  -->
           <mat-form-field class = "filter" color="accent">
             <mat-label>Year</mat-label>
@@ -25,14 +26,8 @@
             <input matInput [formControl]="Condition">
           </mat-form-field>
         <!-- </form> -->
-
-        <!-- <button mat-raised-button color="accent" type ="submit">SEARCH</button>
-        <mat-divider></mat-divider>
-        <mat-divider></mat-divider>
-        <mat-divider></mat-divider>
-        <mat-divider></mat-divider>
-        <mat-divider></mat-divider> -->
-        <button mat-raised-button color="accent" (click)="openDialogEntry()">ADD VEHICLE</button>
+          <p></p>
+        <button mat-raised-button color="accent" (click)="openDialogEntry()">NEW VEHICLE</button>
       </div>
 
 
@@ -41,7 +36,7 @@
           <!-- Id Column -->
           <ng-container matColumnDef="vehVin">
             <th mat-header-cell *matHeaderCellDef>VIN</th>
-            <td class="vehicleSelect" mat-cell *matCellDef="let element">{{ element.vehVin }}</td>
+            <td class="vehicleSelect" mat-cell *matCellDef="let element">{{ element.vehVin | uppercase }}</td>
           </ng-container>
           <!-- Year Column -->
           <ng-container matColumnDef="vehYear">
