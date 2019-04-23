@@ -57,7 +57,7 @@
   <form *ngIf="!edit">
     <div class="flex-container">
       <div align="center">
-        <h6>{{ this.data.vehMake }} {{ this.data.vehModel}}</h6>
+        <h4>{{ this.data.vehMake }} {{ this.data.vehModel}}</h4>
           <div class="image-preview">
             <img [src]="this.data.vehImage">
           </div>
@@ -67,23 +67,23 @@
       </div>
     </div>
     <div class="flex-container">
-      <h6>Vehicle Price</h6>
+      <h4><u><strong>Vehicle Price</strong></u></h4>
       <p >{{ this.data.vehPrice | currency }}</p>
     </div>
       <div class="flex-container">
-      <h6>Vehicle VIN</h6>
+        <h4><u><strong>Vehicle VIN</strong></u></h4>
       <p >{{ this.data.vehVin | uppercase }}</p>
     </div>
     <div class="flex-container">
-      <h6>Vehicle Color</h6>
+      <h4><u><strong>Vehicle Color</strong></u></h4>
       <p >{{ this.data.vehColor }}</p>
     </div>
     <div class="flex-container">
-      <h6>Vehicle Condition</h6>
+      <h4><u><strong>Vehicle Condition</strong></u></h4>
       <p >{{ this.data.vehCondition }}</p>
     </div>
     <div class="flex-container">
-      <h6>Vehicle Detail</h6>
+      <h4><u><strong>Vehicle Detail</strong></u></h4>
       <p >{{ this.data.vehDetail }}</p>
     </div>
   </form>

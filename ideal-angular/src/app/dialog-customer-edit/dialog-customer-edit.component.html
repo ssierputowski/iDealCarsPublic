@@ -57,31 +57,31 @@
           </div>
         </div>
         <div class="flex-container">
-            <h6>Customer ID</h6>
+            <h4><u><strong>Customer ID</strong></u></h4>
             <p >{{ this.data.customerId }}</p>
         </div>
         <div class="flex-container">
-          <h6>Phone Number</h6>
+          <h4><u><strong>Phone Number</strong></u></h4>
           <p >{{ this.data.phoneNumber }}</p>
         </div>
         <div class="flex-container">
-            <h6>Email Address</h6>
-            <p >{{ this.data.emailAddress }}</p>
+          <h4><u><strong>Email Address</strong></u></h4>
+          <p >{{ this.data.emailAddress }}</p>
         </div>
          <div class="flex-container">
-          <h6>Street Address</h6>
+          <h4><u><strong>Street Address</strong></u></h4>
           <p >{{ this.data.address }}</p>
         </div>
         <div class="flex-container">
-          <h6>City</h6>
+          <h4><u><strong>City</strong></u></h4>
           <p >{{ this.data.city }}</p>
         </div>
         <div class="flex-container">
-          <h6>State</h6>
+          <h4><u><strong>State</strong></u></h4>
           <p >{{ this.data.state }}</p>
         </div>
         <div class="flex-container">
-          <h6>Zipcode</h6>
+          <h4><u><strong>Zipcode</strong></u></h4>
           <p >{{ this.data.zipCode }}</p>
         </div>
       </form>
@@ -140,7 +140,7 @@
       </mat-select>
         <div class="flex-container">
           <div align="center">
-            <h6>{{ vehicleSelector.value?.make }} {{ vehicleSelector.value?.model}}</h6>
+            <h4>{{ vehicleSelector.value?.make }} {{ vehicleSelector.value?.model}}</h4>
               <div class="image-preview">
                 <img [src]="vehicleSelector.value?.carPic || ''">
               </div>
@@ -150,25 +150,25 @@
           </div>
         </div>
         <div class="flex-container">
-          <h6>Vehicle Price Sold</h6>
+          <h4><u><strong>Vehicle Price Sold</strong></u></h4>
           <p >{{ vehicleSelector.value?.pricePaid | currency }}</p>
         </div>
           <div class="flex-container">
-          <h6>Vehicle VIN</h6>
+            <h4><u><strong>Vehicle VIN</strong></u></h4>
           <p >{{ vehicleSelector.value?.carvin | uppercase }}</p>
         </div>
         <div class="flex-container">
-          <h6>Vehicle Color</h6>
+          <h4><u><strong>Vehicle Color</strong></u></h4>
           <p >{{ vehicleSelector.value?.color }}</p>
         </div>
         <div class="flex-container">
-          <h6>Vehicle Detail</h6>
+          <h4><u><strong>Vehicle Detail</strong></u></h4>
           <p >{{ vehicleSelector.value?.details }}</p>
         </div>
       </form>
       <form [formGroup]="addCustomerVehicleForm" *ngIf="this.addVehicle && tabIndex==1">
           <div class="flex-container">
-              <h6>Customer ID</h6>
+            <h4><u><strong>Customer ID</strong></u></h4>
               <p >{{ this.data.customerId }}</p>
           </div>
           <mat-form-field color="accent">
@@ -220,11 +220,11 @@
         <h6 style="color: red" *ngIf="(this.edit || this.addRecord) && (customerServiceRecordForm.invalid )">This dissappears when Service Record Form inputs valid!</h6>
         <form [formGroup]="customerServiceRecordForm" *ngIf="this.edit">
         <div class="flex-container">
-            <h6>Customer ID</h6>
+          <h4><u><strong>Customer ID</strong></u></h4>
             <p >{{ this.data.customerId }}</p>
         </div>
         <div class="flex-container">
-            <h6>Vehicle VIN</h6>
+          <h4><u><strong>Vehicle VIN</strong></u></h4>
             <p >{{ this.recordSelector?.value.carvin | uppercase }}</p>
         </div>
         <mat-form-field color="accent">
@@ -278,53 +278,53 @@
               </mat-option>
             </mat-select>
           <div class="flex-container">
-              <h6>Customer ID</h6>
+            <h4><u><strong>Customer ID</strong></u></h4>
               <p >{{ recordSelector.value?.custID }}</p>
           </div>
           <div class="flex-container">
-              <h6>Vehicle VIN</h6>
+            <h4><u><strong>Vehicle VIN</strong></u></h4>
               <p >{{ recordSelector.value?.carvin | uppercase }}</p>
           </div>
           <div class="flex-container">
-              <h6>Mileage</h6>
+            <h4><u><strong>Mileage</strong></u></h4>
               <p >{{ recordSelector.value?.miles }}</p>
           </div>
           <div class="flex-container">
-            <h6>Service Performed</h6>
+            <h4><u><strong>Service Performed</strong></u></h4>
             <p >{{ recordSelector.value?.service }}</p>
           </div>
           <div class="flex-container">
-              <h6>Service Date</h6>
+            <h4><u><strong>Service Date</strong></u></h4>
               <p >{{ recordSelector.value?.date}}</p>
           </div>
           <div class="flex-container">
-            <h6>Date Returned</h6>
+            <h4><u><strong>Date Returned</strong></u></h4>
             <p >{{ recordSelector.value?.returnDate }}</p>
           </div>
           <div class="flex-container">
-              <h6>Mechanic</h6>
+            <h4><u><strong>Mechanic</strong></u></h4>
               <p >{{ recordSelector.value?.mechanic }}</p>
           </div>
           <div class="flex-container">
-            <h6>Notes:</h6>
+            <h4><u><strong>Notes:</strong></u></h4>
             <p >{{ recordSelector.value?.note }}</p>
           </div>
           <div class="flex-container">
-            <h6>Service Price</h6>
+            <h4><u><strong>Service Price</strong></u></h4>
             <p >{{ recordSelector.value?.price | currency }}</p>
           </div>
           <div class="flex-container">
-              <h6>Payment Received</h6>
+            <h4><u><strong>Payment Received</strong></u></h4>
               <p >{{ recordSelector.value?.payment }}</p>
           </div>
         </form>
         <form [formGroup]="addCustomerServiceRecordForm" *ngIf="this.addRecord && tabIndex==2">
             <div class="flex-container">
-                <h6>Customer ID</h6>
+                <h4>Customer ID</h4>
                 <p >{{ this.data.customerId }}</p>
             </div>
             <div class="flex-container">
-                <h6>Vehicle VIN</h6>
+                <h4>Vehicle VIN</h4>
                 <p >{{ this.vehicleSelector?.value.carvin }}</p>
             </div>
             <mat-form-field color="accent">
