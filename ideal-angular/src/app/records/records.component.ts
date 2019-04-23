@@ -42,45 +42,36 @@ export class RecordsComponent implements OnInit {
     'customerPhone',
     'customerAddress',
   ];
+  filterValues = {
+    firstName: '',
+    lastName: '',
+  };
 
-  applyFilter(filterValue: string) {
+  FName = new FormControl('');
+  LName = new FormControl('');
+
+  /* applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+  } */
 
   ngOnInit() {
-    if (this.checked) {
-      this.isLoading = true;
-    } else {
-      this.isLoading = false;
-    }
+
     this.titleService.setTitle('Customer Records | iDealCars');
-  this.searchForm = new FormGroup({
-    'firstName': new FormControl(null, {
-      validators: [Validators.required]
-    }),
-    'lastName': new FormControl(null, {
-      validators: [Validators.required]
-    }),
-    'phoneNumber': new FormControl(null, {
-      validators: [Validators.required]
-    }),
-    'emailAddress' : new FormControl (null, {
-      validators: [Validators.required]
-    }),
-    'address' : new FormControl (null, {
-      validators: [Validators.required]
-    }),
-    'city' : new FormControl (null, {
-      validators: [Validators.required]
-    }),
-    'state' : new FormControl (null, {
-      validators: [Validators.required]
-    }),
-    'zipCode' : new FormControl (null, {
-      validators: [Validators.required]
-    })
-  });
-  this.getCustomer();
+    this.FName.valueChanges
+    .subscribe(
+      Fname => {
+        this.filterValues.firstName  = Fname;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    );
+    this.LName.valueChanges
+      .subscribe(
+        LName => {
+          this.filterValues.lastName = LName;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      );
+    this.getCustomer();
 }
 
 getCustomer(): void {
@@ -89,9 +80,18 @@ getCustomer(): void {
     .subscribe((customerData: { customers: Customer[] }) => {
       this.customers = customerData.customers;
       this.dataSource = new MatTableDataSource(this.customers);
+      this.dataSource.filterPredicate = this.tableFilter();
     });
   }
-
+// filter function for table data
+tableFilter(): (data: any, filter: string) => boolean {
+  const filterFunction = function(data, filter): boolean {
+    const searchTerms = JSON.parse(filter);
+    return data.firstName.toString().indexOf(searchTerms.firstName) !== -1
+      && data.lastName.toString().indexOf(searchTerms.lastName) !== -1;
+  };
+  return filterFunction;
+}
   openDialogEntry() {
     this.dialogEntryRef = this.dialog.open(DialogEntryCustomerComponent, {
       disableClose: true,

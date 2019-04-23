@@ -32,22 +32,22 @@ export class AddPartComponent implements OnInit {
 
     this.partform = new FormGroup({
       'partID': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.maxLength(30)]
       }),
       'partName': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.maxLength(25)]
       }),
       'partPrice': new FormControl(null, {
         validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)]
       }),
       'partQuantity': new FormControl(null, {
-        validators: [Validators.required, Validators.min(1), Validators.max(1000), Validators.pattern('[0-9]*')]
+        validators: [Validators.required, Validators.min(0), Validators.max(1000), Validators.pattern('[0-9]*')]
       }),
       'partCompatibility': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.maxLength(25)]
       }),
       'partDescription': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.maxLength(25)]
       }),
       'partImage': new FormControl(null, {
         validators: [Validators.required], asyncValidators: [mimeType]
@@ -99,7 +99,7 @@ export class AddPartComponent implements OnInit {
     return  'PRICE must be a number of format 0.00 less than 20,000,000.00!';
   }
   getQUANTITYErrorMessage() {
-    return  'QUANTITY must be a number less than 1,000!';
+    return  'QUANTITY must be a number between 0 and 1,000!';
   }
   getGENErrorMessage() {
     return  'FIELD REQUIRED!';

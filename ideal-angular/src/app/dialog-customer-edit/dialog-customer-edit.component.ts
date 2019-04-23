@@ -92,12 +92,12 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
 
     this.customerInfoForm = this.formBuild.group({
       'customerId': new FormControl(null, { validators: [Validators.required] }),
-      'firstName': new FormControl(null, { validators: [Validators.required] }),
-      'lastName': new FormControl(null, { validators: [Validators.required] }),
+      'firstName': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
+      'lastName': new FormControl(null, { validators: [Validators.required, Validators.maxLength(20)] }),
       'phoneNumber': new FormControl(null, { validators: [Validators.required, Validators.minLength(10)] }),
       'emailAddress': new FormControl(null, { validators: [Validators.required, Validators.email] }),
-      'address': new FormControl(null, { validators: [Validators.required] }),
-      'city': new FormControl(null, { validators: [Validators.required] }),
+      'address': new FormControl(null, { validators: [Validators.required, Validators.maxLength(30)] }),
+      'city': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
       'state': new FormControl(null, { validators: [Validators.required] }),
       // tslint:disable-next-line:max-line-length
       'zipCode': new FormControl(null, { validators: [Validators.required, Validators.minLength(5), Validators.maxLength(5), Validators.max(99999), Validators.pattern('[0-9]*')] }),
@@ -107,10 +107,10 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
       'vehicleId': new FormControl(null, { validators: [Validators.required, Validators.minLength(17), Validators.maxLength(17), Validators.pattern('[A-Za-z0-9]*')] }),
       // tslint:disable-next-line:max-line-length
       'vehicleYear': new FormControl(null, { validators: [Validators.required, Validators.min(1900), Validators.max(2050), Validators.pattern('[0-9]*')] }),
-      'vehicleMake': new FormControl(null, { validators: [Validators.required] }),
-      'vehicleModel': new FormControl(null, { validators: [Validators.required] }),
-      'vehicleColor': new FormControl(null, { validators: [Validators.required] }),
-      'vehicleDetails': new FormControl(null, { validators: [Validators.required] }),
+      'vehicleMake': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+      'vehicleModel': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
+      'vehicleColor': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
+      'vehicleDetails': new FormControl(null, { validators: [Validators.required, Validators.maxLength(20)] }),
       // tslint:disable-next-line:max-line-length
       'vehiclePriceSold': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'vehicleImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
@@ -119,11 +119,11 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
       'vehicleId': new FormControl(null, { validators: [Validators.required] }),
       // tslint:disable-next-line:max-line-length
       'mileage': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern('[0-9]*')] }),
-      'servicePerformed': new FormControl(null, { validators: [Validators.required] }),
+      'servicePerformed': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
       'serviceDate': new FormControl(null, { validators: [Validators.required] }),
       'dateReturned': new FormControl(null, { validators: [Validators.required] }),
-      'mechanic': new FormControl(null, { validators: [Validators.required] }),
-      'serviceNotes': new FormControl(null, { validators: [Validators.required] }),
+      'mechanic': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
+      'serviceNotes': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
       // tslint:disable-next-line:max-line-length
       'servicePrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'paymentReceived': new FormControl(null, { validators: [Validators.required] }),

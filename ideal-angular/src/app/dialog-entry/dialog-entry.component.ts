@@ -41,19 +41,19 @@ export class DialogEntryComponent implements OnInit {
         validators: [Validators.required, Validators.min(1900), Validators.max(2050), Validators.pattern('[0-9]*')]
       }),
       'vehMake': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.maxLength(25)]
       }),
       'vehModel': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.maxLength(15)]
       }),
       'vehColor': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.maxLength(15)]
       }),
       'vehCondition': new FormControl(null, {
         validators: [Validators.required]
       }),
       'vehDetail': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.maxLength(20)]
       }),
       'vehPrice': new FormControl(null, {
         validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)]
