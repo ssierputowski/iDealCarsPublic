@@ -4,7 +4,7 @@
   <mat-tab-group  #tabGroup (selectedTabChange)="tabChanged($event)">
     <!--     =================this is a TAB========================================================== -->
     <mat-tab label="Customer Info">
-    <h6 style="color: red" *ngIf="(this.edit) && (customerInfoForm.invalid)">This dissappears when Customer Info Form inputs valid!</h6>
+    <h6 style="color: red" *ngIf="(this.edit) && (customerInfoForm.invalid)">This disappears when Customer Info Form inputs valid!</h6>
     <form [formGroup]="customerInfoForm" *ngIf="this.edit">
       <mat-form-field color="accent">
         <mat-label>First Name</mat-label>
