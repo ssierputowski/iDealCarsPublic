@@ -14,17 +14,17 @@
     </mat-form-field>
     <mat-form-field color="accent">
       <mat-label>Vehicle Make</mat-label>
-      <input matInput type="text" formControlName="vehMake">
+      <input matInput type="text" formControlName="vehMake" required maxlength="25">
       <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
       <mat-label>Vehicle Model</mat-label>
-      <input matInput type = "text" formControlName="vehModel">
+      <input matInput type = "text" formControlName="vehModel" required maxlength="15">
       <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
         <mat-label>Vehicle Color</mat-label>
-        <input matInput type = "text" formControlName="vehColor">
+        <input matInput type = "text" formControlName="vehColor" required maxlength="15">
         <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
@@ -37,7 +37,7 @@
         </mat-form-field>
     <mat-form-field color="accent">
       <mat-label>Vehicle Detail</mat-label>
-      <input matInput type = "text" formControlName="vehDetail">
+      <input matInput type = "text" formControlName="vehDetail" required maxlength="20">
       <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">

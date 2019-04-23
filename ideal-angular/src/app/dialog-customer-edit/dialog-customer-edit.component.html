@@ -8,12 +8,12 @@
     <form [formGroup]="customerInfoForm" *ngIf="this.edit">
       <mat-form-field color="accent">
         <mat-label>First Name</mat-label>
-        <input matInput type="text" formControlName="firstName">
+        <input matInput type="text" formControlName="firstName"required maxlength="15">
         <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field color="accent">
         <mat-label>Last Name</mat-label>
-        <input matInput type="text" formControlName="lastName">
+        <input matInput type="text" formControlName="lastName"required maxlength="20">
         <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field color="accent">
@@ -28,12 +28,12 @@
       </mat-form-field>
       <mat-form-field color="accent">
         <mat-label>Address</mat-label>
-        <input matInput type="text" formControlName="address">
+        <input matInput type="text" formControlName="address"required maxlength="30">
         <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field color="accent">
         <mat-label>City</mat-label>
-        <input matInput type="text" formControlName="city">
+        <input matInput type="text" formControlName="city"required maxlength="25">
         <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field color="accent">
@@ -101,22 +101,22 @@
       </mat-form-field>
       <mat-form-field color="accent">
         <mat-label>Vehicle Make</mat-label>
-        <input matInput type="text" formControlName="vehicleMake">
+        <input matInput type="text" formControlName="vehicleMake"required maxlength="25">
         <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field color="accent">
         <mat-label>Vehicle Model</mat-label>
-        <input matInput type="text" formControlName="vehicleModel">
+        <input matInput type="text" formControlName="vehicleModel"required maxlength="15">
         <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field color="accent">
         <mat-label>Vehicle Color</mat-label>
-        <input matInput type="text" formControlName="vehicleColor">
+        <input matInput type="text" formControlName="vehicleColor"required maxlength="15">
         <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field color="accent">
         <mat-label>Vehicle Details</mat-label>
-        <input matInput type="text" formControlName="vehicleDetails">
+        <input matInput type="text" formControlName="vehicleDetails"required maxlength="20">
         <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field color="accent">
@@ -183,22 +183,22 @@
           </mat-form-field>
           <mat-form-field color="accent">
             <mat-label>Vehicle Make</mat-label>
-            <input matInput type="text" formControlName="vehicleMake">
+            <input matInput type="text" formControlName="vehicleMake"required maxlength="25">
             <mat-error>{{getGENErrorMessage()}}</mat-error>
           </mat-form-field>
           <mat-form-field color="accent">
             <mat-label>Vehicle Model</mat-label>
-            <input matInput type="text" formControlName="vehicleModel">
+            <input matInput type="text" formControlName="vehicleModel"required maxlength="15">
             <mat-error>{{getGENErrorMessage()}}</mat-error>
           </mat-form-field>
           <mat-form-field color="accent">
             <mat-label>Vehicle Color</mat-label>
-            <input matInput type="text" formControlName="vehicleColor">
+            <input matInput type="text" formControlName="vehicleColor"required maxlength="15">
             <mat-error>{{getGENErrorMessage()}}</mat-error>
           </mat-form-field>
           <mat-form-field color="accent">
             <mat-label>Vehicle Details</mat-label>
-            <input matInput type="text" formControlName="vehicleDetails">
+            <input matInput type="text" formControlName="vehicleDetails"required maxlength="20">
             <mat-error>{{getGENErrorMessage()}}</mat-error>
           </mat-form-field>
           <mat-form-field color="accent">
@@ -234,7 +234,7 @@
         </mat-form-field>
         <mat-form-field color="accent">
           <mat-label>Service Performed</mat-label>
-          <input matInput type="text" formControlName="servicePerformed">
+          <input matInput type="text" formControlName="servicePerformed"required maxlength="25">
           <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field color="accent">
@@ -249,12 +249,12 @@
         </mat-form-field>
         <mat-form-field color="accent">
           <mat-label>Mechanic</mat-label>
-          <input matInput type="text" formControlName="mechanic">
+          <input matInput type="text" formControlName="mechanic"required maxlength="15">
           <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field color="accent">
           <mat-label>Service Notes</mat-label>
-          <input matInput type="text" formControlName="serviceNotes">
+          <input matInput type="text" formControlName="serviceNotes"required maxlength="25">
           <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field color="accent">
@@ -272,7 +272,7 @@
         </mat-form-field>
       </form>
       <form *ngIf="!this.edit && !this.addRecord">
-          <mat-select [formControl]="recordSelector" placeholder="PLEASE SELECT VEHICLE SERVICE RECORD">
+          <mat-select [formControl]="recordSelector" placeholder="PLEASE SELECT VEHICLE FROM CUSTOMER VEHICLES TAB FIRST">
               <mat-option *ngFor="let filteredRecord of filteredRecords" [value]="filteredRecord">
               {{this.filteredRecord?.date}}
               </mat-option>
@@ -334,7 +334,7 @@
             </mat-form-field>
             <mat-form-field color="accent">
               <mat-label>Service Performed</mat-label>
-              <input matInput type="text" formControlName="servicePerformed">
+              <input matInput type="text" formControlName="servicePerformed"required maxlength="25">
               <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field color="accent">
@@ -349,12 +349,12 @@
             </mat-form-field>
             <mat-form-field color="accent">
               <mat-label>Mechanic</mat-label>
-              <input matInput type="text" formControlName="mechanic">
+              <input matInput type="text" formControlName="mechanic"required maxlength="15">
               <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field color="accent">
               <mat-label>Service Notes</mat-label>
-              <input matInput type="text" formControlName="serviceNotes">
+              <input matInput type="text" formControlName="serviceNotes"required maxlength="25">
               <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field color="accent">
@@ -393,10 +393,10 @@
   <button mat-raised-button type="submit" color="accent" [disabled]="tabIndex!=2" (click)="setAddRecord(); addCustomerVehicleServiceRecord()">ADD RECORD</button>
 </mat-dialog-actions>
 <mat-dialog-actions *ngIf="this.addVehicle && tabIndex==1" align="end">
-    <button mat-raised-button type="submit" color="accent" (click)="saveAddedCustomerVehicle(); unSetAddVehicle();">SAVE</button>
+    <button mat-raised-button type="submit" color="accent" [disabled]="customerVehicleForm.invalid"(click)="saveAddedCustomerVehicle(); unSetAddVehicle();">SAVE</button>
     <button mat-raised-button (click)="unSetEdit(); unSetAddVehicle();" color="primary">CANCEL</button>
 </mat-dialog-actions>
 <mat-dialog-actions *ngIf="this.addRecord && tabIndex==2" align="end">
-    <button mat-raised-button type="submit" color="accent" (click)="saveAddedCustomerVehicleServiceRecord(); unSetAddRecord();">SAVE</button>
+    <button mat-raised-button type="submit" color="accent" [disabled]="customerServiceRecordForm.invalid"(click)="saveAddedCustomerVehicleServiceRecord(); unSetAddRecord();">SAVE</button>
     <button mat-raised-button (click)="unSetEdit(); unSetAddRecord();" color="primary">CANCEL</button>
 </mat-dialog-actions>
