@@ -15,11 +15,7 @@ const app = express();
 //'mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test'
 //'mongodb+srv://EWD:zipGEoVPTIRJvIEh@cluster0-tcbpt.mongodb.net/node-angular?retryWrites=true'
 mongoose.connect(
-<<<<<<< HEAD
     'mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test2',
-=======
-    'mongodb+srv://jmathis:' + process.env.MONGO_ATLAS_PW + '@ideal-cars-szrks.mongodb.net/test',
->>>>>>> b73358dbe794f2b29fc65e22f42166d1da15b323
     { useNewUrlParser: true }
     )
     .then(() => {
