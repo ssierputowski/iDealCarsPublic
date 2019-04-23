@@ -81,28 +81,28 @@ export class InventoryComponent implements OnInit {
       this.Make.valueChanges
       .subscribe(
         Make => {
-          this.filterValues.vehMake = Make;
+          this.filterValues.vehMake = Make.toLowerCase();
           this.dataSource.filter = JSON.stringify(this.filterValues);
         }
       );
       this.Model.valueChanges
       .subscribe(
         Model => {
-          this.filterValues.vehModel = Model;
+          this.filterValues.vehModel = Model.toLowerCase();
           this.dataSource.filter = JSON.stringify(this.filterValues);
         }
       );
       this.Color.valueChanges
       .subscribe(
         Color => {
-          this.filterValues.vehColor = Color;
+          this.filterValues.vehColor = Color.toLowerCase();
           this.dataSource.filter = JSON.stringify(this.filterValues);
         }
       );
       this.Condition.valueChanges
       .subscribe(
         Condition => {
-          this.filterValues.vehCondition = Condition;
+          this.filterValues.vehCondition = Condition.toLowerCase();
           this.dataSource.filter = JSON.stringify(this.filterValues);
         }
       );
@@ -125,10 +125,10 @@ tableFilter(): (data: any, filter: string) => boolean {
   const filterFunction = function(data, filter): boolean {
     const searchTerms = JSON.parse(filter);
     return data.vehYear.toString().indexOf(searchTerms.vehYear) !== -1
-      && data.vehMake.toString().indexOf(searchTerms.vehMake) !== -1
-      && data.vehModel.toString().indexOf(searchTerms.vehModel) !== -1
-      && data.vehColor.toString().indexOf(searchTerms.vehColor) !== -1
-      && data.vehCondition.toString().indexOf(searchTerms.vehCondition) !== -1;
+      && data.vehMake.toString().toLowerCase().indexOf(searchTerms.vehMake) !== -1
+      && data.vehModel.toString().toLowerCase().indexOf(searchTerms.vehModel) !== -1
+      && data.vehColor.toString().toLowerCase().indexOf(searchTerms.vehColor) !== -1
+      && data.vehCondition.toString().toLowerCase().indexOf(searchTerms.vehCondition) !== -1;
   };
   return filterFunction;
 }
