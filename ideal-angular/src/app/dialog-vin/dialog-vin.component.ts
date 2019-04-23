@@ -40,11 +40,11 @@ export class DialogVinComponent implements OnInit {
         'vehVin': new FormControl(null, { validators: [Validators.required, Validators.minLength(17), Validators.maxLength(17), Validators.pattern('[A-Za-z0-9]*')] }),
         // tslint:disable-next-line:max-line-length
         'vehYear': new FormControl(null, { validators: [Validators.required, Validators.min(1900), Validators.max(2050), Validators.pattern('[0-9]*')] }),
-        'vehMake': new FormControl(null, { validators: [Validators.required] }),
-        'vehModel': new FormControl(null, { validators: [Validators.required] }),
-        'vehColor': new FormControl(null, { validators: [Validators.required] }),
+        'vehMake': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+        'vehModel': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
+        'vehColor': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
         'vehCondition': new FormControl(null, { validators: [Validators.required] }),
-        'vehDetail': new FormControl(null, { validators: [Validators.required] }),
+        'vehDetail': new FormControl(null, { validators: [Validators.required, Validators.maxLength(20)] }),
         // tslint:disable-next-line:max-line-length
         'vehPrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
         'vehImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),

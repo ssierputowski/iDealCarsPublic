@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-2 search-container">
         <!--########################################### PARTS FILTER ##################################################-->
-
+        <mat-label align="center" style="color: #1972a4">SEARCH PARTS</mat-label>
         <!-- <form> remove form to even out input fields  -->
           <mat-form-field class = "filter" color="accent">
             <mat-label>ID</mat-label>
@@ -18,15 +18,8 @@
             <mat-label>Compatibility</mat-label>
             <input matInput [formControl]="Compatibility">
           </mat-form-field>
-        <!-- </form> -->
-
-        <!-- <button mat-raised-button color="accent" type ="submit">SEARCH</button>
-        <mat-divider></mat-divider>
-        <mat-divider></mat-divider>
-        <mat-divider></mat-divider>
-        <mat-divider></mat-divider>
-        <mat-divider></mat-divider> -->
-        <button mat-raised-button color="accent" (click)="openAddPart()">ADD PART</button>
+        <p></p>
+        <button mat-raised-button color="accent" (click)="openAddPart()">NEW PART</button>
       </div>
 
 
