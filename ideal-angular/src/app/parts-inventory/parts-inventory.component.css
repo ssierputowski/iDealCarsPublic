@@ -11,9 +11,12 @@ th {
   font-weight: bold;
   font-size: 1.4rem;
 }
-
+td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .max-width {
-  max-width: 25rem;
+  max-width: 10rem;
 }
 
 .search-container {

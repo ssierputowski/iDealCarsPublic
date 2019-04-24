@@ -96,7 +96,7 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
       'lastName': new FormControl(null, { validators: [Validators.required, Validators.maxLength(20)] }),
       'phoneNumber': new FormControl(null, { validators: [Validators.required, Validators.minLength(10)] }),
       'emailAddress': new FormControl(null, { validators: [Validators.required, Validators.email] }),
-      'address': new FormControl(null, { validators: [Validators.required, Validators.maxLength(30)] }),
+      'address': new FormControl(null, { validators: [Validators.required, Validators.maxLength(50)] }),
       'city': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
       'state': new FormControl(null, { validators: [Validators.required] }),
       // tslint:disable-next-line:max-line-length
@@ -108,9 +108,9 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
       // tslint:disable-next-line:max-line-length
       'vehicleYear': new FormControl(null, { validators: [Validators.required, Validators.min(1900), Validators.max(2050), Validators.pattern('[0-9]*')] }),
       'vehicleMake': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
-      'vehicleModel': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
-      'vehicleColor': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
-      'vehicleDetails': new FormControl(null, { validators: [Validators.required, Validators.maxLength(20)] }),
+      'vehicleModel': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+      'vehicleColor': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+      'vehicleDetails': new FormControl(null, { validators: [Validators.required, Validators.maxLength(50)] }),
       // tslint:disable-next-line:max-line-length
       'vehiclePriceSold': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'vehicleImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
@@ -123,7 +123,7 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
       'serviceDate': new FormControl(null, { validators: [Validators.required] }),
       'dateReturned': new FormControl(null, { validators: [Validators.required] }),
       'mechanic': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
-      'serviceNotes': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+      'serviceNotes': new FormControl(null, { validators: [Validators.required, Validators.maxLength(50)] }),
       // tslint:disable-next-line:max-line-length
       'servicePrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'paymentReceived': new FormControl(null, { validators: [Validators.required] }),
@@ -134,10 +134,10 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
       'vehicleId': new FormControl(null, { validators: [Validators.required, Validators.minLength(17), Validators.maxLength(17), Validators.pattern('[A-Za-z0-9]*')] }),
       // tslint:disable-next-line:max-line-length
       'vehicleYear': new FormControl(null, { validators: [Validators.required, Validators.min(1900), Validators.max(2050), Validators.pattern('[0-9]*')] }),
-      'vehicleMake': new FormControl(null, { validators: [Validators.required] }),
-      'vehicleModel': new FormControl(null, { validators: [Validators.required] }),
-      'vehicleColor': new FormControl(null, { validators: [Validators.required] }),
-      'vehicleDetails': new FormControl(null, { validators: [Validators.required] }),
+      'vehicleMake': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+      'vehicleModel': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+      'vehicleColor': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+      'vehicleDetails': new FormControl(null, { validators: [Validators.required, Validators.maxLength(50)] }),
       // tslint:disable-next-line:max-line-length
       'vehiclePriceSold': new FormControl(null, { validators: [Validators.required, Validators.min(1), Validators.max(20000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'vehicleImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
@@ -147,11 +147,11 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
       'vehicleId': new FormControl(null, { validators: [Validators.required] }),
       // tslint:disable-next-line:max-line-length
       'mileage': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(20000000), Validators.pattern('[0-9]*')] }),
-      'servicePerformed': new FormControl(null, { validators: [Validators.required] }),
+      'servicePerformed': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
       'serviceDate': new FormControl(null, { validators: [Validators.required] }),
       'dateReturned': new FormControl(null, { validators: [Validators.required] }),
-      'mechanic': new FormControl(null, { validators: [Validators.required] }),
-      'serviceNotes': new FormControl(null, { validators: [Validators.required] }),
+      'mechanic': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
+      'serviceNotes': new FormControl(null, { validators: [Validators.required, Validators.maxLength(50)] }),
       // tslint:disable-next-line:max-line-length
       'servicePrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(20000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'paymentReceived': new FormControl(null, { validators: [Validators.required] }),
@@ -206,7 +206,7 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
         this.customerVehicleForm.patchValue({vehicleModel: value.model});
         this.customerVehicleForm.patchValue({vehicleColor: value.color});
         this.customerVehicleForm.patchValue({vehicleDetails: value.details});
-        this.customerVehicleForm.patchValue({vehiclePriceSold:  value.pricePaid});
+        this.customerVehicleForm.patchValue({vehiclePriceSold: value.pricePaid});
         this.customerVehicleForm.patchValue({vehicleImage:  value.carPic});
       });
 
@@ -318,6 +318,7 @@ addCustomerVehicle() {
       this.addCustomerVehicleForm.get('vehiclePriceSold').value,
       this.addCustomerVehicleForm.get('vehicleImage').value
     );
+    this.dialogRef.close();
   }
    // ADD customer vehicle record to dB referencing customerId
    addCustomerVehicleServiceRecord() {
@@ -341,6 +342,7 @@ addCustomerVehicle() {
       this.addCustomerServiceRecordForm.get('servicePrice').value,
       this.addCustomerServiceRecordForm.get('paymentReceived').value,
     );
+    this.dialogRef.close();
   }
   /* ==================================================================================THESE ARE EDIT METHODS */
 
@@ -361,6 +363,7 @@ addCustomerVehicle() {
       this.customerInfoForm.get('state').value,
       this.customerInfoForm.get('zipCode').value,
     );
+    this.dialogRef.close();
   }
   // Saves edited customer vehicle info only
   saveEditedCustomerVehicleONLY () {
@@ -376,6 +379,7 @@ addCustomerVehicle() {
       this.customerVehicleForm.get('vehiclePriceSold').value,
       this.customerVehicleForm.get('vehicleImage').value,
     );
+    this.dialogRef.close();
   }
   // Saves edited customer service record info only
   saveEditedCustomerServiceRecordONLY() {
@@ -392,6 +396,7 @@ addCustomerVehicle() {
       this.customerServiceRecordForm.get('servicePrice').value,
       this.customerServiceRecordForm.get('paymentReceived').value,
     );
+    this.dialogRef.close();
   }
   // Saves customer data edited: one vehicle and one record at a time
   saveEditedCustomerALL() {
@@ -435,6 +440,7 @@ addCustomerVehicle() {
       this.customerServiceRecordForm.get('servicePrice').value,
       this.customerServiceRecordForm.get('paymentReceived').value,
     );
+    this.dialogRef.close();
  }
 
  /* ==================================================================================THESE ARE GETTERS METHODS */

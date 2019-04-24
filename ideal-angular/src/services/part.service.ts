@@ -82,7 +82,7 @@ export class PartService {
         };
         this.parts.push(part);
         this.partsUpdated.next({parts: [...this.parts]});
-        // window.location.reload();
+
       });
   }
   // helper method (not used) for edit part
@@ -150,7 +150,7 @@ export class PartService {
       this.parts = updatedParts;
       this.partsUpdated.next({parts: [...this.parts ]});
       this.router.navigate(['/inventory']);
-      window.location.reload();
+
     });
   }
 

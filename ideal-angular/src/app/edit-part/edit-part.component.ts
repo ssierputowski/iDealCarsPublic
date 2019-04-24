@@ -42,7 +42,7 @@ export class EditPartComponent implements OnInit {
         // tslint:disable-next-line:max-line-length
         'partQuantity': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000), Validators.pattern('[0-9]*')] }),
         'partCompatibility': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
-        'partDescription': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+        'partDescription': new FormControl(null, { validators: [Validators.required, Validators.maxLength(50)] }),
         'partImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
       });
      }
@@ -92,7 +92,7 @@ export class EditPartComponent implements OnInit {
 
     );
     console.log(this.edit_part.value);
-     this.editPartRef.close();
+    this.editPartRef.close();
   }
 
   close() {

@@ -28,7 +28,7 @@
       </mat-form-field>
       <mat-form-field color="accent">
         <mat-label>Address</mat-label>
-        <input matInput type="text" formControlName="address"required maxlength="30">
+        <input matInput type="text" formControlName="address"required maxlength="50">
         <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field color="accent">
@@ -106,17 +106,17 @@
       </mat-form-field>
       <mat-form-field color="accent">
         <mat-label>Vehicle Model</mat-label>
-        <input matInput type="text" formControlName="vehicleModel"required maxlength="15">
+        <input matInput type="text" formControlName="vehicleModel"required maxlength="25">
         <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field color="accent">
         <mat-label>Vehicle Color</mat-label>
-        <input matInput type="text" formControlName="vehicleColor"required maxlength="15">
+        <input matInput type="text" formControlName="vehicleColor"required maxlength="25">
         <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field color="accent">
         <mat-label>Vehicle Details</mat-label>
-        <input matInput type="text" formControlName="vehicleDetails"required maxlength="20">
+        <input matInput type="text" formControlName="vehicleDetails"required maxlength="50">
         <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field color="accent">
@@ -125,8 +125,9 @@
         <mat-error>{{getPRICEErrorMessage()}}</mat-error>
       </mat-form-field>
       <div>
+        <h6 style="color: red" *ngIf="(customerVehicleForm.get('vehicleImage').invalid)">PLEASE CHOOSE AN IMAGE!</h6>
         <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
-          <input type="file" #filePicker (change)="onImagePicked($event)">
+        <input type="file" #filePicker (change)="onImagePicked($event)">
       </div>
       <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && customerVehicleForm.get('vehicleImage').valid">
         <img [src]="imagePreview" [alt]="customerVehicleForm.value.vehicleModel">
@@ -188,17 +189,17 @@
           </mat-form-field>
           <mat-form-field color="accent">
             <mat-label>Vehicle Model</mat-label>
-            <input matInput type="text" formControlName="vehicleModel"required maxlength="15">
+            <input matInput type="text" formControlName="vehicleModel"required maxlength="25">
             <mat-error>{{getGENErrorMessage()}}</mat-error>
           </mat-form-field>
           <mat-form-field color="accent">
             <mat-label>Vehicle Color</mat-label>
-            <input matInput type="text" formControlName="vehicleColor"required maxlength="15">
+            <input matInput type="text" formControlName="vehicleColor"required maxlength="25">
             <mat-error>{{getGENErrorMessage()}}</mat-error>
           </mat-form-field>
           <mat-form-field color="accent">
             <mat-label>Vehicle Details</mat-label>
-            <input matInput type="text" formControlName="vehicleDetails"required maxlength="20">
+            <input matInput type="text" formControlName="vehicleDetails"required maxlength="50">
             <mat-error>{{getGENErrorMessage()}}</mat-error>
           </mat-form-field>
           <mat-form-field color="accent">
@@ -207,8 +208,9 @@
             <mat-error>{{getPRICEErrorMessage()}}</mat-error>
           </mat-form-field>
           <div>
+            <h6 style="color: red" *ngIf="(addCustomerVehicleForm.get('vehicleImage').invalid)">PLEASE CHOOSE AN IMAGE!</h6>
             <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
-              <input type="file" #filePicker (change)="addOnImagePicked($event)">
+            <input type="file" #filePicker (change)="addOnImagePicked($event)">
           </div>
           <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && addCustomerVehicleForm.get('vehicleImage').valid">
             <img [src]="imagePreview" [alt]="addCustomerVehicleForm.value.vehicleModel">
@@ -254,7 +256,7 @@
         </mat-form-field>
         <mat-form-field color="accent">
           <mat-label>Service Notes</mat-label>
-          <input matInput type="text" formControlName="serviceNotes"required maxlength="25">
+          <input matInput type="text" formControlName="serviceNotes"required maxlength="50">
           <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field color="accent">
@@ -325,7 +327,7 @@
             </div>
             <div class="flex-container">
                 <h4>Vehicle VIN</h4>
-                <p >{{ this.vehicleSelector?.value.carvin }}</p>
+                <p >{{ this.vehicleSelector?.value.carvin | uppercase }}</p>
             </div>
             <mat-form-field color="accent">
               <mat-label>Mileage</mat-label>
@@ -354,7 +356,7 @@
             </mat-form-field>
             <mat-form-field color="accent">
               <mat-label>Service Notes</mat-label>
-              <input matInput type="text" formControlName="serviceNotes"required maxlength="25">
+              <input matInput type="text" formControlName="serviceNotes"required maxlength="50">
               <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field color="accent">
@@ -376,10 +378,10 @@
   </mat-tab-group>
 </mat-dialog-content>
 <mat-dialog-actions *ngIf="this.edit" align="end">
-  <button mat-raised-button type="submit" color="accent" [disabled]="customerInfoForm.invalid || customerVehicleForm.invalid || customerServiceRecordForm.invalid" (click)="saveEditedCustomerALL() && unSetEdit()">SAVE ALL</button>
-  <button mat-raised-button type="submit" color="accent" *ngIf="customerInfoForm.valid && tabIndex==0"(click)="saveEditedCustomerONLY() && unSetEdit()">SAVE CUSTOMER</button>
-  <button mat-raised-button type="submit" color="accent" *ngIf="customerVehicleForm.valid && tabIndex==1"(click)="saveEditedCustomerVehicleONLY() && unSetEdit()">SAVE VEHICLE</button>
-  <button mat-raised-button type="submit" color="accent" *ngIf="customerServiceRecordForm.valid && tabIndex==2"(click)="saveEditedCustomerServiceRecordONLY() && unSetEdit()">SAVE SERVICE RECORD</button>
+  <button mat-raised-button type="submit" color="accent" [disabled]="customerInfoForm.invalid || customerVehicleForm.invalid || customerServiceRecordForm.invalid" (click)="saveEditedCustomerALL(); unSetEdit();">SAVE ALL</button>
+  <button mat-raised-button type="submit" color="accent" *ngIf="customerInfoForm.valid && tabIndex==0"(click)="saveEditedCustomerONLY(); unSetEdit();">SAVE CUSTOMER</button>
+  <button mat-raised-button type="submit" color="accent" *ngIf="customerVehicleForm.valid && tabIndex==1"(click)="saveEditedCustomerVehicleONLY(); unSetEdit();">SAVE VEHICLE</button>
+  <button mat-raised-button type="submit" color="accent" *ngIf="customerServiceRecordForm.valid && tabIndex==2"(click)="saveEditedCustomerServiceRecordONLY(); unSetEdit();">SAVE SERVICE RECORD</button>
 
   <button mat-raised-button mat-dialog-close color="warn" *ngIf="this.edit && tabIndex==0" (click)="onDelete(this.data.id)">DELETE CUSTOMER</button>
   <button mat-raised-button mat-dialog-close color="warn" *ngIf="this.edit && tabIndex==1" (click)="onVehicleDelete(); unSetEdit();">DELETE VEHICLE</button>
@@ -389,14 +391,14 @@
 <mat-dialog-actions *ngIf="!this.edit && !this.addVehicle && !this.addRecord" align="end">
   <button mat-raised-button type="submit" color="accent" (click)="setEdit()">EDIT ALL</button>
   <button mat-raised-button mat-dialog-close color="primary" (click)="close()">CANCEL</button>
-  <button mat-raised-button type="submit" color="accent" [disabled]="tabIndex!=1" (click)="setAddVehicle(); addCustomerVehicle()">ADD VEHICLE</button>
-  <button mat-raised-button type="submit" color="accent" [disabled]="tabIndex!=2" (click)="setAddRecord(); addCustomerVehicleServiceRecord()">ADD RECORD</button>
+  <button mat-raised-button type="submit" color="accent" [disabled]="tabIndex!=1" (click)="setAddVehicle(); addCustomerVehicle();">ADD VEHICLE</button>
+  <button mat-raised-button type="submit" color="accent" [disabled]="tabIndex!=2" (click)="setAddRecord(); addCustomerVehicleServiceRecord();">ADD RECORD</button>
 </mat-dialog-actions>
 <mat-dialog-actions *ngIf="this.addVehicle && tabIndex==1" align="end">
-    <button mat-raised-button type="submit" color="accent" [disabled]="customerVehicleForm.invalid"(click)="saveAddedCustomerVehicle(); unSetAddVehicle();">SAVE</button>
+    <button mat-raised-button type="submit" color="accent" [disabled]="addCustomerVehicleForm.invalid"(click)="saveAddedCustomerVehicle(); unSetAddVehicle();">SAVE</button>
     <button mat-raised-button (click)="unSetEdit(); unSetAddVehicle();" color="primary">CANCEL</button>
 </mat-dialog-actions>
 <mat-dialog-actions *ngIf="this.addRecord && tabIndex==2" align="end">
-    <button mat-raised-button type="submit" color="accent" [disabled]="customerServiceRecordForm.invalid"(click)="saveAddedCustomerVehicleServiceRecord(); unSetAddRecord();">SAVE</button>
+    <button mat-raised-button type="submit" color="accent" [disabled]="addCustomerServiceRecordForm.invalid"(click)="saveAddedCustomerVehicleServiceRecord(); unSetAddRecord();">SAVE</button>
     <button mat-raised-button (click)="unSetEdit(); unSetAddRecord();" color="primary">CANCEL</button>
 </mat-dialog-actions>

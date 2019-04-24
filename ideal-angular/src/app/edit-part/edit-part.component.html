@@ -29,12 +29,13 @@
   </mat-form-field>
   <mat-form-field color="accent">
     <mat-label>Part Description</mat-label>
-    <input matInput type="text" formControlName="partDescription" required maxlength="25">
+    <input matInput type="text" formControlName="partDescription" required maxlength="50">
     <mat-error>{{getGENErrorMessage()}}</mat-error>
   </mat-form-field>
   <div>
+    <h6 style="color: red" *ngIf="(edit_part.get('partImage').invalid)">PLEASE CHOOSE AN IMAGE!</h6>
     <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
-      <input type="file" #filePicker (change)="onImagePicked($event)">
+    <input type="file" #filePicker (change)="onImagePicked($event)">
   </div>
   <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && edit_part.get('partImage').valid">
     <img [src]="imagePreview" [alt]="edit_part.value.partName">
@@ -68,8 +69,8 @@
 </form>
 </mat-dialog-content>
 <mat-dialog-actions *ngIf="edit" align="end">
-<button mat-raised-button color="accent" type="submit" [disabled]="edit_part.invalid" (click)="saveEditedPart()">SAVE</button>
-<button mat-raised-button color="warn" (click)="onDelete(this.data.id)">DELETE</button>
+<button mat-raised-button color="accent" type="submit" [disabled]="edit_part.invalid" (click)="saveEditedPart(); unSetEdit()">SAVE</button>
+<button mat-raised-button mat-dialog-close color="warn" (click)="onDelete(this.data.id)">DELETE</button>
 <button mat-raised-button  (click)="unSetEdit()" color="primary">CANCEL</button>
 </mat-dialog-actions>
 <mat-dialog-actions *ngIf="!edit" align="end">
