@@ -17,6 +17,7 @@ import {
   MatRadioModule,
   MatSelectModule,
   MatSidenavModule,
+  MatSnackBarModule,
   MatTableModule,
   MatTabsModule,
 } from '@angular/material';
@@ -29,6 +30,7 @@ import { environment } from '../environments/environment';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
+import { Ng2FileSizeModule } from 'ng2-file-size';
 
 import { AlertComponent } from './auth/alert/alert.component';
 import { AppComponent } from './app.component';
@@ -102,9 +104,11 @@ const routes: Routes = [
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
+    MatSnackBarModule,
     MatProgressSpinnerModule,
     MatTableModule,
     MatTabsModule,
+    Ng2FileSizeModule,
     NgbModule,
     NgxMaskModule.forRoot(),
     ReactiveFormsModule,

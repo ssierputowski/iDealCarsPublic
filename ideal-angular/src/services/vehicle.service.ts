@@ -169,7 +169,6 @@ export class VehicleService {
       const updatedVehicles = this.vehicles.filter(vehicle => vehicle.id !== vehicleID);
       this.vehicles = updatedVehicles;
       this.vehiclesUpdated.next({vehicles: [...this.vehicles]});
-
     });
   }
 }
