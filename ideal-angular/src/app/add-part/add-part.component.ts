@@ -47,7 +47,7 @@ export class AddPartComponent implements OnInit {
         validators: [Validators.required, Validators.maxLength(25)]
       }),
       'partDescription': new FormControl(null, {
-        validators: [Validators.required, Validators.maxLength(25)]
+        validators: [Validators.required, Validators.maxLength(50)]
       }),
       'partImage': new FormControl(null, {
         validators: [Validators.required], asyncValidators: [mimeType]
@@ -75,8 +75,7 @@ export class AddPartComponent implements OnInit {
       this.partform.get('partImage').value
 
     );
-    console.log(this.partform.value);
-    this.partform.reset();
+    this.addPartRef.close();
 
   }
   /* closes 'Add Part Inventory' form */

@@ -91,6 +91,7 @@ export class VehicleService {
         };
         this.vehicles.push(vehicle);
         this.vehiclesUpdated.next({vehicles: [...this.vehicles]});
+
       });
   }
   // helper method (not used) for edit vehicle

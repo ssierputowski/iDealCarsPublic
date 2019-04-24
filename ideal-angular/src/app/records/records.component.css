@@ -12,6 +12,11 @@ th {
   font-size: 1.4rem;
 }
 
+td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .max-width {
   max-width: 5rem;
 }
