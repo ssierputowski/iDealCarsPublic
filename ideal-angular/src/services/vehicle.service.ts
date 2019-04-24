@@ -91,6 +91,7 @@ export class VehicleService {
         };
         this.vehicles.push(vehicle);
         this.vehiclesUpdated.next({vehicles: [...this.vehicles]});
+        window.location.reload();
       });
   }
   // helper method (not used) for edit vehicle
@@ -158,6 +159,7 @@ export class VehicleService {
       this.vehicles = updatedVehicles;
       this.vehiclesUpdated.next({vehicles: [...this.vehicles ]});
       this.router.navigate(['/inventory']);
+      window.location.reload();
     });
   }
 // DELETE method for vehicles; used in dialogVin
@@ -168,6 +170,7 @@ export class VehicleService {
       const updatedVehicles = this.vehicles.filter(vehicle => vehicle.id !== vehicleID);
       this.vehicles = updatedVehicles;
       this.vehiclesUpdated.next({vehicles: [...this.vehicles]});
+
     });
   }
 }

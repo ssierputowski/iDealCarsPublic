@@ -59,7 +59,10 @@ export class AuthService {
     userData.append('phoneNumber', phoneNumber);
     userData.append('jobRole', jobRole);
     userData.append('image', image, image.name);
-    this.http.post(BACKEND_URL + '/register', userData);
+    this.http.post(BACKEND_URL + '/register', userData)
+      .subscribe(res => {
+        console.log(res);
+      });
   }
 
   login(username: string, password: string) {
