@@ -4,6 +4,11 @@
   <mat-tab-group>
 <!--     =================this is a TAB========================================================== -->
     <mat-tab label="Customer Info">
+      <mat-select *ngIf="currentCust" [formControl]="customerSelector" placeholder="PLEASE SELECT CUSTOMER">
+        <mat-option *ngFor="let cust of custs"[value]="cust">
+          {{ this.cust?.last }}, {{ this.cust?.first }}
+        </mat-option>
+      </mat-select>
   <form [formGroup]="customerInfoForm">
     <mat-form-field color="accent">
       <mat-label>First Name</mat-label>
@@ -27,7 +32,7 @@
       </mat-form-field>
     <mat-form-field color="accent">
         <mat-label>Address</mat-label>
-        <input matInput type="text" formControlName="address"required maxlength="30">
+        <input matInput type="text" formControlName="address"required maxlength="50">
         <mat-error>{{getGENErrorMessage()}}</mat-error>
       </mat-form-field>
     <mat-form-field color="accent">
@@ -70,17 +75,17 @@
     </mat-form-field>
     <mat-form-field color="accent">
       <mat-label>Vehicle Model</mat-label>
-      <input matInput type="text" formControlName="vehicleModel"required maxlength="15">
+      <input matInput type="text" formControlName="vehicleModel"required maxlength="25">
       <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
       <mat-label>Vehicle Color</mat-label>
-      <input matInput type="text" formControlName="vehicleColor"required maxlength="15">
+      <input matInput type="text" formControlName="vehicleColor"required maxlength="25">
       <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
       <mat-label>Vehicle Details</mat-label>
-      <input matInput type="text" formControlName="vehicleDetails"required maxlength="20">
+      <input matInput type="text" formControlName="vehicleDetails"required maxlength="50">
       <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
@@ -89,8 +94,9 @@
       <mat-error>{{getPRICEErrorMessage()}}</mat-error>
     </mat-form-field>
     <div>
+      <h6 style="color: red" *ngIf="(customerVehicleForm.get('vehicleImage').invalid)">PLEASE CHOOSE AN IMAGE!</h6>
       <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
-        <input type="file" #filePicker (change)="onImagePicked($event)">
+      <input type="file" #filePicker (change)="onImagePicked($event)">
     </div>
     <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && customerVehicleForm.get('vehicleImage').valid">
       <img [src]="imagePreview" [alt]="customerVehicleForm.value.vehicleModel">
@@ -131,7 +137,7 @@
     </mat-form-field>
     <mat-form-field color="accent">
       <mat-label>Service Notes</mat-label>
-      <input matInput type="text" formControlName="serviceNotes"required maxlength="25">
+      <input matInput type="text" formControlName="serviceNotes"required maxlength="50">
       <mat-error>{{getSERVICEErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
@@ -152,6 +158,8 @@
   </mat-tab-group>
   </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-raised-button color="accent" type="submit" [disabled]="(customerInfoForm.invalid || customerVehicleForm.invalid || customerServiceRecordForm.invalid )"(click)="saveCustomer()" mat-dialog-close>ADD CUSTOMER</button>
+  <button mat-raised-button color="accent" *ngIf="this.data" (click)="setCurrentCustomer()">CURRENT CUSTOMER?</button>
+  <button mat-raised-button color="accent" type="submit" *ngIf="!currentCust" [disabled]="(customerInfoForm.invalid || customerVehicleForm.invalid || customerServiceRecordForm.invalid )"(click)="saveCustomer()" mat-dialog-close>ADD CUSTOMER</button>
+  <button mat-raised-button color="accent" type="submit" *ngIf="currentCust" [disabled]="(customerInfoForm.invalid || customerVehicleForm.invalid || customerServiceRecordForm.invalid )"(click)="saveCurrentCustomer()" mat-dialog-close>ADD CUSTOMER VEHICLE</button>
   <button mat-raised-button color="primary" mat-dialog-close>CANCEL</button>
 </mat-dialog-actions>

@@ -123,8 +123,7 @@ export class CustomerVehicleService {
             };
             this.customerVehicles.push(customerVehicle);
             this.customerVehiclesUpdated.next({customerVehicles: [...this.customerVehicles]});
-            // this.router.navigate(['/records']);
-            // window.location.reload();
+
           });
       }
 
@@ -187,8 +186,7 @@ export class CustomerVehicleService {
         updatedCustomerVehicles[oldCustomerVehicleIndex] = customerVehicle;
         this.customerVehicles = updatedCustomerVehicles;
         this.customerVehiclesUpdated.next({customerVehicles: [...this.customerVehicles ]});
-        // this.router.navigate(['/records']);
-        // window.location.reload();
+
       });
     }
 

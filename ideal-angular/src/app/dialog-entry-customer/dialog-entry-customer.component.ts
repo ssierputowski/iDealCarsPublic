@@ -15,6 +15,17 @@ import { VehicleService } from '../../services/vehicle.service';
 import { Subscription } from 'rxjs';
 import { mimeType } from '../manager-actions/mime-type.validator';
 
+export interface Cust {
+  IDcust: string;
+  first: string;
+  last: string;
+  phone: string;
+  emailA: string;
+  street: string;
+  town: string;
+  st: string;
+  zip: string;
+}
 @Component({
   selector: 'app-dialog-entry-customer',
   templateUrl: './dialog-entry-customer.component.html',
@@ -25,7 +36,6 @@ export class DialogEntryCustomerComponent implements OnInit {
   last: string;
   cellNum: string;
   custID: string;
-  customerCreateID: string;
   imagePreview: string;
   customerInfoForm: FormGroup;
   customerVehicleForm: FormGroup;
@@ -43,15 +53,16 @@ export class DialogEntryCustomerComponent implements OnInit {
     'Awaiting Payment', 'Paid In Full'
   ];
   customers: Customer[] = [];
+  custs: Cust[] = [];
   totalCustomers = 0;
   private customersSub: Subscription;
-
+  customerSelector = new FormControl('', { validators: [Validators.required]});
   pulledFromInventory = false;
   checked = false;
 
   customerform: FormGroup;
   // @ViewChild('addCustomerForm') addCustomerForm: FormGroupDirective;
-
+  public currentCust = false;
   constructor(
     private customerServiceRecordService: CustomerServiceRecordService,
     private customerVehicleService: CustomerVehicleService,
@@ -69,7 +80,7 @@ export class DialogEntryCustomerComponent implements OnInit {
       'lastName': new FormControl(null, { validators: [Validators.required, Validators.maxLength(20)] }),
       'phoneNumber': new FormControl(null, { validators: [Validators.required, Validators.minLength(10)] }),
       'emailAddress': new FormControl(null, { validators: [Validators.required, Validators.email] }),
-      'address': new FormControl(null, { validators: [Validators.required, Validators.maxLength(30)] }),
+      'address': new FormControl(null, { validators: [Validators.required, Validators.maxLength(50)] }),
       'city': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
       'state': new FormControl(null, { validators: [Validators.required] }),
       // tslint:disable-next-line:max-line-length
@@ -81,9 +92,9 @@ export class DialogEntryCustomerComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       'vehicleYear': new FormControl(null, { validators: [Validators.required, Validators.min(1900), Validators.max(2050), Validators.pattern('[0-9]*')] }),
       'vehicleMake': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
-      'vehicleModel': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
-      'vehicleColor': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
-      'vehicleDetails': new FormControl(null, { validators: [Validators.required, Validators.maxLength(20)] }),
+      'vehicleModel': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+      'vehicleColor': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+      'vehicleDetails': new FormControl(null, { validators: [Validators.required, Validators.maxLength(50)] }),
       // tslint:disable-next-line:max-line-length
       'vehiclePriceSold': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'vehicleImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
@@ -96,7 +107,7 @@ export class DialogEntryCustomerComponent implements OnInit {
       'serviceDate': new FormControl(null, { validators: [Validators.required] }),
       'dateReturned': new FormControl(null, { validators: [Validators.required] }),
       'mechanic': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
-      'serviceNotes': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+      'serviceNotes': new FormControl(null, { validators: [Validators.required, Validators.maxLength(50)] }),
       // tslint:disable-next-line:max-line-length
       'servicePrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'paymentReceived': new FormControl(null, { validators: [Validators.required] }),
@@ -105,29 +116,70 @@ export class DialogEntryCustomerComponent implements OnInit {
 
   ngOnInit() {
     if (this.data) {
+      this.getCustomer();
+      this.route.params.subscribe(
+        param => {
 
-    this.route.params.subscribe(
-      param => {
-        this.customerVehicleForm.patchValue({vehicleId: this.data.vehVin});
-        this.customerVehicleForm.patchValue({vehicleYear: this.data.vehYear});
-        this.customerVehicleForm.patchValue({vehicleMake: this.data.vehMake});
-        this.customerVehicleForm.patchValue({vehicleModel: this.data.vehModel});
-        this.customerVehicleForm.patchValue({vehicleColor: this.data.vehColor});
-        this.customerVehicleForm.patchValue({vehicleDetails: this.data.vehDetail});
-        this.customerVehicleForm.patchValue({vehicleMiles: this.data.vehMiles});
-        this.customerVehicleForm.patchValue({vehiclePriceSold: this.data.vehPrice});
-        this.customerVehicleForm.patchValue({vehicleImage: this.data.vehImage});
+          this.customerSelector.valueChanges.subscribe(value => {
+            value.first = this.customerSelector.value.first;
+            value.last = this.customerSelector.value.last;
+            value.phone = this.customerSelector.value.phone;
+            value.emailA = this.customerSelector.value.emailA;
+            value.street = this.customerSelector.value.street;
+            value.town = this.customerSelector.value.town;
+            value.st = this.customerSelector.value.st;
+            value.zip = this.customerSelector.value.zip;
 
-        this.customerServiceRecordForm.patchValue({vehicleId: this.data.vehVin});
+            this.customerInfoForm.patchValue({firstName: value.first});
+            this.customerInfoForm.patchValue({lastName: value.last});
+            this.customerInfoForm.patchValue({phoneNumber: value.phone});
+            this.customerInfoForm.patchValue({emailAddress: value.emailA});
+            this.customerInfoForm.patchValue({address: value.street});
+            this.customerInfoForm.patchValue({city: value.town});
+            this.customerInfoForm.patchValue({state: value.st });
+            this.customerInfoForm.patchValue({zipCode: value.zip});
+          });
 
-      }
-    );
-  }
+          this.customerVehicleForm.patchValue({vehicleId: this.data.vehVin});
+          this.customerVehicleForm.patchValue({vehicleYear: this.data.vehYear});
+          this.customerVehicleForm.patchValue({vehicleMake: this.data.vehMake});
+          this.customerVehicleForm.patchValue({vehicleModel: this.data.vehModel});
+          this.customerVehicleForm.patchValue({vehicleColor: this.data.vehColor});
+          this.customerVehicleForm.patchValue({vehicleDetails: this.data.vehDetail});
+          this.customerVehicleForm.patchValue({vehicleMiles: this.data.vehMiles});
+          this.customerVehicleForm.patchValue({vehiclePriceSold: this.data.vehPrice});
+
+          this.customerServiceRecordForm.patchValue({vehicleId: this.data.vehVin});
+
+        }
+      );
+    }
   this.customerVehicleForm.valueChanges.subscribe(val => {
     val = this.customerVehicleForm.get('vehicleId').value;
     this.customerServiceRecordForm.patchValue({vehicleId: val});
   });
 }
+  // Customer data to keep track of current customers
+  getCustomer(): void {
+    this.customerService.getCustomers();
+    this.customerService.getCustomerUpdateListener()
+      .subscribe((customerData: { customers: Customer[] }) => {
+        this.customers = customerData.customers;
+        this.customers.map(customer => {
+          this.custs.push(
+            { IDcust: customer.customerId,
+              first: customer.firstName,
+              last: customer.lastName,
+              phone: customer.phoneNumber,
+              emailA: customer.emailAddress,
+              street: customer.address,
+              town: customer.city,
+              st: customer.state,
+              zip: customer.zipCode
+          });
+        });
+      });
+    }
 
   saveCustomer() {
     if (this.customerInfoForm.invalid || this.customerVehicleForm.invalid || this.customerServiceRecordForm.invalid) {
@@ -136,7 +188,7 @@ export class DialogEntryCustomerComponent implements OnInit {
       return;
     }
     if (this.data) { this.pulledFromInventory = true; }
-    // this.customerCreateID = this.createCustomerID();
+
     this.customerService.addCustomer(
       this.createCustomerID(),
       this.customerInfoForm.get('firstName').value,
@@ -176,6 +228,44 @@ export class DialogEntryCustomerComponent implements OnInit {
     }
     this.dialogRef.close();
  }
+ // save if current customer is buying vehicle
+ saveCurrentCustomer() {
+  if (this.customerInfoForm.invalid || this.customerVehicleForm.invalid || this.customerServiceRecordForm.invalid) {
+    console.log(this.createCustomerID());
+
+    return;
+  }
+  if (this.data) { this.pulledFromInventory = true; }
+
+  this.customerVehicleService.addCustomerVehicle(
+    this.createCustomerID(),
+    this.customerVehicleForm.get('vehicleId').value,
+    this.customerVehicleForm.get('vehicleYear').value,
+    this.customerVehicleForm.get('vehicleMake').value,
+    this.customerVehicleForm.get('vehicleModel').value,
+    this.customerVehicleForm.get('vehicleColor').value,
+    this.customerVehicleForm.get('vehicleDetails').value,
+    this.customerVehicleForm.get('vehiclePriceSold').value,
+    this.customerVehicleForm.get('vehicleImage').value,
+  );
+  this.customerServiceRecordService.addCustomerServiceRecord(
+    this.createCustomerID(),
+    this.customerServiceRecordForm.get('vehicleId').value,
+    this.customerServiceRecordForm.get('mileage').value,
+    this.customerServiceRecordForm.get('servicePerformed').value,
+    this.customerServiceRecordForm.get('serviceDate').value,
+    this.customerServiceRecordForm.get('dateReturned').value,
+    this.customerServiceRecordForm.get('mechanic').value,
+    this.customerServiceRecordForm.get('serviceNotes').value,
+    this.customerServiceRecordForm.get('servicePrice').value,
+    this.customerServiceRecordForm.get('paymentReceived').value,
+  );
+  if (this.pulledFromInventory) {
+    this.vehicleService.deleteVehicle(this.data.id);
+  }
+  this.dialogRef.close();
+}
+
   // method creates customerId from first, last names and number
   createCustomerID() {
     this.first = this.customerInfoForm.get('firstName').value;
@@ -240,5 +330,8 @@ export class DialogEntryCustomerComponent implements OnInit {
   close() {
     this.dialogRef.close();
 
+  }
+  setCurrentCustomer() {
+    this.currentCust = true;
   }
 }

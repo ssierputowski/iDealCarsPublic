@@ -93,8 +93,7 @@ export class CustomerService {
             };
             this.customers.push(customer);
             this.customersUpdated.next({customers: [...this.customers]});
-            // this.router.navigate(['/records']);
-            // window.location.reload();
+
           });
       }
 
@@ -143,8 +142,7 @@ export class CustomerService {
         updatedCustomers[oldCustomerIndex] = customer;
         this.customers = updatedCustomers;
         this.customersUpdated.next({customers: [...this.customers ]});
-        this.router.navigate(['/records']);
-        window.location.reload();
+
       });
     }
 

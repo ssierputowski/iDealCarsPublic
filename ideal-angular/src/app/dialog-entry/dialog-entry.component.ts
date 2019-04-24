@@ -44,16 +44,16 @@ export class DialogEntryComponent implements OnInit {
         validators: [Validators.required, Validators.maxLength(25)]
       }),
       'vehModel': new FormControl(null, {
-        validators: [Validators.required, Validators.maxLength(15)]
+        validators: [Validators.required, Validators.maxLength(25)]
       }),
       'vehColor': new FormControl(null, {
-        validators: [Validators.required, Validators.maxLength(15)]
+        validators: [Validators.required, Validators.maxLength(25)]
       }),
       'vehCondition': new FormControl(null, {
         validators: [Validators.required]
       }),
       'vehDetail': new FormControl(null, {
-        validators: [Validators.required, Validators.maxLength(20)]
+        validators: [Validators.required, Validators.maxLength(50)]
       }),
       'vehMiles': new FormControl(null, {
         validators: [Validators.required, Validators.maxLength(7)]
@@ -90,8 +90,7 @@ export class DialogEntryComponent implements OnInit {
         this.vehicleform.get('vehImage').value
 
       );
-      console.log(this.vehicleform.value );
-      this.vehicleform.reset();
+      this.dialogRef.close();
 
     }
   /* closes 'Add Vehicle Inventory' form */

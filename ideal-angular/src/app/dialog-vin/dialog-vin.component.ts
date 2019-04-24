@@ -41,10 +41,10 @@ export class DialogVinComponent implements OnInit {
         // tslint:disable-next-line:max-line-length
         'vehYear': new FormControl(null, { validators: [Validators.required, Validators.min(1900), Validators.max(2050), Validators.pattern('[0-9]*')] }),
         'vehMake': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
-        'vehModel': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
-        'vehColor': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
+        'vehModel': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
+        'vehColor': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
         'vehCondition': new FormControl(null, { validators: [Validators.required] }),
-        'vehDetail': new FormControl(null, { validators: [Validators.required, Validators.maxLength(20)] }),
+        'vehDetail': new FormControl(null, { validators: [Validators.required, Validators.maxLength(50)] }),
         'vehMiles': new FormControl(null, { validators: [Validators.required, Validators.maxLength(7)] }),
         // tslint:disable-next-line:max-line-length
         'vehPrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
@@ -113,7 +113,7 @@ export class DialogVinComponent implements OnInit {
 onDelete(vehicleID: string) {
   // vehicleVin = this.data.vehVin;
   this.vehicleService.deleteVehicle(vehicleID);
-  // this.dialogRef.close();
+  this.dialogRef.close();
 }
 // opens customer entry dialog
 sellVehicle() {
