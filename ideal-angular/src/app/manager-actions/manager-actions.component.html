@@ -46,11 +46,11 @@
           <input type="file" #filePicker (change)="onImagePicked($event)">
         </div>
         <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && employeeForm.get('image').valid">
-          <img [src]="imagePreview" [alt]="form.value.username">
+          <img [src]="imagePreview" [alt]="employeeForm.value.username">
         </div>
       </form>
     </mat-tab>
-    <mat-tab label="Generate Schedule">
+    <!-- <mat-tab label="Generate Schedule">
       <form [formGroup]="scheduleForm" (ngSubmit)="onGenerateSchedule()" #generateScheduleForm="ngForm" autocomplete="off">
         <mat-form-field color="accent">
           <mat-select placeholder="Employee" formControlName="employee">
@@ -142,7 +142,7 @@
           </mat-form-field>
         </div>
       </form>
-    </mat-tab>
+    </mat-tab> -->
     <mat-tab label="Post Message">
       <form [formGroup]="messageForm" (ngSubmit)="onPostMessage()" #postMessageForm="ngForm">
         <mat-form-field color="accent" appearance="outline">
@@ -160,13 +160,13 @@
   [disabled]="!addEmployeeForm.form.valid"
   color="accent"
   mat-dialog-close>ADD EMPLOYEE</button>
-  <button *ngIf="tabIndex == 1"
+  <!-- <button *ngIf="tabIndex == 1"
   mat-raised-button
   (click)="generateScheduleForm.ngSubmit.emit()"
   [disabled]="!generateScheduleForm.form.valid"
   color="accent"
-  mat-dialog-close>GENERATE SCHEDULE</button>
-  <button *ngIf="tabIndex == 2"
+  mat-dialog-close>GENERATE SCHEDULE</button> -->
+  <button *ngIf="tabIndex == 1"
   mat-raised-button
   (click)="postMessageForm.ngSubmit.emit()"
   [disabled]="!postMessageForm.form.valid"

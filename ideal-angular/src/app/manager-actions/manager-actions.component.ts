@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
 
 import { mimeType } from '../manager-actions/mime-type.validator';
+import { fileSizeValidator } from '../manager-actions/file-size.validator';
 import { MatTabChangeEvent } from '@angular/material';
 import { AuthService } from '../auth/auth.service';
 import { UserService } from 'src/services/user.service';
@@ -52,7 +53,7 @@ export class ManagerActionsComponent implements OnInit {
       'jobRole': new FormControl(null, {validators: [Validators.required]}),
       'image': new FormControl(null, {
         validators: [Validators.required],
-        asyncValidators: [mimeType]
+        asyncValidators: [mimeType, fileSizeValidator]
       })
     });
     this.scheduleForm = new FormGroup({

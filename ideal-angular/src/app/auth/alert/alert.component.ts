@@ -8,7 +8,7 @@ import { AlertService } from '../../../services/alert.service';
   templateUrl: 'alert.component.html',
   styleUrls: ['alert.component.css'],
 })
-export class AlertComponent implements OnInit, OnDestroy {
+export class AlertComponent implements OnInit {
 
   private sub: Subscription;
   message: any;
@@ -19,9 +19,5 @@ export class AlertComponent implements OnInit, OnDestroy {
     this.sub = this.alertService.getMessage().subscribe(message => {
       this.message = message;
     });
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
   }
 }

@@ -1,5 +1,5 @@
 <mat-card>
-  <div class="container-fluid">
+  <!-- <div class="container-fluid">
     <h2>My Weekly Schedule</h2>
     <hr>
     <table>
@@ -32,8 +32,8 @@
         <td>{{ saturday.timeIn }} - {{ saturday.timeOut }}</td>
       </tr>
     </table>
-  </div>
+  </div> -->
   <h1>{{ now | date: 'mediumDate' }}</h1>
   <h1>{{ now | date: 'h:mm a' }}</h1>
-  <button mat-raised-button color="accent" (click)="setTime()">CLOCK IN</button>
+  <button mat-raised-button color="accent" (click)="setTime()" [disabled]="clockInDisabled">CLOCK IN</button>
 </mat-card>
