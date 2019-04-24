@@ -17,6 +17,7 @@ import {
   MatRadioModule,
   MatSelectModule,
   MatSidenavModule,
+  MatSnackBarModule,
   MatTableModule,
   MatTabsModule,
 } from '@angular/material';
@@ -103,6 +104,7 @@ const routes: Routes = [
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
+    MatSnackBarModule,
     MatProgressSpinnerModule,
     MatTableModule,
     MatTabsModule,
