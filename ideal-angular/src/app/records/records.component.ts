@@ -60,14 +60,14 @@ export class RecordsComponent implements OnInit {
     this.FName.valueChanges
     .subscribe(
       Fname => {
-        this.filterValues.firstName  = Fname;
+        this.filterValues.firstName  = Fname.toLowerCase();
         this.dataSource.filter = JSON.stringify(this.filterValues);
       }
     );
     this.LName.valueChanges
       .subscribe(
         LName => {
-          this.filterValues.lastName = LName;
+          this.filterValues.lastName = LName.toLowerCase();
           this.dataSource.filter = JSON.stringify(this.filterValues);
         }
       );
@@ -87,8 +87,8 @@ getCustomer(): void {
 tableFilter(): (data: any, filter: string) => boolean {
   const filterFunction = function(data, filter): boolean {
     const searchTerms = JSON.parse(filter);
-    return data.firstName.toString().indexOf(searchTerms.firstName) !== -1
-      && data.lastName.toString().indexOf(searchTerms.lastName) !== -1;
+    return data.firstName.toString().toLowerCase().indexOf(searchTerms.firstName) !== -1
+      && data.lastName.toString().toLowerCase().indexOf(searchTerms.lastName) !== -1;
   };
   return filterFunction;
 }

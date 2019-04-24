@@ -73,21 +73,21 @@ export class PartsInventoryComponent implements OnInit {
         this.PartID.valueChanges
         .subscribe(
           PartID => {
-            this.filterValuesParts.partID = PartID;
+            this.filterValuesParts.partID = PartID.toLowerCase();
             this.dataSourceParts.filter = JSON.stringify(this.filterValuesParts);
           }
         );
         this.Name.valueChanges
         .subscribe(
           Name => {
-            this.filterValuesParts.partName = Name;
+            this.filterValuesParts.partName = Name.toLowerCase();
             this.dataSourceParts.filter = JSON.stringify(this.filterValuesParts);
           }
         );
         this.Compatibility.valueChanges
         .subscribe(
           Compatibility => {
-            this.filterValuesParts.partCompatibility = Compatibility;
+            this.filterValuesParts.partCompatibility = Compatibility.toLowerCase();
             this.dataSourceParts.filter = JSON.stringify(this.filterValuesParts);
           }
         );
@@ -111,9 +111,9 @@ export class PartsInventoryComponent implements OnInit {
   tableFilter(): (data: any, filter: string) => boolean {
     const filterFunctionParts = function(data, filter): boolean {
       const searchTerms = JSON.parse(filter);
-      return data.partID.toString().indexOf(searchTerms.partID) !== -1
-        && data.partName.toString().indexOf(searchTerms.partName) !== -1
-        && data.partCompatibility.toString().indexOf(searchTerms.partCompatibility) !== -1;
+      return data.partID.toString().toLowerCase().indexOf(searchTerms.partID) !== -1
+        && data.partName.toString().toLowerCase().indexOf(searchTerms.partName) !== -1
+        && data.partCompatibility.toString().toLowerCase().indexOf(searchTerms.partCompatibility) !== -1;
     };
     return filterFunctionParts;
   }
