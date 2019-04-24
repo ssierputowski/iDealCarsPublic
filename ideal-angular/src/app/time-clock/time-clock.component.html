@@ -35,5 +35,5 @@
   </div> -->
   <h1>{{ now | date: 'mediumDate' }}</h1>
   <h1>{{ now | date: 'h:mm a' }}</h1>
-  <button mat-raised-button color="accent" (click)="setTime()" [disabled]="clockInDisabled">CLOCK IN</button>
+  <button mat-raised-button color="accent" (click)="doToggle()" (click)="setTime()" [disabled]="clockInDisabled">{{toggle ? 'CLOCK OUT':'CLOCK IN'}}</button>
 </mat-card>
