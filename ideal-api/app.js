@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const webpush = require('web-push');
 
 const userRoutes = require('./routes/user');
 const messageRoutes = require('./routes/message');
@@ -28,12 +27,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/vehicleImages', express.static(path.join('/vehicleImages')));
 app.use('/customerVehicleImages', express.static(path.join('/customerVehicleImages')));
-
-webpush.setVapidDetails(
-    'mailto:you@domain.com',
-    process.env.PUBLIC_VAPID,
-    process.env.PRIVATE_VAPID
-);
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

@@ -46,7 +46,7 @@
           <input type="file" #filePicker (change)="onImagePicked($event)">
         </div>
         <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && employeeForm.get('image').valid">
-          <img [src]="imagePreview" [alt]="form.value.username">
+          <img [src]="imagePreview" [alt]="employeeForm.value.username">
         </div>
       </form>
     </mat-tab>
