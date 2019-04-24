@@ -41,6 +41,11 @@
       <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
+      <mat-label>Vehicle Miles</mat-label>
+      <input matInput type="text" formControlName="vehMiles" required maxlength="7">
+      <mat-error>{{getGENErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field color="accent">
       <mat-label>Vehicle Price</mat-label>
       <input matInput type="text" formControlName="vehPrice">
       <mat-error>{{getPRICEErrorMessage()}}</mat-error>
@@ -85,6 +90,10 @@
     <div class="flex-container">
       <h4><u><strong>Vehicle Detail</strong></u></h4>
       <p >{{ this.data.vehDetail }}</p>
+    </div>
+    <div class="flex-container">
+      <h4><u><strong>Vehicle Miles</strong></u></h4>
+      <p >{{ this.data.vehMiles }}</p>
     </div>
   </form>
 </mat-dialog-content>

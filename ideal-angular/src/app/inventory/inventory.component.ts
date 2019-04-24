@@ -47,6 +47,7 @@ export class InventoryComponent implements OnInit {
      'vehColor',
      'vehCondition',
      'vehDetail',
+     'vehMiles',
      'vehPrice',
      'vehImage'
   ];
@@ -155,6 +156,7 @@ openDialogVin(data: any) {
     vehColor: data.vehColor,
     vehCondition: data.vehCondition,
     vehDetail: data.vehDetail,
+    vehMiles: data.vehMiles,
     vehPrice: data.vehPrice,
     vehImage: data.vehImage,
     };

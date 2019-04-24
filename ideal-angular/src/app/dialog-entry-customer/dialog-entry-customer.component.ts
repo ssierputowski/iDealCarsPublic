@@ -114,6 +114,7 @@ export class DialogEntryCustomerComponent implements OnInit {
         this.customerVehicleForm.patchValue({vehicleModel: this.data.vehModel});
         this.customerVehicleForm.patchValue({vehicleColor: this.data.vehColor});
         this.customerVehicleForm.patchValue({vehicleDetails: this.data.vehDetail});
+        this.customerVehicleForm.patchValue({vehicleMiles: this.data.vehMiles});
         this.customerVehicleForm.patchValue({vehiclePriceSold: this.data.vehPrice});
         this.customerVehicleForm.patchValue({vehicleImage: this.data.vehImage});
 

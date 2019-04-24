@@ -38,6 +38,7 @@ router.post('', multer({ storage: storage }).single('vehImage'),
         vehColor: req.body.vehColor,
         vehCondition: req.body.vehCondition,
         vehDetail: req.body.vehDetail,
+        vehMiles: req.body.vehMiles,
         vehPrice: req.body.vehPrice,
         vehImage: url + '/vehicleImages/' + req.file.filename
     });
@@ -81,6 +82,7 @@ router.put('/:id', multer({ storage: storage }).single('vehImage'),
         vehColor: req.body.vehColor,
         vehCondition: req.body.vehCondition,
         vehDetail: req.body.vehDetail,
+        vehMiles: req.body.vehMiles,
         vehPrice: req.body.vehPrice,
         vehImage: vehImage
     });
