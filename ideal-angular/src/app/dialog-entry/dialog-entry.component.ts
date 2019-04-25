@@ -5,6 +5,8 @@ import { FormGroup, FormControl, Validators, ValidationErrors, FormBuilder } fro
 import { VehicleService } from '../../services/vehicle.service';
 import { Subscription } from 'rxjs';
 import { mimeType } from '../manager-actions/mime-type.validator';
+import { fileSizeValidator } from '../manager-actions/file-size.validator';
+
 
 @Component({
   selector: 'app-dialog-entry',
@@ -62,7 +64,7 @@ export class DialogEntryComponent implements OnInit {
         validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)]
       }),
       'vehImage': new FormControl(null, {
-        validators: [Validators.required], asyncValidators: [mimeType]
+        validators: [Validators.required], asyncValidators: [mimeType, fileSizeValidator]
       })
 
     });

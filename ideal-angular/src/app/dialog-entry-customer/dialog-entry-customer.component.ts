@@ -14,6 +14,8 @@ import { VehicleService } from '../../services/vehicle.service';
 
 import { Subscription } from 'rxjs';
 import { mimeType } from '../manager-actions/mime-type.validator';
+import { fileSizeValidator } from '../manager-actions/file-size.validator';
+
 
 export interface Cust {
   IDcust: string;
@@ -97,7 +99,7 @@ export class DialogEntryCustomerComponent implements OnInit {
       'vehicleDetails': new FormControl(null, { validators: [Validators.required, Validators.maxLength(50)] }),
       // tslint:disable-next-line:max-line-length
       'vehiclePriceSold': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
-      'vehicleImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
+      'vehicleImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType, fileSizeValidator] }),
     });
     this.customerServiceRecordForm = this.formBuild.group({
       'vehicleId': new FormControl(null, { validators: [Validators.required] }),

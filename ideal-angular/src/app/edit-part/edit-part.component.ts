@@ -7,6 +7,8 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
 import { mimeType } from '../manager-actions/mime-type.validator';
+import { fileSizeValidator } from '../manager-actions/file-size.validator';
+
 
 @Component({
   selector: 'app-edit-part',
@@ -43,7 +45,7 @@ export class EditPartComponent implements OnInit {
         'partQuantity': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000), Validators.pattern('[0-9]*')] }),
         'partCompatibility': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
         'partDescription': new FormControl(null, { validators: [Validators.required, Validators.maxLength(50)] }),
-        'partImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
+        'partImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType, fileSizeValidator] }),
       });
      }
 

@@ -21,4 +21,4 @@ export const fileSizeValidator = (control: AbstractControl): Promise<{[key: stri
     fileReader.readAsArrayBuffer(file);
   });
   return frObs;
-}
+};
