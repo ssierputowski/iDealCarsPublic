@@ -55,6 +55,7 @@ import { AddPartComponent } from './add-part/add-part.component';
 import { EditPartComponent } from './edit-part/edit-part.component';
 import { PartsInventoryComponent } from './parts-inventory/parts-inventory.component';
 import { ErrorInterceptor } from './auth/error-interceptor';
+import { FooterComponent } from './footer/footer.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -82,7 +83,8 @@ const routes: Routes = [
     MessageBoardComponent,
     AddPartComponent,
     EditPartComponent,
-    PartsInventoryComponent
+    PartsInventoryComponent,
+    FooterComponent
   ],
   imports: [
     BrowserAnimationsModule,
