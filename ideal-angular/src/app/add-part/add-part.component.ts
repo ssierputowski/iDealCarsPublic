@@ -5,6 +5,8 @@ import { FormGroup, FormControl, Validators, ValidationErrors, FormBuilder } fro
 import { PartService } from '../../services/part.service';
 import { Subscription } from 'rxjs';
 import { mimeType } from '../manager-actions/mime-type.validator';
+import { fileSizeValidator } from '../manager-actions/file-size.validator';
+
 
 @Component({
   selector: 'app-add-part',
@@ -50,7 +52,7 @@ export class AddPartComponent implements OnInit {
         validators: [Validators.required, Validators.maxLength(50)]
       }),
       'partImage': new FormControl(null, {
-        validators: [Validators.required], asyncValidators: [mimeType]
+        validators: [Validators.required], asyncValidators: [mimeType, fileSizeValidator]
       })
 
     });

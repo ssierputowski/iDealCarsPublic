@@ -8,6 +8,8 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
 import { mimeType } from '../manager-actions/mime-type.validator';
+import { fileSizeValidator } from '../manager-actions/file-size.validator';
+
 
 
 @Component({
@@ -47,7 +49,7 @@ export class DialogVinComponent implements OnInit {
         'vehDetail': new FormControl(null, { validators: [Validators.required, Validators.maxLength(50)] }),
         // tslint:disable-next-line:max-line-length
         'vehPrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
-        'vehImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
+        'vehImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType, fileSizeValidator] }),
       });
      }
 
