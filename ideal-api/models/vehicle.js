@@ -9,6 +9,7 @@ const vehicleSchema = mongoose.Schema({
     vehColor: { type: String, required: true },
     vehCondition: { type: String, required: true },
     vehDetail: { type: String, required: false },
+    vehMiles: { type: String, require: true},
     vehPrice: { type: String, required: true },
     vehImage: { type: String, required: true }
 });

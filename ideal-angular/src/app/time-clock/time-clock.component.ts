@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class TimeClockComponent {
   public now: Date = new Date();
+  toggle: boolean = false;
 
   clockInDisabled = false;
   disabledDuration = 60; // minutes
@@ -18,6 +19,10 @@ export class TimeClockComponent {
     setInterval(() => {
       this.now = new Date();
     }, 60);
+  }
+  doToggle(): void {
+    this.toggle = !this.toggle;
+    // Do some other stuff needed
   }
 
   setTime() {

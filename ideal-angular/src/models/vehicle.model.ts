@@ -7,6 +7,7 @@ export interface Vehicle {
   vehColor: string;
   vehCondition: string;
   vehDetail: string;
+  vehMiles: string;
   vehPrice: string;
   vehImage: string;
 }

@@ -57,6 +57,9 @@ export class DialogEntryComponent implements OnInit {
       'vehDetail': new FormControl(null, {
         validators: [Validators.required, Validators.maxLength(50)]
       }),
+      'vehMiles': new FormControl(null, {
+        validators: [Validators.required, Validators.maxLength(7)]
+      }),
       'vehPrice': new FormControl(null, {
         validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)]
       }),
@@ -84,6 +87,7 @@ export class DialogEntryComponent implements OnInit {
         this.vehicleform.get('vehColor').value,
         this.vehicleform.get('vehCondition').value,
         this.vehicleform.get('vehDetail').value,
+        this.vehicleform.get('vehMiles').value,
         this.vehicleform.get('vehPrice').value,
         this.vehicleform.get('vehImage').value
 

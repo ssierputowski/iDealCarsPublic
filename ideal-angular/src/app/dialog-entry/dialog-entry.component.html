@@ -41,6 +41,11 @@
       <mat-error>{{getGENErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field color="accent">
+      <mat-label>Vehicle Miles</mat-label>
+      <input matInput type = "text" formControlName="vehMiles" required maxlength="7">
+      <mat-error>{{getGENErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field color="accent">
         <mat-label>Vehicle Price</mat-label>
         <input matInput type = "text" formControlName="vehPrice">
         <mat-error>{{getPRICEErrorMessage()}}</mat-error>

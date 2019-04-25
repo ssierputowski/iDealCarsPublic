@@ -37,6 +37,7 @@ export class VehicleService {
               vehColor: vehicle.vehColor,
               vehCondition: vehicle.vehCondition,
               vehDetail: vehicle.vehDetail,
+              vehMiles: vehicle.vehMiles,
               vehPrice: vehicle.vehPrice,
               vehImage: vehicle.vehImage
             };
@@ -61,6 +62,7 @@ export class VehicleService {
     vehColor: string,
     vehCondition: string,
     vehDetail: string,
+    vehMiles: string,
     vehPrice: string,
     vehImage: File
   ) {
@@ -72,6 +74,7 @@ export class VehicleService {
     vehicleData.append('vehColor', vehColor);
     vehicleData.append('vehCondition', vehCondition);
     vehicleData.append('vehDetail', vehDetail);
+    vehicleData.append('vehMiles', vehMiles);
     vehicleData.append('vehPrice', vehPrice);
     vehicleData.append('vehImage', vehImage, vehModel);
     return this.http
@@ -86,6 +89,7 @@ export class VehicleService {
           vehColor: vehColor,
           vehCondition: vehCondition,
           vehDetail: vehDetail,
+          vehMiles: vehMiles,
           vehPrice: vehPrice,
           vehImage: resData.vehicle.vehImage
         };
@@ -97,7 +101,7 @@ export class VehicleService {
   // helper method (not used) for edit vehicle
   getVehicleByID(id: string) {
     // tslint:disable-next-line:max-line-length
-    return this.http.get<{_id: string, vehVin: string, vehYear: string, vehMake: string, vehModel: string, vehColor: string, vehCondition: string, vehDetail: string, vehPrice: string, vehImage: string }>( BACKEND_URL + '/' + id);
+    return this.http.get<{_id: string, vehVin: string, vehYear: string, vehMake: string, vehModel: string, vehColor: string, vehCondition: string, vehDetail: string, vehMiles: string, vehPrice: string, vehImage: string }>( BACKEND_URL + '/' + id);
   }
   // EDIT functions for dialogVin
   updateVehicle(
@@ -109,6 +113,7 @@ export class VehicleService {
     vehColor: string,
     vehCondition: string,
     vehDetail: string,
+    vehMiles: string,
     vehPrice: string,
     vehImage: File | string
     ) {
@@ -123,6 +128,7 @@ export class VehicleService {
         vehicleData.append('vehColor', vehColor);
         vehicleData.append('vehCondition', vehCondition);
         vehicleData.append('vehDetail', vehDetail);
+        vehicleData.append('vehMiles', vehMiles);
         vehicleData.append('vehPrice', vehPrice);
         vehicleData.append('vehImage', vehImage, vehModel);
     } else {
@@ -135,6 +141,7 @@ export class VehicleService {
         vehColor: vehColor,
         vehCondition: vehCondition,
         vehDetail: vehDetail,
+        vehMiles: vehMiles,
         vehPrice: vehPrice,
         vehImage: vehImage
     };
@@ -152,6 +159,7 @@ export class VehicleService {
         vehColor: vehColor,
         vehCondition: vehCondition,
         vehDetail: vehDetail,
+        vehMiles: vehMiles,
         vehPrice: vehPrice,
         vehImage: ''
       };
