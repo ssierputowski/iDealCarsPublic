@@ -58,7 +58,7 @@ export class DialogEntryComponent implements OnInit {
         validators: [Validators.required, Validators.maxLength(50)]
       }),
       'vehMiles': new FormControl(null, {
-        validators: [Validators.required, Validators.maxLength(7)]
+        validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern('[0-9]*')]
       }),
       'vehPrice': new FormControl(null, {
         validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)]
@@ -121,7 +121,7 @@ export class DialogEntryComponent implements OnInit {
       return  'PRICE must be a number of format 0.00 less than 20,000,000.00!';
     }
     getMILEAGEErrorMessage() {
-      return  'MILEAGE must be a number less than 20,000,000!';
+      return  'MILEAGE must be a number less than 1,000,000!';
     }
     getGENErrorMessage() {
       return  'FIELD REQUIRED!';

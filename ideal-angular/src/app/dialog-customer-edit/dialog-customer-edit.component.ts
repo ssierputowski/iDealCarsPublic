@@ -147,7 +147,7 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
     this.addCustomerServiceRecordForm = this.formBuild.group({
       'vehicleId': new FormControl(null, { validators: [Validators.required] }),
       // tslint:disable-next-line:max-line-length
-      'mileage': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(20000000), Validators.pattern('[0-9]*')] }),
+      'mileage': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern('[0-9]*')] }),
       'servicePerformed': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
       'serviceDate': new FormControl(null, { validators: [Validators.required] }),
       'dateReturned': new FormControl(null, { validators: [Validators.required] }),
@@ -279,7 +279,7 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
     return  'PRICE must be a number of format 0.00 less than 20,000,000.00!';
   }
   getMILEAGEErrorMessage() {
-    return  'MILEAGE must be a number less than 20,000,000!';
+    return  'MILEAGE must be a number less than 1,000,000!';
   }
   getGENErrorMessage() {
     return  'FIELD REQUIRED!';

@@ -47,7 +47,8 @@ export class DialogVinComponent implements OnInit {
         'vehColor': new FormControl(null, { validators: [Validators.required, Validators.maxLength(25)] }),
         'vehCondition': new FormControl(null, { validators: [Validators.required] }),
         'vehDetail': new FormControl(null, { validators: [Validators.required, Validators.maxLength(50)] }),
-        'vehMiles': new FormControl(null, { validators: [Validators.required, Validators.maxLength(7)] }),
+        // tslint:disable-next-line:max-line-length
+        'vehMiles': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern('[0-9]*')] }),
         // tslint:disable-next-line:max-line-length
         'vehPrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
         'vehImage': new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType, fileSizeValidator] }),
