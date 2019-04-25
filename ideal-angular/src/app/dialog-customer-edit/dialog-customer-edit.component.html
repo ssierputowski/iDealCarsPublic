@@ -62,7 +62,7 @@
         </div>
         <div class="flex-container">
           <h4><u><strong>Phone Number</strong></u></h4>
-          <p >{{ this.data.phoneNumber }}</p>
+          <p >({{ this.data.phoneNumber | slice:0:3 }}){{ this.data.phoneNumber | slice:3:6 }}-{{ this.data.phoneNumber | slice:6:10 }}</p>
         </div>
         <div class="flex-container">
           <h4><u><strong>Email Address</strong></u></h4>
