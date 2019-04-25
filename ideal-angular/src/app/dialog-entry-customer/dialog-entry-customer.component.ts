@@ -148,10 +148,10 @@ export class DialogEntryCustomerComponent implements OnInit {
           this.customerVehicleForm.patchValue({vehicleModel: this.data.vehModel});
           this.customerVehicleForm.patchValue({vehicleColor: this.data.vehColor});
           this.customerVehicleForm.patchValue({vehicleDetails: this.data.vehDetail});
-          this.customerVehicleForm.patchValue({vehicleMiles: this.data.vehMiles});
           this.customerVehicleForm.patchValue({vehiclePriceSold: this.data.vehPrice});
 
           this.customerServiceRecordForm.patchValue({vehicleId: this.data.vehVin});
+          this.customerServiceRecordForm.patchValue({mileage: this.data.vehMiles});
 
         }
       );
@@ -307,7 +307,7 @@ export class DialogEntryCustomerComponent implements OnInit {
     return  'PRICE must be a number of format 0.00 less than 20,000,000.00!';
   }
   getMILEAGEErrorMessage() {
-    return  'MILEAGE must be a number less than 20,000,000!';
+    return  'MILEAGE must be a number less than 1,000,000!';
   }
   getZIPErrorMessage() {
     return  'ZIPCODE must be a 5 digit number!';
