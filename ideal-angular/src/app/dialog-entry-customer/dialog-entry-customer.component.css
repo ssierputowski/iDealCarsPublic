@@ -13,7 +13,7 @@ input[type="file"] {
 
 mat-dialog-content {
   height: 100%;
-  max-height: 79%;
+  max-height: 82%;
 }
 .image-preview {
   height: 5rem;
