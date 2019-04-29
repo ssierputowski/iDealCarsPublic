@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Part Upload</h2>
 <mat-dialog-content class="mat-typography">
-  <h6 style="color: red" *ngIf="(partform.invalid)">This disappears when Part Form inputs valid!</h6>
+  <h6 style="color: red" *ngIf="(partform.invalid)">Part Form inputs missing or invalid!</h6>
   <form [formGroup]="partform" ><!-- Part Entry Form -->
     <mat-form-field color="accent">
       <mat-label>Part ID</mat-label>

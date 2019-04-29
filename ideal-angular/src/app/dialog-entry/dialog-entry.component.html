@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Vehicle Inventory Upload</h2>
 <mat-dialog-content class="mat-typography">
-  <h6 style="color: red" *ngIf="(vehicleform.invalid)">This disappears when Vehicle Form inputs valid!</h6>
+  <h6 style="color: red" *ngIf="(vehicleform.invalid)">Vehicle Form inputs missing or invalid!</h6>
   <form [formGroup]="vehicleform" ><!-- Vehicle entry form -->
     <mat-form-field color="accent">
       <mat-label>Vehicle VIN</mat-label>

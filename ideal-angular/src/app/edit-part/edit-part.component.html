@@ -3,7 +3,7 @@
 <mat-dialog-content class="mat-typography">
     <!--Validator checking-->
 <form [formGroup]="edit_part" *ngIf="edit"><!-- Part Edit Form -->
-  <h6 style="color: red" *ngIf="(edit_part.invalid)">This disappears when Part Form inputs valid!</h6>
+  <h6 style="color: red" *ngIf="(edit_part.invalid)">Part Edit Form inputs missing or invalid!</h6>
   <mat-form-field color="accent">
     <mat-label>Part ID</mat-label>
    <input matInput type="text" formControlName="partID" class="uppercase" required maxlength="30">
