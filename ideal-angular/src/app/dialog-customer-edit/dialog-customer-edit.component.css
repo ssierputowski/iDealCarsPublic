@@ -1,5 +1,6 @@
 form {
   margin-top: 1rem;
+  margin-right: 1rem;
   display: flex;
   flex-direction: column;
 }
@@ -9,7 +10,9 @@ form {
 
 mat-dialog-content {
   height: 100%;
+  max-height: 82%;
 }
+
 input[type="file"] {
   visibility: hidden;
 }
@@ -20,4 +23,16 @@ input[type="file"] {
 .image-preview img {
   max-width: 300px;
   max-height: 300px;
+}
+.edit-preview {
+  max-width: 300px;
+  max-height: 300px;
+  /* min-width: 300px;
+  min-height: 300px; */
+}
+.edit-preview img {
+  max-width: 300px;
+  max-height: 300px;
+  /* min-width: 300px;
+  min-height: 300px; */
 }

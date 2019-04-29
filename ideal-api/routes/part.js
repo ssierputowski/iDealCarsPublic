@@ -9,6 +9,7 @@ const MIME_TYPE_MAP = {
     'image/jpeg': 'jpg',
     'image/jpg': 'jpg'
 };
+
 // Disk-file storage code for storing on the app partImages file
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -25,7 +26,8 @@ const storage = multer.diskStorage({
         cb(null, name + '-' + Date.now() + '.' + ext);
     }
 });
-// For SAVE part for part dialog-add-part
+
+// Saves new Part entry express post() call to mongo save() method
 router.post('', multer({ storage: storage }).single('partImage'),
 (req, res, next) => {
     const url = req.protocol + '://' + req.get('host');
@@ -50,7 +52,7 @@ router.post('', multer({ storage: storage }).single('partImage'),
     });
 });
 
-//DELETE method for Part Inventory, node.js code-->may not need this OPTIONS above
+//DELETE method for Part dialog express delete(id) call to mongo findByIdAndRemove() method
 router.delete('/:id', function(req, res, next) {
     console.log('Deleting a part');
     Part.findByIdAndRemove(req.params.id, req.body, function(err, deletedPart){
@@ -62,7 +64,7 @@ router.delete('/:id', function(req, res, next) {
     });
 });
 
-// EDIT function on dialogVin
+// EDIT function on Part Edit dialog express put() call to mongo updateOne() method
 router.put('/:id', multer({ storage: storage }).single('partImage'),
 (req,res,next) => {
     let partImage = req.body.partImage;
@@ -85,7 +87,8 @@ router.put('/:id', multer({ storage: storage }).single('partImage'),
     });
 
 })
-//For EDIT helper function
+
+// getter method returns list of Parts by customerId express get() call to mongo find() method
 router.get('/:id', (req, res, next) => {
     Part.findById(req.params).then(part => {
         if(part) {
@@ -96,7 +99,7 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
-
+// getter method returns list of Parts
 router.get('', (req, res, next) => {
     const partQuery = Part.find();
     partQuery.then(documents => {

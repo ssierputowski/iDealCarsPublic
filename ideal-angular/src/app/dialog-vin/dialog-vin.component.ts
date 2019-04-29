@@ -4,7 +4,6 @@ import { Vehicle } from '../../models/vehicle.model';
 import { FormGroup, FormControl, Validators, ValidationErrors, FormBuilder, FormGroupDirective } from '@angular/forms';
 import { VehicleService } from '../../services/vehicle.service';
 import { DialogEntryCustomerComponent } from '../dialog-entry-customer/dialog-entry-customer.component';
-import { Subscription } from 'rxjs';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
 import { mimeType } from '../manager-actions/mime-type.validator';
@@ -28,6 +27,7 @@ export class DialogVinComponent implements OnInit {
   dialogEntryCustomerRef: MatDialogRef<DialogEntryCustomerComponent>;
   dataSource: MatTableDataSource<Vehicle>;
   public edit = false;
+  public imgClicked = false;
 
   constructor(
     public dialog: MatDialog,
@@ -36,7 +36,7 @@ export class DialogVinComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuild: FormBuilder,
     private route: ActivatedRoute) {// this passes the data from the inventory component to this dialog
-
+      // forms for diplaying vehicle data to edit
       this.edit_form = this.formBuild.group({
         // tslint:disable-next-line:max-line-length
         'vehVin': new FormControl(null, { validators: [Validators.required, Validators.minLength(17), Validators.maxLength(17), Validators.pattern('[A-Za-z0-9]*')] }),
@@ -57,6 +57,7 @@ export class DialogVinComponent implements OnInit {
 
 
   ngOnInit() {
+    // sets state value in carState select with data from db
     this.stateSelector.setValue(this.data.vehCondition || this.stateSelector.markAsPristine);
     // Patches form with vehicle data for EDIT
     this.route.params.subscribe(
@@ -76,7 +77,7 @@ export class DialogVinComponent implements OnInit {
       }
     );
   }
-  // Image selection function
+  // Image selection function-listens for event sets preview when imagae file selected
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     this.edit_form.patchValue({vehImage: file});
@@ -87,7 +88,7 @@ export class DialogVinComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
-  // for EDIT function
+  // save method-saves values currently entered in the form for EDIT function
   saveEditedVehicle() {
     if (this.edit_form.invalid) {
       return;
@@ -112,17 +113,18 @@ export class DialogVinComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
-// this for delete
+// this for delete vehicle by vin number, vehicleID
 onDelete(vehicleID: string) {
   // vehicleVin = this.data.vehVin;
   this.vehicleService.deleteVehicle(vehicleID);
   this.dialogRef.close();
 }
-// opens customer entry dialog
+// opens customer entry dialog if Mark as Sold is clicked, populating customer entry dialog with vehicle data
 sellVehicle() {
   const config: MatDialogConfig = {
     disableClose: true,
     minWidth: '50rem',
+    height: '75rem',
   };
   this.dialogEntryCustomerRef = this.dialog.open(DialogEntryCustomerComponent, config);
   this.dialogEntryCustomerRef.componentInstance.data = {
@@ -139,7 +141,7 @@ sellVehicle() {
     vehImage: this.data.vehImage,
     };
   }
-    // ERROR Messaging=======================================
+    // ERROR Messaging- displays error message if validators violated=======================================
   getVINErrorMessage() {
     return  'VIN must be 17 letters, numbers in length!';
   }
@@ -155,11 +157,14 @@ sellVehicle() {
   getGENErrorMessage() {
     return  'FIELD REQUIRED!';
   }
-
+  // boolean setters for *ngIf bindings
   setEdit() {
     this.edit = true;
   }
   unSetEdit() {
     this.edit = false;
+  }
+  imgClick() {
+    this.imgClicked = true;
   }
 }

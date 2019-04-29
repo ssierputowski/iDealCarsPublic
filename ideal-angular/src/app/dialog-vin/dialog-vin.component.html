@@ -1,7 +1,8 @@
+<h2 mat-dialog-title *ngIf="edit">EDIT: {{ this.data.vehYear }} {{ this.data.vehMake }} {{ this.data.vehModel }}</h2>
+<h2 mat-dialog-title *ngIf="!edit">{{ this.data.vehMake }}</h2>
 <mat-dialog-content class="mat-typography">
-  <form [formGroup]="edit_form" *ngIf="edit">
-  <h2 mat-dialog-title>EDIT: {{ this.data.vehYear }} {{ this.data.vehMake }} {{ this.data.vehModel }}</h2>
-  <h6 style="color: red" *ngIf="(edit_form.invalid)">This disappears when Vehicle Form inputs valid!</h6>
+  <form [formGroup]="edit_form" *ngIf="edit"><!-- Vehicle Edit Form -->
+    <h6 style="color: red" *ngIf="(edit_form.invalid)">This disappears when Vehicle Form inputs valid!</h6>
     <mat-form-field color="accent">
       <mat-label>Vehicle VIN</mat-label>
      <input matInput type="text" class="uppercase" formControlName="vehVin"required minlength="17" required maxlength="17" required pattern="[A-Za-z0-9]*">
@@ -52,24 +53,26 @@
     </mat-form-field>
     <div>
       <h6 style="color: red" *ngIf="(edit_form.get('vehImage').invalid)">PLEASE CHOOSE AN IMAGE!</h6>
-      <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
+      <button mat-stroked-button type="button" (click)="filePicker.click(); imgClick();">PICK IMAGE</button>
         <input type="file" #filePicker (change)="onImagePicked($event)">
     </div>
     <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && edit_form.get('vehImage').valid">
       <img [src]="imagePreview" [alt]="edit_form.value.vehModel">
     </div>
+    <div class="edit-preview" *ngIf="!imgClicked && this.data.vehImage && edit_form.get('vehImage').valid">
+      <img [src]="this.data.vehImage" [alt]="edit_form.value.vehModel">
+    </div>
   </form>
   <!-- ============================================================================================== -->
-  <form *ngIf="!edit">
+  <form *ngIf="!edit"><!-- Vehicle Display Form -->
     <div class="flex-container">
       <div align="center">
-        <h4>{{ this.data.vehMake }} {{ this.data.vehModel}}</h4>
-          <div class="image-preview">
-            <img [src]="this.data.vehImage">
-          </div>
+        <div class="image-preview">
+          <img [src]="this.data.vehImage">
+        </div>
       </div>
       <div>
-        <h1 mat-dialog-title>{{ this.data.vehYear }} {{ this.data.vehMake }} {{ this.data.vehModel }}</h1>
+        <h1 style="margin-top: 1rem" mat-dialog-title><i>{{ this.data.vehYear }} {{ this.data.vehModel }}</i></h1>
       </div>
     </div>
     <div class="flex-container">
@@ -98,7 +101,7 @@
     </div>
   </form>
 </mat-dialog-content>
-<mat-dialog-actions *ngIf="edit" align="end">
+<mat-dialog-actions *ngIf="edit" align="end"><!-- Buttons for this dialog, display and function according to conditions in Button -->
   <button mat-raised-button color="accent" type="submit" [disabled]="edit_form.invalid" (click)="saveEditedVehicle(); unSetEdit();">SAVE</button>
   <button mat-raised-button mat-dialog-close color="warn" (click)="onDelete(this.data.id)">DELETE</button>
   <button mat-raised-button mat-dialog-close color="primary">CANCEL</button>

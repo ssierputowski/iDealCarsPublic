@@ -21,6 +21,7 @@ export class CustomerServiceRecordService {
     private router: Router
   ) {}
 
+  // Returns observable of List of Customer for Records page dialog
   getCustomerServiceRecords() {
     this.http
       .get<{message: string, customerServiceRecords: any}>(
@@ -84,6 +85,7 @@ export class CustomerServiceRecordService {
         this.customerServiceRecordsUpdated.next({customerServiceRecords: [...this.customerServiceRecords]});
       });
   }
+
 // ADD method for Customer dialog
   addCustomerServiceRecord(
     customerId: string,

@@ -1,7 +1,7 @@
+<h2 mat-dialog-title>Part Upload</h2>
 <mat-dialog-content class="mat-typography">
-  <h2 mat-dialog-title>Part Upload</h2>
   <h6 style="color: red" *ngIf="(partform.invalid)">This disappears when Part Form inputs valid!</h6>
-  <form [formGroup]="partform" >
+  <form [formGroup]="partform" ><!-- Part Entry Form -->
     <mat-form-field color="accent">
       <mat-label>Part ID</mat-label>
       <input matInput type="text" formControlName="partID" class="uppercase" required maxlength="30">
@@ -42,7 +42,7 @@
         </div>
        </form>
    </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions align="end"><!-- Buttons for this dialog, display and function according to conditions in Button -->
   <button mat-raised-button color="accent" type="submit" [disabled]="partform.invalid" (click)="savePart()">UPLOAD PART</button>
   <button mat-raised-button color="primary" mat-dialog-close>CANCEL</button>
 </mat-dialog-actions>
