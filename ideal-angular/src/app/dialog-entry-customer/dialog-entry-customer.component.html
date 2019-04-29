@@ -1,9 +1,9 @@
 <h2 mat-dialog-title>Add Customer</h2>
-<h6 style="color: red" *ngIf="(customerInfoForm.invalid || customerVehicleForm.invalid || customerServiceRecordForm.invalid )">This disappears when all 3 form inputs valid!</h6>
 <mat-dialog-content class="mat-typography">
   <mat-tab-group>
 <!--     =================this is a TAB========================================================== -->
-    <mat-tab label="Customer Info">
+    <mat-tab label="Customer Info"><!-- Enter Customer Form -->
+      <h6 style="color: red" *ngIf="(customerInfoForm.invalid )">Customer Form inputs missing or invalid!</h6>
       <mat-select *ngIf="currentCust" [formControl]="customerSelector" placeholder="PLEASE SELECT CUSTOMER">
         <mat-option *ngFor="let cust of custs"[value]="cust">
           {{ this.cust?.last }}, {{ this.cust?.first }}
@@ -56,7 +56,8 @@
     </form>
   </mat-tab>
   <!--     =================this is a TAB========================================================== -->
-  <mat-tab label="Customer Vehicles">
+  <mat-tab label="Customer Vehicles"><!-- Enter CustomerVehicle Form -->
+    <h6 style="color: red" *ngIf="(customerVehicleForm.invalid )">Customer Vehicle Form inputs missing or invalid!</h6>
     <form [formGroup]="customerVehicleForm">
     <mat-form-field color="accent">
       <mat-label>Vehicle VIN</mat-label>
@@ -104,7 +105,8 @@
     </form>
   </mat-tab>
   <!--     =================this is a TAB========================================================== -->
-  <mat-tab label="Customer Service Record">
+  <mat-tab label="Customer Service Record"><!-- Enter CustomerServiceRecord Form -->
+    <h6 style="color: red" *ngIf="( customerServiceRecordForm.invalid )">Customer Service Record Form inputs missing or invalid!</h6>
     <form [formGroup]="customerServiceRecordForm">
       <mat-form-field color="accent">
         <mat-label>Vehicle VIN</mat-label>
@@ -157,9 +159,13 @@
   </mat-tab>
   </mat-tab-group>
   </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions align="end"><!-- Buttons for this dialog, display and function according to conditions in Button -->
+  <!-- These save all three -->
   <button mat-raised-button color="accent" *ngIf="this.data" (click)="setCurrentCustomer()">CURRENT CUSTOMER?</button>
-  <button mat-raised-button color="accent" type="submit" *ngIf="!currentCust" [disabled]="(customerInfoForm.invalid || customerVehicleForm.invalid || customerServiceRecordForm.invalid )"(click)="saveCustomer()" mat-dialog-close>ADD CUSTOMER</button>
-  <button mat-raised-button color="accent" type="submit" *ngIf="currentCust" [disabled]="(customerInfoForm.invalid || customerVehicleForm.invalid || customerServiceRecordForm.invalid )"(click)="saveCurrentCustomer()" mat-dialog-close>ADD CUSTOMER VEHICLE</button>
+  <button mat-raised-button color="accent" type="submit" *ngIf="!currentCust && customerServiceRecordForm.valid" [disabled]="(customerInfoForm.invalid || customerVehicleForm.invalid || customerServiceRecordForm.invalid )"(click)="saveCustomer()" mat-dialog-close>ADD CUSTOMER</button>
+  <button mat-raised-button color="accent" type="submit" *ngIf="currentCust && customerServiceRecordForm.valid" [disabled]="(customerInfoForm.invalid || customerVehicleForm.invalid || customerServiceRecordForm.invalid )"(click)="saveCurrentCustomer()" mat-dialog-close>ADD CUSTOMER VEHICLE</button>
+  <!-- These save customer and vehicle ONLY -->
+  <button mat-raised-button color="accent" type="submit" *ngIf="!currentCust && customerServiceRecordForm.invalid" [disabled]="(customerInfoForm.invalid || customerVehicleForm.invalid )"(click)="saveCustomerAndVehONLY()" mat-dialog-close>ADD CUSTOMER</button>
+  <button mat-raised-button color="accent" type="submit" *ngIf="currentCust && customerServiceRecordForm.invalid" [disabled]="(customerInfoForm.invalid || customerVehicleForm.invalid )"(click)="saveCurrentCustomerVehONLY()" mat-dialog-close>ADD CUSTOMER VEHICLE</button>
   <button mat-raised-button color="primary" mat-dialog-close>CANCEL</button>
 </mat-dialog-actions>

@@ -1,8 +1,9 @@
+<h2 *ngIf="edit" mat-dialog-title>Edit Part: {{ this.data.partName }}</h2>
+<h2 *ngIf="!edit" mat-dialog-title>{{ this.data.partName }}</h2>
 <mat-dialog-content class="mat-typography">
-  <h2 *ngIf="edit" mat-dialog-title>Edit Part</h2>
-  <!--Validator checking-->
-<form [formGroup]="edit_part" *ngIf="edit">
-  <h6 style="color: red" *ngIf="(edit_part.invalid)">This disappears when Part Form inputs valid!</h6>
+    <!--Validator checking-->
+<form [formGroup]="edit_part" *ngIf="edit"><!-- Part Edit Form -->
+  <h6 style="color: red" *ngIf="(edit_part.invalid)">Part Edit Form inputs missing or invalid!</h6>
   <mat-form-field color="accent">
     <mat-label>Part ID</mat-label>
    <input matInput type="text" formControlName="partID" class="uppercase" required maxlength="30">
@@ -35,24 +36,26 @@
   </mat-form-field>
   <div>
     <h6 style="color: red" *ngIf="(edit_part.get('partImage').invalid)">PLEASE CHOOSE AN IMAGE!</h6>
-    <button mat-stroked-button type="button" (click)="filePicker.click()">PICK IMAGE</button>
+    <button mat-stroked-button type="button" (click)="filePicker.click(); imgClick();">PICK IMAGE</button>
     <input type="file" #filePicker (change)="onImagePicked($event)">
   </div>
   <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && edit_part.get('partImage').valid">
     <img [src]="imagePreview" [alt]="edit_part.value.partName">
   </div>
+  <div class="edit-preview" *ngIf="!imgClicked && this.data.partImage && edit_part.get('partImage').valid">
+    <img [src]="this.data.partImage" [alt]="edit_part.value.partName">
+  </div>
 </form>
 <!-- ============================================================================================== -->
-<form *ngIf="!edit">
+<form *ngIf="!edit"><!-- Part Display Form -->
   <div class="flex-container">
     <div align="center">
-      <h6>{{ this.data.partName }}</h6>
-        <div class="image-preview">
-          <img [src]="this.data.partImage">
-        </div>
+      <div class="image-preview">
+        <img [src]="this.data.partImage">
+      </div>
     </div>
     <div>
-      <h1 mat-dialog-title>{{ this.data.partName }} {{ this.data.partCompatibility }}</h1>
+      <h1 style="margin-top: 1rem" mat-dialog-title><i>{{ this.data.partName }} {{ this.data.partCompatibility }}</i></h1>
     </div>
   </div>
   <div class="flex-container">
@@ -69,10 +72,10 @@
   </div>
 </form>
 </mat-dialog-content>
-<mat-dialog-actions *ngIf="edit" align="end">
+<mat-dialog-actions *ngIf="edit" align="end"><!-- Buttons for this dialog, display and function according to conditions in Button -->
 <button mat-raised-button color="accent" type="submit" [disabled]="edit_part.invalid" (click)="saveEditedPart(); unSetEdit()">SAVE</button>
 <button mat-raised-button mat-dialog-close color="warn" (click)="onDelete(this.data.id)">DELETE</button>
-<button mat-raised-button  (click)="unSetEdit()" color="primary">CANCEL</button>
+<button mat-raised-button mat-dialog-close (click)="unSetEdit()" color="primary">CANCEL</button>
 </mat-dialog-actions>
 <mat-dialog-actions *ngIf="!edit" align="end">
 <button mat-raised-button color="accent" (click)="setEdit()">EDIT</button>

@@ -60,7 +60,7 @@ export class InventoryComponent implements OnInit {
     vehCondition: '',
 
   };
-
+  // formControls for search filters
   Year = new FormControl('');
   Make = new FormControl('');
   Model = new FormControl('');
@@ -71,7 +71,8 @@ export class InventoryComponent implements OnInit {
   ngOnInit() {
 
     this.titleService.setTitle('Vehicle Inventory | iDealCars');
-
+      // below subscribe to value changes of the search Filter formControls and filter the
+      // table dataSource cooresponding to the values entered in the filter formControls
       this.Year.valueChanges
       .subscribe(
         Year => {
@@ -110,7 +111,9 @@ export class InventoryComponent implements OnInit {
     this.getCars();
 
   }
-
+// returns observable of the vehicles for the inventory page stored in the db
+// last line applies filter function below filterPredicate to datasource and causes to
+// display those results in the table
 getCars(): void {
   this.vehicleService.getVehicles();
   this.vehicleService.getVehicleUpdateListener()
@@ -118,10 +121,12 @@ getCars(): void {
       this.vehicles = vehicleData.vehicles;
       this.dataSource = new MatTableDataSource(this.vehicles);
       this.dataSource.filterPredicate = this.tableFilter();
-     // console.log(this.vehicles);
+
     });
 }
-// filter function for table data
+// filter function for table data-filters results contained in the column attributes
+// converts them to string lowercase to  return a result and in combination with the
+// formControls above ignores case
 tableFilter(): (data: any, filter: string) => boolean {
   const filterFunction = function(data, filter): boolean {
     const searchTerms = JSON.parse(filter);
@@ -133,18 +138,22 @@ tableFilter(): (data: any, filter: string) => boolean {
   };
   return filterFunction;
 }
-
+// opens dialog to enter a new vehicle to the inventory page
 openDialogEntry() {
   this.dialogEntryRef = this.dialog.open(DialogEntryComponent, {
     disableClose: true,
     minWidth: '50rem',
+    height: '75rem',
   });
 }
 
+// opens dialog for editing vehicle entry already contained in the table,
+// passing the data in that row to the edit dialog
 openDialogVin(data: any) {
   const config: MatDialogConfig = {
     disableClose: true,
     minWidth: '50rem',
+    height: '75rem',
   };
   this.dialogVinRef = this.dialog.open(DialogVinComponent, config);
   this.dialogVinRef.componentInstance.data = {

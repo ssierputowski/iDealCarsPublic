@@ -20,7 +20,7 @@ export class CustomerService {
     private http: HttpClient,
     private router: Router
   ) {}
-
+  // Returns observable of List of Customer for Records page
   getCustomers() {
     this.http
       .get<{message: string, customers: any}>(

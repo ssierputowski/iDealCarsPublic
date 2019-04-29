@@ -25,6 +25,8 @@ const storage = multer.diskStorage({
         cb(null, name + '-' + Date.now() + '.' + ext);
     }
 });
+
+// Saves new customerServiceRecord entry express post() call to mongo save() method
 router.post('',  multer({ storage: storage }).single('vehicleImage'),
 (req, res, next) => {
     const url = req.protocol + '://' + req.get('host');
@@ -52,7 +54,7 @@ router.post('',  multer({ storage: storage }).single('vehicleImage'),
     });
 });
 
-//DELETE method for Customer dialog/ Records, node.js code-->may not need this OPTIONS above
+//DELETE method for Customer dialog/ Records express delete(id) call to mongo findByIdAndRemove() method
 router.delete('/:id', function(req, res, next) {
     console.log('Deleting a CustomerServiceRecord');
     CustomerServiceRecord.findByIdAndRemove(req.params.id, req.body, function(err, deletedCustomerServiceRecord){
@@ -64,7 +66,7 @@ router.delete('/:id', function(req, res, next) {
     });
 });
 
-// EDIT function on Customer Edit dialog
+// EDIT function on Customer Edit dialog express put() call to mongo updateOne() method
 router.put('/:id', multer({ storage: storage }).single('vehicleImage'),
 (req,res,next) => {
     let vehicleImage = req.body.vehicleImage;
@@ -101,6 +103,7 @@ router.get('/:id', (req, res, next) => {
     });
 });
  */
+
 // find by vehicleId helper===>changed here from vehicleId
 router.get('/:customerId', (req, res, next) => {
     const customerServiceRecordQuery = CustomerServiceRecord.find({customerId: req.params.customerId});

@@ -20,6 +20,7 @@ export class VehicleService {
     private router: Router
   ) {}
 
+  // Returns observable of List of Vehicles for inventory page dialog
   getVehicles() {
     this.http
       .get<{message: string, vehicles: any}>(
@@ -53,6 +54,7 @@ export class VehicleService {
   getVehicleUpdateListener() {
     return this.vehiclesUpdated.asObservable();
   }
+
   // SAVE functions for dialog-entry
   addVehicle(
     vehVin: string,
@@ -95,7 +97,7 @@ export class VehicleService {
         };
         this.vehicles.push(vehicle);
         this.vehiclesUpdated.next({vehicles: [...this.vehicles]});
-
+        window.location.reload();
       });
   }
   // helper method (not used) for edit vehicle
@@ -103,6 +105,7 @@ export class VehicleService {
     // tslint:disable-next-line:max-line-length
     return this.http.get<{_id: string, vehVin: string, vehYear: string, vehMake: string, vehModel: string, vehColor: string, vehCondition: string, vehDetail: string, vehMiles: string, vehPrice: string, vehImage: string }>( BACKEND_URL + '/' + id);
   }
+
   // EDIT functions for dialogVin
   updateVehicle(
     id: string,
@@ -166,7 +169,8 @@ export class VehicleService {
       updatedVehicles[oldVehicleIndex] = vehicle;
       this.vehicles = updatedVehicles;
       this.vehiclesUpdated.next({vehicles: [...this.vehicles ]});
-      this.router.navigate(['/inventory']);
+      window.location.reload();
+
     });
   }
 // DELETE method for vehicles; used in dialogVin

@@ -34,7 +34,7 @@ export class DialogEntryComponent implements OnInit {
    ) {}
 
   ngOnInit() {
-
+    // forms for diplaying vehicle data for entry
     this.vehicleform = new FormGroup({
       'vehVin': new FormControl(null, {
         validators: [Validators.required, Validators.minLength(17), Validators.maxLength(17), Validators.pattern('[A-Za-z0-9]*')]
@@ -74,7 +74,7 @@ export class DialogEntryComponent implements OnInit {
         this.vehicles = vehicleData.vehicles;
       });
   }
-
+    // save method-saves values currently entered in the vehicleForm
     saveVehicle() {
       if (this.vehicleform.invalid) {
         return;
@@ -99,7 +99,7 @@ export class DialogEntryComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
-  // Image selection function
+  // Image selection function-listens for event sets preview when imagae file selected
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     this.vehicleform.patchValue({vehImage: file});
@@ -110,7 +110,7 @@ export class DialogEntryComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
-     // ERROR Messaging=======================================
+     // ERROR Messaging- displays error message if validators violated=======================================
     getVINErrorMessage() {
       return  'VIN must be 17 letters, numbers in length!';
     }

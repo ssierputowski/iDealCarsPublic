@@ -19,6 +19,7 @@ export class PartService {
     private router: Router
   ) {}
 
+   // Returns observable of List of parts for part inventory page dialog
   getParts() {
     this.http
       .get<{message: string, parts: any}>(
@@ -82,7 +83,7 @@ export class PartService {
         };
         this.parts.push(part);
         this.partsUpdated.next({parts: [...this.parts]});
-
+        window.location.reload();
       });
   }
   // helper method (not used) for edit part
@@ -149,7 +150,7 @@ export class PartService {
       updatedParts[oldPartIndex] = part;
       this.parts = updatedParts;
       this.partsUpdated.next({parts: [...this.parts ]});
-      this.router.navigate(['/inventory']);
+      window.location.reload();
 
     });
   }

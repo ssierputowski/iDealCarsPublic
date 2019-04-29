@@ -18,8 +18,6 @@ export class AddPartComponent implements OnInit {
   parts: Part[] = [];
   private partsSub: Subscription;
 
-  isLoading = false;
-  checked = false;
   partform: FormGroup;
   imagePreview: string;
 
@@ -31,7 +29,7 @@ export class AddPartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    // forms for displaying part data for part entry
     this.partform = new FormGroup({
       'partID': new FormControl(null, {
         validators: [Validators.required, Validators.maxLength(30)]
@@ -62,7 +60,7 @@ export class AddPartComponent implements OnInit {
         this.parts = partData.parts;
       });
   }
-
+  // save method-saves values currently entered in the partform
   savePart() {
     if (this.partform.invalid) {
       return;
@@ -85,6 +83,7 @@ export class AddPartComponent implements OnInit {
     this.addPartRef.close();
 
   }
+  // Image selection function-listens for event sets preview when image file selected
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     this.partform.patchValue({ partImage: file });
@@ -95,7 +94,7 @@ export class AddPartComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
-  // ERROR Messaging=======================================
+  // ERROR Messaging- displays error message if validators violated=======================================
   getPRICEErrorMessage() {
     return  'PRICE must be a number of format 0.00 less than 20,000,000.00!';
   }
