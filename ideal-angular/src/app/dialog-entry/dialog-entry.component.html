@@ -1,7 +1,7 @@
+<h2 mat-dialog-title>Vehicle Inventory Upload</h2>
 <mat-dialog-content class="mat-typography">
-  <h2 mat-dialog-title>Vehicle Inventory Upload</h2>
-  <h6 style="color: red" *ngIf="(vehicleform.invalid)">This disappears when Vehicle Form inputs valid!</h6>
-  <form [formGroup]="vehicleform" >
+  <h6 style="color: red" *ngIf="(vehicleform.invalid)">Vehicle Form inputs missing or invalid!</h6>
+  <form [formGroup]="vehicleform" ><!-- Vehicle entry form -->
     <mat-form-field color="accent">
       <mat-label>Vehicle VIN</mat-label>
       <input matInput type="text" class="uppercase" formControlName="vehVin" required minlength="17" required maxlength="17" required pattern="[A-Za-z0-9]*">
@@ -60,7 +60,7 @@
       </div>
        </form>
    </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions align="end"><!-- Buttons for this dialog, display and function according to conditions in Button -->
   <button mat-raised-button  mat-dialog-close color="accent" type="submit" [disabled]="vehicleform.invalid" (click)="saveVehicle()">UPLOAD VEHICLE</button>
   <button mat-raised-button color="primary" mat-dialog-close>CANCEL</button>
 </mat-dialog-actions>

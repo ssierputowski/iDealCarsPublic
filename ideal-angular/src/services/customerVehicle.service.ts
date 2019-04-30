@@ -21,6 +21,7 @@ export class CustomerVehicleService {
     private router: Router
   ) {}
 
+  // Returns observable of List of Customer for Records page dialog
   getCustomerVehicles() {
     this.http
       .get<{message: string, customerVehicles: any}>(
@@ -123,7 +124,7 @@ export class CustomerVehicleService {
             };
             this.customerVehicles.push(customerVehicle);
             this.customerVehiclesUpdated.next({customerVehicles: [...this.customerVehicles]});
-
+            window.location.reload();
           });
       }
 
@@ -186,11 +187,11 @@ export class CustomerVehicleService {
         updatedCustomerVehicles[oldCustomerVehicleIndex] = customerVehicle;
         this.customerVehicles = updatedCustomerVehicles;
         this.customerVehiclesUpdated.next({customerVehicles: [...this.customerVehicles ]});
-
+        window.location.reload();
       });
     }
 
-    // DELETE method Customer dialog
+  // DELETE method Customer dialog
   deleteCustomerVehicle(idCustomerVehicleID: string) {
     console.log('Customer Vehicle Deleted! ' + idCustomerVehicleID);
     return this.http.delete(BACKEND_URL + '/' + idCustomerVehicleID)

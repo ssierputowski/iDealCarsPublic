@@ -5,10 +5,7 @@ import { Router } from '@angular/router';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { VehicleService } from 'src/services/vehicle.service';
-import { Vehicle } from '../../models/vehicle.model';
 import { Subscription } from 'rxjs';
-import { DialogEntryComponent } from '../dialog-entry/dialog-entry.component';
-import { DialogVinComponent } from '../dialog-vin/dialog-vin.component';
 
 import { AddPartComponent } from '../add-part/add-part.component';
 import { EditPartComponent } from '../edit-part/edit-part.component';
@@ -60,7 +57,7 @@ export class PartsInventoryComponent implements OnInit {
       partCompatibility: ''
     };
 
-    // form for parts filter
+    // formControls for search filters
     PartID = new FormControl('');
     Name = new FormControl('');
     Compatibility = new FormControl('');
@@ -69,7 +66,8 @@ export class PartsInventoryComponent implements OnInit {
 
       // ######## PARTS #########
         this.titleService.setTitle('Parts Inventory | iDealCars');
-
+        // below subscribe to value changes of the search Filter formControls and filter the
+        // table dataSource cooresponding to the values entered in the filter formControls
         this.PartID.valueChanges
         .subscribe(
           PartID => {
@@ -95,7 +93,9 @@ export class PartsInventoryComponent implements OnInit {
       this.getParts();
 
     }
-
+  // returns observable of the parts for the inventory page stored in the db
+  // last line applies filter function below filterPredicate to datasource and causes to
+  // display those results in the table
   getParts(): void {
     this.partService.getParts();
     this.partService.getPartUpdateListener()
@@ -106,8 +106,9 @@ export class PartsInventoryComponent implements OnInit {
       });
   }
 
-
-  // filter function for table data
+  // filter function for table data-filters results contained in the column attributes
+  // converts them to string lowercase to  return a result and in combination with the
+  // formControls above ignores case
   tableFilter(): (data: any, filter: string) => boolean {
     const filterFunctionParts = function(data, filter): boolean {
       const searchTerms = JSON.parse(filter);
@@ -118,17 +119,22 @@ export class PartsInventoryComponent implements OnInit {
     return filterFunctionParts;
   }
 
+    // opens dialog to enter a new part to the inventory page
     openAddPart() {
       this.addPartRef = this.dialog.open(AddPartComponent, {
         disableClose: true,
         minWidth: '50rem',
+        height: '75rem',
       });
     }
 
+    // opens dialog for editing part entry already contained in the table,
+    // passing the data in that row to the edit dialog
     openEditPart(data: any) {
       const config: MatDialogConfig = {
         disableClose: true,
         minWidth: '50rem',
+        height: '75rem',
       };
       this.editPartRef = this.dialog.open(EditPartComponent, config);
       this.editPartRef.componentInstance.data = {

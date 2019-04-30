@@ -17,7 +17,6 @@ export interface Car {
   objID: string;
   custID: string;
   carvin: string;
-  // miles: string;
   year: string;
   make: string;
   model: string;
@@ -78,6 +77,7 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
   public edit: boolean;
   public addRecord: boolean;
   public addVehicle: boolean;
+  public imgClicked = false;
 
   constructor(
   @Inject(MAT_DIALOG_DATA) public data: any,
@@ -90,7 +90,7 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
   private dialogRef: MatDialogRef<DialogCustomerEditComponent>,
   private formBuild: FormBuilder,
   private route: ActivatedRoute) {
-
+    // forms for editing Customer, customerVehicle and customerServiceRecord
     this.customerInfoForm = this.formBuild.group({
       'customerId': new FormControl(null, { validators: [Validators.required] }),
       'firstName': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
@@ -129,6 +129,8 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
       'servicePrice': new FormControl(null, { validators: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern(/^\d+\.\d{2}$/)] }),
       'paymentReceived': new FormControl(null, { validators: [Validators.required] }),
     });
+
+
     // These below for ADDING to record of vehicles
     this.addCustomerVehicleForm = this.formBuild.group({
       // tslint:disable-next-line:max-line-length
@@ -161,26 +163,27 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    // console.log(this.data);
+    // sets state select to value in data.state
     this.stateSelector.setValue(this.data.state || this.stateSelector.markAsPristine);
+    // calls function below and maps vehicles cooresponding to customerId to cars[] array
     this.displayCustomerVehicles(this.data.customerId);
+    // calls function below and maps vehicle records cooresponding to customerId to records[] array
     this.displayCustomerVehicleRecords(this.data.customerId);
+    // follows value changes in vehicle select on dialog and filters records in record tab to coorespond to selected vehicle
     this.vehicleSelector.valueChanges.subscribe(value => {
-      // console.log(value);
       value = this.vehicleSelector.value.carvin;
       this.filteredRecords = this.records.filter(function(record) {
         return record.carvin === value;
       });
+      // clears customerServiceRecordForm
       this.customerServiceRecordForm.reset();
+      // sets record on records table to first in filtered list
       this.recordSelector.setValue(this.filteredRecords[0] || this.recordSelector.markAsPristine);
     });
-    // console.log(this.filteredRecords);
-    // console.log(this.records);
-    // console.log(this.cars);
-
 
     this.route.params.subscribe(
       param => {
+        // populating customerInfoForm with injected data from clicked row
         this.customerInfoForm.patchValue({customerId: this.data.customerId});
         this.customerInfoForm.patchValue({firstName: this.data.firstName});
         this.customerInfoForm.patchValue({lastName: this.data.lastName});
@@ -191,6 +194,7 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
         this.customerInfoForm.patchValue({state: this.data.state});
         this.customerInfoForm.patchValue({zipCode: this.data.zipCode});
 
+      // follows changes in vehicle select and assigns cooresponding values to Car object
       this.vehicleSelector.valueChanges.subscribe(value => {
         value.carvin = this.vehicleSelector.value.carvin;
         value.year = this.vehicleSelector.value.year;
@@ -201,6 +205,7 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
         value.pricePaid = this.vehicleSelector.value.pricePaid;
         value.carPic = this.vehicleSelector.value.carPic;
 
+        // populating customerInfoForm with assigned values
         this.customerVehicleForm.patchValue({vehicleId: value.carvin});
         this.customerVehicleForm.patchValue({vehicleYear: value.year});
         this.customerVehicleForm.patchValue({vehicleMake: value.make});
@@ -211,6 +216,7 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
         this.customerVehicleForm.patchValue({vehicleImage:  value.carPic});
       });
 
+      // follows changes in record select and assigns cooresponding values to Record object
       this.recordSelector.valueChanges.subscribe(value => {
         value.carvin = this.recordSelector.value.carvin,
         value.miles = this.recordSelector.value.miles,
@@ -222,6 +228,7 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
         value.price = this.recordSelector.value.price,
         value.payment = this.recordSelector.value.payment,
 
+        // populating customerServiceRecordForm with assigned values
         this.customerServiceRecordForm.patchValue({vehicleId:  value.carvin});
         this.customerServiceRecordForm.patchValue({mileage: value.miles});
         this.customerServiceRecordForm.patchValue({servicePerformed: value.service});
@@ -234,7 +241,7 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
       });
   });
 }
-  // Image selection Function
+  // Image selection Function-waits for event and sets preview of uploaded file-photo
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     this.customerVehicleForm.patchValue({vehicleImage: file});
@@ -245,7 +252,8 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
     };
     reader.readAsDataURL(file);
   }
-  // Image selection Function
+
+  // Image selection Function for ADDVehicleForm-waits for event and sets preview of uploaded file-photo
   addOnImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     this.addCustomerVehicleForm.patchValue({vehicleImage: file});
@@ -256,19 +264,21 @@ export class DialogCustomerEditComponent implements OnInit, OnDestroy {
     };
     reader.readAsDataURL(file);
   }
+
   // fires tabchange index print statement
   tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
     this.tabIndex = tabChangeEvent.index;
     console.log('index => ', tabChangeEvent.index);
   }
-  // Cancel button to clear vehicle and record arrays
+
+  // Cancel button to clear vehicle and record arrays - not used
   close() {
     this.records.length = 0;
     this.cars.length = 0;
    // this.dialogRef.close();
   }
 
-  // ERROR Messaging=======================================
+  // ERROR Messaging-these display an error message when validators above are violated============================
   getVINErrorMessage() {
     return  'VIN must be 17 letters, numbers in length!';
   }
@@ -306,7 +316,7 @@ addCustomerVehicle() {
       this.addCustomerVehicleForm.patchValue({customerId: this.data.customerId});
   }
 }
-// Saves ADDed customer vehicle to dB
+// Saves ADDed individual customer vehicle to dB
   saveAddedCustomerVehicle() {
     this.customerVehicleService.addCustomerVehicle(
       this.data.customerId,
@@ -329,7 +339,7 @@ addCustomerVehicle() {
     }
   }
 
-  // Saves ADDed customer vehicle service record to dB
+  // Saves ADDed individual customer vehicle service record to dB
   saveAddedCustomerVehicleServiceRecord() {
     this.customerServiceRecordService.addCustomerServiceRecord(
       this.data.customerId,
@@ -455,7 +465,7 @@ addCustomerVehicle() {
     });
 }
 
- // retrieves vehicles owned by customer
+ // retrieves vehicles owned by customer-searches db by customerId and maps values to Car array
  displayCustomerVehicles(customerId: string): void {
    this.cars.length = 0;
    this.customerVehicleService.getCustomerVehiclesByCustomerID(customerId);
@@ -479,7 +489,7 @@ addCustomerVehicle() {
     });
   }
 
- // retrieves records of vehicles owned by customer
+ // retrieves records of vehicles owned by customer-searches db by customerId and maps values to Record array
  displayCustomerVehicleRecords(customerId: string): void {
   this.customerServiceRecordService.getCustomerServiceRecordsByVehicleID(customerId);
   this.customerServiceRecordService.getCustomerServiceRecordUpdateListener()
@@ -518,7 +528,7 @@ addCustomerVehicle() {
     this.customerService.deleteCustomer(customerobjId);
   }
 
-  // Individual CustomerVehicleDelete
+  // Individual CustomerVehicleDelete-loops through records and deletes those associated with this vehicle
   onVehicleDelete() {
     if (this.filteredRecords.length > 0) {
       this.filteredRecords.forEach(record => {
@@ -536,6 +546,8 @@ addCustomerVehicle() {
   ngOnDestroy() {
     console.log('destroyed');
   }
+
+  // functions for setting boolean values for *ngIf bindings
   setEdit() {
     this.edit = true;
   }
@@ -553,5 +565,8 @@ addCustomerVehicle() {
   }
   unSetAddVehicle() {
     this.addVehicle = false;
+  }
+  imgClick() {
+    this.imgClicked = true;
   }
 }

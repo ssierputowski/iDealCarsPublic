@@ -9,6 +9,7 @@ const MIME_TYPE_MAP = {
     'image/jpeg': 'jpg',
     'image/jpg': 'jpg'
 };
+
 // Disk-file storage code for storing on the app vehicleImages file
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -25,7 +26,8 @@ const storage = multer.diskStorage({
         cb(null, name + '-' + Date.now() + '.' + ext);
     }
 });
-// For SAVE vehicle for vehicle dialog-entry
+
+// Saves new Vehicle entry express post() call to mongo save() method
 router.post('', multer({ storage: storage }).single('vehImage'),
 (req, res, next) => {
     const url = req.protocol + '://' + req.get('host');
@@ -53,7 +55,7 @@ router.post('', multer({ storage: storage }).single('vehImage'),
     });
 });
 
-//DELETE method for Vehicle Inventory, node.js code-->may not need this OPTIONS above
+//DELETE method for Vehicle dialog express delete(id) call to mongo findByIdAndRemove() method
 router.delete('/:id', function(req, res, next) {
     console.log('Deleting a vehicle');
     Vehicle.findByIdAndRemove(req.params.id, req.body, function(err, deletedVehicle){
@@ -65,7 +67,7 @@ router.delete('/:id', function(req, res, next) {
     });
 });
 
-// EDIT function on dialogVin
+// EDIT function on CustomerVehicle Edit dialog express put() call to mongo updateOne() method
 router.put('/:id', multer({ storage: storage }).single('vehImage'),
 (req,res,next) => {
     let vehImage = req.body.vehImage;
@@ -91,7 +93,8 @@ router.put('/:id', multer({ storage: storage }).single('vehImage'),
     });
 
 })
-//For EDIT helper function
+
+// getter method returns list of Vehicles by customerId express get() call to mongo find() method
 router.get('/:id', (req, res, next) => {
     Vehicle.findById(req.params).then(vehicle => {
         if(vehicle) {
@@ -102,7 +105,7 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
-
+// getter method returns list of Vehicles
 router.get('', (req, res, next) => {
     const vehicleQuery = Vehicle.find();
     vehicleQuery.then(documents => {

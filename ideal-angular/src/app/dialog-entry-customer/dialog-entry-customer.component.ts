@@ -1,8 +1,6 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { Customer } from '../../models/customer.model';
-import { CustomerVehicle } from '../../models/customerVehicle.model';
-import { CustomerServiceRecord} from '../../models/customerServiceRecord.model';
 import { FormGroup, FormControl, Validators, ValidationErrors, FormBuilder, FormGroupDirective } from '@angular/forms';
 import { MatTabChangeEvent } from '@angular/material';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -77,6 +75,7 @@ export class DialogEntryCustomerComponent implements OnInit {
     private formBuild: FormBuilder,
     private route: ActivatedRoute
    ) {
+     // forms for adding Customer, customerVehicle and customerServiceRecord data
     this.customerInfoForm = this.formBuild.group({
       'firstName': new FormControl(null, { validators: [Validators.required, Validators.maxLength(15)] }),
       'lastName': new FormControl(null, { validators: [Validators.required, Validators.maxLength(20)] }),
@@ -119,6 +118,9 @@ export class DialogEntryCustomerComponent implements OnInit {
   ngOnInit() {
     if (this.data) {
       this.getCustomer();
+      // follows value changes in the customer select--this is if Current Customer? button is selected
+      // providing a list of currrent customers to populate customer entry form if the vehicle being sold
+      // is being bought by a current customer
       this.route.params.subscribe(
         param => {
 
@@ -141,7 +143,8 @@ export class DialogEntryCustomerComponent implements OnInit {
             this.customerInfoForm.patchValue({state: value.st });
             this.customerInfoForm.patchValue({zipCode: value.zip});
           });
-
+          // populates customerVehicleForm and customerServiceRecord with values passed if
+          // vehicle  from inventory page is being sold
           this.customerVehicleForm.patchValue({vehicleId: this.data.vehVin});
           this.customerVehicleForm.patchValue({vehicleYear: this.data.vehYear});
           this.customerVehicleForm.patchValue({vehicleMake: this.data.vehMake});
@@ -156,12 +159,13 @@ export class DialogEntryCustomerComponent implements OnInit {
         }
       );
     }
-  this.customerVehicleForm.valueChanges.subscribe(val => {
+    this.customerVehicleForm.valueChanges.subscribe(val => {
     val = this.customerVehicleForm.get('vehicleId').value;
     this.customerServiceRecordForm.patchValue({vehicleId: val});
   });
 }
-  // Customer data to keep track of current customers
+  // Customer data to keep track of current customers maps to cust object to display in customer select
+  // if Current Customer is clicked
   getCustomer(): void {
     this.customerService.getCustomers();
     this.customerService.getCustomerUpdateListener()
@@ -182,7 +186,7 @@ export class DialogEntryCustomerComponent implements OnInit {
         });
       });
     }
-
+  // Saves all 3- customer, customerVehicle and customerServiceRecord
   saveCustomer() {
     if (this.customerInfoForm.invalid || this.customerVehicleForm.invalid || this.customerServiceRecordForm.invalid) {
       console.log(this.createCustomerID());
@@ -230,7 +234,7 @@ export class DialogEntryCustomerComponent implements OnInit {
     }
     this.dialogRef.close();
  }
- // save if current customer is buying vehicle
+ // save if current customer is buying vehicle, ONLY saves customerVehicle and customerServiceRecord
  saveCurrentCustomer() {
   if (this.customerInfoForm.invalid || this.customerVehicleForm.invalid || this.customerServiceRecordForm.invalid) {
     console.log(this.createCustomerID());
@@ -268,6 +272,70 @@ export class DialogEntryCustomerComponent implements OnInit {
   this.dialogRef.close();
 }
 
+// Saves customer, customerVehicle ONLY
+saveCustomerAndVehONLY() {
+  if (this.customerInfoForm.invalid || this.customerVehicleForm.invalid ) {
+    console.log(this.createCustomerID());
+
+    return;
+  }
+  if (this.data) { this.pulledFromInventory = true; }
+
+  this.customerService.addCustomer(
+    this.createCustomerID(),
+    this.customerInfoForm.get('firstName').value,
+    this.customerInfoForm.get('lastName').value,
+    this.customerInfoForm.get('phoneNumber').value,
+    this.customerInfoForm.get('emailAddress').value,
+    this.customerInfoForm.get('address').value,
+    this.customerInfoForm.get('city').value,
+    this.customerInfoForm.get('state').value,
+    this.customerInfoForm.get('zipCode').value,
+  );
+  this.customerVehicleService.addCustomerVehicle(
+    this.createCustomerID(),
+    this.customerVehicleForm.get('vehicleId').value,
+    this.customerVehicleForm.get('vehicleYear').value,
+    this.customerVehicleForm.get('vehicleMake').value,
+    this.customerVehicleForm.get('vehicleModel').value,
+    this.customerVehicleForm.get('vehicleColor').value,
+    this.customerVehicleForm.get('vehicleDetails').value,
+    this.customerVehicleForm.get('vehiclePriceSold').value,
+    this.customerVehicleForm.get('vehicleImage').value,
+  );
+
+  if (this.pulledFromInventory) {
+    this.vehicleService.deleteVehicle(this.data.id);
+  }
+  this.dialogRef.close();
+}
+
+saveCurrentCustomerVehONLY() {
+  if (this.customerInfoForm.invalid || this.customerVehicleForm.invalid ) {
+    console.log(this.createCustomerID());
+
+    return;
+  }
+  if (this.data) { this.pulledFromInventory = true; }
+
+  this.customerVehicleService.addCustomerVehicle(
+    this.createCustomerID(),
+    this.customerVehicleForm.get('vehicleId').value,
+    this.customerVehicleForm.get('vehicleYear').value,
+    this.customerVehicleForm.get('vehicleMake').value,
+    this.customerVehicleForm.get('vehicleModel').value,
+    this.customerVehicleForm.get('vehicleColor').value,
+    this.customerVehicleForm.get('vehicleDetails').value,
+    this.customerVehicleForm.get('vehiclePriceSold').value,
+    this.customerVehicleForm.get('vehicleImage').value,
+  );
+
+  if (this.pulledFromInventory) {
+    this.vehicleService.deleteVehicle(this.data.id);
+  }
+  this.dialogRef.close();
+}
+
   // method creates customerId from first, last names and number
   createCustomerID() {
     this.first = this.customerInfoForm.get('firstName').value;
@@ -285,7 +353,7 @@ export class DialogEntryCustomerComponent implements OnInit {
 
     return this.custID;
   }
-  // Image selection Function
+  // Image selection Function, listens for event- photo file being selected and assigns the preview image
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     this.customerVehicleForm.patchValue({vehicleImage: file});
@@ -296,7 +364,7 @@ export class DialogEntryCustomerComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
-   // ERROR Messaging=======================================
+   // ERROR Messaging- displays error message if validators violated=======================================
    getVINErrorMessage() {
     return  'VIN must be 17 letters, numbers in length!';
   }
@@ -333,6 +401,7 @@ export class DialogEntryCustomerComponent implements OnInit {
     this.dialogRef.close();
 
   }
+  // boolean setter for *ngIf bindings
   setCurrentCustomer() {
     this.currentCust = true;
   }
