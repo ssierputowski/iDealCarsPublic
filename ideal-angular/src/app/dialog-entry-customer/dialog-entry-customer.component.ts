@@ -274,7 +274,7 @@ export class DialogEntryCustomerComponent implements OnInit {
 
 // Saves customer, customerVehicle ONLY
 saveCustomerAndVehONLY() {
-  if (this.customerInfoForm.invalid || this.customerVehicleForm.invalid || this.customerServiceRecordForm.invalid) {
+  if (this.customerInfoForm.invalid || this.customerVehicleForm.invalid ) {
     console.log(this.createCustomerID());
 
     return;
@@ -311,7 +311,7 @@ saveCustomerAndVehONLY() {
 }
 
 saveCurrentCustomerVehONLY() {
-  if (this.customerInfoForm.invalid || this.customerVehicleForm.invalid || this.customerServiceRecordForm.invalid) {
+  if (this.customerInfoForm.invalid || this.customerVehicleForm.invalid ) {
     console.log(this.createCustomerID());
 
     return;
