@@ -1,32 +1,62 @@
-<main class="center">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-12" id="video">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/NL6JTxxPg80" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      <div class="col-12">
-        <app-alert></app-alert>
-      </div>
-      <div class="col-lg-6 col-12">
-        <img src="../../../assets/images/logo_transparent.png" class="rounded mx-auto d-block">
-      </div>
-      <div class="col-lg-6 col-12">
-        <mat-spinner *ngIf="isLoading"></mat-spinner>
-        <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
-          <mat-form-field color="accent">
-            <mat-label>Username</mat-label>
-            <input matInput name="username" ngModel type="text" #usernameInput="ngModel" required autocomplete="off">
-            <mat-error *ngIf="usernameInput.invalid">Please enter a valid username.</mat-error>
-          </mat-form-field>
-          <mat-form-field color="accent">
-            <mat-label>Password</mat-label>
-            <input matInput name="password" ngModel type="password" #passwordInput="ngModel" required>
-            <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error>
-          </mat-form-field>
-          <button mat-raised-button color="accent" type="submit">LOGIN</button>
-        </form>
-      </div>
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col-12 p-4" id="video">
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/NL6JTxxPg80"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div class="col-12">
+      <app-alert></app-alert>
+    </div>
+    <div class="col-lg-6 col-12 p-4">
+      <img
+        src="../../../assets/images/logo_transparent.png"
+        class="rounded mx-auto d-block"
+      />
+    </div>
+    <div class="col-lg-6 col-12 p-4">
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <form
+        (submit)="onLogin(loginForm)"
+        #loginForm="ngForm"
+        *ngIf="!isLoading"
+      >
+        <mat-form-field color="accent">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            name="username"
+            ngModel
+            type="text"
+            #usernameInput="ngModel"
+            required
+            autocomplete="off"
+          />
+          <mat-error *ngIf="usernameInput.invalid"
+            >Please enter a valid username.</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field color="accent">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            name="password"
+            ngModel
+            type="password"
+            #passwordInput="ngModel"
+            required
+          />
+          <mat-error *ngIf="passwordInput.invalid"
+            >Please enter a valid password.</mat-error
+          >
+        </mat-form-field>
+        <button mat-raised-button color="accent" type="submit">LOGIN</button>
+      </form>
     </div>
   </div>
-</main>
-<app-footer></app-footer>
+</div>
