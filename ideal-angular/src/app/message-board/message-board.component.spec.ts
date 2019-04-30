@@ -20,6 +20,7 @@ describe('MessageBoardComponent', () => {
         MatDividerModule,
         MatCardModule,
         HttpClientModule,
+        RouterTestingModule
       ],
       schemas: [
       ]

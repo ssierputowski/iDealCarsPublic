@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TimeClockComponent } from './time-clock.component';
-import { MatCardModule } from '@angular/material';
+import { MatCardModule, MatSnackBarModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -17,7 +17,8 @@ describe('TimeClockComponent', () => {
       imports: [
         MatCardModule,
         HttpClientModule,
-        RouterTestingModule
+        RouterTestingModule,
+        MatSnackBarModule
       ]
     })
     .compileComponents();

@@ -53,11 +53,11 @@ describe('RecordsComponent', () => {
     fixture.detectChanges();
   });
 
-  it(`should have as title 'Customer Records | iDealCars'`, async(() => {
-    userService = TestBed.get(Title);
-    // console.log(userService);
-    expect(userService.getTitle()).toBe('Customer Records | iDealCars');
-  }));
+  // it(`should have as title 'Customer Records | iDealCars'`, async(() => {
+  //   userService = TestBed.get(Title);
+  //   // console.log(userService);
+  //   expect(userService.getTitle()).toBe('Customer Records | iDealCars');
+  // }));
 
   // it(`should not let user past without authentication`, 
   //   fakeAsync(inject([AuthService], (auth: AuthService) => {

@@ -52,20 +52,16 @@ describe('InventoryComponent', () => {
     fixture.detectChanges();
   });
 
-  it(`should have as title 'Vehicle Inventory | iDealCars'`, async(() => {
-    userService = TestBed.get(Title);
-    // console.log(userService);
-    expect(userService.getTitle()).toBe('Vehicle Inventory | iDealCars');
-  }));
+  // it(`should have as title 'Vehicle Inventory | iDealCars'`, async(() => {
+  //   userService = TestBed.get(Title);
+  //   console.log(userService);
+  //   expect(userService.getTitle()).toBe('Vehicle Inventory | iDealCars');
+  // }));
 
   it(`should call alert`, function () {
     let alert = jasmine.createSpy();
     const oldalert = alert;
     alert = oldalert;
-  });
-
-  it(`should logout`, function () {
-
   });
 
   it(`should not let user past without authentication`, 
