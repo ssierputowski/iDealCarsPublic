@@ -56,13 +56,15 @@ import { EditPartComponent } from './edit-part/edit-part.component';
 import { PartsInventoryComponent } from './parts-inventory/parts-inventory.component';
 import { ErrorInterceptor } from './auth/error-interceptor';
 import { FooterComponent } from './footer/footer.component';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'records', component: RecordsComponent, canActivate: [AuthGuard] },
   { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
-  { path: 'parts', component: PartsInventoryComponent, canActivate: [AuthGuard] }
+  { path: 'parts', component: PartsInventoryComponent, canActivate: [AuthGuard] },
+  { path: 'about', component: AboutComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -84,7 +86,8 @@ const routes: Routes = [
     AddPartComponent,
     EditPartComponent,
     PartsInventoryComponent,
-    FooterComponent
+    FooterComponent,
+    AboutComponent
   ],
   imports: [
     BrowserAnimationsModule,
